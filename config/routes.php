@@ -1,4 +1,4 @@
 <?php
 $app = app();
 
-$app->get('/', 'App\Controller\IndexController:index')->setName('root');
+$app->get('/', 'App\Controller\IndexController:index')->setName('/');
