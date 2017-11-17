@@ -5,6 +5,7 @@ use Cake\Database\Driver\Mysql;
 use League\Plates\Engine;
 use Odan\Plates\Extension\PlatesDataExtension;
 use Slim\Container;
+use Slim\Http\Environment;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 $app = app();
@@ -13,9 +14,9 @@ $container = $app->getContainer();
 /**
  * Environment Container (for routes).
  *
- * @return \Slim\Http\Environment
+ * @return Environment
  */
-$container['environment'] = function () ***REMOVED***
+$container['environment'] = function (): Environment ***REMOVED***
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
 
@@ -28,7 +29,7 @@ $container['environment'] = function () ***REMOVED***
  * @param Container $container
  * @return Connection
  */
-$container['connection'] = function (Container $container) ***REMOVED***
+$container['connection'] = function (Container $container): Connection ***REMOVED***
     $config = $container->get('db');
     $driver = new Mysql([
         'host' => $config['host'],
@@ -63,14 +64,19 @@ $container['connection'] = function (Container $container) ***REMOVED***
  * @param Container $container
  * @return Engine
  */
-$container[Engine::class] = function (Container $container) ***REMOVED***
+$container[Engine::class] = function (Container $container): Engine ***REMOVED***
     $path = $container->get('viewPath');
     $engine = new Engine($path, null);
+
+    $dir = __DIR__ . '/../tmp/cache';
+    if (!is_dir($dir)) ***REMOVED***
+        mkdir($dir);
+***REMOVED***
 
     $options = array(
         'minify' => true,
         'public_dir' => __DIR__ . '/../public/assets',
-        'cache' => new FilesystemAdapter('assets-cache', 0, 'tmp/cache'),
+        'cache' => new FilesystemAdapter('assets-cache', 0, $dir),
     );
     $engine->loadExtension(new \Odan\Asset\PlatesAssetExtension($options));
     $engine->loadExtension(new PlatesDataExtension());
