@@ -10,7 +10,7 @@
 	<meta name="robots" content="nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 	<base href="<?= $base; ?>">
-	<link rel="canonical" href="https://contactform.d4rkmindz.ch/"/>
+	<link rel="canonical" href="https://example.com/"/>
 	<link rel="icon" href="favicon.ico">
 
 
