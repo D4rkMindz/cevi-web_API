@@ -9,7 +9,8 @@
  * @return string The normalized URI for the path
  */
 function baseurl($path = '', $full = false)***REMOVED***
-    $scriptName = $_SERVER['SCRIPT_NAME'];
+    $router = app()->getContainer()->get('router');
+    $scriptName = $router->pathFor('root');
     $baseUri = dirname(dirname($scriptName));
     $result = str_replace('\\', '/', $baseUri) . $path;
     $result = str_replace('//', '/', $result);

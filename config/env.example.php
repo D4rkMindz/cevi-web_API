@@ -1,8 +1,8 @@
 <?php
 
-$env['dbconfig']['host'] = '';
-$env['dbconfig']['port'] = '';
-$env['dbconfig']['username'] = '';
-$env['dbconfig']['password'] = '';
+$env['db']['host'] = '';
+$env['db']['port'] = '';
+$env['db']['username'] = '';
+$env['db']['password'] = '';
 
 return $env;
