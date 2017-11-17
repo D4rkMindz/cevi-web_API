@@ -7,7 +7,7 @@
 	<meta name="author" content="Bjoern Pfoster">
 	<meta name="description" content="A proper Contactform :D">
 	<meta name="keywords" content="Contact, contactform, d4rkmidnz">
-	<meta name=“robots” content=“nofollow”>
+	<meta name="robots" content="nofollow">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 	<base href="<?= $base; ?>">
 	<link rel="canonical" href="https://contactform.d4rkmindz.ch/"/>
