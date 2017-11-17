@@ -8,12 +8,15 @@
  *
  * @return string The normalized URI for the path
  */
-function baseurl($path = '/', $full = false)***REMOVED***
-    $router = app()->getContainer()->get('router');
+function baseurl($path = '/', $full = false)
+***REMOVED***
+    $router = app()->getContainer()
+        ->get('router');
     $result = $router->pathFor($path);
     if ($full === true) ***REMOVED***
         $result = hosturl() . $result;
 ***REMOVED***
+
     return $result;
 ***REMOVED***
 
@@ -22,8 +25,13 @@ function baseurl($path = '/', $full = false)***REMOVED***
  *
  * @return string URL
  */
-function hosturl() ***REMOVED***
-    return is_secure() ? "https://" : "http://" . $_SERVER['SERVER_NAME'];
+function hosturl()
+***REMOVED***
+    $serverName = app()->getContainer()
+        ->get('request')
+        ->getServerParam('SERVER_NAME');
+
+    return is_secure() ? "https://" : "http://" . $serverName;
 ***REMOVED***
 
 /**
@@ -47,6 +55,11 @@ function is_email($email)
  *
  * @return bool
  */
-function is_secure() ***REMOVED***
-    return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off";
+function is_secure()
+***REMOVED***
+    $https = app()->getContainer()
+        ->get('request')
+        ->getServerParam('HTTPS');
+
+    return isset($https) && $https != "off";
 ***REMOVED***
