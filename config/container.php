@@ -60,7 +60,7 @@ $container['connection'] = function (Container $container)***REMOVED***
  * @param Container $container
  * @return Engine
  */
-$container['renderEngine'] = function (Container $container) ***REMOVED***
+$container[Engine::class] = function (Container $container) ***REMOVED***
     $path = $container->get('viewPath');
     $engine = new Engine($path, null);
     $engine->loadExtension(new PlatesDataExtension());
