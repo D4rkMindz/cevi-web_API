@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Table\UserTable;
+use Cake\Database\Connection;
 use League\Plates\Engine;
 use Slim\Container;
 
@@ -11,6 +12,9 @@ use Slim\Container;
  */
 class IndexController extends AppController
 ***REMOVED***
+    /**
+     * @var Connection
+     */
     private $connection;
 
     /**
