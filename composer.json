@@ -1,0 +1,18 @@
+***REMOVED***
+    "require": ***REMOVED***
+        "slim/slim": "^3.9",
+        "cakephp/database": "^3.5",
+        "league/plates": "^3.3",
+        "odan/plates-data-extension": "^0.3.0"
+***REMOVED***,
+    "autoload": ***REMOVED***
+        "psr-4": ***REMOVED***
+            "App\\": "src"
+    ***REMOVED***
+***REMOVED***,
+    "autoload-dev": ***REMOVED***
+        "psr-4": ***REMOVED***
+            "App\\Tests\\": "tests"
+    ***REMOVED***
+***REMOVED***
+***REMOVED***
