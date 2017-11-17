@@ -69,7 +69,7 @@ $container[Engine::class] = function (Container $container) ***REMOVED***
 
     $options = array(
         'minify' => true,
-        'public_dir' => __DIR__ . '/../public/cache',
+        'public_dir' => __DIR__ . '/../public/assets',
         'cache' => new FilesystemAdapter('assets-cache', 0, 'tmp/cache'),
     );
     $engine->loadExtension(new \Odan\Asset\PlatesAssetExtension($options));
