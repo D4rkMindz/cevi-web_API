@@ -13,6 +13,11 @@ use Slim\Container;
 class IndexController extends AppController
 ***REMOVED***
     /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
      * @var Connection
      */
     private $connection;
@@ -24,8 +29,9 @@ class IndexController extends AppController
      */
     public function __construct(Container $container)
     ***REMOVED***
-        $this->connection = $container->get('connection');
-        parent::__construct($container->get(Engine::class));
+        $this->container = $container;
+        $this->connection = $this->container->get('connection');
+        parent::__construct($this->container->get(Engine::class));
 ***REMOVED***
 
     /**
