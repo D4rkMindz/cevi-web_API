@@ -18,9 +18,7 @@ ant.*
 !ant.example.*
 
 #Project dependencies
-!vendor/
-vendor/*
-!vendor/.htaccess
+vendor/
 
 #Complete build folder
 build/
