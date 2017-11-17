@@ -26,11 +26,7 @@ function baseurl($path = '', $full = false)***REMOVED***
  * @return string URL
  */
 function hosturl() ***REMOVED***
-    $host = $_SERVER['SERVER_NAME'];
-    $port = $_SERVER['SERVER_PORT'];
-    $result = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https://" : "http://";
-    $result .= ($port == '80' || $port == '443') ? $host : $host . ":" . $port;
-    return $result;
+    return is_secure() ? "https://" : "http://" . $_SERVER['SERVER_NAME'];
 ***REMOVED***
 
 /**
@@ -47,4 +43,8 @@ function hosturl() ***REMOVED***
 function is_email($email)
 ***REMOVED***
     return filter_var($email, FILTER_VALIDATE_EMAIL);
+***REMOVED***
+
+function is_secure() ***REMOVED***
+    return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off";
 ***REMOVED***
