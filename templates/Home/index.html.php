@@ -1,4 +1,11 @@
 <?php $this->layout('view::layout.html.php'); ?>
+
+<?php
+$this->start('assets');
+echo $this->assets(['view::Home/style.css'], ['inline'=> false]);
+$this->stop('assets');
+?>
+
 <h1>Hello World</h1>
 <?php foreach ($this->v('userData') as $user):?>
     <hr>

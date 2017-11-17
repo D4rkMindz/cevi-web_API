@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2cb05b5de4da0ea38303c2ffbc09810",
+    "content-hash": "bf3af89666e37e209efcf1b42679901d",
     "packages": [
         ***REMOVED***
             "name": "cakephp/core",
@@ -333,6 +333,58 @@
             "time": "2017-01-19T11:35:12+00:00"
     ***REMOVED***,
         ***REMOVED***
+            "name": "odan/plates-asset-cache",
+            "version": "0.3.5",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/odan/plates-asset-cache.git",
+                "reference": "96d6388f280e85ca92aa76ace6837cef4dbe2b43"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/odan/plates-asset-cache/zipball/96d6388f280e85ca92aa76ace6837cef4dbe2b43",
+                "reference": "96d6388f280e85ca92aa76ace6837cef4dbe2b43",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^7.0",
+                "symfony/cache": "^3.2"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "league/plates": "3.*",
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^6.0"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Odan\\": "src",
+                    "Odan\\Test\\": "tests"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "odan",
+                    "homepage": "https://github.com/odan"
+            ***REMOVED***
+            ],
+            "description": "Caching and compression for Plates template assets (JavaScript and CSS).",
+            "homepage": "http://github.com/odan/plates-asset-cache",
+            "keywords": [
+                "assets",
+                "cache",
+                "css",
+                "javascript",
+                "minify",
+                "plates"
+            ],
+            "time": "2017-04-25T23:17:46+00:00"
+    ***REMOVED***,
+        ***REMOVED***
             "name": "odan/plates-data-extension",
             "version": "0.3.0",
             "source": ***REMOVED***
@@ -430,6 +482,52 @@
                 "dependency injection"
             ],
             "time": "2017-07-23T07:32:15+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "psr/cache",
+            "version": "1.0.1",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.0"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.0.x-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Psr\\Cache\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+            ***REMOVED***
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "time": "2016-08-06T20:24:11+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "psr/container",
@@ -531,6 +629,101 @@
             "time": "2016-08-06T14:39:51+00:00"
     ***REMOVED***,
         ***REMOVED***
+            "name": "psr/log",
+            "version": "1.0.2",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.0"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.0.x-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Psr\\Log\\": "Psr/Log/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+            ***REMOVED***
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2016-10-10T12:19:37+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "psr/simple-cache",
+            "version": "1.0.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.0"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.0.x-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Psr\\SimpleCache\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+            ***REMOVED***
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "time": "2017-01-02T13:31:39+00:00"
+    ***REMOVED***,
+        ***REMOVED***
             "name": "slim/slim",
             "version": "3.9.0",
             "source": ***REMOVED***
@@ -600,6 +793,132 @@
                 "router"
             ],
             "time": "2017-11-04T08:46:46+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "symfony/cache",
+            "version": "v3.3.13",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/symfony/cache.git",
+                "reference": "49aadc35cc8ae6646cdc39ebdeaceb6712769c9f"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/49aadc35cc8ae6646cdc39ebdeaceb6712769c9f",
+                "reference": "49aadc35cc8ae6646cdc39ebdeaceb6712769c9f",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^5.5.9|>=7.0.8",
+                "psr/cache": "~1.0",
+                "psr/log": "~1.0",
+                "psr/simple-cache": "^1.0",
+                "symfony/polyfill-apcu": "~1.1"
+        ***REMOVED***,
+            "conflict": ***REMOVED***
+                "symfony/var-dumper": "<3.3"
+        ***REMOVED***,
+            "provide": ***REMOVED***
+                "psr/cache-implementation": "1.0",
+                "psr/simple-cache-implementation": "1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "cache/integration-tests": "dev-master",
+                "doctrine/cache": "~1.6",
+                "doctrine/dbal": "~2.4",
+                "predis/predis": "~1.0"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "3.3-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Symfony\\Component\\Cache\\": ""
+            ***REMOVED***,
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+            ***REMOVED***,
+                ***REMOVED***
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+            ***REMOVED***
+            ],
+            "description": "Symfony Cache component with PSR-6, PSR-16, and tags",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "caching",
+                "psr6"
+            ],
+            "time": "2017-11-07T14:16:22+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "symfony/polyfill-apcu",
+            "version": "v1.6.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-apcu.git",
+                "reference": "04f62674339602def515bff4bc6901fc1d4951e8"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/04f62674339602def515bff4bc6901fc1d4951e8",
+                "reference": "04f62674339602def515bff4bc6901fc1d4951e8",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.3"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.6-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Symfony\\Polyfill\\Apcu\\": ""
+            ***REMOVED***,
+                "files": [
+                    "bootstrap.php"
+                ]
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+            ***REMOVED***,
+                ***REMOVED***
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+            ***REMOVED***
+            ],
+            "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "apcu",
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2017-10-11T12:05:26+00:00"
     ***REMOVED***
     ],
     "packages-dev": [],

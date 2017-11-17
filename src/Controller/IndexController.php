@@ -43,6 +43,6 @@ class IndexController extends AppController
             'userData' => $userData,
         ];
 
-        return $this->render('view::index.html.php', $viewData);
+        return $this->render('view::Home/index.html.php', $viewData);
 ***REMOVED***
 ***REMOVED***

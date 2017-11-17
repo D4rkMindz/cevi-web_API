@@ -5,6 +5,7 @@ use Cake\Database\Driver\Mysql;
 use League\Plates\Engine;
 use Odan\Plates\Extension\PlatesDataExtension;
 use Slim\Container;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 $app = app();
 $container = $app->getContainer();
@@ -65,7 +66,15 @@ $container['connection'] = function (Container $container) ***REMOVED***
 $container[Engine::class] = function (Container $container) ***REMOVED***
     $path = $container->get('viewPath');
     $engine = new Engine($path, null);
+
+    $options = array(
+        'minify' => true,
+        'public_dir' => __DIR__ . '/../public/cache',
+        'cache' => new FilesystemAdapter('assets-cache', 0, 'tmp/cache'),
+    );
+    $engine->loadExtension(new \Odan\Asset\PlatesAssetExtension($options));
     $engine->loadExtension(new PlatesDataExtension());
+
     $engine->addFolder('view', $path);
 
     return $engine;
