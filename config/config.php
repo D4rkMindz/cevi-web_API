@@ -2,10 +2,10 @@
 
 $config = [];
 
-$config['dbconfig']['database'] = 'slim';
-$config['dbconfig']['charset'] = 'utf8';
-$config['dbconfig']['encoding'] = 'utf8';
-$config['dbconfig']['collation'] = 'utf8_unicode_ci';
+$config['db']['database'] = 'slim';
+$config['db']['charset'] = 'utf8';
+$config['db']['encoding'] = 'utf8';
+$config['db']['collation'] = 'utf8_unicode_ci';
 
 $config['viewPath'] = __DIR__ . '/../templates';
 
