@@ -42,6 +42,11 @@ function is_email($email)
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 ***REMOVED***
 
+/**
+ * Check if connection is secure.
+ *
+ * @return bool
+ */
 function is_secure() ***REMOVED***
     return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off";
 ***REMOVED***

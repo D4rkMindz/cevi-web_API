@@ -30,9 +30,10 @@ class AppController
      */
     public function render(string $file, array $viewData)
     ***REMOVED***
-        $default = ['base'=>baseurl()];
+        $default = ['base' => baseurl('/', true)];
         $viewData = array_merge_recursive($viewData, $default);
         $this->engine->addData($viewData);
+
         return $this->engine->render($file, $viewData);
 ***REMOVED***
 ***REMOVED***
