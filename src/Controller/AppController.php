@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use League\Plates\Engine;
+use Slim\Container;
 
 /**
  * Class AppController
  */
 class AppController
 ***REMOVED***
+    /**
+     * @var Container
+     */
+    protected $container;
     private $engine;
 
     /**
@@ -30,7 +35,8 @@ class AppController
      */
     public function render(string $file, array $viewData)
     ***REMOVED***
-        $default = ['base' => baseurl('/', true)];
+        //TODO implement base via PSR-7 Middleware
+        $default = ['base' => ''];
         $viewData = array_merge_recursive($viewData, $default);
         $this->engine->addData($viewData);
 
