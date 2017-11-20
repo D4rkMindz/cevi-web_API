@@ -11,9 +11,14 @@ function app(): App
 ***REMOVED***
     static $app = null;
     if ($app === null) ***REMOVED***
-        $config = require_once __DIR__ . '/../config/config.php';
+        $config = ['settings' => require_once __DIR__ . '/../config/config.php'];
         $app = new App($config);
 ***REMOVED***
 
     return $app;
+***REMOVED***
+
+
+function route(callable $callback) ***REMOVED***
+    return implode(':', (array)$callback);
 ***REMOVED***

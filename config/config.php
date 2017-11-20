@@ -7,7 +7,7 @@ $config['db']['charset'] = 'utf8';
 $config['db']['encoding'] = 'utf8';
 $config['db']['collation'] = 'utf8_unicode_ci';
 
-$config['sessionconfig'] = [
+$config['session'] = [
     'name' => 'app_template',
     'autorefresh' => true,
     'lifetime' => '2 hours',

@@ -23,9 +23,6 @@ class AppTable
      */
     public function __construct(Connection $connection = null)
     ***REMOVED***
-        if ($connection === null) ***REMOVED***
-            $connection = app()->getContainer()->get('connection');
-    ***REMOVED***
         $this->connection = $connection;
 ***REMOVED***
 

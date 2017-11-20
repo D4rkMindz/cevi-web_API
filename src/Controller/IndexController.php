@@ -13,10 +13,6 @@ use SlimSession\Helper;
  */
 class IndexController extends AppController
 ***REMOVED***
-    /**
-     * @var Container
-     */
-    protected $container;
 
     /**
      * @var Connection
@@ -27,14 +23,11 @@ class IndexController extends AppController
      * IndexController constructor.
      *
      * @param Container $container
-     */
+*/
     public function __construct(Container $container)
     ***REMOVED***
-        $session = new Helper();
-
-        $this->container = $container;
-        $this->connection = $this->container->get('connection');
-        parent::__construct($this->container->get(Engine::class), $session);
+        $this->connection = $container->get(Connection::class);
+        parent::__construct($container);
 ***REMOVED***
 
     /**
@@ -47,7 +40,7 @@ class IndexController extends AppController
     ***REMOVED***
         $username = $this->session->get('username');
 
-        $userTable = new UserTable();
+        $userTable = new UserTable($this->connection);
         $userData = $userTable->getAll();
 
         $viewData = [

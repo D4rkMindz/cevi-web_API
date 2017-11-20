@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use League\Plates\Engine;
 use Slim\Container;
-use SlimSession\Helper;
+use Slim\Http\Request;
+use Slim\Router;
+use SlimSession\Helper as SessionHelper;
 
 /**
  * Class AppController
@@ -12,22 +14,36 @@ use SlimSession\Helper;
 class AppController
 ***REMOVED***
     /**
-     * @var Container
+     * @var SessionHelper
      */
-    protected $container;
     protected $session;
+
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var Router
+     */
+    protected $router;
+
+    /**
+     * @var Engine
+     */
     private $engine;
 
     /**
      * AppController constructor.
      *
-     * @param Engine $engine
-     * @param Helper $session
+     * @param Container $container
      */
-    public function __construct(Engine $engine, Helper $session)
+    public function __construct(Container $container)
     ***REMOVED***
-        $this->engine = $engine;
-        $this->session = $session;
+        $this->request = $container->get('request');
+        $this->engine = $container->get(Engine::class);
+        $this->session = $container->get(SessionHelper::class);
+        $this->router = $container->get('router');
 ***REMOVED***
 
     /**
@@ -39,8 +55,7 @@ class AppController
      */
     public function render(string $file, array $viewData)
     ***REMOVED***
-        //TODO implement base via PSR-7 Middleware
-        $default = ['base' => ''];
+        $default = ['base' => $this->router->pathFor('/')];
         $viewData = array_merge_recursive($viewData, $default);
         $this->engine->addData($viewData);
 

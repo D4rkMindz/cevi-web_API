@@ -6,7 +6,10 @@ use League\Plates\Engine;
 use Odan\Plates\Extension\PlatesDataExtension;
 use Slim\Container;
 use Slim\Http\Environment;
+use SlimSession\Helper as SessionHelper;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
+//use Slim\Collection;
 
 $app = app();
 $container = $app->getContainer();
@@ -29,8 +32,8 @@ $container['environment'] = function (): Environment ***REMOVED***
  * @param Container $container
  * @return Connection
  */
-$container['connection'] = function (Container $container): Connection ***REMOVED***
-    $config = $container->get('db');
+$container[Connection::class] = function (Container $container): Connection ***REMOVED***
+    $config = $container->get('settings')->get('db');
     $driver = new Mysql([
         'host' => $config['host'],
         'port' => $config['port'],
@@ -65,7 +68,7 @@ $container['connection'] = function (Container $container): Connection ***REMOVE
  * @return Engine
  */
 $container[Engine::class] = function (Container $container): Engine ***REMOVED***
-    $path = $container->get('viewPath');
+    $path = $container->get('settings')->get('viewPath');
     $engine = new Engine($path, null);
 
     $dir = __DIR__ . '/../tmp/cache';
@@ -84,4 +87,8 @@ $container[Engine::class] = function (Container $container): Engine ***REMOVED**
     $engine->addFolder('view', $path);
 
     return $engine;
+***REMOVED***;
+
+$container[SessionHelper::class] = function ()***REMOVED***
+    return new SessionHelper();
 ***REMOVED***;

@@ -1,8 +1,8 @@
 <?php
 
-use Slim\Middleware\Helper;
+use Slim\Middleware\Session;
 
 $app = app();
 $container = $app->getContainer();
 
-$app->add(new Helper($container->get('sessionconfig')));
+$app->add(new Session($container->get('settings')->get('session')));

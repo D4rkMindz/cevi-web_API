@@ -32,6 +32,7 @@ tmp/*
 !tmp/cache/
 tmp/cache/*
 !tmp/cache/empty
+
 #logs/ folder with empty file
 !tmp/logs/
 tmp/logs/*
@@ -46,3 +47,13 @@ files/*
 #Prod database sql
 docs/contact_form.sql
 tmp/cache/
+
+#Asset cache
+!public/assets/
+public/assets/*
+!public/assets/.htaccess
+
+#Asset cache
+!public/tmp/
+public/tmp/*
+!public/tmp/.htaccess
