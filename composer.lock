@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf3af89666e37e209efcf1b42679901d",
+    "content-hash": "fbfcb19a81c323e0fe936b99d7e764a9",
     "packages": [
+        ***REMOVED***
+            "name": "bryanjhv/slim-session",
+            "version": "3.3.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/bryanjhv/slim-session.git",
+                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/d2bb057593be8fe015b86f2a4283f9af2231f6b9",
+                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.5",
+                "slim/slim": "^3.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "4.7.*"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Bryan Horna",
+                    "email": "bryanjhv@gmail.com",
+                    "homepage": "https://bryanjhv.github.io",
+                    "role": "developer"
+            ***REMOVED***
+            ],
+            "description": "Helper middleware and helper for Slim framework 3.",
+            "homepage": "https://github.com/bryanjhv/slim-session",
+            "keywords": [
+                "helper",
+                "middleware",
+                "session",
+                "slim"
+            ],
+            "time": "2017-06-05T14:49:58+00:00"
+    ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/core",
             "version": "3.5.5",

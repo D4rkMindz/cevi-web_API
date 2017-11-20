@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use League\Plates\Engine;
 use Slim\Container;
+use SlimSession\Helper;
 
 /**
  * Class AppController
@@ -14,16 +15,19 @@ class AppController
      * @var Container
      */
     protected $container;
+    protected $session;
     private $engine;
 
     /**
      * AppController constructor.
      *
      * @param Engine $engine
+     * @param Helper $session
      */
-    public function __construct(Engine $engine)
+    public function __construct(Engine $engine, Helper $session)
     ***REMOVED***
         $this->engine = $engine;
+        $this->session = $session;
 ***REMOVED***
 
     /**
