@@ -1,8 +1,10 @@
 <?php
 
+use App\Service\Mail\Mail;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use League\Plates\Engine;
+use Mailgun\Mailgun;
 use Odan\Plates\Extension\PlatesDataExtension;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -91,4 +93,10 @@ $container[Engine::class] = function (Container $container): Engine ***REMOVED**
 
 $container[SessionHelper::class] = function ()***REMOVED***
     return new SessionHelper();
+***REMOVED***;
+
+$container[Mailgun::class] = function (Container $container) ***REMOVED***
+    $mailSettings = $container->get('settings')->get('mailgun');
+    $mail = new Mail($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
+    return $mail;
 ***REMOVED***;

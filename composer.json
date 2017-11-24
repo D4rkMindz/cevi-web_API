@@ -5,7 +5,9 @@
         "league/plates": "^3.3",
         "odan/plates-data-extension": "^0.3.0",
         "odan/plates-asset-cache": "^0.3.5",
-        "bryanjhv/slim-session": "^3.3"
+        "bryanjhv/slim-session": "^3.3",
+        "mailgun/mailgun-php": "^2.3",
+        "php-http/curl-client": "^1.7"
 ***REMOVED***,
     "autoload": ***REMOVED***
         "psr-4": ***REMOVED***
