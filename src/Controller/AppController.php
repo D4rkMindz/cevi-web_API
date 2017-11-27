@@ -53,7 +53,7 @@ class AppController
      * @param array $viewData
      * @return string rendered HTML File
      */
-    public function render(string $file, array $viewData)
+    public function render(string $file, array $viewData): string
     ***REMOVED***
         $default = ['base' => $this->router->pathFor('/')];
         $viewData = array_merge_recursive($viewData, $default);

@@ -38,7 +38,7 @@ class Mail implements MailService
         $this->sender = $sender;
 ***REMOVED***
 
-    public function getDomain()
+    public function getDomain(): string
     ***REMOVED***
         return $this->domain;
 ***REMOVED***

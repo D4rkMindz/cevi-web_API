@@ -91,12 +91,13 @@ $container[Engine::class] = function (Container $container): Engine ***REMOVED**
     return $engine;
 ***REMOVED***;
 
-$container[SessionHelper::class] = function ()***REMOVED***
+$container[SessionHelper::class] = function (): SessionHelper ***REMOVED***
     return new SessionHelper();
 ***REMOVED***;
 
 $container[Mailgun::class] = function (Container $container) ***REMOVED***
     $mailSettings = $container->get('settings')->get('mailgun');
     $mail = new Mail($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
+
     return $mail;
 ***REMOVED***;

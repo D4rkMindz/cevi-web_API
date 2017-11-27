@@ -11,7 +11,7 @@
  *
  * @return mixed
  */
-function is_email($email): bool
+function is_email(string $email): bool
 ***REMOVED***
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 ***REMOVED***

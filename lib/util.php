@@ -19,6 +19,6 @@ function app(): App
 ***REMOVED***
 
 
-function route(callable $callback) ***REMOVED***
+function route(callable $callback): string ***REMOVED***
     return implode(':', (array)$callback);
 ***REMOVED***

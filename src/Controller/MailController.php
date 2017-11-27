@@ -20,7 +20,7 @@ class MailController extends AppController
         parent::__construct($container);
 ***REMOVED***
 
-    public function index()
+    public function index(): string
     ***REMOVED***
         $viewData = [
             'page' => 'Mail',
@@ -29,7 +29,7 @@ class MailController extends AppController
         return $this->render('view::Mail/index.html.php', $viewData);
 ***REMOVED***
 
-    public function sendMail()
+    public function sendMail(): string
     ***REMOVED***
         $data = $this->request->getParsedBody();
         try ***REMOVED***

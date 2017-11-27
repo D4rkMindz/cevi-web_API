@@ -36,7 +36,7 @@ class IndexController extends AppController
      *
      * @return string
      */
-    public function index()
+    public function index(): string
     ***REMOVED***
         $username = $this->session->get('username');
 

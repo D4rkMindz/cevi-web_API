@@ -8,16 +8,16 @@
     "packages": [
         ***REMOVED***
             "name": "bryanjhv/slim-session",
-            "version": "3.3.0",
+            "version": "3.4.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/bryanjhv/slim-session.git",
-                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9"
+                "reference": "493496dc527761a42f3d216beca82234555f4995"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/d2bb057593be8fe015b86f2a4283f9af2231f6b9",
-                "reference": "d2bb057593be8fe015b86f2a4283f9af2231f6b9",
+                "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/493496dc527761a42f3d216beca82234555f4995",
+                "reference": "493496dc527761a42f3d216beca82234555f4995",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -53,7 +53,7 @@
                 "session",
                 "slim"
             ],
-            "time": "2017-06-05T14:49:58+00:00"
+            "time": "2017-11-25T21:06:50+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/core",
@@ -1338,16 +1338,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "slim/slim",
-            "version": "3.9.0",
+            "version": "3.9.2",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "575a8b53a0a489447915029c69680156cd355304"
+                "reference": "4086d0106cf5a7135c69fce4161fe355a8feb118"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/575a8b53a0a489447915029c69680156cd355304",
-                "reference": "575a8b53a0a489447915029c69680156cd355304",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/4086d0106cf5a7135c69fce4161fe355a8feb118",
+                "reference": "4086d0106cf5a7135c69fce4161fe355a8feb118",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1405,7 +1405,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-11-04T08:46:46+00:00"
+            "time": "2017-11-26T19:13:09+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/cache",
