@@ -4,8 +4,18 @@ namespace App\ArrayObjects;
 
 use App\Entity\User;
 
+/**
+ * Class UserArray
+ */
 class UserArray extends \ArrayObject
 ***REMOVED***
+    /**
+     * Inherited method.
+     *
+     * @param mixed $index
+     * @param mixed $newval
+     * @return void
+     */
     public function offsetSet($index, $newval)
     ***REMOVED***
         if ($index instanceof User)***REMOVED***
@@ -13,5 +23,4 @@ class UserArray extends \ArrayObject
     ***REMOVED***
         throw new \InvalidArgumentException('Index ' . $index . ' not instance of ' . User::class);
 ***REMOVED***
-
 ***REMOVED***
