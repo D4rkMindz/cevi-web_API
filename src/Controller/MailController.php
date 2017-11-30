@@ -2,38 +2,57 @@
 
 namespace App\Controller;
 
-use App\Service\Mail\Mail;
+use App\Service\Mail\MailerInterface;
+use App\Service\Mail\MailgunAdapter;
 use Exception;
-use Mailgun\Mailgun;
+use Interop\Container\Exception\ContainerException;
 use Slim\Container;
 
 class MailController extends AppController
 ***REMOVED***
     /**
-     * @var Mail
+     * @var MailgunAdapter
      */
     private $mail;
 
+    /**
+     * MailController constructor.
+     *
+     * @param Container $container
+     */
     public function __construct(Container $container)
     ***REMOVED***
-        $this->mail = $container->get(Mailgun::class);
         parent::__construct($container);
+        try ***REMOVED***
+            $this->mail = $container->get(MailerInterface::class);
+    ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 
+    /**
+     * Index action.
+     *
+     * @return string rendered HTML
+     */
     public function index(): string
     ***REMOVED***
         $viewData = [
-            'page' => 'Mail',
+            'page' => 'MailgunAdapter',
         ];
 
         return $this->render('view::Mail/index.html.php', $viewData);
 ***REMOVED***
 
+    /**
+     * Send mail action.
+     *
+     * @return string rendered HTML
+     */
     public function sendMail(): string
     ***REMOVED***
         $data = $this->request->getParsedBody();
         try ***REMOVED***
-            $this->mail->send('bjoern <bjoern.pfoster@gmail.com>', $data['subject'], $data['message']);
+            $this->mail->sendText('bjoern <bjoern.pfoster@gmail.com>', $data['subject'], $data['message']);
     ***REMOVED*** catch (Exception$exception) ***REMOVED***
             return $exception->getMessage();
     ***REMOVED***

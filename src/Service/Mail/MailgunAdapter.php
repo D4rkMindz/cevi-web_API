@@ -5,9 +5,9 @@ namespace App\Service\Mail;
 use Mailgun\Mailgun;
 
 /**
- * Class Mail
+ * Class MailgunAdapter
  */
-class Mail implements MailService
+class MailgunAdapter implements MailerInterface
 ***REMOVED***
     /**
      * @var Mailgun $mail
@@ -20,12 +20,12 @@ class Mail implements MailService
     private $domain;
 
     /**
-     * @var string $sender email
+     * @var string $from email
      */
-    private $sender;
+    private $from;
 
     /**
-     * Mail constructor.
+     * MailgunAdapter constructor.
      *
      * @param string $apiKey
      * @param string $domain
@@ -35,9 +35,14 @@ class Mail implements MailService
     ***REMOVED***
         $this->mail = Mailgun::create($apiKey);
         $this->domain = $domain;
-        $this->sender = $sender;
+        $this->from = $sender;
 ***REMOVED***
 
+    /**
+     * Get domain name.
+     *
+     * @return string
+     */
     public function getDomain(): string
     ***REMOVED***
         return $this->domain;
@@ -47,15 +52,18 @@ class Mail implements MailService
      * Send Text email.
      *
      * @param string $to Receiver
-     * @param string $from Forwarder
      * @param string $subject
      * @param string $text Email as String
+     * @param string $from Forwarder
      * @return void
      */
-    public function sendText(string $to, string $from, string $subject, string $text)
+    public function sendText(string $to, string $subject, string $text, string $from = null)
+    ***REMOVED***
+        if (empty($from)) ***REMOVED***
+            $from = $this->from;
     ***REMOVED***
         $mailConfig = [
-            'from' => $this->sender,
+            'from' => $from,
             'to' => $to,
             'subject' => $subject,
             'text' => $text,
@@ -67,15 +75,18 @@ class Mail implements MailService
      * Send HTML email.
      *
      * @param string $to Receiver
-     * @param string $from Forwarder
      * @param string $subject
      * @param string $html Email content as HTML
+     * @param string $from Forwarder
      * @return void
      */
-    public function sendHtml(string $to, string $from, string $subject, string $html)
+    public function sendHtml(string $to,  string $subject, string $html, string $from = null)
+    ***REMOVED***
+        if (empty($from)) ***REMOVED***
+            $from = $this->from;
     ***REMOVED***
         $mailConfig = [
-            'from' => $this->sender,
+            'from' => $from,
             'to' => $to,
             'subject' => $subject,
             'html' => $html,

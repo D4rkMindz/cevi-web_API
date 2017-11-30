@@ -1,6 +1,10 @@
 <?php
 
+use App\Service\Mail\MailerInterface;
+
 $config = [];
+
+$config['displayErrorDetails'] = false;
 
 $config['db']['database'] = 'slim';
 $config['db']['charset'] = 'utf8';
@@ -17,9 +21,16 @@ $config['session'] = [
     'httponly' => false, //default
 ];
 
-$env['mailgun']['from'] = '';
-$env['mailgun']['apikey'] = '';
-$env['mailgun']['domain'] = '';
+$config['logger'] = [
+    'main' => 'app',
+    'context'=> [
+        MailerInterface::class => 'mail',
+    ]
+];
+
+$config['mailgun']['from'] = '';
+$config['mailgun']['apikey'] = '';
+$config['mailgun']['domain'] = '';
 
 $config['viewPath'] = __DIR__ . '/../templates';
 

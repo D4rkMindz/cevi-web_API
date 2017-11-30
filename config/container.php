@@ -1,10 +1,11 @@
 <?php
 
-use App\Service\Mail\Mail;
+use App\Service\Mail\MailerInterface;
+use App\Service\Mail\MailgunAdapter;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use League\Plates\Engine;
-use Mailgun\Mailgun;
+use Monolog\Logger;
 use Odan\Plates\Extension\PlatesDataExtension;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -33,6 +34,7 @@ $container['environment'] = function (): Environment ***REMOVED***
  *
  * @param Container $container
  * @return Connection
+ * @throws \Interop\Container\Exception\ContainerException
  */
 $container[Connection::class] = function (Container $container): Connection ***REMOVED***
     $config = $container->get('settings')->get('db');
@@ -64,10 +66,11 @@ $container[Connection::class] = function (Container $container): Connection ***R
 ***REMOVED***;
 
 /**
- * Render Engine Container.
+ * Get render engine instance.
  *
  * @param Container $container
  * @return Engine
+ * @throws \Interop\Container\Exception\ContainerException
  */
 $container[Engine::class] = function (Container $container): Engine ***REMOVED***
     $path = $container->get('settings')->get('viewPath');
@@ -91,13 +94,46 @@ $container[Engine::class] = function (Container $container): Engine ***REMOVED**
     return $engine;
 ***REMOVED***;
 
+/**
+ * Get SessionHelper instance.
+ *
+ * @return SessionHelper
+ */
 $container[SessionHelper::class] = function (): SessionHelper ***REMOVED***
     return new SessionHelper();
 ***REMOVED***;
 
-$container[Mailgun::class] = function (Container $container) ***REMOVED***
-    $mailSettings = $container->get('settings')->get('mailgun');
-    $mail = new Mail($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
+/**
+ * Get Mailer instance.
+ *
+ * @param Container $container
+ * @return MailgunAdapter
+ * @throws \Interop\Container\Exception\ContainerException
+ * @throws Exception
+ */
+$container[MailerInterface::class] = function (Container $container) ***REMOVED***
+    try ***REMOVED***
+        $mailSettings = $container->get('settings')->get('mailgun');
+        $mail = new MailgunAdapter($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
+***REMOVED*** catch (Exception $exception) ***REMOVED***
+        $logger = $container->get(Logger::class);
+        $message = $exception->getMessage();
+        $message .= "\n" . $exception->getTraceAsString();
+        $context = $container->get('settings')->get('logger')['context'][MailerInterface::class];
+        $logger->addDebug($message, $context);
+        throw new Exception('Mailer instantiation failed');
+***REMOVED***
 
     return $mail;
+***REMOVED***;
+
+/**
+ * Get logger instance.
+ *
+ * @param Container $container
+ * @return Logger
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
+    return new Logger($container->get('settings')->get('logger')['main']);
 ***REMOVED***;

@@ -8,7 +8,7 @@
 
 namespace App\Service\Mail;
 
-interface MailService
+interface MailerInterface
 ***REMOVED***
     /**
      * Get domain as string.
