@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="webapp" default="noop">
+    <target name="noop"/>
+    <property environment="env"/>
+    <fileset id="files.php" dir="." includes="**/*.php" excludes="**/vendor/**"/>
+
+    <condition property="is_windows">
+        <os family="windows"/>
+    </condition>
+
+    <tstamp>
+        <format property="now" pattern="yyyy-MM-dd HH:mm:ss" locale="en,UK"/>
+        <format property="now_num" pattern="yyyyMMddHHmmss" locale="en,UK"/>
+        <format property="now_file" pattern="yyyy-MM-dd_HHmmss" locale="en,UK"/>
+        <format property="timestamp" pattern="MM_dd_yyyy_HH-mm-ss" locale="de, DE"/>
+    </tstamp>
+
+    <!-- File variables-->
+    <property name="filename" value="contact_form_$***REMOVED***timestamp***REMOVED***.zip"/>
+    <property name="build_dir" value="$***REMOVED***basedir***REMOVED***/build"/>
+
+    <!-- By default, we assume all tools to be on the $PATH -->
+    <condition property="ext" value=".bat">
+        <os family="windows"/>
+    </condition>
+
+    <condition property="ext" value="">
+        <os family="Unix"/>
+    </condition>
+
+    <!-- DISPLAYS WINDOWS OS -->
+    <target name="display_windows" if="is_windows">
+        <echo message="OS Family is: Windows"/>
+    </target>
+
+    <target name="migrations" description="Generate database migrations">
+        <condition property="script_ext" value=".bat" else="">
+            <os family="windows"/>
+        </condition>
+        <input message="Migration name" addproperty="migrationName"/>
+        <exec executable="$***REMOVED***basedir***REMOVED***/vendor/bin/phinx-migrations.bat" dir="$***REMOVED***basedir***REMOVED***/config" osfamily="windows">
+            <arg line="generate --name $***REMOVED***migrationName***REMOVED*** --overwrite"/>
+        </exec>
+    </target>
+
+    <target name="deploy" description="get your Repository from GitHub to your build folder">
+        <!-- Choose, which environment you want to deploy -->
+        <input message="Which config should be used?"
+               validArgs="test,staging,prod"
+               addproperty="config"
+        />
+        <property file="$***REMOVED***basedir***REMOVED***/config/ant.$***REMOVED***config***REMOVED***.properties"/>
+
+        <!-- Build project -->
+        <antcall target="build"/>
+
+        <!-- Upload deploy.php -->
+        <echo message="Uploading deploy.php ..."/>
+        <scp file="$***REMOVED***build_dir***REMOVED***/deploy.php"
+             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             trust="true"/>
+
+        <!-- Upload clean-up.php -->
+        <echo message="uploading clean-up.php ..."/>
+        <scp file="$***REMOVED***build_dir***REMOVED***/clean-up.php"
+             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             trust="true"/>
+
+        <!-- Deleting clean-up.php and deploy.php -->
+        <echo message="Deleting clean-up.php and deploy.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/clean-up.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/deploy.php"/>
+
+        <!-- Upload zip-file -->
+        <echo message="Uploading $***REMOVED***filename***REMOVED*** ..."/>
+        <scp file="$***REMOVED***build_dir***REMOVED***/$***REMOVED***filename***REMOVED***"
+             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             trust="true"/>
+
+        <!-- Delete old directories -->
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master.zip"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/$***REMOVED***filename***REMOVED***"/>
+
+
+        <!-- Call deploy.php for zip-file -->
+        <sshexec host="$***REMOVED***build.ftp.host***REMOVED***"
+                 username="$***REMOVED***build.ftp.user***REMOVED***"
+                 password="$***REMOVED***build.ftp.password***REMOVED***"
+                 command="cd $***REMOVED***build.ftp.dir***REMOVED***;php deploy.php $***REMOVED***filename***REMOVED***"
+                 usepty="true"
+                 trust="true"
+        />
+    </target>
+
+    <target name="build">
+        <!-- Download newest repository master -->
+        <antcall target="get-repo"/>
+
+        <!-- Install composer.phar, if this file isn't already in the buildfolder -->
+        <get src="https://getcomposer.org/composer.phar" dest="$***REMOVED***build_dir***REMOVED***" skipexisting="true"/>
+
+        <!-- Install project dependencies -->
+        <exec executable="php" failonerror="true">
+            <arg line="$***REMOVED***build_dir***REMOVED***/composer.phar install --no-dev --optimize-autoloader -d $***REMOVED***build_dir***REMOVED***/master"/>
+        </exec>
+        <move file="$***REMOVED***build_dir***REMOVED***/master/config/deploy.php" todir="$***REMOVED***build_dir***REMOVED***"/>
+        <move file="$***REMOVED***build_dir***REMOVED***/master/config/clean-up.php" todir="$***REMOVED***build_dir***REMOVED***"/>
+        <!-- Clean up build -->
+        <antcall target="clean-build"/>
+
+        <!-- Zip master into file -->
+        <zip basedir="$***REMOVED***build_dir***REMOVED***/master" destfile="$***REMOVED***build_dir***REMOVED***/$***REMOVED***filename***REMOVED***"/>
+    </target>
+
+    <target name="get-repo">
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master"/>
+        <mkdir dir="$***REMOVED***build_dir***REMOVED***/master"/>
+        <exec executable="git" failonerror="true">
+            <arg line="archive  --format zip --output $***REMOVED***build_dir***REMOVED***/master.zip master"/>
+        </exec>
+        <unzip src="$***REMOVED***build_dir***REMOVED***/master.zip" dest="$***REMOVED***build_dir***REMOVED***/master"/>
+    </target>
+
+    <target name="clean-build">
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/tests"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/.gitignore"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/.styleci.yml"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/.scrudinizer.yml"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/build.xml"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/phpstan.neon"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/README.md"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/composer.json"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/composer.lock"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/ant.example.properties"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/env.example.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/clean-up.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/deploy.php"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/docs"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/phpstan"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/monolog/monolog/doc"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/monolog/monolog/tests"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/dflydev/dot-access-data/tests"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/league/plates/docs"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/league/plates/examples"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/phpmailer/phpmailer/examples"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/symfony/cache/Tests"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/symfony/http-foundation/Tests"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/symfony/routing/Tests"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/symfony/translation/Tests"/>
+    </target>
+
+    <target name="phpstan" description="DbBlockedUsersTest code for errors">
+        <mkdir dir="$***REMOVED***basedir***REMOVED***/build"/>
+        <get src="https://github.com/phpstan/phpstan/releases/download/0.9/phpstan.phar"
+             dest="$***REMOVED***basedir***REMOVED***/build/phpstan.phar"
+             skipexisting="true"/>
+        <exec executable="php" failonerror="true">
+            <arg line="$***REMOVED***basedir***REMOVED***/build/phpstan.phar analyse --no-progress --level=5 -c phpstan.neon src"/>
+        </exec>
+        <exec executable="php" failonerror="true">
+            <arg line="$***REMOVED***basedir***REMOVED***/build/phpstan.phar analyse --no-progress --level=1 -c phpstan.neon tests"/>
+        </exec>
+    </target>
+
+    <target name="php-lints">
+        <apply executable="php"
+               failonerror="true">
+            <arg value="-l"/>
+            <fileset dir="$***REMOVED***basedir***REMOVED***">
+                <include name="**/*.php"/>
+                <include name="**/*.ctp"/>
+                <exclude name="**/vendor/**/*.*"/>
+
+                <!--Inspect only modified files-->
+                <modified/>
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="$***REMOVED***basedir***REMOVED***/vendor/bin/phpunit$***REMOVED***ext***REMOVED***" searchpath="true" resolveexecutable="true" failonerror="true" taskname="phpunit">
+            <arg value="-v"/>
+            <arg value="--configuration" />
+            <arg path="$***REMOVED***basedir***REMOVED***/phpunit.xml" />
+        </exec>
+    </target>
+
+    <target name="phpunit-actual" description="Run unit tests with PHPUnit">
+        <exec executable="$***REMOVED***basedir***REMOVED***/vendor/bin/phpunit$***REMOVED***ext***REMOVED***" searchpath="true" resolveexecutable="true"
+              failonerror="true" taskname="phpunit">
+            <arg value="-v"/>
+            <arg value="--configuration"/>
+            <arg path="$***REMOVED***basedir***REMOVED***/phpunit.xml"/>
+            <arg value="--group"/>
+            <arg value="actual"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit with coverage">
+        <delete dir="$***REMOVED***basedir***REMOVED***/build/coverage" />
+        <mkdir dir="$***REMOVED***basedir***REMOVED***/build/coverage" />
+        <exec executable="$***REMOVED***basedir***REMOVED***/vendor/bin/phpunit$***REMOVED***ext***REMOVED***" searchpath="true" resolveexecutable="true" failonerror="true" taskname="phpunit-coverage">
+            <arg value="--configuration" />
+            <arg path="$***REMOVED***basedir***REMOVED***/phpunit.xml" />
+            <arg value="--coverage-clover" />
+            <arg path="$***REMOVED***basedir***REMOVED***/build/logs/clover.xml" />
+            <arg value="--coverage-html" />
+            <arg path="$***REMOVED***basedir***REMOVED***/build/coverage" />
+        </exec>
+    </target>
+
+</project>

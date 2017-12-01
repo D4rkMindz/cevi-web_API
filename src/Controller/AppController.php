@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use Interop\Container\Exception\ContainerException;
 use League\Plates\Engine;
 use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
+use Slim\Http\Response;
 use Slim\Router;
+use Slim\Views\Twig;
 use SlimSession\Helper as SessionHelper;
-use Interop\Container\Exception\ContainerException;
 
 /**
  * Class AppController
@@ -16,14 +18,20 @@ use Interop\Container\Exception\ContainerException;
 class AppController
 ***REMOVED***
     /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var Response
+     */
+    protected $response;
+
+    /**
      * @var SessionHelper
      */
     protected $session;
 
-    /**
-     * @var Request
-     */
-    protected $request;
 
     /**
      * @var Router
@@ -31,14 +39,14 @@ class AppController
     protected $router;
 
     /**
-     * @var Engine
-     */
-    private $engine;
-
-    /**
      * @var Logger
      */
     protected $logger;
+
+    /**
+     * @var Twig
+     */
+    protected $twig;
 
     /**
      * AppController constructor.
@@ -49,13 +57,13 @@ class AppController
     ***REMOVED***
         try ***REMOVED***
             $this->request = $container->get('request');
-            $this->engine = $container->get(Engine::class);
+            $this->response = $container->get('response');
             $this->session = $container->get(SessionHelper::class);
             $this->router = $container->get('router');
             $this->logger = $container->get(Logger::class);
+            $this->twig = $container->get(Twig::class);
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
             // TODO handle Exception
-            return null;
     ***REMOVED***
 ***REMOVED***
 
@@ -64,14 +72,10 @@ class AppController
      *
      * @param string $file
      * @param array $viewData
-     * @return string rendered HTML File
+     * @return Response
      */
-    public function render(string $file, array $viewData): string
+    public function render(string $file, array $viewData = []): Response
     ***REMOVED***
-        $default = ['base' => $this->router->pathFor('/')];
-        $viewData = array_merge_recursive($viewData, $default);
-        $this->engine->addData($viewData);
-
-        return $this->engine->render($file, $viewData);
+        return $this->twig->render($this->response, $file, $viewData);
 ***REMOVED***
 ***REMOVED***

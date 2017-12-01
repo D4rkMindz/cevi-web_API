@@ -2,13 +2,15 @@
     "require": ***REMOVED***
         "slim/slim": "^3.9",
         "cakephp/database": "^3.5",
-        "league/plates": "^3.3",
-        "odan/plates-data-extension": "^0.3.0",
-        "odan/plates-asset-cache": "^0.3.5",
         "bryanjhv/slim-session": "^3.3",
         "mailgun/mailgun-php": "^2.3",
         "php-http/curl-client": "^1.7",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "phpunit/phpunit": "^6.4",
+        "slim/twig-view": "^2.3",
+        "odan/twig-translation": "^0.2.2",
+        "odan/twig-assets": "^0.2.2",
+        "symfony/translation": "^3.4"
 ***REMOVED***,
     "autoload": ***REMOVED***
         "psr-4": ***REMOVED***
@@ -17,7 +19,7 @@
 ***REMOVED***,
     "autoload-dev": ***REMOVED***
         "psr-4": ***REMOVED***
-            "App\\Tests\\": "tests"
+            "App\\Test\\": "tests"
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

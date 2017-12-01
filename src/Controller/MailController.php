@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
 use Exception;
-use Interop\Container\Exception\ContainerException;
 use Slim\Container;
+use Slim\Views\Twig;
 
 class MailController extends AppController
 ***REMOVED***
@@ -19,14 +19,12 @@ class MailController extends AppController
      * MailController constructor.
      *
      * @param Container $container
+     * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
     ***REMOVED***
         parent::__construct($container);
-        try ***REMOVED***
-            $this->mail = $container->get(MailerInterface::class);
-    ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
-    ***REMOVED***
+        $this->mail = $container->get(MailerInterface::class);
 ***REMOVED***
 
     /**
@@ -40,7 +38,7 @@ class MailController extends AppController
             'page' => 'MailgunAdapter',
         ];
 
-        return $this->render('view::Mail/index.html.php', $viewData);
+        return $this->render('Mail/index.html.php', $viewData);
 ***REMOVED***
 
     /**
@@ -57,6 +55,6 @@ class MailController extends AppController
             return $exception->getMessage();
     ***REMOVED***
 
-        return $this->render('view::Mail/index.html.php', []);
+        return $this->render('Mail/index.html.php');
 ***REMOVED***
 ***REMOVED***

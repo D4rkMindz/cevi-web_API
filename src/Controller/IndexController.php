@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Table\UserTable;
 use Cake\Database\Connection;
 use League\Plates\Engine;
+use Psr\Http\Message\ResponseInterface;
 use Slim\Container;
+use Slim\Http\Response;
+use Slim\Views\Twig;
 use SlimSession\Helper;
 
 /**
@@ -23,20 +26,20 @@ class IndexController extends AppController
      * IndexController constructor.
      *
      * @param Container $container
+     * @throws \Interop\Container\Exception\ContainerException
 */
     public function __construct(Container $container)
     ***REMOVED***
-        $this->connection = $container->get(Connection::class);
         parent::__construct($container);
+        $this->connection = $container->get(Connection::class);
 ***REMOVED***
 
     /**
-     * Index method,
-     * .
+     * Index method.
      *
-     * @return string
+     * @return Response
      */
-    public function index(): string
+    public function index(): Response
     ***REMOVED***
         $username = $this->session->get('username');
 
@@ -46,11 +49,11 @@ class IndexController extends AppController
         $viewData = [
             'page' => 'Home',
             'username'=> $username,
-            'userData' => $userData,
+            'users' => $userData,
         ];
 
         $this->session->set('username', $userData[0]['username']);
 
-        return $this->render('view::Home/index.html.php', $viewData);
+        return $this->render('Home/home.index.twig', $viewData);
 ***REMOVED***
 ***REMOVED***

@@ -4,13 +4,16 @@ use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
-use League\Plates\Engine;
 use Monolog\Logger;
-use Odan\Plates\Extension\PlatesDataExtension;
+use Odan\Twig\TwigAssetsExtension;
+use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
 use Slim\Http\Environment;
+use Slim\Views\Twig;
 use SlimSession\Helper as SessionHelper;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Translation\Loader\MoFileLoader;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Translator;
 
 //use Slim\Collection;
 
@@ -18,7 +21,7 @@ $app = app();
 $container = $app->getContainer();
 
 /**
- * Environment Container (for routes).
+ * Environment container (for routes).
  *
  * @return Environment
  */
@@ -27,6 +30,44 @@ $container['environment'] = function (): Environment ***REMOVED***
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
 
     return new Slim\Http\Environment($_SERVER);
+***REMOVED***;
+
+/**
+ * Twig container.
+ *
+ * @param Container $container
+ * @return Twig
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[Twig::class] = function (Container $container): Twig ***REMOVED***
+    $twigSettings = $container->get('settings')->get('twig');
+    $twig = new Twig($twigSettings['viewPath'], ['cache' => $twigSettings['cachePath']]);
+    $twig->addExtension(new TwigTranslationExtension());
+    $twig->addExtension(new TwigAssetsExtension($twig->getEnvironment(), $twigSettings['assetCache']));
+    return $twig;
+***REMOVED***;
+
+/**
+ * Translator container.
+ *
+ * @param Container $container
+ * @return Translator $translator
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[Translator::class] = function (Container $container): Translator ***REMOVED***
+    $session = $container->get(SessionHelper::class);
+    $locale = $session->get('lang');
+    if (empty($locale)) ***REMOVED***
+        $locale = DE;
+        $session->set('lang', DE);
+***REMOVED***
+    $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
+    $translator = new Translator($locale, new MessageSelector());
+    $translator->setFallbackLocales([EN]);
+    $translator->addLoader('mo', new MoFileLoader());
+    $translator->addResource('mo', $resource, $locale);
+    $translator->setLocale($locale);
+    return $translator;
 ***REMOVED***;
 
 /**
@@ -66,36 +107,7 @@ $container[Connection::class] = function (Container $container): Connection ***R
 ***REMOVED***;
 
 /**
- * Get render engine instance.
- *
- * @param Container $container
- * @return Engine
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Engine::class] = function (Container $container): Engine ***REMOVED***
-    $path = $container->get('settings')->get('viewPath');
-    $engine = new Engine($path, null);
-
-    $dir = __DIR__ . '/../tmp/cache';
-    if (!is_dir($dir)) ***REMOVED***
-        mkdir($dir);
-***REMOVED***
-
-    $options = array(
-        'minify' => true,
-        'public_dir' => __DIR__ . '/../public/assets',
-        'cache' => new FilesystemAdapter('assets-cache', 0, $dir),
-    );
-    $engine->loadExtension(new \Odan\Asset\PlatesAssetExtension($options));
-    $engine->loadExtension(new PlatesDataExtension());
-
-    $engine->addFolder('view', $path);
-
-    return $engine;
-***REMOVED***;
-
-/**
- * Get SessionHelper instance.
+ * SessionHelper container.
  *
  * @return SessionHelper
  */
@@ -104,7 +116,7 @@ $container[SessionHelper::class] = function (): SessionHelper ***REMOVED***
 ***REMOVED***;
 
 /**
- * Get Mailer instance.
+ * Mailer container.
  *
  * @param Container $container
  * @return MailgunAdapter
@@ -128,7 +140,7 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
 ***REMOVED***;
 
 /**
- * Get logger instance.
+ * Logger container.
  *
  * @param Container $container
  * @return Logger

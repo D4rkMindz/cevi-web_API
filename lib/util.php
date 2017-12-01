@@ -1,6 +1,7 @@
 <?php
 
 use Slim\App;
+use Symfony\Component\Translation\Translator;
 
 /**
  * Get app.
@@ -18,7 +19,32 @@ function app(): App
     return $app;
 ***REMOVED***
 
-
+/**
+ * Route function.
+ *
+ * @param callable $callback
+ * @return string
+ */
 function route(callable $callback): string ***REMOVED***
     return implode(':', (array)$callback);
+***REMOVED***
+
+/**
+ * Translation function (i18n).
+ *
+ * @param $message
+ * @return string
+ * @throws \Psr\Container\ContainerExceptionInterface
+ * @throws \Psr\Container\NotFoundExceptionInterface
+ */
+function __($message)
+***REMOVED***
+    /* @var $translator Translator */
+    $translator = app()->getContainer()->get(Translator::class);
+    $translated = $translator->trans($message);
+    $context = array_slice(func_get_args(), 1);
+    if (!empty($context)) ***REMOVED***
+        $translated = vsprintf($translated, $context);
+***REMOVED***
+    return $translated;
 ***REMOVED***
