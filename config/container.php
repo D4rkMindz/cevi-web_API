@@ -15,8 +15,6 @@ use Symfony\Component\Translation\Loader\MoFileLoader;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator;
 
-//use Slim\Collection;
-
 $app = app();
 $container = $app->getContainer();
 
@@ -58,12 +56,12 @@ $container[Translator::class] = function (Container $container): Translator ***R
     $session = $container->get(SessionHelper::class);
     $locale = $session->get('lang');
     if (empty($locale)) ***REMOVED***
-        $locale = DE;
-        $session->set('lang', DE);
+        $locale = 'de_CH';
+        $session->set('lang', 'de_CH');
 ***REMOVED***
     $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
     $translator = new Translator($locale, new MessageSelector());
-    $translator->setFallbackLocales([EN]);
+    $translator->setFallbackLocales(['en_GB']);
     $translator->addLoader('mo', new MoFileLoader());
     $translator->addResource('mo', $resource, $locale);
     $translator->setLocale($locale);
