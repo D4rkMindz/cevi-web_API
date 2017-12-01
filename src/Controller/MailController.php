@@ -38,7 +38,7 @@ class MailController extends AppController
             'page' => 'MailgunAdapter',
         ];
 
-        return $this->render('Mail/index.html.php', $viewData);
+        return $this->render('Mail/mail.index.twig', $viewData);
 ***REMOVED***
 
     /**
@@ -55,6 +55,6 @@ class MailController extends AppController
             return $exception->getMessage();
     ***REMOVED***
 
-        return $this->render('Mail/index.html.php');
+        return $this->render('Mail/mail.index.twig');
 ***REMOVED***
 ***REMOVED***
