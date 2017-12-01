@@ -48,3 +48,7 @@ function __($message)
 ***REMOVED***
     return $translated;
 ***REMOVED***
+
+function container() ***REMOVED***
+    return app()->getContainer();
+***REMOVED***
