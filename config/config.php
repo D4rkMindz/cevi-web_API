@@ -2,15 +2,20 @@
 
 use App\Service\Mail\MailerInterface;
 
-define('DE', 'de_CH');
-define('EN', 'en_GB');
-
 $config = [];
 
 $config['displayErrorDetails'] = false;
+$config['migrations'] = __DIR__ . '/../resources/migrations';
 
 $config['db'] = [
     'database' => 'slim',
+    'charset' => 'utf8',
+    'encoding' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+];
+
+$config['db_test'] = [
+    'database' => 'slim_test',
     'charset' => 'utf8',
     'encoding' => 'utf8',
     'collation' => 'utf8_unicode_ci',
