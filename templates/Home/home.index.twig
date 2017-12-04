@@ -8,10 +8,12 @@
 ***REMOVED***# Content #***REMOVED***
 ***REMOVED***% block content %***REMOVED***
     <h1>***REMOVED******REMOVED*** __('Hello') ***REMOVED******REMOVED*** ***REMOVED******REMOVED*** username ***REMOVED******REMOVED***</h1>
-    ***REMOVED***% for user in users %***REMOVED***
-        <hr>
-        <p>***REMOVED******REMOVED*** __('Username') ***REMOVED******REMOVED***: ***REMOVED******REMOVED*** user.username ***REMOVED******REMOVED***</p>
-        <p>***REMOVED******REMOVED*** __('Firstname') ***REMOVED******REMOVED***: ***REMOVED******REMOVED*** user.first_name ***REMOVED******REMOVED***</p>
-        <p>***REMOVED******REMOVED*** __('Lastname') ***REMOVED******REMOVED***: ***REMOVED******REMOVED*** user.last_name ***REMOVED******REMOVED***</p>
-    ***REMOVED***% endfor %***REMOVED***
+    ***REMOVED***% verbatim %***REMOVED***
+        ***REMOVED******REMOVED***#users#***REMOVED******REMOVED***
+            <hr>
+            <p>***REMOVED***% endverbatim %***REMOVED******REMOVED******REMOVED******REMOVED*** __('Username') ***REMOVED******REMOVED******REMOVED***% verbatim %***REMOVED***: ***REMOVED******REMOVED***username***REMOVED******REMOVED***</p>
+            <p>***REMOVED***% endverbatim %***REMOVED******REMOVED******REMOVED******REMOVED*** __('Firstname') ***REMOVED******REMOVED******REMOVED***% verbatim %***REMOVED***: ***REMOVED******REMOVED***first_name***REMOVED******REMOVED***</p>
+            <p>***REMOVED***% endverbatim %***REMOVED******REMOVED******REMOVED******REMOVED*** __('Lastname') ***REMOVED******REMOVED******REMOVED***% verbatim %***REMOVED***: ***REMOVED******REMOVED***last_name***REMOVED******REMOVED***</p>
+        ***REMOVED******REMOVED***/users***REMOVED******REMOVED***
+    ***REMOVED***% endverbatim %***REMOVED******REMOVED***
 ***REMOVED***% endblock %***REMOVED***

@@ -59,12 +59,55 @@ class AppControllerTest extends BaseTest
         $response = $this->appController->render('Mail/mail.index.twig');
         $this->assertInstanceOf(Response::class, $response);
 
-        $content = (string) $response->getBody();
+        $content = (string)$response->getBody();
 
         $twig = $this->container->get(Twig::class);
         $responseNew = $twig->render(new Response(), 'Mail/mail.index.twig');
-        $expected = (string) $responseNew->getBody();
+        $expected = (string)$responseNew->getBody();
 
         $this->assertSame($expected, $content);
+***REMOVED***
+
+    /**
+     * Test JSON response.
+     *
+     * @covers ::json
+     * @return void
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function testJsonResponse()
+    ***REMOVED***
+        $data = [
+            'test' => 'value',
+            'value' => [
+                'second' => 'val',
+                'third' => 'val',
+            ],
+        ];
+
+        $responseExpected = $this->container->get('response');
+        $responseExpected = $responseExpected->withJson($data, 200);
+        $response = $this->appController->json($data, 200);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame((string)$responseExpected->getBody(), (string)$response->getBody());
+        $this->assertSame(200, $response->getStatusCode());
+***REMOVED***
+
+    /**
+     * Test redirect.
+     *
+     * @covers ::redirect
+     * @return void
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    public function testRedirect()
+    ***REMOVED***
+        $expected = $this->container->get('response');
+        $expected = $expected->withRedirect('/', 301);
+        $response = $this->appController->redirect('/', 301);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame((string)$expected->getBody(), (string)$response->getBody());
+        $this->assertSame(301, $response->getStatusCode());
 ***REMOVED***
 ***REMOVED***

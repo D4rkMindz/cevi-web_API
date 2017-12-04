@@ -49,6 +49,11 @@ function __($message)
     return $translated;
 ***REMOVED***
 
+/**
+ * Get Container.
+ *
+ * @return \Psr\Container\ContainerInterface
+ */
 function container() ***REMOVED***
     return app()->getContainer();
 ***REMOVED***

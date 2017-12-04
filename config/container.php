@@ -39,7 +39,7 @@ $container['environment'] = function (): Environment ***REMOVED***
  */
 $container[Twig::class] = function (Container $container): Twig ***REMOVED***
     $twigSettings = $container->get('settings')->get('twig');
-    $twig = new Twig($twigSettings['viewPath'], ['cache' => $twigSettings['cachePath']]);
+    $twig = new Twig($twigSettings['viewPath'], ['cache' => $twigSettings['cachePath'], 'auto_reload'=>$twigSettings['autoReload']]);
     $twig->addExtension(new TwigTranslationExtension());
     $twig->addExtension(new TwigAssetsExtension($twig->getEnvironment(), $twigSettings['assetCache']));
     return $twig;

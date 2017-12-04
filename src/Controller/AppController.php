@@ -76,6 +76,34 @@ class AppController
      */
     public function render(string $file, array $viewData = []): Response
     ***REMOVED***
+        $extend = [
+            'base'=> baseurl('/'),
+        ];
+        $viewData = array_replace_recursive($extend, $viewData);
         return $this->twig->render($this->response, $file, $viewData);
+***REMOVED***
+
+    /**
+     * Return JSON Response.
+     *
+     * @param array $data
+     * @param int $status
+     * @return Response
+     */
+    public function json(array $data, int $status = 200): Response
+    ***REMOVED***
+        return $this->response->withJson($data, $status);
+***REMOVED***
+
+    /**
+     * Return redirect.
+     *
+     * @param string $url
+     * @param int $status
+     * @return Response
+     */
+    public function redirect(string $url, int $status = 301): Response
+    ***REMOVED***
+        return $this->response->withRedirect($url, $status);
 ***REMOVED***
 ***REMOVED***

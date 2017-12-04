@@ -24,6 +24,7 @@ $config['db_test'] = [
 $config['twig'] = [
     'viewPath' => __DIR__ . '/../templates',
     'cachePath' => __DIR__ . '/../tmp/cache/twig',
+    'autoReload' => false,
     'assetCache' => [
         'path' => __DIR__ . '/../public/assets',
         // Cache settings
