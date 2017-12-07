@@ -6,7 +6,8 @@ use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
 use Exception;
 use Slim\Container;
-use Slim\Views\Twig;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 class MailController extends AppController
 ***REMOVED***
@@ -30,31 +31,35 @@ class MailController extends AppController
     /**
      * Index action.
      *
-     * @return string rendered HTML
+     * @param Request $request
+     * @param Response $response
+     * @return Response
      */
-    public function index(): string
+    public function indexAction(Request $request, Response $response): Response
     ***REMOVED***
         $viewData = [
             'page' => 'MailgunAdapter',
         ];
 
-        return $this->render('Mail/mail.index.twig', $viewData);
+        return $this->render('Mail/mail.indexAction.twig', $viewData);
 ***REMOVED***
 
     /**
      * Send mail action.
      *
-     * @return string rendered HTML
+     * @param Request $request
+     * @param Response $response
+     * @return Response
      */
-    public function sendMail(): string
+    public function sendMailAction(Request $request, Response $response): Response
     ***REMOVED***
-        $data = $this->request->getParsedBody();
+        $data = $request->getParsedBody();
         try ***REMOVED***
             $this->mail->sendText('bjoern <bjoern.pfoster@gmail.com>', $data['subject'], $data['message']);
     ***REMOVED*** catch (Exception$exception) ***REMOVED***
             return $exception->getMessage();
     ***REMOVED***
 
-        return $this->render('Mail/mail.index.twig');
+        return $this->render('Mail/mail.indexAction.twig');
 ***REMOVED***
 ***REMOVED***

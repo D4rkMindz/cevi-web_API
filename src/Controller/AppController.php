@@ -70,17 +70,18 @@ class AppController
     /**
      * Render HTML file.
      *
+     * @param Response $response
      * @param string $file
      * @param array $viewData
      * @return Response
      */
-    public function render(string $file, array $viewData = []): Response
+    public function render(Response $response, string $file, array $viewData = []): Response
     ***REMOVED***
         $extend = [
             'base'=> baseurl('/'),
         ];
         $viewData = array_replace_recursive($extend, $viewData);
-        return $this->twig->render($this->response, $file, $viewData);
+        return $this->twig->render($response, $file, $viewData);
 ***REMOVED***
 
     /**

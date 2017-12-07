@@ -4,7 +4,11 @@ use App\Service\Mail\MailerInterface;
 
 $config = [];
 
-$config['displayErrorDetails'] = false;
+$config = [
+    'displayErrorDetails' => false,
+    'determineRouteBeforeAppMiddleware' => true,
+    'addContentLengthHeader' => false,
+];
 $config['migrations'] = __DIR__ . '/../resources/migrations';
 
 $config['db'] = [

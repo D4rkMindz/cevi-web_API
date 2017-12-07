@@ -3,7 +3,7 @@
 An application MVC template with Slim and CakePHP QueryBuilder.
 
 `config/` configuration files
-`public/` web server files (with index.php and .htaccess)
+`public/` web server files (with indexAction.php and .htaccess)
 `templates/` template files
 `resources/` other resource files
 `src/` PHP source code (The App namespace)

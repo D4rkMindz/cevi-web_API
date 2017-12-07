@@ -1446,7 +1446,7 @@ function microtaskDebounce(fn) ***REMOVED***
   return function () ***REMOVED***
     if (!scheduled) ***REMOVED***
       scheduled = true;
-      elem.setAttribute('x-index', i);
+      elem.setAttribute('x-indexAction', i);
       i = i + 1; // don't use compund (+=) because it doesn't get optimized in V8
 ***REMOVED***
   ***REMOVED***;
@@ -2177,7 +2177,7 @@ function find(arr, check) ***REMOVED***
 ***REMOVED***
 
 /**
- * Return the index of the matching object
+ * Return the indexAction of the matching object
  * @method
  * @memberof Popper.Utils
  * @argument ***REMOVED***Array***REMOVED*** arr
@@ -2992,7 +2992,7 @@ function toValue(str, measurement, popperOffsets, referenceOffsets) ***REMOVED**
 function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) ***REMOVED***
   var offsets = [0, 0];
 
-  // Use height if placement is left or right and index is 0 otherwise use width
+  // Use height if placement is left or right and indexAction is 0 otherwise use width
   // in this way the first offset will use an axis and the second one
   // will use the other one
   var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
@@ -6247,7 +6247,7 @@ var Tab = function () ***REMOVED***
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-alpha.6): index.js
+ * Bootstrap (v4.0.0-alpha.6): indexAction.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */

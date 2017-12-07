@@ -56,13 +56,13 @@ class AppControllerTest extends BaseTest
      */
     public function testRender()
     ***REMOVED***
-        $response = $this->appController->render('Mail/mail.index.twig');
+        $response = $this->appController->render('Mail/mail.indexAction.twig');
         $this->assertInstanceOf(Response::class, $response);
 
         $content = (string)$response->getBody();
 
         $twig = $this->container->get(Twig::class);
-        $responseNew = $twig->render(new Response(), 'Mail/mail.index.twig');
+        $responseNew = $twig->render(new Response(), 'Mail/mail.indexAction.twig');
         $expected = (string)$responseNew->getBody();
 
         $this->assertSame($expected, $content);

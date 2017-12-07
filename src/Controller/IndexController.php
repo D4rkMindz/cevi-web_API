@@ -7,6 +7,7 @@ use Cake\Database\Connection;
 use League\Plates\Engine;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Container;
+use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
 use SlimSession\Helper;
@@ -37,9 +38,11 @@ class IndexController extends AppController
     /**
      * Index method.
      *
+     * @param Request $request
+     * @param Response $response
      * @return Response
      */
-    public function index(): Response
+    public function indexAction(Request $request, Response $response): Response
     ***REMOVED***
         $username = $this->session->get('username');
 
@@ -54,6 +57,6 @@ class IndexController extends AppController
 
         $this->session->set('username', $userData[0]['username']);
 
-        return $this->render('Home/home.index.twig', $viewData);
+        return $this->render('Home/home.indexAction.twig', $viewData);
 ***REMOVED***
 ***REMOVED***

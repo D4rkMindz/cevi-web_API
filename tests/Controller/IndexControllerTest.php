@@ -88,7 +88,7 @@ class IndexControllerTest extends DbUnitBaseTest
 ***REMOVED***
 
     /**
-     * Test index method.
+     * Test indexAction method.
      *
      * @coversNothing
      * @return void

@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
-use Slim\Container;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 class UserController extends AppController
 ***REMOVED***
-    public function __construct(Container $container)
+    /**
+     * Send
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function indexAction(Request $request, Response $response): Response
     ***REMOVED***
-        parent::__construct($container);
-***REMOVED***
-
-    public function index()
-    ***REMOVED***
-
+        return $this->render('User/user.indexAction.twig');
 ***REMOVED***
 ***REMOVED***

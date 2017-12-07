@@ -2202,7 +2202,7 @@
             ***REMOVED***
             ],
             "description": "Common additional features for Twig that do not directly belong in core",
-            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/indexAction.html",
             "keywords": [
                 "i18n",
                 "text"
