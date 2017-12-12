@@ -16,6 +16,6 @@ class UserController extends AppController
      */
     public function indexAction(Request $request, Response $response): Response
     ***REMOVED***
-        return $this->render('User/user.indexAction.twig');
+        return $this->render($response,'User/user.indexAction.twig');
 ***REMOVED***
 ***REMOVED***

@@ -39,33 +39,12 @@ class AppControllerTest extends BaseTest
     /**
      * Test AppController instance.
      *
-     * @covers ::__constructor
+     * @covers ::__construct
      * @return void
      */
     public function testInstance()
     ***REMOVED***
         $this->assertInstanceOf(AppController::class, $this->appController);
-***REMOVED***
-
-    /**
-     * Test render method
-     *
-     * @covers ::render
-     * @return void
-     * @throws \Interop\Container\Exception\ContainerException
-     */
-    public function testRender()
-    ***REMOVED***
-        $response = $this->appController->render('Mail/mail.indexAction.twig');
-        $this->assertInstanceOf(Response::class, $response);
-
-        $content = (string)$response->getBody();
-
-        $twig = $this->container->get(Twig::class);
-        $responseNew = $twig->render(new Response(), 'Mail/mail.indexAction.twig');
-        $expected = (string)$responseNew->getBody();
-
-        $this->assertSame($expected, $content);
 ***REMOVED***
 
     /**

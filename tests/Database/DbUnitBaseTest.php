@@ -36,6 +36,8 @@ abstract class DbUnitBaseTest extends BaseTest
      * Get Connection.
      *
      * @return DefaultConnection
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function getConnection(): DefaultConnection
     ***REMOVED***
@@ -56,35 +58,6 @@ abstract class DbUnitBaseTest extends BaseTest
     protected static function getPdo(): PDO
     ***REMOVED***
         if (!self::$pdo) ***REMOVED***
-            container()[Connection::class] = function (Container $container) ***REMOVED***
-                $config = $container->get('settings')->get('db_test');
-                $driver = new Mysql([
-                    'host' => $config['host'],
-                    'port' => $config['port'],
-                    'database' => $config['database'],
-                    'username' => $config['username'],
-                    'password' => $config['password'],
-                    'encoding' => $config['encoding'],
-                    'charset' => $config['charset'],
-                    'collation' => $config['collation'],
-                    'prefix' => '',
-                    'flags' => [
-                        // Enable exceptions
-                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                        // Set default fetch mode
-                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                        PDO::ATTR_PERSISTENT => false,
-                        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8 COLLATE utf8_unicode_ci",
-                    ],
-                ]);
-                $db = new Connection([
-                    'driver' => $driver,
-                ]);
-                $db->connect();
-
-                return $db;
-        ***REMOVED***;
-
             self::$pdo = container()->get(Connection::class)->getDriver()->connection();
     ***REMOVED***
 
@@ -158,7 +131,9 @@ abstract class DbUnitBaseTest extends BaseTest
             $table = array_values($row)[0];
             $pdo->prepare(sprintf('DROP TABLE `%s`', $table))->execute();
     ***REMOVED***
-        chdir(__DIR__ . '/../config');
+        $sql= "CREATE TABLE `phinxlog` (`version` bigint(20) NOT NULL,`migration_name` varchar(100) DEFAULT NULL,`start_time` timestamp NULL DEFAULT NULL,`end_time` timestamp NULL DEFAULT NULL,`breakpoint` tinyint(1) NOT NULL DEFAULT '0',PRIMARY KEY (`version`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        $pdo->prepare($sql)->execute();
+        chdir(__DIR__ . '/../../config');
         $wrap = new TextWrapper(new PhinxApplication());
         // Execute the command and determine if it was successful.
         $env = 'local';

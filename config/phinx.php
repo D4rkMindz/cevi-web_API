@@ -4,7 +4,7 @@ use Cake\Database\Connection;
 
 require_once __DIR__ . '/bootstrap.php';
 $container = container();
-$pdo = $container->get(Connection::class);
+$pdo = $container->get(Connection::class)->getDriver()->connection();
 
 return array(
     'paths' => array(

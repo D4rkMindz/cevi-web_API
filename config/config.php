@@ -12,14 +12,14 @@ $config = [
 $config['migrations'] = __DIR__ . '/../resources/migrations';
 
 $config['db'] = [
-    'database' => 'slim',
+    'database' => 'cevi_web',
     'charset' => 'utf8',
     'encoding' => 'utf8',
     'collation' => 'utf8_unicode_ci',
 ];
 
 $config['db_test'] = [
-    'database' => 'slim_test',
+    'database' => 'cevi_web_test',
     'charset' => 'utf8',
     'encoding' => 'utf8',
     'collation' => 'utf8_unicode_ci',

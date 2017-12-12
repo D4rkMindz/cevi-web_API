@@ -9,6 +9,6 @@ class ErrorController extends AppController
 ***REMOVED***
     public function notFoundAction(Request $request, Response $response): Response
     ***REMOVED***
-        return $this->render('Error/error.twig');
+        return $this->render($response,'Error/error.twig');
 ***REMOVED***
 ***REMOVED***

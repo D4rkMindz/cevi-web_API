@@ -57,6 +57,6 @@ class IndexController extends AppController
 
         $this->session->set('username', $userData[0]['username']);
 
-        return $this->render('Home/home.indexAction.twig', $viewData);
+        return $this->render($response,'Home/home.indexAction.twig', $viewData);
 ***REMOVED***
 ***REMOVED***

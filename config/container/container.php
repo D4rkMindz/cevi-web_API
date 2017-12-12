@@ -1,4 +1,7 @@
 <?php
+/**
+ * Basic containers
+ */
 
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;

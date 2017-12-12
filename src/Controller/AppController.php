@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Http\Client\Common\Exception\ServerErrorException;
 use Interop\Container\Exception\ContainerException;
 use League\Plates\Engine;
 use Monolog\Logger;
@@ -61,27 +62,9 @@ class AppController
             $this->session = $container->get(SessionHelper::class);
             $this->router = $container->get('router');
             $this->logger = $container->get(Logger::class);
-            $this->twig = $container->get(Twig::class);
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
-            // TODO handle Exception
+            throw new ServerErrorException('SERVER ERROR', $this->request, $this->response);
     ***REMOVED***
-***REMOVED***
-
-    /**
-     * Render HTML file.
-     *
-     * @param Response $response
-     * @param string $file
-     * @param array $viewData
-     * @return Response
-     */
-    public function render(Response $response, string $file, array $viewData = []): Response
-    ***REMOVED***
-        $extend = [
-            'base'=> baseurl('/'),
-        ];
-        $viewData = array_replace_recursive($extend, $viewData);
-        return $this->twig->render($response, $file, $viewData);
 ***REMOVED***
 
     /**
