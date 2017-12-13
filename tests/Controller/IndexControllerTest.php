@@ -4,11 +4,8 @@ namespace App\Test\Controller;
 
 use App\Controller\IndexController;
 use App\Test\Database\DbUnitBaseTest;
-use SlimSession\Helper as SessionHelper;
-use Slim\Container;
-use Slim\Http\Response;
-use Slim\Views\Twig;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
+use Slim\Container;
 
 /**
  * Class IndexControllerTest
@@ -27,34 +24,7 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     private $container;
 
-    private $data = [
-        'user' => [
-            [
-                'id' => 1,
-                'username' => 'UserOne',
-                'first_name' => 'User',
-                'last_name' => 'One',
-            ],
-            [
-                'id' => 2,
-                'username' => 'UserTwo',
-                'first_name' => 'User',
-                'last_name' => 'Two',
-            ],
-            [
-                'id' => 3,
-                'username' => 'UserThree',
-                'first_name' => 'User',
-                'last_name' => 'Three',
-            ],
-            [
-                'id' => 4,
-                'username' => 'UserFour',
-                'first_name' => 'User',
-                'last_name' => 'Four',
-            ],
-        ]
-    ];
+    private $data = [];
 
     /**
      * Set up before test.
@@ -74,6 +44,7 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     public function getDataSet()
     ***REMOVED***
+        $this->data['user'] = require __DIR__ . '/../Database/Data/user.php';
         return new ArrayDataSet($this->data);
 ***REMOVED***
 
@@ -96,6 +67,9 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     public function testIndex()
     ***REMOVED***
-        //TODO write Test with mocked database
+        $request = $this->container->get('container');
+        $response = $this->container->get('response');
+        $actual = $this->indexController->indexAction($request, $response);
+        // TODO finish test
 ***REMOVED***
 ***REMOVED***

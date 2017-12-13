@@ -56,6 +56,11 @@ class UserRepositoryTest extends DbUnitBaseTest
         $this->assertSame($this->data['user'], $users);
 ***REMOVED***
 
+    /**
+     * Test getUser.
+     *
+     * @covers ::getUser
+     */
     public function testGetUser()
     ***REMOVED***
         $expected = $this->data['user'][0];
@@ -69,3 +74,4 @@ class UserRepositoryTest extends DbUnitBaseTest
         $this->assertSame([], $user);
 ***REMOVED***
 ***REMOVED***
+
