@@ -27,16 +27,6 @@ class AppTable
 ***REMOVED***
 
     /**
-     * Get Query.
-     *
-     * @return Query
-     */
-    public function newSelect(): Query
-    ***REMOVED***
-        return $this->connection->newQuery()->from($this->table);
-***REMOVED***
-
-    /**
      * Get all entries from database.
      *
      * @return array $rows
@@ -51,6 +41,30 @@ class AppTable
 ***REMOVED***
 
     /**
+     * Get Query.
+     *
+     * @return Query
+     */
+    public function newSelect(): Query
+    ***REMOVED***
+        return $this->connection->newQuery()->from($this->table);
+***REMOVED***
+
+    /**
+     * Get entity by id.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function getById($id): array
+    ***REMOVED***
+        $query = $this->newSelect();
+        $query->select('*')->where(['id' => $id]);
+        $row = $query->execute()->fetch('assoc');
+        return !empty($row) ? $row : [];
+***REMOVED***
+
+    /**
      * Insert into database.
      *
      * @param array $row with data to insertUser into database
@@ -60,6 +74,7 @@ class AppTable
     ***REMOVED***
         return $this->connection->insert($this->table, $row);
 ***REMOVED***
+
     /**
      * Update database
      *
@@ -75,6 +90,7 @@ class AppTable
             ->where(['id' => $where]);
         return $query->execute();
 ***REMOVED***
+
     /**
      * Delete from database.
      *

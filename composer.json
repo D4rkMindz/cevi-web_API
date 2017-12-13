@@ -10,7 +10,9 @@
         "odan/twig-translation": "^0.2.2",
         "odan/twig-assets": "^0.2.2",
         "symfony/translation": "^3.4",
-        "robmorgan/phinx": "^0.9.1"
+        "robmorgan/phinx": "^0.9.1",
+        "odan/phinx-migrations-generator": "^2.3",
+        "fzaninotto/faker": "^1.7"
 ***REMOVED***,
     "require-dev": ***REMOVED***
         "phpunit/phpunit": "^6.4",

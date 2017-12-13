@@ -28,7 +28,7 @@ class IndexControllerTest extends DbUnitBaseTest
     private $container;
 
     private $data = [
-        'users' => [
+        'user' => [
             [
                 'id' => 1,
                 'username' => 'UserOne',

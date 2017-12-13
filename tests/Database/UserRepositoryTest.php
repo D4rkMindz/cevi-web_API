@@ -12,6 +12,11 @@ namespace App\Test\Database;
 use App\Repository\UserRepository;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 
+/**
+ * Class UserRepositoryTest
+ *
+ * @coversDefaultClass App\Repository\UserRepository
+ */
 class UserRepositoryTest extends DbUnitBaseTest
 ***REMOVED***
     protected $data = [];
@@ -36,13 +41,31 @@ class UserRepositoryTest extends DbUnitBaseTest
      */
     public function getDataSet()
     ***REMOVED***
-        $this->data = require __DIR__ . '/Data/user.php';
+        $this->data['user'] = require __DIR__ . '/Data/user.php';
         return new ArrayDataSet($this->data);
+***REMOVED***
+
+    /**
+     * Test getUsers.
+     *
+     * @covers ::getUsers
+     */
+    public function testGetUsers()
+    ***REMOVED***
+        $users = $this->repository->getUsers();
+        $this->assertSame($this->data['user'], $users);
 ***REMOVED***
 
     public function testGetUser()
     ***REMOVED***
-        $users = $this->repository->getUsers();
-        $this->assertSame($this->data, $users);
+        $expected = $this->data['user'][0];
+        $user = $this->repository->getUser($expected['id']);
+        $this->assertSame($expected, $user);
+
+        $user = $this->repository->getUser(end($this->data['user'])['id'] + 1);
+        $this->assertSame([], $user);
+
+        $user = $this->repository->getUser('string');
+        $this->assertSame([], $user);
 ***REMOVED***
 ***REMOVED***

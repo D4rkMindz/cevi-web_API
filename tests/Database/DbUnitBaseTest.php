@@ -5,14 +5,13 @@ namespace App\Test\Database;
 
 use App\Test\BaseTest;
 use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
+use Exception;
 use PDO;
 use Phinx\Console\PhinxApplication;
 use Phinx\Wrapper\TextWrapper;
 use PHPUnit\DbUnit\Database\DefaultConnection;
 use PHPUnit\DbUnit\Operation\Factory;
 use PHPUnit\DbUnit\TestCaseTrait;
-use Exception;
 use Slim\Container;
 
 abstract class DbUnitBaseTest extends BaseTest
@@ -33,19 +32,17 @@ abstract class DbUnitBaseTest extends BaseTest
     private $container;
 
     /**
-     * Get Connection.
+     * Setup before Class.
      *
-     * @return DefaultConnection
+     * This code will be executed before every class. This makes sure, that the test-database is always in the same
+     * "test-state".
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function getConnection(): DefaultConnection
+    public static function setUpBeforeClass()
     ***REMOVED***
-        if ($this->conn === null) ***REMOVED***
-            $this->conn = $this->createDefaultDBConnection(static::getPdo());
-    ***REMOVED***
-
-        return $this->conn;
+        static::getPdo();
 ***REMOVED***
 
     /**
@@ -62,20 +59,6 @@ abstract class DbUnitBaseTest extends BaseTest
     ***REMOVED***
 
         return self::$pdo;
-***REMOVED***
-
-    /**
-     * Setup before Class.
-     *
-     * This code will be executed before every class. This makes sure, that the test-database is always in the same
-     * "test-state".
-     *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    public static function setUpBeforeClass()
-    ***REMOVED***
-        static::getPdo();
 ***REMOVED***
 
     /**
@@ -101,6 +84,38 @@ abstract class DbUnitBaseTest extends BaseTest
 ***REMOVED***
 
     /**
+     * Setup Database.
+     *
+     * @throws Exception
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function setupDatabase()
+    ***REMOVED***
+        $pdo = static::getPdo();
+        $stmt = $pdo->query('SHOW TABLES');
+        $phinxlog = false;
+        while ($row = $stmt->fetch()) ***REMOVED***
+            $table = array_values($row)[0];
+            $pdo->prepare(sprintf('DROP TABLE `%s`', $table))->execute();
+    ***REMOVED***
+        if (!$phinxlog) ***REMOVED***
+            $sql = "CREATE TABLE `phinxlog` (`version` bigint(20) NOT NULL,`migration_name` varchar(100) DEFAULT NULL,`start_time` timestamp NULL DEFAULT NULL,`end_time` timestamp NULL DEFAULT NULL,`breakpoint` tinyint(1) NOT NULL DEFAULT '0',PRIMARY KEY (`version`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            $pdo->prepare($sql)->execute();
+    ***REMOVED***
+        chdir(__DIR__ . '/../../config');
+        $wrap = new TextWrapper(new PhinxApplication());
+        // Execute the command and determine if it was successful.
+        $env = 'test';
+        $target = null;
+        call_user_func([$wrap, 'getMigrate'], $env, $target);
+        $error = $wrap->getExitCode() > 0;
+        if ($error) ***REMOVED***
+            throw new Exception('Error: Setup database failed with exit code: %s', $wrap->getExitCode());
+    ***REMOVED***
+***REMOVED***
+
+    /**
      * Truncate all Tables.
      *
      * @throws \Psr\Container\ContainerExceptionInterface
@@ -117,32 +132,19 @@ abstract class DbUnitBaseTest extends BaseTest
 ***REMOVED***
 
     /**
-     * Setup Database.
+     * Get Connection.
      *
-     * @throws Exception
+     * @return DefaultConnection
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function setupDatabase()
+    public function getConnection(): DefaultConnection
     ***REMOVED***
-        $pdo = static::getPdo();
-        $stmt = $pdo->query('SHOW TABLES');
-        while ($row = $stmt->fetch()) ***REMOVED***
-            $table = array_values($row)[0];
-            $pdo->prepare(sprintf('DROP TABLE `%s`', $table))->execute();
+        if ($this->conn === null) ***REMOVED***
+            $this->conn = $this->createDefaultDBConnection(static::getPdo());
     ***REMOVED***
-        $sql= "CREATE TABLE `phinxlog` (`version` bigint(20) NOT NULL,`migration_name` varchar(100) DEFAULT NULL,`start_time` timestamp NULL DEFAULT NULL,`end_time` timestamp NULL DEFAULT NULL,`breakpoint` tinyint(1) NOT NULL DEFAULT '0',PRIMARY KEY (`version`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-        $pdo->prepare($sql)->execute();
-        chdir(__DIR__ . '/../../config');
-        $wrap = new TextWrapper(new PhinxApplication());
-        // Execute the command and determine if it was successful.
-        $env = 'local';
-        $target = null;
-        call_user_func([$wrap, 'getMigrate'], $env, $target);
-        $error = $wrap->getExitCode() > 0;
-        if ($error) ***REMOVED***
-            throw new Exception('Error: Setup database failed with exit code: %s', $wrap->getExitCode());
-    ***REMOVED***
+
+        return $this->conn;
 ***REMOVED***
 
     /**

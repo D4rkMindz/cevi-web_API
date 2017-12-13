@@ -1,52 +1,32 @@
 <?php
-$rows = [
-    0 => [
-        'id' => 1,
+
+$faker = Faker\Factory::create();
+
+$rows = [];
+
+for ($i = 0; $i < 10; $i++) ***REMOVED***
+    $js = (bool)rand(0, 1);
+    $rows[] = [
+        'id' => (string)($i + 1),
+        'department_id' => (string)rand(1, 20),
+        'position_id' => (string)rand(1, 7),
+        'language_id' => (string)rand(1, 4),
+        'gender_id' => (string)rand(1, 76),
+        'last_name' => $faker->firstName(),
+        'first_name' => $faker->name(),
+        'email' => $faker->email,
+        'username' => $faker->userName,
+        'password' => $faker->password(8),
+        'cevi_name' => $faker->userName,
+        'birthdate' => $faker->dateTimeThisCentury->format('Y-m-d'),
+        'phone' => (string)rand(10000000, 1111111111),
+        'mobile' => (string)rand(10000000, 1111111111),
         'signup_completed' => true,
-        'department_id' => 1,
-        'position_id' => 1,
-        'last_name' => 'Müller',
-        'first_name' => 'Mike',
-        'cevi_name' => 'Surrli',
-        'email' => 'mike.mueller@surrli.ch',
-        'username' => 'Surrli94',
-        'gender' => 1,
-        'language' => 'de_CH',
-        'postcode' => '4313',
-        'birthday' => '05.08.1994',
-        'js_cert' => 2019,
-    ],
-    1 => [
-        'id' => 2,
-        'signup_completed' => false,
-        'department_id' => 1,
-        'position_id' => 2,
-        'last_name' => 'Meier',
-        'first_name' => 'Heinz',
-        'cevi_name' => 'Juffli',
-        'email' => 'hmeier@juffli.ch',
-        'username' => 'Jufl',
-        'gender' => 1,
-        'language' => 'de_CH',
-        'postcode' => '4810',
-        'birthday' => '16.05.1986',
-        'js_cert' => 2018,
-    ],
-    2 => [
-        'id' => 3,
-        'signup_completed' => true,
-        'department_id' => 1,
-        'position_id' => 1,
-        'last_name' => 'Jasi',
-        'first_name' => 'Jutta',
-        'cevi_name' => 'Jurra',
-        'email' => 'jj@jurra.ch',
-        'username' => 'JuRrA',
-        'gender' => 2,
-        'language' => 'fr_CH',
-        'postcode' => '4312',
-        'birthday' => '25.09.1999',
-        'js_cert' => 2020,
-    ],
-];
+        'js_certificate' => $js,
+        'js_certificate_until' => $js ? rand(2017, 2020) : null,
+        'created' => $faker->dateTimeThisCentury('now')->format('Y-m-d H:i:s'),
+        'created_by' => (string)rand(1, 50),
+    ];
+***REMOVED***
+
 return $rows;
