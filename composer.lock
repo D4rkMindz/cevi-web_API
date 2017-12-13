@@ -1850,32 +1850,32 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/debug",
-            "version": "v4.0.1",
+            "version": "v3.4.1",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "26a15dab86c3820473716be4f846eac774ad4ad9"
+                "reference": "fb2001e5d85f95d8b6ab94ae3be5d2672df128fd"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/26a15dab86c3820473716be4f846eac774ad4ad9",
-                "reference": "26a15dab86c3820473716be4f846eac774ad4ad9",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/fb2001e5d85f95d8b6ab94ae3be5d2672df128fd",
+                "reference": "fb2001e5d85f95d8b6ab94ae3be5d2672df128fd",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3",
+                "php": "^5.5.9|>=7.0.8",
                 "psr/log": "~1.0"
         ***REMOVED***,
             "conflict": ***REMOVED***
-                "symfony/http-kernel": "<3.4"
+                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
         ***REMOVED***,
             "require-dev": ***REMOVED***
-                "symfony/http-kernel": "~3.4|~4.0"
+                "symfony/http-kernel": "~2.8|~3.0|~4.0"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1902,29 +1902,29 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-21T09:27:49+00:00"
+            "time": "2017-11-21T09:01:46+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/filesystem",
-            "version": "v4.0.1",
+            "version": "v3.4.1",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "c9d4a26759ff75a077e4e334315cb632739b661a"
+                "reference": "de56eee71e0a128d8c54ccc1909cdefd574bad0f"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/c9d4a26759ff75a077e4e334315cb632739b661a",
-                "reference": "c9d4a26759ff75a077e4e334315cb632739b661a",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/de56eee71e0a128d8c54ccc1909cdefd574bad0f",
+                "reference": "de56eee71e0a128d8c54ccc1909cdefd574bad0f",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1951,29 +1951,29 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-21T14:14:53+00:00"
+            "time": "2017-11-19T18:59:05+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/options-resolver",
-            "version": "v4.0.1",
+            "version": "v3.4.1",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "ef617a2867c7d889d4ecee3c29595698d87474a4"
+                "reference": "08748edfe6982f4d878cc42b8325b19a276fb1cf"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/ef617a2867c7d889d4ecee3c29595698d87474a4",
-                "reference": "ef617a2867c7d889d4ecee3c29595698d87474a4",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/08748edfe6982f4d878cc42b8325b19a276fb1cf",
+                "reference": "08748edfe6982f4d878cc42b8325b19a276fb1cf",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -2005,7 +2005,7 @@
                 "configuration",
                 "options"
             ],
-            "time": "2017-11-07T14:45:01+00:00"
+            "time": "2017-11-05T16:10:10+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/polyfill-apcu",

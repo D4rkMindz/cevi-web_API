@@ -11,6 +11,7 @@ use Slim\Container;
  * Class IndexControllerTest
  *
  * @coversDefaultClass App\Controller\IndexController
+ * @group actual
  */
 class IndexControllerTest extends DbUnitBaseTest
 ***REMOVED***
