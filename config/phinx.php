@@ -30,5 +30,5 @@ try ***REMOVED***
 ***REMOVED*** catch (\Psr\Container\ContainerExceptionInterface $e) ***REMOVED***
     echo 'MIGRATION ERROR';
 ***REMOVED***
-return false;
 
+return false;
