@@ -84,7 +84,7 @@ class AppControllerTest extends BaseTest
     ***REMOVED***
         $expected = $this->container->get('response');
         $expected = $expected->withRedirect('/', 301);
-        $response = $this->appController->redirect('/', 301);
+        $response = $this->appController->redirect(new Response(),'/', 301);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame((string)$expected->getBody(), (string)$response->getBody());
         $this->assertSame(301, $response->getStatusCode());

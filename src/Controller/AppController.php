@@ -19,25 +19,9 @@ use SlimSession\Helper as SessionHelper;
 class AppController
 ***REMOVED***
     /**
-     * @var Request
-     */
-    protected $request;
-
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * @var SessionHelper
      */
     protected $session;
-
-
-    /**
-     * @var Router
-     */
-    protected $router;
 
     /**
      * @var Logger
@@ -45,49 +29,66 @@ class AppController
     protected $logger;
 
     /**
-     * @var Twig
-     */
-    protected $twig;
-
-    /**
      * AppController constructor.
      *
      * @param Container $container
+     * @throws ContainerException
      */
     public function __construct(Container $container)
     ***REMOVED***
         try ***REMOVED***
-            $this->request = $container->get('request');
-            $this->response = $container->get('response');
             $this->session = $container->get(SessionHelper::class);
-            $this->router = $container->get('router');
             $this->logger = $container->get(Logger::class);
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
-            throw new ServerErrorException('SERVER ERROR', $this->request, $this->response);
+            throw new ServerErrorException('SERVER ERROR', $container->get('request'), $container->get('response'));
     ***REMOVED***
+***REMOVED***
+
+    /**
+     * Return Error JSON Response
+     *
+     * @param Response $response
+     * @param string $message
+     * @param int $status
+     * @param array $data
+     * @return Response
+     */
+    public function error(Response $response, string $message = 'Not Found', int $status = 404,array $data = []): Response
+    ***REMOVED***
+        $data['message'] = $message;
+        $data['code'] = $status;
+        return $this->json($response, $data, $status);
 ***REMOVED***
 
     /**
      * Return JSON Response.
      *
+     * @param Response $response
      * @param array $data
      * @param int $status
      * @return Response
      */
-    public function json(array $data, int $status = 200): Response
+    public function json(Response $response, array $data, int $status = 200): Response
     ***REMOVED***
-        return $this->response->withJson($data, $status);
+        if ($status === 200) ***REMOVED***
+            $data['message'] = 'Success';
+    ***REMOVED*** else ***REMOVED***
+            $data['message'] = 'Error ' . $status;
+    ***REMOVED***
+        $data['code'] = $status;
+        return $response->withJson($data, $status);
 ***REMOVED***
 
     /**
      * Return redirect.
      *
+     * @param Response $response
      * @param string $url
      * @param int $status
      * @return Response
      */
-    public function redirect(string $url, int $status = 301): Response
+    public function redirect(Response $response,string $url, int $status = 301): Response
     ***REMOVED***
-        return $this->response->withRedirect($url, $status);
+        return $response->withRedirect($url, $status);
 ***REMOVED***
 ***REMOVED***

@@ -1,6 +1,6 @@
 <?php
 $app = app();
 
-$app->get('/[***REMOVED***language***REMOVED***]', route(['App\Controller\IndexController', 'indexAction']))->setName('root');
-$app->get('/***REMOVED***language***REMOVED***/users', route(['App\Controller\UserController', 'indexAction']))->setName('users');
-$app->get('/***REMOVED***language***REMOVED***/errorpage', route(['App\Controller\ErrorController', 'notFoundAction']))->setName('notFound');
+$app->get('/', route(['App\Controller\UserController', 'getAllUsersAction']))->setName('root');
+$app->get('/v2/users', route(['App\Controller\UserController', 'getAllUsersAction']))->setName('getAllUsers');
+$app->get('/v2/users/***REMOVED***user_id***REMOVED***', route(['App\Controller\UserController', 'getUserAction']))->setName('getUser');

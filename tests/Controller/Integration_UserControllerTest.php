@@ -2,23 +2,27 @@
 
 namespace App\Test\Controller;
 
-use App\Controller\IndexController;
+use App\Controller\UserController;
+use App\Factory\JsonResponseFactory;
 use App\Test\Database\DbUnitBaseTest;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use Slim\Container;
+use Slim\Http\Environment;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 /**
- * Class IndexControllerTest
+ * Class Integration_UserControllerTest
  *
  * @coversDefaultClass App\Controller\IndexController
  * @group actual
  */
-class IndexControllerTest extends DbUnitBaseTest
+class Integration_UserControllerTest extends DbUnitBaseTest
 ***REMOVED***
     /**
-     * @var IndexController
+     * @var UserController
      */
-    private $indexController;
+    private $userController;
 
     /**
      * @var Container
@@ -35,7 +39,7 @@ class IndexControllerTest extends DbUnitBaseTest
     public function setUp()
     ***REMOVED***
         $this->container = app()->getContainer();
-        $this->indexController = new IndexController($this->container);
+        $this->userController = new UserController($this->container);
 ***REMOVED***
 
     /**
@@ -45,7 +49,7 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     public function getDataSet()
     ***REMOVED***
-        $this->data['user'] = require __DIR__ . '/../Database/Data/user.php';
+        $this->data['users'] = require __DIR__ . '/../Database/Data/user.php';
         return new ArrayDataSet($this->data);
 ***REMOVED***
 
@@ -56,7 +60,7 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     public function testInstance()
     ***REMOVED***
-        $this->assertInstanceOf(IndexController::class, $this->indexController);
+        $this->assertInstanceOf(UserController::class, $this->userController);
 ***REMOVED***
 
     /**
@@ -68,9 +72,17 @@ class IndexControllerTest extends DbUnitBaseTest
      */
     public function testIndex()
     ***REMOVED***
-        $request = $this->container->get('container');
-        $response = $this->container->get('response');
-        $actual = $this->indexController->indexAction($request, $response);
-        // TODO finish test
+        $environment = Environment::mock([
+            'REQUEST_METHOD'=> 'GET',
+            'REQUEST_URI' =>'/v2/users',
+        ]);
+        $request = Request::createFromEnvironment($environment);
+        $response = new Response();
+        $actual = $this->userController->indexAction($request, $response);
+
+        $expected = JsonResponseFactory::createSuccess(['users' => $this->data['users']]);
+
+        $this->assertInstanceOf(Response::class, $actual);
+        $this->assertSame($expected, (string)$actual->getBody());
 ***REMOVED***
 ***REMOVED***

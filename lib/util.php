@@ -25,7 +25,8 @@ function app(): App
  * @param callable $callback
  * @return string
  */
-function route(callable $callback): string ***REMOVED***
+function route(callable $callback): string
+***REMOVED***
     return implode(':', (array)$callback);
 ***REMOVED***
 
@@ -54,6 +55,7 @@ function __($message)
  *
  * @return \Psr\Container\ContainerInterface
  */
-function container() ***REMOVED***
+function container()
+***REMOVED***
     return app()->getContainer();
 ***REMOVED***

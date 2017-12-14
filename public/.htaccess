@@ -6,4 +6,4 @@ RewriteRule .* https://%***REMOVED***SERVER_NAME***REMOVED***%***REMOVED***REQUE
 # RewriteBase /
 RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-d
 RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-f
-RewriteRule ^ indexAction.php [QSA,L]
+RewriteRule ^ index.php [QSA,L]

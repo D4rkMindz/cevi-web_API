@@ -46,7 +46,7 @@ class UserRepository
      * @param int $id
      * @return array with single user
      */
-    public function getUser(string $id): array
+    public function getUser(int $id): array
     ***REMOVED***
         return $this->userTable->getById($id);
 ***REMOVED***
