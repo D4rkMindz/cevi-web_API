@@ -1,0 +1,1258 @@
+possible routes
+
+api.cevi-web.com
+
+RETURN ERRORS:
+- code
+- message
+[- INFOARRAY] info
+	- message
+		- name_de
+		- name_en
+		- name_fr
+		- near_it
+	...
+...
+
+RETURN SUCCESS:
+- code
+- message
+...
+
+POST				'/v2/auth'		 														Authentication
+- username
+- password
+- type (refresh/login)
+? token
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+POST				'/v2/users' 															User Profile
+Parameters:
+-USERARRAY
+	- signup_completed
+	- department_id
+	- position_id
+	- last_name
+	- first_name
+	- cevi_name
+	- email
+	- username
+	- gendersing
+	- language
+	- postcode (city)
+	- streetj
+	- birthday
+	- js_cert
+
+POST				'/v2/users/signup'														User Profile
+- USER
+	- email
+	- first_name
+	- postcode
+	- username
+	- password
+	- lang
+
+GET					'/v2/users'
+- token
+? limit
+? offset
+
++ USERARRAY
+  + id
+  + signup_completed
+  + position_id
+  + department_id
+  + last_name
+  + first_name
+  + cevi_name
+  + language
+  + postcode (city)
+  + url (/v2/users/***REMOVED***id***REMOVED***)
+
+GET					'/v2/users/***REMOVED***user_id***REMOVED***' 													User Profile
+- token
+
++ USERARRAY
+	+ id
+	+ signup_completed
+	+ position_id
+	+ department_id
+	+ last_name
+	+ first_name
+	+ cevi_name
+	+ language
+	+ postcode (city)
+	+ created
+	+ created_by
+	+ updated
+	+ updated_by
+	+ deleted (bool)
+	+ deleted_at
+	+ deleted_by
+
+
+PUT					'/v2/users/***REMOVED***user_id***REMOVED***' 													User Profile
+- token
+- department_id
+- position_id
+- last_name
+- first_name
+- cevi_name
+- email
+- username
+- password
+- language
+- postcode (city)
+- user_position
+if not update => value MUST be null
+
+DELETE				'/v2/users/***REMOVED***user_id***REMOVED***' 													User Profile
+- token
+- user_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departmentgroups'													All department groups (AGSOLUZG)
++ id
++ name_de
++ name_en
++ name_fr
++ name_it
+
+GET					'/v2/cities'															All cities
+? limit
+? offset
+
++ id
++ postcode
++ name_de
++ name_en
++ name_fr
++ name_it
+
+GET					'/v2/events'															All events
+? until
+? near_to
+? incl_passed
+? lang
+
++ lang
++ until
++ near_to
++ incl_passed
++ EVENTARRAY
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ near_it
+	+ description
+		+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
+	+ price
+	+ start
+	+ end
+	+ start_leaders
+	+ end_leaders
+	+ created
+	+ created_by
+	+ updated
+	+ updated_by
+	+ deleted (bool)
+	+ deleted_at
+	+ deleted_by
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments' 														All departments
+- token
+? limit
+? offset
+
++ limit
++ offset
++ DEPARTMENTARRAY
+	+ id
+	+ name
+	+ department_group_id
+	+ city_id
+
+
+POST				'/v2/departments' 														All departments
+- token
+- name
+- city_id
+- department_group_id
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***'										Single department
++ DEPARTMENT
+	+ name
+	+ city
+		+ city_id
+		+ postcode
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ department_group
+		+ department_group_id
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***'										Single department
+- token
+- name
+- department_group_id
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***'										Single department
+- token
+- department_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/articles'								All Articles by department
+- token
+? limit
+? offset
+? lang
+
++ lang
++ ARTICLEARRAY
+  + id
+  + name
+    + name_de
+    + name_en
+    + name_fr
+    + name_it
+  + description
+    + name_de
+	  + plain
+	  + parsed
+	+ name_en
+	  + plain
+	  + parsed
+	+ name_fr
+	  + plain
+	  + parsed
+	+ near_it
+	  + plain
+	  + parsed
+  + age (or date)
+  + quantity
+  + quality (1 - 10)
+  + storageplace
+    + location_id
+	+ room_id
+	+ shelf_id
+	+ tray_id
+	+ chest_id
+  + replace
+  + barcode string
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/articles'								All Articles by department
+- token
+- lang
+- ARTICLE
+  - name
+  - description
+  - age (or date)
+  - quantity
+  - quality
+  - storageplace
+    - location_id
+    - room_id
+    - corridor_id
+    - shelf_id
+    - tray_id
+    - chest_id
+  - replace
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/articles/***REMOVED***article_id***REMOVED***'					Article by department
+- token
+? lang
+
++ lang
++ ARTICLE
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ description
+		+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ name_it
+			+ plain
+			+ parsed
+	+ age (or date)
+	+ quantity
+	+ quality (1 - 10)
+	+ storageplace
+		+ location
+			+ id
+			+ name
+		+ room_id
+			+ id
+			+ name
+		+ shelf_id
+			+ id
+			+ name
+		+ tray_id
+			+ id
+			+ name
+		+ chest_id
+			+ id
+			+ name
+	+ replace
+	+ barcode string
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/articles/***REMOVED***article_id***REMOVED***'					Article by department
+- token
+- lang
+- article
+  - name
+  - description
+  - age (or date)
+  - quantity
+  - quality
+  - storageplace
+    - location_id
+    - room_id
+    - corridor_id
+    - shelf_id
+    - tray_id
+    - chest_id
+  - replace
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***/articles/***REMOVED***article_id***REMOVED***'					Article by department
+- token
+- article_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/storages'								All storages for the department (all together)
+- token
+? limit
+? offset
+? lang
+
++ limit
++ offset
++ lang
++ LOCATIONARRAY
+  + id
+  + name
+  + url
++ ROOMARRAY
+  + id
+  + name
+  + url
++ CORRIDORARRAY
+  + id
+  + name
+  + url
++ SHELFARRAY
+  + id
+  + name
+  + url
++ TRAYARRAY
+  + id
+  + name
+  + url
++ CHESTARRAY
+  + id
+  + name
+  + url
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/rooms'									All rooms for the department (all together)
+- token
+? limit
+? offset
+
++ limit
++ offset
++ type
++ ROOMARRAY
+	+ id
+	+ name
+	+ url
+	+ location
+		+ id
+		+ name
+		+ url
+	+ room
+		+ id
+		+ name
+		+ url
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/rooms'									All rooms for the department (all together)
+- token
+- name
+- department_id
+- location_id
+
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/rooms/***REMOVED***room_id***REMOVED***'						All articles in the room including exact storage place (all together)
+- token
+? lang
+
++ lang
++ type
++ ROOM
+	+ id
+	+ name
+	+ ARTICLEARRAY
+		+ id
+		+ name
+			+ name_de
+			+ name_en
+			+ name_fr
+			+ name_it
+		+ description
+			+ name_de
+				+ plain
+				+ parsed
+			+ name_en
+				+ plain
+				+ parsed
+			+ name_fr
+				+ plain
+				+ parsed
+			+ name_it
+				+ plain
+				+ parsed
+		+ storageplace
+			+ location
+				+ id
+				+ name
+			+ room_id
+				+ id
+				+ name
+			+ shelf_id
+				+ id
+				+ name
+			+ tray_id
+				+ id
+				+ name
+			+ chest_id
+				+ id
+				+ name
+		+ replace
+		+ barcode string
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/rooms/***REMOVED***room_id***REMOVED***'						All articles in the room including exact storage place (all together)
+- token
+- name
+- department_id
+- location_id
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***/rooms/***REMOVED***room_id***REMOVED***'						All articles in the room including exact storage place (all together)
+- token
+- room_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/corridors'								All corridors for the department (all together)
+- token
+? lang
+? limit
+? offset
+
++ limit
++ offset
++ lang
++ type
++ CORRIDOR
+	+ id
+	+ name
+	+ url
+	+ location
+		+ id
+		+ name
+		+ url
+	+ room
+		+ id
+		+ name
+		+ url
+	+ corridor
+		+ id
+		+ name
+		+ url
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/corridors'								All corridors for the department (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/corridors/***REMOVED***corridor_id***REMOVED***'				All articles in the corridor including exact storage place (all together)
+- token
+? lang
+
++ lang
++ type
++ ROOM
+	+ ARTICLEARRAY
+		+ id
+		+ name
+			+ name_de
+			+ name_en
+			+ name_fr
+			+ name_it
+		+ description
+			+ name_de
+				+ plain
+				+ parsed
+			+ name_en
+				+ plain
+				+ parsed
+			+ name_fr
+				+ plain
+				+ parsed
+			+ name_it
+				+ plain
+				+ parsed
+		+ storageplace
+			+ location
+				+ id
+				+ name
+			+ room_id
+				+ id
+				+ name
+			+ shelf_id
+				+ id
+				+ name
+			+ tray_id
+				+ id
+				+ name
+			+ chest_id
+				+ id
+				+ name
+		+ replace
+		+ barcode string
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/corridors/***REMOVED***corridor_id***REMOVED***'				All articles in the corridor including exact storage place (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+
+DELETE					'/v2/departments/***REMOVED***department_id***REMOVED***/corridors/***REMOVED***corridor_id***REMOVED***'				All articles in the corridor including exact storage place (all together)
+- token
+- corridor_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/shelf'									All shelf for the department (all together)
+- token
+? limit
+? offset
+
++ limit
++ offset
++ type
++ SHELFARRAY
+	+ id
+	+ name
+	+ url
+	+ location
+		+ id
+		+ name
+		+ url
+	+ room
+		+ id
+		+ name
+		+ url
+	+ corridor
+		+ id
+		+ name
+		+ url
+	+ shelf
+		+ id
+		+ name
+		+ url
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/shelf'									All shelf for the department (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/shelf/***REMOVED***shelf_id***REMOVED***'						All articles in the shelf including exact storage place (all together)
+
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/shelf/***REMOVED***shelf_id***REMOVED***'						All articles in the shelf including exact storage place (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***/shelf/***REMOVED***shelf_id***REMOVED***'						All articles in the shelf including exact storage place (all together)
+- token
+- corriodor_id
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET 				'/v2/departments/***REMOVED***department_id***REMOVED***/tray'									All rooms for the department (all together)
+- token
+? limit
+? offset
+
++ limit
++ offset
++ type
++ TRAYARRAY
+	+ id
+	+ name
+	+ url
+	+ location
+		+ id
+		+ name
+		+ url
+	+ room
+		+ id
+		+ name
+		+ url
+	+ corridor
+		+ id
+		+ name
+		+ url
+	+ shelf
+		+ id
+		+ name
+		+ url
+	+ tray
+		+ id
+		+ name
+		+ url
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/tray'									All rooms for the department (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+- shelf_id
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/tray/***REMOVED***tray_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/tray/***REMOVED***tray_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+- shelf_id
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***/tray/***REMOVED***tray_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+- token
+- tray_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/chests'								All chests for the department (all together)
+- token
+? limit
+? offset
+
++ limit
++ offset
++ type
++ CHESTARRAY
+	+ id
+	+ name
+	+ url
+	+ location
+		+ id
+		+ name
+		+ url
+	+ room
+		+ id
+		+ name
+		+ url
+	+ corridor
+		+ id
+		+ name
+		+ url
+	+ shelf
+		+ id
+		+ name
+		+ url
+	+ tray
+		+ id
+		+ name
+		+ url
+	+ chest
+		+ id
+		+ name
+		+ url
+
+POST				'/v2/departments/***REMOVED***department_id***REMOVED***/chests'								All chests for the department (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+- shelf_id
+- tray_id
+- public
+- publicate_at
+
+GET					'/v2/departments/***REMOVED***department_id***REMOVED***/chests/***REMOVED***chest_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+
+PUT					'/v2/departments/***REMOVED***department_id***REMOVED***/chests/***REMOVED***chest_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+- token
+- name
+- department_id
+- location_id
+- room_id
+- corridor_id
+- shelf_id
+- tray_id
+
+DELETE				'/v2/departments/***REMOVED***department_id***REMOVED***/chests/***REMOVED***chest_id***REMOVED***'						All articles in the tray including exact storage place (all together)
+- token
+- chest_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+GET					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events'								All Events by department
+- token
+? limit
+? offset
+? lang
+
++ limit
++ offset
++ lang
++ DEPARTMENT
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ url
++ EVENTARRAY
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ near_it
+	+ description
+		+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
+	+ price
+	+ start
+	+ end
+	+ start_leaders
+	+ end_leaders
+	+ url
+
+POST				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events'								All Events by department
+- token
+- name
+- description
+- start
+- end
+- start_leaders
+- end_leaders
+- price
+- public
+- publicate_at
+
+GET					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***'						Event by department
+- token
+? lang
+
++ lang
++ EVENT
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ near_it
+	+ description
+		+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
+	+ price
+	+ start
+	+ end
+	+ start_leaders
+	+ end_leaders
+
+PUT					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***'						Event by department
+- token
+- name
+- description
+- start
+- end
+- start_leaders
+- end_leaders
+- price
+- public
+- publicate_at
+
+DELETE				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***'						Event by department
+- token
+- event_id
+
+
+GET					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/participate'			Make user participate at event (participate status (not interested, interestet, participating, unparticipated
+- token
+? lang
+
++ lang
++ EVENT
+	+ id
+	+ url
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ description
+			+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
++ USERARRAY
+	+ id
+	+ position_id
+	+ department_id
+	+ last_name
+	+ first_name
+	+ cevi_name
+	+ language
+	+ postcode (city)
+	+ url (/v2/users/***REMOVED***id***REMOVED***)
+
+POST 				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/participate'			Make user participate at event (participate status (not interested, interestet, participating, unparticipated
+- token
+- user_id
+- event_id
+- status
+- position_id
+
+PUT					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/participate'			Make user participate at event (participate status (not interested, interestet, participating, unparticipated
+- token
+- user_id
+- event_id
+- status
+- position_id
+
+DELETE				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/participate'			Make user participate at event (participate status (not interested, interestet, participating, unparticipated
+- token
+- user_id
+- event_id
+
+GET					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/users'				Users assigned for event
+- token
+? lang
+
++ lang
++ EVENT
+	+ id
+	+ url
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ description
+			+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
++ USERARRAY
+	+ id
+	+ position_id
+	+ department_id
+	+ last_name
+	+ first_name
+	+ cevi_name
+	+ language
+	+ postcode (city)
+	+ url (/v2/users/***REMOVED***id***REMOVED***)
+// Same as /participate
+
+PUT					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/users'				Users assigned for event
+- token
+- status
+? message
+
+// change status for all users (bsp absage, etc)
+
+DELETE				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/users'				Users assigned for event
+- token
+- user_id
+- message
+
+// remove user (block, message for reason)
+
+GET					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/articles'			Articles assigned for event
+- token
+? department_id
+? article_id
+? limit
+? offset
+? lang
+
+if (department_id)
+	return all articles from department
+
+if (article_id)
+	get all articles by id
+
++ limit
++ offset
++ lang
++ EVENT
+	+ id
+	+ url
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ description
+			+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ near_it
+			+ plain
+			+ parsed
++ARTICLEARRAY
+	+ id
+	+ name
+		+ name_de
+		+ name_en
+		+ name_fr
+		+ name_it
+	+ description
+		+ name_de
+			+ plain
+			+ parsed
+		+ name_en
+			+ plain
+			+ parsed
+		+ name_fr
+			+ plain
+			+ parsed
+		+ name_it
+			+ plain
+			+ parsed
+	+ storageplace
+		+ location
+			+ id
+			+ name
+		+ room_id
+			+ id
+			+ name
+		+ shelf_id
+			+ id
+			+ name
+		+ tray_id
+			+ id
+			+ name
+		+ chest_id
+			+ id
+			+ name
+	+ replace
+	+ barcode string
+
+POST				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/articles'			Articles assigned for event
+- token
+- type (for event specific articles)
+if (type is unique for event)
+	- name
+	- description
+	- user_id (verantwortlicher)
+- article_id
+- count
+- department_id
+
+PUT					'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/articles'			Articles assigned for event
+- token
+- article_id
+- count
+- department_id
+
+DELETE				'/v2/deparmtents/***REMOVED***department_id***REMOVED***/events/***REMOVED***event_id***REMOVED***/articles'			Articles assigned for event
+- token
+- article_id
+- department_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+www.cevi-web.com
+
+the lang parameter MUST be optional
+
+GET	'/***REMOVED***lang***REMOVED***/' 								Main page
+GET '/***REMOVED***lang***REMOVED***/login'							Login page
+GET '/***REMOVED***lang***REMOVED***/imprint' 						Impressum
+GET '/***REMOVED***lang***REMOVED***/impressum'						Impressum
+GET '/events' 								Public events (open for everyone)
+GET '/departments'							Department informations
+GET '/departments/***REMOVED***department_name***REMOVED***/events' Events by department (closed)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REQUIRED DATA
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TABLES
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+USER
+- id
+- department_id
+- position_id
+- language_id
+- last_name
+- first_name
+- email
+- cevi_name
+- username
+- password
+- birthdate
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+POSITION
+- id
+- name_de
+- name_en
+- name_fr
+- name_it
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+LANGUAGE
+- id
+- name
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+ARTICLE
+- id
+- article_title_id
+- article_description_id
+- article_quality_id
+- storage_place_id
+- date (bought)
+- quantity
+- replace
+- barcode
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+ARTICLETITLE
+- id
+- name_de
+- name_en
+- name_fr
+- name_it
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+ARTICLEDESCRIPTION
+- id
+- name_de
+- name_en
+- name_fr
+- name_it
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ARTICLE_IMAGE
+- id
+- article_id
+- image_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+IMAGE
+- url
+- type (JPEG, PNG, etc)
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+EVENT
+- id
+- event_title_id
+- event_description_id
+- price
+- start
+- end
+- start_leaders
+- end_leaders
+- public
+- publicate_at
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+EVENT_IMAGES
+- event_id
+- image_id
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+EVENT-PARTICIPANTS
+- id
+- event_id
+- user_id2
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+DEPARTMENT
+- id
+- department_group_id
+- city_id
+- name
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+DEPARTMENTGROUP
+- id
+- name_de
+- name_en
+- name_fr
+- name_it
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+CITY
+- country
+- state
+- number
+- number2
+- title_de
+- title_fr
+- title_it
+- title_en
+- meta
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+PERMISSION
+- id
+- level
+- name
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PERMISSIONLEVELS
+
+Administrator		64
+Abteilungsleiter 	32
+Materialchef		16
+Lagerleiter			8
+Gruppenleiter		4
+Hilfsleiter/Teilnehmer/Eltern 2
+All					1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EVENTS (public):
+SEE		0
+CREATE	32
+EDIT	32
+DELETE	32
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EVENTS (private)
+SEE		0
+CREATE	4
+EDIT	4
+DELETE	32
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ARTICLES
+SEE		4
+CREATE	16
+EDIT	16
+DELETE	16
