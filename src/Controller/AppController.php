@@ -9,20 +9,12 @@ use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Router;
-use Slim\Views\Twig;
-use SlimSession\Helper as SessionHelper;
 
 /**
  * Class AppController
  */
 class AppController
 ***REMOVED***
-    /**
-     * @var SessionHelper
-     */
-    protected $session;
-
     /**
      * @var Logger
      */
@@ -37,11 +29,22 @@ class AppController
     public function __construct(Container $container)
     ***REMOVED***
         try ***REMOVED***
-            $this->session = $container->get(SessionHelper::class);
             $this->logger = $container->get(Logger::class);
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
             throw new ServerErrorException('SERVER ERROR', $container->get('request'), $container->get('response'));
     ***REMOVED***
+***REMOVED***
+
+    /**
+     * Redirect to main page.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function redirectToCeviWeb(Request $request, Response $response): Response
+    ***REMOVED***
+        return $response->withRedirect('https://cevi-web.com/');
 ***REMOVED***
 
     /**
@@ -53,7 +56,7 @@ class AppController
      * @param array $data
      * @return Response
      */
-    public function error(Response $response, string $message = 'Not Found', int $status = 404,array $data = []): Response
+    public function error(Response $response, string $message = 'Not Found', int $status = 404, array $data = []): Response
     ***REMOVED***
         $data['message'] = $message;
         $data['code'] = $status;
@@ -87,7 +90,7 @@ class AppController
      * @param int $status
      * @return Response
      */
-    public function redirect(Response $response,string $url, int $status = 301): Response
+    public function redirect(Response $response, string $url, int $status = 301): Response
     ***REMOVED***
         return $response->withRedirect($url, $status);
 ***REMOVED***

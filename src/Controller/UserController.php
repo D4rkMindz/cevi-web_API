@@ -57,4 +57,10 @@ class UserController extends AppController
         $user = $this->userRepository->getUser($userId);
         return $this->json($response, ['user'=> $user]);
 ***REMOVED***
+
+    public function signupAction(Request $request, Response $response): Response
+    ***REMOVED***
+        $data = $request->getParams();
+        return $response;
+***REMOVED***
 ***REMOVED***

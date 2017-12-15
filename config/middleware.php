@@ -1,9 +1,8 @@
 <?php
 
-use Slim\Exception\NotFoundException;
+use Aura\Session\Session;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Middleware\Session;
 
 $app = app();
 $container = $app->getContainer();
@@ -54,3 +53,13 @@ $container = $app->getContainer();
 //    $request = $request->withAttribute('language', $language);
 //    return $next($request, $response);
 //***REMOVED***);
+
+/**
+ * Session Middleware
+ */
+$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    $session = $container->get(Session::class);
+    $response = $next($request, $response);
+    $session->commit();
+    return $response;
+***REMOVED***);

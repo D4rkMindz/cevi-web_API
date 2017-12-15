@@ -5,6 +5,8 @@
 
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
+use Aura\Session\Session;
+use Aura\Session\SessionFactory;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
@@ -12,11 +14,9 @@ use Odan\Twig\TwigAssetsExtension;
 use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
 use Slim\Http\Environment;
+use Slim\Http\Request;
+use Slim\Http\Response;
 use Slim\Views\Twig;
-use SlimSession\Helper as SessionHelper;
-use Symfony\Component\Translation\Loader\MoFileLoader;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Translator;
 
 $app = app();
 $container = $app->getContainer();
@@ -46,29 +46,6 @@ $container[Twig::class] = function (Container $container): Twig ***REMOVED***
     $twig->addExtension(new TwigTranslationExtension());
     $twig->addExtension(new TwigAssetsExtension($twig->getEnvironment(), $twigSettings['assetCache']));
     return $twig;
-***REMOVED***;
-
-/**
- * Translator container.
- *
- * @param Container $container
- * @return Translator $translator
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Translator::class] = function (Container $container): Translator ***REMOVED***
-    $session = $container->get(SessionHelper::class);
-    $locale = $session->get('lang');
-    if (empty($locale)) ***REMOVED***
-        $locale = 'de_CH';
-        $session->set('lang', 'de_CH');
-***REMOVED***
-    $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
-    $translator = new Translator($locale, new MessageSelector());
-    $translator->setFallbackLocales(['en_GB']);
-    $translator->addLoader('mo', new MoFileLoader());
-    $translator->addResource('mo', $resource, $locale);
-    $translator->setLocale($locale);
-    return $translator;
 ***REMOVED***;
 
 /**
@@ -137,15 +114,6 @@ $container[Connection::class . '_test'] = function (Container $container): Conne
 ***REMOVED***;
 
 /**
- * SessionHelper container.
- *
- * @return SessionHelper
- */
-$container[SessionHelper::class] = function (): SessionHelper ***REMOVED***
-    return new SessionHelper();
-***REMOVED***;
-
-/**
  * Mailer container.
  *
  * @param Container $container
@@ -178,4 +146,28 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
  */
 $container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
     return new Logger($container->get('settings')->get('logger')['main']);
+***REMOVED***;
+
+/**
+ * Session container.
+ *
+ * @param Container $container
+ * @return Session
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[Session::class] = function (Container $container) ***REMOVED***
+    $settings = $container->get('settings');
+    $sessionFactory = new SessionFactory();
+    $cookieParams = $container->get('request')->getCookieParams();
+    $session = $sessionFactory->newInstance($cookieParams);
+    $session->setName($settings['session']['name']);
+    $session->setCacheExpire($settings['session']['cache_expire']);
+    return $session;
+***REMOVED***;
+
+$container['notFoundHandler'] = function (Container $container) ***REMOVED***
+    return function (Request $request, Response $response) use ($container) ***REMOVED***
+        $response = $response->withRedirect($container->get('router')->pathFor('notFound'));
+        return $response;
+***REMOVED***;
 ***REMOVED***;

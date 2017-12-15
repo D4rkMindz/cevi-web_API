@@ -17,7 +17,7 @@ class UserRepository
     /**
      * @var UserTable
      */
-    public $userTable;
+    private $userTable;
 
     /**
      * UserRepository constructor.
@@ -60,5 +60,16 @@ class UserRepository
     public function insertUser(array $user): string
     ***REMOVED***
         return "1";
+***REMOVED***
+
+    /**
+     * Check if username already exists.
+     *
+     * @param string $username
+     * @return bool
+     */
+    public function existsUsername(string $username): bool
+    ***REMOVED***
+        return $this->userTable->existsUsername($username);
 ***REMOVED***
 ***REMOVED***

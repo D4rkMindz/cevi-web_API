@@ -8,9 +8,6 @@ $container = container();
 try ***REMOVED***
     return [
         'paths' => [
-            /**
-             *
-             */
             'migrations' => $container->get('settings')->get('migrations'),
         ],
         'environments' => [
@@ -22,7 +19,7 @@ try ***REMOVED***
             'test' => [
                 'name' => $container->get('settings')->get('db_test')['database'],
                 'connection' => $container->get(Connection::class . '_test')->getDriver()->connection()
-            ]
+            ],
         ],
     ];
 ***REMOVED*** catch (\Psr\Container\NotFoundExceptionInterface $e) ***REMOVED***

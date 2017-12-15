@@ -47,6 +47,7 @@ $config['session'] = [
     'domain' => null, //default
     'secure' => false, //default
     'httponly' => false, //default
+    'cache_expire' => 0,
 ];
 
 $config['logger'] = [
