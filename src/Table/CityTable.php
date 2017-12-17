@@ -4,9 +4,9 @@
 namespace App\Table;
 
 
-class PostcodeTable extends AppTable
+class CityTable extends AppTable
 ***REMOVED***
-    protected $table = 'postcode';
+    protected $table = 'city';
 
     /**
      * Check if postode exists in database.

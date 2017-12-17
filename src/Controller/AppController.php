@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Aura\Session\Segment;
+use Aura\Session\Session;
 use Http\Client\Common\Exception\ServerErrorException;
 use Interop\Container\Exception\ContainerException;
 use League\Plates\Engine;
@@ -21,6 +23,11 @@ class AppController
     protected $logger;
 
     /**
+     * @var Segment
+     */
+    protected $session;
+
+    /**
      * AppController constructor.
      *
      * @param Container $container
@@ -30,6 +37,7 @@ class AppController
     ***REMOVED***
         try ***REMOVED***
             $this->logger = $container->get(Logger::class);
+            $this->session = $container->get(Session::class)->getSegment('default');;
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
             throw new ServerErrorException('SERVER ERROR', $container->get('request'), $container->get('response'));
     ***REMOVED***

@@ -10,13 +10,13 @@ use Aura\Session\SessionFactory;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
-use Odan\Twig\TwigAssetsExtension;
-use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Slim\Views\Twig;
+use Symfony\Component\Translation\Loader\MoFileLoader;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Translator;
 
 $app = app();
 $container = $app->getContainer();
@@ -31,21 +31,6 @@ $container['environment'] = function (): Environment ***REMOVED***
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
 
     return new Slim\Http\Environment($_SERVER);
-***REMOVED***;
-
-/**
- * Twig container.
- *
- * @param Container $container
- * @return Twig
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Twig::class] = function (Container $container): Twig ***REMOVED***
-    $twigSettings = $container->get('settings')->get('twig');
-    $twig = new Twig($twigSettings['viewPath'], ['cache' => $twigSettings['cachePath'], 'auto_reload'=>$twigSettings['autoReload']]);
-    $twig->addExtension(new TwigTranslationExtension());
-    $twig->addExtension(new TwigAssetsExtension($twig->getEnvironment(), $twigSettings['assetCache']));
-    return $twig;
 ***REMOVED***;
 
 /**
@@ -84,6 +69,13 @@ $container[Connection::class] = function (Container $container): Connection ***R
     return $db;
 ***REMOVED***;
 
+/**
+ * Database test connection container.
+ *
+ * @param Container $container
+ * @return Connection
+ * @throws \Interop\Container\Exception\ContainerException
+ */
 $container[Connection::class . '_test'] = function (Container $container): Connection ***REMOVED***
     $config = $container->get('settings')->get('db_test');
     $driver = new Mysql([
@@ -162,12 +154,45 @@ $container[Session::class] = function (Container $container) ***REMOVED***
     $session = $sessionFactory->newInstance($cookieParams);
     $session->setName($settings['session']['name']);
     $session->setCacheExpire($settings['session']['cache_expire']);
+
     return $session;
 ***REMOVED***;
 
+/**
+ * Translator container.
+ *
+ * @param Container $container
+ * @return Translator
+ * @throws \Psr\Container\ContainerExceptionInterface
+ * @throws \Psr\Container\NotFoundExceptionInterface
+ */
+$container[Translator::class] = function (Container $container): Translator ***REMOVED***
+    $session = $container->get(Session::class)->getSegment('default');
+    $locale = $session->get('lang');
+    if (empty($locale)) ***REMOVED***
+        $locale = 'de_CH';
+        $session->set('lang', 'de_CH');
+***REMOVED***
+    $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
+    $translator = new Translator($locale, new MessageSelector());
+    $translator->setFallbackLocales(['en_GB']);
+    $translator->addLoader('mo', new MoFileLoader());
+    $translator->addResource('mo', $resource, $locale);
+    $translator->setLocale($locale);
+    return $translator;
+***REMOVED***;
+
+/**
+ * Not found handler
+ *
+ * @param Container $container
+ * @return Closure
+ */
 $container['notFoundHandler'] = function (Container $container) ***REMOVED***
     return function (Request $request, Response $response) use ($container) ***REMOVED***
         $response = $response->withRedirect($container->get('router')->pathFor('notFound'));
         return $response;
 ***REMOVED***;
 ***REMOVED***;
+
+

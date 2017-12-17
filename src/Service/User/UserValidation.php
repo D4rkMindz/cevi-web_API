@@ -4,7 +4,7 @@
 namespace App\Service\User;
 
 
-use App\Repository\PostcodeRepository;
+use App\Repository\CityRepository;
 use App\Repository\UserRepository;
 use App\Service\AppValidation;
 use App\Util\ValidationContext;
@@ -13,7 +13,7 @@ use Slim\Container;
 class UserValidation extends AppValidation
 ***REMOVED***
     /**
-     * @var PostcodeRepository
+     * @var CityRepository
      */
     private $postcodeRepository;
 
@@ -30,7 +30,7 @@ class UserValidation extends AppValidation
      */
     public function __construct(Container $container)
     ***REMOVED***
-        $this->postcodeRepository = $container->get(PostcodeRepository::class);
+        $this->postcodeRepository = $container->get(CityRepository::class);
         $this->userRepository = $container->get(UserRepository::class);
 ***REMOVED***
 
@@ -56,7 +56,7 @@ class UserValidation extends AppValidation
 
         $this->validatePostcode($postcode, $validationContext);
         $this->validateUsername($username, $validationContext);
-        // todo validate password
+        $this->validatePassword($password, $validationContext);
 
         return $validationContext;
 ***REMOVED***
@@ -70,7 +70,7 @@ class UserValidation extends AppValidation
     private function validatePostcode(string $postcode, ValidationContext $validationContext)
     ***REMOVED***
         if (!$this->postcodeRepository->existsPostcode($postcode)) ***REMOVED***
-            $validationContext->setError('postcode', 'Does not exist', 3);
+            $validationContext->setError('postcode', _('Does not exist'), 3);
     ***REMOVED***
 ***REMOVED***
 
@@ -83,7 +83,28 @@ class UserValidation extends AppValidation
     private function validateUsername(string $username, ValidationContext $validationContext)
     ***REMOVED***
         if (!$this->userRepository->existsUsername($username))***REMOVED***
-            $validationContext->setError('username', 'Already in use', 4);
+            $validationContext->setError('username', __('Already in use'), 4);
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Validate password.
+     *
+     * @param string $password
+     * @param ValidationContext $validationContext
+     */
+    private function validatePassword(string $password, ValidationContext $validationContext)
+    ***REMOVED***
+        if (!preg_match('/(?=.*\d)/', $password)) ***REMOVED***
+            $validationContext->setError('password', __('Password must contain a number'), 4);
+    ***REMOVED***
+
+        if (!preg_match('/(?=.*[a-z])/', $password))***REMOVED***
+            $validationContext->setError('password', __('Password must contain a lowercase character'), 4);
+    ***REMOVED***
+
+        if (!preg_match('/(?=.*[A-Z])/', $password)) ***REMOVED***
+            $validationContext->setError('password', __('Password must contain a uppercase character'), 4);
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

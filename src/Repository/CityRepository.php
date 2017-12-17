@@ -4,24 +4,27 @@
 namespace App\Repository;
 
 
-use App\Table\PostcodeTable;
+use App\Table\CityTable;
 use Slim\Container;
 
-class PostcodeRepository
+/**
+ * Class CityRepository
+ */
+class CityRepository
 ***REMOVED***
     /**
-     * @var PostcodeTable
+     * @var CityTable
      */
-    private $postcodeTable;
+    private $cityTable;
 
     /**
-     * PostcodeRepository constructor.
+     * CityRepository constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
     ***REMOVED***
-        $this->postcodeTable = $container->get(PostcodeTable::class);
+        $this->cityTable = $container->get(CityTable::class);
 ***REMOVED***
 
     /**
@@ -32,6 +35,6 @@ class PostcodeRepository
      */
     public function existsPostcode(string $postcode): bool
     ***REMOVED***
-        return $this->postcodeTable->existsPostcode($postcode);
+        return $this->cityTable->existsPostcode($postcode);
 ***REMOVED***
 ***REMOVED***

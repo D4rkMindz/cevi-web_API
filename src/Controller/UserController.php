@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Service\User\UserValidation;
 use Slim\Container;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Http\Request;
@@ -16,6 +17,11 @@ class UserController extends AppController
     private $userRepository;
 
     /**
+     * @var UserValidation
+     */
+    private $userValidation;
+
+    /**
      * UserController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -24,6 +30,7 @@ class UserController extends AppController
     ***REMOVED***
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
+        $this->userValidation = $container->get(UserValidation::class);
 ***REMOVED***
 
     /**
@@ -58,9 +65,36 @@ class UserController extends AppController
         return $this->json($response, ['user'=> $user]);
 ***REMOVED***
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function signupAction(Request $request, Response $response): Response
     ***REMOVED***
         $data = $request->getParams();
-        return $response;
+
+        $email = $data['email'];
+        $firstName = $data['first_name'];
+        $postcode = $data['postcode'];
+        $username = $data['username'];
+        $password = $data['password'];
+        $lang = $data['lang'];
+
+        $validationContext = $this->userValidation->validateSignup($email, $firstName, $postcode, $username, $password, $lang);
+        if ($validationContext->fails())***REMOVED***
+            $responseData = [];
+            $responseData['code'] = 422;
+            $responseData['errors'] = $validationContext->toArray();
+            return $this->json($response, $responseData, 422);
+    ***REMOVED***
+
+        $this->userRepository->signupUser($email,  $firstName, $postcode, $username, $password, $lang);
+        $responseData = [
+            'code' => 200,
+            'message' => __('Signed up user successfully')
+        ];
+
+        return $this->json($response, $responseData);
 ***REMOVED***
 ***REMOVED***

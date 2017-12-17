@@ -68,11 +68,11 @@ class AppTable
      * Insert into database.
      *
      * @param array $row with data to insertUser into database
-     * @return StatementInterface
+     * @return string last inserted ID
      */
-    public function insert(array $row): StatementInterface
+    public function insert(array $row): string
     ***REMOVED***
-        return $this->connection->insert($this->table, $row);
+        return $this->connection->insert($this->table, $row)->lastInsertId($this->table);
 ***REMOVED***
 
     /**

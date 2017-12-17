@@ -1,5 +1,7 @@
 <?php
 
+use Aura\Session\Segment;
+use Aura\Session\Session;
 use Slim\App;
 use Symfony\Component\Translation\Translator;
 
@@ -35,13 +37,16 @@ function route(callable $callback): string
  *
  * @param $message
  * @return string
- * @throws \Psr\Container\ContainerExceptionInterface
- * @throws \Psr\Container\NotFoundExceptionInterface
  */
 function __($message)
 ***REMOVED***
     /* @var $translator Translator */
-    $translator = app()->getContainer()->get(Translator::class);
+    try ***REMOVED***
+        $translator = app()->getContainer()->get(Translator::class);
+***REMOVED*** catch (\Psr\Container\NotFoundExceptionInterface $e) ***REMOVED***
+***REMOVED*** catch (\Psr\Container\ContainerExceptionInterface $e) ***REMOVED***
+***REMOVED***
+
     $translated = $translator->trans($message);
     $context = array_slice(func_get_args(), 1);
     if (!empty($context)) ***REMOVED***

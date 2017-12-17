@@ -3,11 +3,11 @@
 use Aura\Session\Session;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Container;
 
 $app = app();
 $container = $app->getContainer();
 
-//$app->add(new Session($container->get('settings')->get('session')));
 //
 //$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
 //    $locale = $request->getAttribute('language');
@@ -57,8 +57,8 @@ $container = $app->getContainer();
 /**
  * Session Middleware
  */
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
-    $session = $container->get(Session::class);
+$app->add(function (Request $request, Response $response, $next) ***REMOVED***
+    $session = $this->get(Session::class);
     $response = $next($request, $response);
     $session->commit();
     return $response;

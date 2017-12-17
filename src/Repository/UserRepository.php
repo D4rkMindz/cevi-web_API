@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 
+use App\Table\LanguageTable;
 use App\Table\UserTable;
 use Slim\Container;
 
@@ -20,6 +21,11 @@ class UserRepository
     private $userTable;
 
     /**
+     * @var LanguageTable
+     */
+    private $languageTable;
+
+    /**
      * UserRepository constructor.
      *
      * @param Container $container
@@ -28,6 +34,7 @@ class UserRepository
     public function __construct(Container $container)
     ***REMOVED***
         $this->userTable = $container->get(UserTable::class);
+        $this->languageTable = $container->get(LanguageTable::class);
 ***REMOVED***
 
     /**
@@ -54,12 +61,26 @@ class UserRepository
     /**
      * Insert user.
      *
-     * @param array $user
+     * @param string $email
+     * @param string $firstName
+     * @param string $postcode
+     * @param string $username
+     * @param string $password
+     * @param string $lang
      * @return string last inserted user id
      */
-    public function insertUser(array $user): string
+    public function signupUser(string $email, string $firstName, string $postcode, string $username, string $password, string $lang): string
     ***REMOVED***
-        return "1";
+        $langaugeId = $this->languageTable->getLanguageId($lang);
+        $row = [
+            'language_id' => $langaugeId,
+            'email' => $email,
+            'first_name' => $firstName,
+            'postcode'=> $postcode,
+            'username' => $username,
+            'password' => password_hash($password, PASSWORD_BCRYPT),
+        ];
+        return $this->userTable->insert($row);
 ***REMOVED***
 
     /**
