@@ -64,11 +64,13 @@ class AppController
      * @param array $data
      * @return Response
      */
-    public function error(Response $response, string $message = 'Not Found', int $status = 404, array $data = []): Response
+    public function error(Response $response, string $message = null, int $status = 404, array $data = []): Response
     ***REMOVED***
+        $message = empty($message) ? __('Not found') : $message;
+
         $data['message'] = $message;
         $data['code'] = $status;
-        return $this->json($response, $data, $status);
+        return $response->withJson($data, $status);
 ***REMOVED***
 
     /**
@@ -81,11 +83,16 @@ class AppController
      */
     public function json(Response $response, array $data, int $status = 200): Response
     ***REMOVED***
+        if (empty($data)) ***REMOVED***
+            return $this->error($response, __('No data available'), 404);
+    ***REMOVED***
+
         if ($status === 200) ***REMOVED***
             $data['message'] = 'Success';
     ***REMOVED*** else ***REMOVED***
             $data['message'] = 'Error ' . $status;
     ***REMOVED***
+
         $data['code'] = $status;
         return $response->withJson($data, $status);
 ***REMOVED***

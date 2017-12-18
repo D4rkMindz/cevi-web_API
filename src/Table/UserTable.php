@@ -15,11 +15,11 @@ class UserTable extends AppTable
      * @param string $username
      * @return bool true if found
      */
-    public function existsUsername(string $username)
+    public function existsUsername(string $username): bool
     ***REMOVED***
         $query = $this->newSelect();
         $query->select('username')->where(['username'=> $username]);
         $row = $query->execute()->fetch();
-        return !empty($row);
+        return empty($row);
 ***REMOVED***
 ***REMOVED***

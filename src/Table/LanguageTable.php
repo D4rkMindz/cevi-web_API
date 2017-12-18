@@ -13,13 +13,13 @@ class LanguageTable extends AppTable
     /**
      * Get language id.
      *
-     * @param string $language
+     * @param string $abbreviation
      * @return string
      */
-    public function getLanguageId(string $language): string
+    public function getLanguageId(string $abbreviation): string
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('id')->where(['name' => $language]);
+        $query->select('id')->where(['abbreviation' => $abbreviation]);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row['id'] : '';
 ***REMOVED***

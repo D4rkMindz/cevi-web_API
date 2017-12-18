@@ -9,6 +9,7 @@
 namespace App\Repository;
 
 
+use App\Table\CityTable;
 use App\Table\LanguageTable;
 use App\Table\UserTable;
 use Slim\Container;
@@ -26,6 +27,11 @@ class UserRepository
     private $languageTable;
 
     /**
+     * @var CityTable
+     */
+    private $cityTable;
+
+    /**
      * UserRepository constructor.
      *
      * @param Container $container
@@ -35,6 +41,7 @@ class UserRepository
     ***REMOVED***
         $this->userTable = $container->get(UserTable::class);
         $this->languageTable = $container->get(LanguageTable::class);
+        $this->cityTable = $container->get(CityTable::class);
 ***REMOVED***
 
     /**
@@ -71,12 +78,14 @@ class UserRepository
      */
     public function signupUser(string $email, string $firstName, string $postcode, string $username, string $password, string $lang): string
     ***REMOVED***
-        $langaugeId = $this->languageTable->getLanguageId($lang);
+        $languageId = $this->languageTable->getLanguageId($lang);
+        $cityId = $this->cityTable->getIdByPostcode($postcode);
+
         $row = [
-            'language_id' => $langaugeId,
+            'city_id' => (int)$cityId,
+            'language_id' => (int)$languageId,
             'email' => $email,
             'first_name' => $firstName,
-            'postcode'=> $postcode,
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
         ];

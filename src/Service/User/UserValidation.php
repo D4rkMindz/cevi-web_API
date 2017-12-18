@@ -56,7 +56,7 @@ class UserValidation extends AppValidation
 
         $this->validatePostcode($postcode, $validationContext);
         $this->validateUsername($username, $validationContext);
-        $this->validatePassword($password, $validationContext);
+//        $this->validatePassword($password, $validationContext);
 
         return $validationContext;
 ***REMOVED***

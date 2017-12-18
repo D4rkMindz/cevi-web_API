@@ -43,6 +43,11 @@ class UserController extends AppController
     public function getAllUsersAction(Request $request, Response $response): Response
     ***REMOVED***
         $users = $this->userRepository->getUsers();
+
+        if (empty($users)) ***REMOVED***
+            return $this->error($response, __('No users found'), 404);
+    ***REMOVED***
+
         return $this->json($response, ['users'=> $users]);
 ***REMOVED***
 
