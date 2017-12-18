@@ -18,7 +18,11 @@
   "autoload": ***REMOVED***
     "psr-4": ***REMOVED***
       "App\\": "src"
-***REMOVED***
+***REMOVED***,
+    "files": [
+      "lib/util.php",
+      "lib/services.php"
+    ]
   ***REMOVED***,
   "autoload-dev": ***REMOVED***
     "psr-4": ***REMOVED***

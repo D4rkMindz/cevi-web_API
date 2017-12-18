@@ -55,7 +55,9 @@ abstract class DbUnitBaseTest extends BaseTest
     protected static function getPdo(): PDO
     ***REMOVED***
         if (!self::$pdo) ***REMOVED***
-            self::$pdo = container()->get(Connection::class)->getDriver()->connection();
+            $app = app();
+            $pdo = $app->getContainer()->get(Connection::class)->getDriver()->connection();
+            self::$pdo = $pdo;
     ***REMOVED***
 
         return self::$pdo;

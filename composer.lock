@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "78eba232f42755235f6fccfca81753d5",
+    "content-hash": "52a10bb1e1db281984e3a862e78b1432",
     "packages": [
         ***REMOVED***
             "name": "aura/session",
@@ -347,56 +347,6 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
-    ***REMOVED***,
-        ***REMOVED***
-            "name": "fzaninotto/faker",
-            "version": "v1.7.1",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "php": "^5.3.3 || ^7.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "ext-intl": "*",
-                "phpunit/phpunit": "^4.0 || ^5.0",
-                "squizlabs/php_codesniffer": "^1.5"
-        ***REMOVED***,
-            "type": "library",
-            "extra": ***REMOVED***
-                "branch-alias": ***REMOVED***
-                    "dev-master": "1.8-dev"
-            ***REMOVED***
-        ***REMOVED***,
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Faker\\": "src/Faker/"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                ***REMOVED***
-                    "name": "François Zaninotto"
-            ***REMOVED***
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "time": "2017-08-15T16:48:10+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "mailgun/mailgun-php",
@@ -1992,6 +1942,56 @@
                 "instantiate"
             ],
             "time": "2017-07-22T11:58:36+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "fzaninotto/faker",
+            "version": "v1.7.1",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "reference": "d3ed4cc37051c1ca52d22d76b437d14809fc7e0d",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^5.3.3 || ^7.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "squizlabs/php_codesniffer": "^1.5"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.8-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Faker\\": "src/Faker/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "François Zaninotto"
+            ***REMOVED***
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2017-08-15T16:48:10+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "myclabs/deep-copy",

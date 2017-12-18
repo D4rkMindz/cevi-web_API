@@ -5,8 +5,13 @@ namespace App\Test;
 use PHPUnit\Framework\TestCase;
 use Slim\App;
 use Slim\Http\Environment;
+use Slim\Http\Headers;
 use Slim\Http\Request;
+use Slim\Http\RequestBody;
 use Slim\Http\Response;
+use Slim\Http\Uri;
+
+require_once __DIR__ . '/bootstrap.php';
 
 /**
  * Class BaseTest
@@ -14,71 +19,68 @@ use Slim\Http\Response;
 abstract class BaseTest extends TestCase
 ***REMOVED***
     /**
-     * @var App
-     */
-    protected $app;
-
-    /**
      * @var Request
      */
     protected $request;
 
-    /**
-     * @var Response
-     */
-    protected $response;
-
-    public function setUp()
-    ***REMOVED***
-
-***REMOVED***
+    /** @var Response */
+    private $response;
+    /** @var App */
+    private $app;
 
     /**
-     * Get
-     *
-     * @return App
-     */
-    public static function getApp()
-    ***REMOVED***
-        static $app = null;
-        if ($app === null) ***REMOVED***
-            $config = ['settings' => require_once __DIR__ . '/../config/config.php'];
-            $app = new App();
-    ***REMOVED***
-        return $app;
-***REMOVED***
-
-    /**
-     * Make request
+     * Send test request.
      *
      * @param $method
-     * @param $path
-     * @param array $options
-     * @return string
+     * @param $url
+     * @param array $requestParameters
+     * @return \Psr\Http\Message\ResponseInterface|Response
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
      */
-    public function request(string $method, string $path,array $options = array())
+    protected function request(string $method, string $url, array $requestParameters = [])
     ***REMOVED***
-        // Capture STDOUT
-        ob_start();
+        $request = $this->prepareRequest($method, $url, $requestParameters);
+        $response = new Response();
 
-        // Prepare a mock environment
-        Environment::mock(array_merge(array(
-            'REQUEST_METHOD' => $method,
-            'PATH_INFO' => $path,
-            'SERVER_NAME' => 'slim-test.dev',
-        ), $options));
-
-        $app = new ();
-        $this->app = $app;
-        $this->request = ->request();
-        $this->response = $app->response();
-
-        // Return STDOUT
-        return ob_get_clean();
+        $app = app();
+        $response = $app($request, $response);
+        return $response;
 ***REMOVED***
 
-    public function get($path, $options = array())
+    /**
+     * Prepare request.
+     *
+     * @param string $method
+     * @param string $url
+     * @param array $requestParameters
+     * @return Request
+     */
+    private function prepareRequest(string $method, string $url, array $requestParameters): Request
     ***REMOVED***
-        $this->request('GET', $path, $options);
+        $env = Environment::mock([
+            'SCRIPT_NAME' => '/index.php',
+            'REQUEST_URI' => $url,
+            'REQUEST_METHOD' => $method,
+        ]);
+
+        $parts = explode('?', $url);
+
+        if (isset($parts[1])) ***REMOVED***
+            $env['QUERY_STRING'] = $parts[1];
+    ***REMOVED***
+
+        $uri = Uri::createFromEnvironment($env);
+        $headers = Headers::createFromEnvironment($env);
+        $cookies = [];
+
+        $serverParams = $env->all();
+
+        $body = new RequestBody();
+        $body->write(json_encode($requestParameters));
+
+        $request = new Request($method, $uri, $headers, $cookies, $serverParams, $body);
+
+        return $request->withHeader('Content-Type', 'application/json');
 ***REMOVED***
 ***REMOVED***

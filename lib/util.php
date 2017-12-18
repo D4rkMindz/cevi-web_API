@@ -14,7 +14,7 @@ function app(): App
 ***REMOVED***
     static $app = null;
     if ($app === null) ***REMOVED***
-        $config = ['settings' => require_once __DIR__ . '/../config/config.php'];
+        $config = ['settings' => require __DIR__ . '/../config/config.php'];
         $app = new App($config);
 ***REMOVED***
 

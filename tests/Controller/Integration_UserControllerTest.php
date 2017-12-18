@@ -5,6 +5,7 @@ namespace App\Test\Controller;
 use App\Controller\UserController;
 use App\Factory\JsonResponseFactory;
 use App\Test\Database\DbUnitBaseTest;
+use App\Test\Mockbuilder;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use Slim\Container;
 use Slim\Http\Environment;
@@ -35,12 +36,15 @@ class Integration_UserControllerTest extends DbUnitBaseTest
      * Set up before test.
      *
      * @return void
+     * @throws \Exception
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function setUp()
     ***REMOVED***
+        parent::setUp();
         $this->container = app()->getContainer();
         $this->userController = new UserController($this->container);
-        $this->getData();
 ***REMOVED***
 
     /**
@@ -50,7 +54,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
      */
     public function getDataSet()
     ***REMOVED***
-        $this->getData();
+        $this->data = Mockbuilder::User();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 
@@ -65,22 +69,16 @@ class Integration_UserControllerTest extends DbUnitBaseTest
 ***REMOVED***
 
     /**
-     * Test indexAction method.
+     * Test get all users action.
      *
      * @coversNothing
      * @return void
-     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
      */
     public function testGetAllUsersAction()
     ***REMOVED***
-        $environment = Environment::mock([
-            'REQUEST_METHOD'=> 'GET',
-            'REQUEST_URI' =>'/v2/users',
-        ]);
-        $request = Request::createFromEnvironment($environment);
-        $response = new Response();
-        $actual = $this->userController->getAllUsersAction($request, $response);
-
+        $actual = $this->request('GET', '/v2/users');
         $expected = JsonResponseFactory::createSuccess(['users' => $this->data['users']]);
 
         $this->assertInstanceOf(Response::class, $actual);
@@ -88,28 +86,19 @@ class Integration_UserControllerTest extends DbUnitBaseTest
 ***REMOVED***
 
     /**
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * Test get single user action.
+     *
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
      */
     public function testGetUserAction()
     ***REMOVED***
         $userId = $this->data['users'][0]['id'];
-        $environment = Environment::mock([
-            'REQUEST_METHOD'=> 'GET',
-            'REQUEST_URI' =>'/v2/users/'. $userId,
-        ]);
-        $request = Request::createFromEnvironment($environment);
-        $actual = $this->userController->getUserAction($request, new Response());
-        $expected = JsonResponseFactory::createSuccess(['user'=> $this->data['users'][0]]);
+
+        $actual = $this->request('GET', '/v2/users/' . $userId);
+        $expected = JsonResponseFactory::createSuccess(['user' => $this->data['users'][0]]);
 
         $this->assertInstanceOf(Response::class, $actual);
-        $this->assertSame($expected, (string) $actual->getBody());
-***REMOVED***
-
-    private function getData(): void
-    ***REMOVED***
-        if (empty($this->data)) ***REMOVED***
-            $this->data['users'] = require __DIR__ . '/../Database/Data/user.php';
-    ***REMOVED***
+        $this->assertSame($expected, (string)$actual->getBody());
 ***REMOVED***
 ***REMOVED***
