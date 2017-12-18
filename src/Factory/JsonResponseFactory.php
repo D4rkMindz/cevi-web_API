@@ -21,11 +21,8 @@ class JsonResponseFactory
      */
     public static function createSuccess(array $body): string
     ***REMOVED***
-        $response = [
-            'message' => 'Success',
-            'code' => 200,
-            $body,
-        ];
-        return json_encode($response);
+        $body['message'] = 'Success';
+        $body['code'] = 200;
+        return json_encode($body);
 ***REMOVED***
 ***REMOVED***

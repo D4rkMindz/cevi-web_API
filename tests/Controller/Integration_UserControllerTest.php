@@ -40,6 +40,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
     ***REMOVED***
         $this->container = app()->getContainer();
         $this->userController = new UserController($this->container);
+        $this->getData();
 ***REMOVED***
 
     /**
@@ -49,7 +50,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
      */
     public function getDataSet()
     ***REMOVED***
-        $this->data['users'] = require __DIR__ . '/../Database/Data/user.php';
+        $this->getData();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 
@@ -70,7 +71,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
      * @return void
      * @throws \Interop\Container\Exception\ContainerException
      */
-    public function testIndex()
+    public function testGetAllUsersAction()
     ***REMOVED***
         $environment = Environment::mock([
             'REQUEST_METHOD'=> 'GET',
@@ -78,11 +79,37 @@ class Integration_UserControllerTest extends DbUnitBaseTest
         ]);
         $request = Request::createFromEnvironment($environment);
         $response = new Response();
-        $actual = $this->userController->indexAction($request, $response);
+        $actual = $this->userController->getAllUsersAction($request, $response);
 
         $expected = JsonResponseFactory::createSuccess(['users' => $this->data['users']]);
 
         $this->assertInstanceOf(Response::class, $actual);
         $this->assertSame($expected, (string)$actual->getBody());
+***REMOVED***
+
+    /**
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function testGetUserAction()
+    ***REMOVED***
+        $userId = $this->data['users'][0]['id'];
+        $environment = Environment::mock([
+            'REQUEST_METHOD'=> 'GET',
+            'REQUEST_URI' =>'/v2/users/'. $userId,
+        ]);
+        $request = Request::createFromEnvironment($environment);
+        $actual = $this->userController->getUserAction($request, new Response());
+        $expected = JsonResponseFactory::createSuccess(['user'=> $this->data['users'][0]]);
+
+        $this->assertInstanceOf(Response::class, $actual);
+        $this->assertSame($expected, (string) $actual->getBody());
+***REMOVED***
+
+    private function getData(): void
+    ***REMOVED***
+        if (empty($this->data)) ***REMOVED***
+            $this->data['users'] = require __DIR__ . '/../Database/Data/user.php';
+    ***REMOVED***
 ***REMOVED***
 ***REMOVED***
