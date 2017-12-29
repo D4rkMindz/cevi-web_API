@@ -5,8 +5,6 @@
 
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
-use Aura\Session\Session;
-use Aura\Session\SessionFactory;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
@@ -141,24 +139,6 @@ $container[Monolog\Logger::class] = function (Container $container) ***REMOVED**
 ***REMOVED***;
 
 /**
- * Session container.
- *
- * @param Container $container
- * @return Session
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Session::class] = function (Container $container) ***REMOVED***
-    $settings = $container->get('settings');
-    $sessionFactory = new SessionFactory();
-    $cookieParams = $container->get('request')->getCookieParams();
-    $session = $sessionFactory->newInstance($cookieParams);
-    $session->setName($settings['session']['name']);
-    $session->setCacheExpire($settings['session']['cache_expire']);
-
-    return $session;
-***REMOVED***;
-
-/**
  * Translator container.
  *
  * @param Container $container
@@ -167,11 +147,9 @@ $container[Session::class] = function (Container $container) ***REMOVED***
  * @throws \Psr\Container\NotFoundExceptionInterface
  */
 $container[Translator::class] = function (Container $container): Translator ***REMOVED***
-    $session = $container->get(Session::class)->getSegment('default');
-    $locale = $session->get('lang');
+    $locale = $container->get('jwt')['lang'];
     if (empty($locale)) ***REMOVED***
         $locale = 'de_CH';
-        $session->set('lang', 'de_CH');
 ***REMOVED***
     $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
     $translator = new Translator($locale, new MessageSelector());
@@ -195,4 +173,10 @@ $container['notFoundHandler'] = function (Container $container) ***REMOVED***
 ***REMOVED***;
 ***REMOVED***;
 
-
+// TODO disable this in prod
+$container['jwt'] = function () ***REMOVED***
+    return [
+        'lang' => 'de_CH',
+        'position_id' => 1,
+    ];
+***REMOVED***;

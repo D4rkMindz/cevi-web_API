@@ -4,70 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "52a10bb1e1db281984e3a862e78b1432",
+    "content-hash": "f0c9cefc65592b79628b9530233b5491",
     "packages": [
-        ***REMOVED***
-            "name": "aura/session",
-            "version": "2.1.0",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Session.git",
-                "reference": "7d2f7d41ad693970b5b6b83facca0961d3378883"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Session/zipball/7d2f7d41ad693970b5b6b83facca0961d3378883",
-                "reference": "7d2f7d41ad693970b5b6b83facca0961d3378883",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "php": ">=5.3.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "aura/di": "~2.0"
-        ***REMOVED***,
-            "suggest": ***REMOVED***
-                "ext-mcrypt": "Mcrypt generates the next best secure CSRF tokens.",
-                "ext-openssl": "OpenSSL generates the best secure CSRF tokens.",
-                "ircmaxell/random-lib": "A Library For Generating Secure Random Numbers",
-                "paragonie/random_compat": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7"
-        ***REMOVED***,
-            "type": "library",
-            "extra": ***REMOVED***
-                "aura": ***REMOVED***
-                    "type": "library",
-                    "config": ***REMOVED***
-                        "common": "Aura\\Session\\_Config\\Common"
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***,
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Aura\\Session\\": "src/",
-                    "Aura\\Session\\_Config\\": "config/"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                ***REMOVED***
-                    "name": "Aura.Session Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Session/contributors"
-            ***REMOVED***
-            ],
-            "description": "Provides session management functionality, including lazy session starting, session segments, next-request-only (\"flash\") values, and CSRF tools.",
-            "homepage": "https://github.com/auraphp/Aura.Session",
-            "keywords": [
-                "csrf",
-                "flash",
-                "flash message",
-                "session",
-                "sessions"
-            ],
-            "time": "2016-10-03T20:28:32+00:00"
-    ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/core",
             "version": "3.5.8",
@@ -349,6 +287,52 @@
             "time": "2017-02-14T19:40:03+00:00"
     ***REMOVED***,
         ***REMOVED***
+            "name": "firebase/php-jwt",
+            "version": "v5.0.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": " 4.8.35"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Firebase\\JWT\\": "src"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+            ***REMOVED***,
+                ***REMOVED***
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+            ***REMOVED***
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2017-06-27T22:17:23+00:00"
+    ***REMOVED***,
+        ***REMOVED***
             "name": "mailgun/mailgun-php",
             "version": "v2.4.0",
             "source": ***REMOVED***
@@ -517,51 +501,6 @@
             "time": "2017-01-19T11:35:12+00:00"
     ***REMOVED***,
         ***REMOVED***
-            "name": "odan/phinx-migrations-generator",
-            "version": "2.3.1",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/odan/phinx-migrations-generator.git",
-                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/odan/phinx-migrations-generator/zipball/94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
-                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "php": "^7.0",
-                "robmorgan/phinx": "^0.9",
-                "symfony/console": "~2.8|~3.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "phpunit/phpunit": "^6.0"
-        ***REMOVED***,
-            "bin": [
-                "./bin/phinx-migrations"
-            ],
-            "type": "library",
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Odan\\": "src",
-                    "Odan\\Test\\": "tests"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Migration generator for Phinx",
-            "homepage": "http://github.com/odan/phinx-migrations-generator",
-            "keywords": [
-                "database",
-                "migration",
-                "phinx"
-            ],
-            "time": "2017-10-25T10:57:03+00:00"
-    ***REMOVED***,
-        ***REMOVED***
             "name": "php-http/client-common",
             "version": "1.7.0",
             "source": ***REMOVED***
@@ -621,62 +560,6 @@
                 "httplug"
             ],
             "time": "2017-11-30T11:06:59+00:00"
-    ***REMOVED***,
-        ***REMOVED***
-            "name": "php-http/curl-client",
-            "version": "v1.7.0",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/php-http/curl-client.git",
-                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/curl-client/zipball/0972ad0d7d37032a52077a5cbe27cf370f2007d8",
-                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "ext-curl": "*",
-                "php": "^5.5 || ^7.0",
-                "php-http/discovery": "^1.0",
-                "php-http/httplug": "^1.0",
-                "php-http/message": "^1.2",
-                "php-http/message-factory": "^1.0.2"
-        ***REMOVED***,
-            "provide": ***REMOVED***
-                "php-http/async-client-implementation": "1.0",
-                "php-http/client-implementation": "1.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "guzzlehttp/psr7": "^1.0",
-                "php-http/client-integration-tests": "^0.5.1",
-                "phpunit/phpunit": "^4.8.27",
-                "zendframework/zend-diactoros": "^1.0"
-        ***REMOVED***,
-            "type": "library",
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Http\\Client\\Curl\\": "src/"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                ***REMOVED***
-                    "name": "Михаил Красильников",
-                    "email": "m.krasilnikov@yandex.ru"
-            ***REMOVED***
-            ],
-            "description": "cURL client for PHP-HTTP",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "curl",
-                "http"
-            ],
-            "time": "2017-02-09T15:18:33+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/discovery",
@@ -1495,32 +1378,32 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/debug",
-            "version": "v3.4.2",
+            "version": "v4.0.2",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "543deab3ffff94402440b326fc94153bae2dfa7a"
+                "reference": "8c3e709209ce3b952a31c0f4a31ac7703c3d0226"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
-                "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/8c3e709209ce3b952a31c0f4a31ac7703c3d0226",
+                "reference": "8c3e709209ce3b952a31c0f4a31ac7703c3d0226",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "psr/log": "~1.0"
         ***REMOVED***,
             "conflict": ***REMOVED***
-                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
+                "symfony/http-kernel": "<3.4"
         ***REMOVED***,
             "require-dev": ***REMOVED***
-                "symfony/http-kernel": "~2.8|~3.0|~4.0"
+                "symfony/http-kernel": "~3.4|~4.0"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1547,29 +1430,29 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-12T08:27:14+00:00"
+            "time": "2017-12-12T08:41:51+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/filesystem",
-            "version": "v3.4.2",
+            "version": "v4.0.2",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "25b135bea251829e3db6a77d773643408b575ed4"
+                "reference": "8c2868641d0c4885eee9c12a89c2b695eb1985cd"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/25b135bea251829e3db6a77d773643408b575ed4",
-                "reference": "25b135bea251829e3db6a77d773643408b575ed4",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/8c2868641d0c4885eee9c12a89c2b695eb1985cd",
+                "reference": "8c2868641d0c4885eee9c12a89c2b695eb1985cd",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^5.5.9|>=7.0.8"
+                "php": "^7.1.3"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1596,29 +1479,29 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2017-12-14T19:48:22+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/options-resolver",
-            "version": "v3.4.2",
+            "version": "v4.0.2",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "4576693efc58c022c3fe9f144aa61d204c86ad2c"
+                "reference": "75fdda335eb0adbd464089e8a0184c61097808e0"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/4576693efc58c022c3fe9f144aa61d204c86ad2c",
-                "reference": "4576693efc58c022c3fe9f144aa61d204c86ad2c",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/75fdda335eb0adbd464089e8a0184c61097808e0",
+                "reference": "75fdda335eb0adbd464089e8a0184c61097808e0",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^5.5.9|>=7.0.8"
+                "php": "^7.1.3"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1650,7 +1533,7 @@
                 "configuration",
                 "options"
             ],
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2017-12-14T19:48:22+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/polyfill-mbstring",
@@ -1836,6 +1719,60 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2017-12-11T20:38:23+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "tuupola/slim-jwt-auth",
+            "version": "2.3.3",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/tuupola/slim-jwt-auth.git",
+                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/tuupola/slim-jwt-auth/zipball/1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
+                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "firebase/php-jwt": "^3.0 || ^4.0 || ^5.0",
+                "php": "^5.5 || ^7.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "^4.6",
+                "squizlabs/php_codesniffer": "^2.3",
+                "zendframework/zend-diactoros": "^1.3"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Slim\\Middleware\\": "src"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Mika Tuupola",
+                    "email": "tuupola@appelsiini.net",
+                    "homepage": "http://www.appelsiini.net/",
+                    "role": "Developer"
+            ***REMOVED***
+            ],
+            "description": "PSR-7 JWT Authentication Middleware",
+            "homepage": "https://github.com/tuupola/slim-jwt-auth",
+            "keywords": [
+                "auth",
+                "json",
+                "jwt",
+                "middleware",
+                "psr-7"
+            ],
+            "time": "2017-07-12T09:57:35+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "webmozart/assert",
@@ -2039,6 +1976,51 @@
             "time": "2017-10-19T19:58:43+00:00"
     ***REMOVED***,
         ***REMOVED***
+            "name": "odan/phinx-migrations-generator",
+            "version": "2.3.1",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/odan/phinx-migrations-generator.git",
+                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/odan/phinx-migrations-generator/zipball/94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
+                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^7.0",
+                "robmorgan/phinx": "^0.9",
+                "symfony/console": "~2.8|~3.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "^6.0"
+        ***REMOVED***,
+            "bin": [
+                "./bin/phinx-migrations"
+            ],
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Odan\\": "src",
+                    "Odan\\Test\\": "tests"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Migration generator for Phinx",
+            "homepage": "http://github.com/odan/phinx-migrations-generator",
+            "keywords": [
+                "database",
+                "migration",
+                "phinx"
+            ],
+            "time": "2017-10-25T10:57:03+00:00"
+    ***REMOVED***,
+        ***REMOVED***
             "name": "phar-io/manifest",
             "version": "1.0.1",
             "source": ***REMOVED***
@@ -2139,6 +2121,62 @@
             ],
             "description": "Library for handling version information and constraints",
             "time": "2017-03-05T17:38:23+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "php-http/curl-client",
+            "version": "v1.7.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/php-http/curl-client.git",
+                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/curl-client/zipball/0972ad0d7d37032a52077a5cbe27cf370f2007d8",
+                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "ext-curl": "*",
+                "php": "^5.5 || ^7.0",
+                "php-http/discovery": "^1.0",
+                "php-http/httplug": "^1.0",
+                "php-http/message": "^1.2",
+                "php-http/message-factory": "^1.0.2"
+        ***REMOVED***,
+            "provide": ***REMOVED***
+                "php-http/async-client-implementation": "1.0",
+                "php-http/client-implementation": "1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "guzzlehttp/psr7": "^1.0",
+                "php-http/client-integration-tests": "^0.5.1",
+                "phpunit/phpunit": "^4.8.27",
+                "zendframework/zend-diactoros": "^1.0"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Http\\Client\\Curl\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Михаил Красильников",
+                    "email": "m.krasilnikov@yandex.ru"
+            ***REMOVED***
+            ],
+            "description": "cURL client for PHP-HTTP",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "curl",
+                "http"
+            ],
+            "time": "2017-02-09T15:18:33+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpdocumentor/reflection-common",

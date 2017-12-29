@@ -1,19 +1,8 @@
 <?php
 
-use App\Service\Mail\MailerInterface;
-use App\Service\Mail\MailgunAdapter;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
-use Monolog\Logger;
-use Odan\Twig\TwigAssetsExtension;
-use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
-use Slim\Http\Environment;
-use Slim\Views\Twig;
-use SlimSession\Helper as SessionHelper;
-use Symfony\Component\Translation\Loader\MoFileLoader;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Translator;
 
 $app = app();
 $container = $app->getContainer();

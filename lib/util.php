@@ -1,7 +1,5 @@
 <?php
 
-use Aura\Session\Segment;
-use Aura\Session\Session;
 use Slim\App;
 use Symfony\Component\Translation\Translator;
 

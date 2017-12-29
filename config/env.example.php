@@ -1,5 +1,10 @@
 <?php
-$config['displayErrorDetails'] = true;
+$env['displayErrorDetails'] = true;
+
+$env['jwt'] = [
+    'active' => false,
+    'secret' => 'superheavysecret',
+];
 
 $env['db'] = [
     'host' => '',
@@ -13,7 +18,5 @@ $env['mailgun'] = [
     'apikey' => '',
     'domain' => '',
 ];
-
-$env['twig']['assetCache']['minify'] = true;
 
 return $env;

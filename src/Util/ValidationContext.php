@@ -13,7 +13,7 @@ class ValidationContext
      *
      * @param string|null $message
      */
-    public function __construct(string $message = 'Not Valid')
+    public function __construct(string $message = 'Please check your data')
     ***REMOVED***
         $this->message = $message;
 ***REMOVED***
@@ -43,12 +43,11 @@ class ValidationContext
      * @param string $message
      * @param int $status
      */
-    public function setError(string $field, string $message, int $status)
+    public function setError(string $field, string $message)
     ***REMOVED***
         $this->errors[] = [
             "field" => $field,
             "message" => $message,
-            "status" => $status,
         ];
 ***REMOVED***
     /**

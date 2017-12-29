@@ -1,8 +1,8 @@
 <?php
 
-use Aura\Session\Session;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Middleware\JwtAuthentication;
 use Symfony\Component\Translation\Translator;
 
 $app = app();
@@ -49,12 +49,15 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
     return $next($request, $response);
 ***REMOVED***);
 
-/**
- * Session Middleware
- */
-$app->add(function (Request $request, Response $response, $next) ***REMOVED***
-    $session = $this->get(Session::class);
-    $response = $next($request, $response);
-    $session->commit();
-    return $response;
-***REMOVED***);
+
+if ($container->get('settings')->get('jwt')['active']) ***REMOVED***
+    $secret = $container->get('settings')->get('jwt')['secret'];
+    $passthrough = $container->get('settings')->get('jwt')['passthrough'];
+    $app->add(new JwtAuthentication([
+        'secret' => $secret,
+        'passthrough' => $passthrough,
+        'callback' => function ($request, $response, $arguments) use ($container) ***REMOVED***
+            $container['jwt'] = $arguments['decoded'];
+    ***REMOVED***,
+    ]));
+***REMOVED***
