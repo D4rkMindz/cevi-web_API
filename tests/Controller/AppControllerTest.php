@@ -67,7 +67,7 @@ class AppControllerTest extends BaseTest
 
         $responseExpected = $this->container->get('response');
         $responseExpected = $responseExpected->withJson($data, 200);
-        $response = $this->appController->json($data, 200);
+        $response = $this->appController->json(new Response() ,$data, 200);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertSame((string)$responseExpected->getBody(), (string)$response->getBody());
         $this->assertSame(200, $response->getStatusCode());

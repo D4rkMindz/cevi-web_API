@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Service\User\UserValidation;
 use Slim\Container;
-use Slim\Exception\MethodNotAllowedException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
@@ -48,7 +47,7 @@ class UserController extends AppController
             return $this->error($response, __('No users found'), 404);
     ***REMOVED***
 
-        return $this->json($response, ['users'=> $users]);
+        return $this->json($response, ['users' => $users]);
 ***REMOVED***
 
     /**
@@ -67,7 +66,11 @@ class UserController extends AppController
             return $this->error($response, 'Unprocessable Entity', 422, ['info' => ['message' => __('Please define user_id correctly')]]);
     ***REMOVED***
         $user = $this->userRepository->getUser($userId);
-        return $this->json($response, ['user'=> $user]);
+        if (empty($user)) ***REMOVED***
+            return $this->error($response, __('No user found'), 404);
+    ***REMOVED***
+
+        return $this->json($response, ['user' => $user]);
 ***REMOVED***
 
     /**
@@ -84,22 +87,60 @@ class UserController extends AppController
         $postcode = $data['postcode'];
         $username = $data['username'];
         $password = $data['password'];
-        $lang = $data['lang'];
+        $lang = $data['language_id'];
 
         $validationContext = $this->userValidation->validateSignup($email, $firstName, $postcode, $username, $password, $lang);
-        if ($validationContext->fails())***REMOVED***
-            $responseData = [];
-            $responseData['code'] = 422;
-            $responseData['errors'] = $validationContext->toArray();
-            return $this->json($response, $responseData, 422);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $this->userRepository->signupUser($email,  $firstName, $postcode, $username, $password, $lang);
+        $this->userRepository->signupUser($email, $firstName, $postcode, $username, $password, $lang);
         $responseData = [
             'code' => 200,
             'message' => __('Signed up user successfully')
         ];
 
         return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Update user action.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function updateUserAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $data = $request->getParams();
+
+        $validationContext = $this->userValidation->validateUpdate($data);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
+    ***REMOVED***
+
+        $this->userRepository->updateUser($data, $args['user_id']);
+
+        $responseData = [
+            'code' => 200,
+            'message' => __('Udpated user successfully')
+        ];
+
+        return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Delete user action.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function deleteUserAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $this->userRepository->deleteUser($args['user_id'], 0); // TODO get executor ID from token.
+        return $this->json($response,[]);
 ***REMOVED***
 ***REMOVED***

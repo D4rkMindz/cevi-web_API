@@ -11,6 +11,16 @@ $config = [
 ];
 $config['migrations'] = __DIR__ . '/../resources/migrations';
 
+$config['jwt'] = [
+    'active' => true,
+    'secret' => '',
+    'passthrough' => [
+        '/',
+        '/v2/users/signup',
+        '/v2/auth',
+    ]
+];
+
 $config['db'] = [
     'database' => 'cevi_web',
     'charset' => 'utf8',
@@ -23,31 +33,6 @@ $config['db_test'] = [
     'charset' => 'utf8',
     'encoding' => 'utf8',
     'collation' => 'utf8_unicode_ci',
-];
-
-$config['twig'] = [
-    'viewPath' => __DIR__ . '/../templates',
-    'cachePath' => __DIR__ . '/../tmp/cache/twig',
-    'autoReload' => false,
-    'assetCache' => [
-        'path' => __DIR__ . '/../public/assets',
-        // Cache settings
-        'cache_enabled' => true,
-        'cache_path' => __DIR__ . '/../tmp/cache',
-        'cache_name' => 'assets',
-        'cache_lifetime' => 0,
-    ]
-];
-
-$config['session'] = [
-    'name' => 'app_template',
-    'autorefresh' => true,
-    'lifetime' => '2 hours',
-    'path' => '/', //default
-    'domain' => null, //default
-    'secure' => false, //default
-    'httponly' => false, //default
-    'cache_expire' => 0,
 ];
 
 $config['logger'] = [
@@ -63,7 +48,14 @@ $config['mailgun'] = [
     'domain' => '',
 ];
 
-$env = require_once __DIR__ . '/env.php';
+if (file_exists(__DIR__ . '/env.php')) ***REMOVED***
+    $env = require_once __DIR__ . '/env.php';
+***REMOVED*** else if (file_exists(__DIR__ . '/../../env.php')) ***REMOVED***
+    $env = require_once __DIR__ . '/../../env.php';
+***REMOVED*** else ***REMOVED***
+    throw new Exception('ENV.php not found');
+***REMOVED***
+
 $config = array_replace_recursive($config, $env);
 
 return $config;

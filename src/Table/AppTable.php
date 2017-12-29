@@ -13,8 +13,7 @@ class AppTable
 ***REMOVED***
     protected $table = null;
 
-    protected $connection = null;
-
+    private $connection = null;
 
     /**
      * AppTable constructor.
@@ -34,7 +33,7 @@ class AppTable
     public function getAll(): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*');
+        $query->select('*')->where(['deleted = ' => '0']);
         $rows = $query->execute()->fetchAll('assoc');
 
         return $rows;
@@ -59,7 +58,7 @@ class AppTable
     public function getById($id): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['id' => $id]);
+        $query->select('*')->where(['id' => $id, 'deleted = ' => '0']);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row : [];
 ***REMOVED***
@@ -87,7 +86,7 @@ class AppTable
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
-            ->where(['id' => $where]);
+            ->where(['id' => $where, 'deleted = ' => '0']);
         return $query->execute();
 ***REMOVED***
 
@@ -99,6 +98,6 @@ class AppTable
      */
     public function delete(string $id): StatementInterface
     ***REMOVED***
-        return $this->connection->delete($this->table, ['id' => $id]);
+        return $this->connection->delete($this->table, ['id' => $id, 'deleted = ' => '0']);
 ***REMOVED***
 ***REMOVED***

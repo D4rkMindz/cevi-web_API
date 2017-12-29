@@ -35,6 +35,23 @@ class CityRepository
      */
     public function existsPostcode(string $postcode): bool
     ***REMOVED***
-        return $this->cityTable->existsPostcode($postcode);
+        $query = $this->cityTable->newSelect();
+        $query->select('number')->where(['number' => $postcode, 'deleted = ' => '0']);
+        $row = $query->execute()->fetch();
+        return !empty($row);
+***REMOVED***
+
+    /**
+     * Check if city exists.
+     *
+     * @param string $cityId
+     * @return bool true if exists
+     */
+    public function existsCity(string $cityId)
+    ***REMOVED***
+        $query = $this->cityTable->newSelect();
+        $query->select('id')->where(['id'=> $cityId, 'deleted = ' => '0']);
+        $row = $query->execute()->fetch();
+        return !empty($row);
 ***REMOVED***
 ***REMOVED***

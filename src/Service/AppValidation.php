@@ -24,11 +24,11 @@ class AppValidation
     ***REMOVED***
         $length = strlen(trim($text));
         if ($length < $min) ***REMOVED***
-            $validationContext->setError($elementName, 'too short', 1);
+            $validationContext->setError($elementName, __('too short'));
     ***REMOVED***
 
         if ($length > $max) ***REMOVED***
-            $validationContext->setError($elementName, 'too long', 2);
+            $validationContext->setError($elementName, __('too long'));
     ***REMOVED***
 ***REMOVED***
 
@@ -40,8 +40,9 @@ class AppValidation
      */
     protected function validateEmail(string $email, ValidationContext $validationContext)
     ***REMOVED***
+        $this->validateLength($email, 'email', $validationContext);
         if (!is_email($email)) ***REMOVED***
-            $validationContext->setError('email', 'invalid', 3);
+            $validationContext->setError('email', _('Not a valid email address'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
