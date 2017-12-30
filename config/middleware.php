@@ -12,7 +12,7 @@ $container = $app->getContainer();
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
     $locale = $request->getAttribute('lang');
     $translator = $container->get(Translator::class);
-    $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
+    $resource = __DIR__ . '/../resources/locale/' . $locale . '_messages.mo';
     $translator->setLocale($locale);
     $translator->setFallbackLocales(['en_US']);
     $translator->addResource('mo', $resource, $locale);
@@ -49,15 +49,27 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
     return $next($request, $response);
 ***REMOVED***);
 
-
-if ($container->get('settings')->get('jwt')['active']) ***REMOVED***
+$jwt = $container->get('settings')->get('jwt');
+if ($jwt['active']) ***REMOVED***
     $secret = $container->get('settings')->get('jwt')['secret'];
     $passthrough = $container->get('settings')->get('jwt')['passthrough'];
     $app->add(new JwtAuthentication([
+        'environment' => 'HTTP_X_TOKEN',
+        'header' => 'X-Token',
         'secret' => $secret,
         'passthrough' => $passthrough,
-        'callback' => function ($request, $response, $arguments) use ($container) ***REMOVED***
+        'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt'] = $arguments['decoded'];
+    ***REMOVED***,
+        'error' => function (Request $request, Response $response) ***REMOVED***
+            $errormessage = [
+                'code' => 403,
+                'message' => 'Forbidden',
+                'info' => [
+                    'message' => 'Please append a token in the correct header'
+                ],
+            ];
+            return $response->withStatus(403)->withJson($errormessage);
     ***REMOVED***,
     ]));
 ***REMOVED***

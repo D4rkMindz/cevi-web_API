@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use Firebase\JWT\JWT;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -18,6 +19,7 @@ class AuthenticationController extends AppController
     public function authenticateAction(Request $request, Response $response): Response
     ***REMOVED***
         $data = $request->getParams();
-        // todo authenticate action
+        // TODO create authentication
+        /** @see https://github.com/firebase/php-jwt */
 ***REMOVED***
 ***REMOVED***
