@@ -294,6 +294,12 @@ class UserValidation extends AppValidation
         $this->validateLength($address, 'address', $validationContext);
 ***REMOVED***
 
+    /**
+     * Validate birthdate.
+     *
+     * @param string $birthdate
+     * @param ValidationContext $validationContext
+     */
     private function validateBirthdate(string $birthdate, ValidationContext $validationContext)
     ***REMOVED***
         // minimum age of 4 years

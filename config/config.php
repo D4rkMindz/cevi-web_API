@@ -15,9 +15,9 @@ $config['jwt'] = [
     'active' => true,
     'secret' => '',
     'passthrough' => [
-        '/',
-        '/v2/users/signup',
-        '/v2/auth',
+        '/' => ['GET'],
+        '/v2/users/signup' => ['POST'],
+        '/v2/auth' => ['POST'],
     ]
 ];
 

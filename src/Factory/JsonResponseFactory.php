@@ -17,12 +17,35 @@ class JsonResponseFactory
      * Creates a default JSON response body if the request was successful.
      *
      * @param array $body
-     * @return string
+     * @param int $status
+     * @param string $message
+     * @return array
      */
-    public static function createSuccess(array $body): string
+    public static function success(array $body, int $status = 200, string $message = 'success'): array
     ***REMOVED***
-        $body['message'] = 'Success';
-        $body['code'] = 200;
-        return json_encode($body);
+        $responseData = [
+            'code' => $status,
+            'message' => $message,
+        ];
+        return array_replace_recursive($responseData, $body);
+***REMOVED***
+
+    /**
+     * Create default error resonse
+     *
+     * @param array|null $body
+     * @return array
+     */
+    public static function error(array $body = null, int $status = 403, string $message = 'forbidden')
+    ***REMOVED***
+        $responseData = [
+            'code' => $status,
+            'message' => $message,
+        ];
+        if ($body !== null) ***REMOVED***
+            $responseData['info'] = $body;
+    ***REMOVED***
+
+        return $responseData;
 ***REMOVED***
 ***REMOVED***

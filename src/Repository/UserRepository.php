@@ -49,6 +49,44 @@ class UserRepository
 ***REMOVED***
 
     /**
+     * Check if user can login by username.
+     *
+     * @param string $username
+     * @param string $password
+     * @return bool
+     */
+    public function checkLoginByUsername(string $username, string $password): bool
+    ***REMOVED***
+        $query = $this->userTable->newSelect();
+        $query->select(['password'])->where(['username' => $username]);
+        $row = $query->execute()->fetch('assoc');
+        if (empty($row)) ***REMOVED***
+            return false;
+    ***REMOVED***
+
+        return password_verify($password, $row['password']);
+***REMOVED***
+
+    /**
+     * Check if user can login by email.
+     *
+     * @param string $email
+     * @param string $password
+     * @return bool
+     */
+    public function checkLoginByEmail(string $email, string $password): bool
+    ***REMOVED***
+        $query = $this->userTable->newSelect();
+        $query->select(['password'])->where(['email' => $email]);
+        $row = $query->execute()->fetch('assoc');
+        if (empty($row)) ***REMOVED***
+            return false;
+    ***REMOVED***
+
+        return password_verify($password, $row['password']);
+***REMOVED***
+
+    /**
      * Get all users.
      *
      * @return array with userData
@@ -158,7 +196,7 @@ class UserRepository
     public function existsUser(string $userId): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('id')->where(['id' => $userId,'deleted = ' => '0']);
+        $query->select('id')->where(['id' => $userId, 'deleted = ' => '0']);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -252,7 +290,7 @@ class UserRepository
     public function deleteUser(string $userId, string $executorId): bool
     ***REMOVED***
         $update = [
-            'deleted'=> 1,
+            'deleted' => 1,
             'deleted_by' => $executorId,
             'deleted_at' => date('Y-m-d H:i:s'),
         ];

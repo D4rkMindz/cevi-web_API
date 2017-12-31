@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Factory\JsonResponseFactory;
 use Http\Client\Common\Exception\ServerErrorException;
 use Interop\Container\Exception\ContainerException;
 use Monolog\Logger;
@@ -47,24 +48,6 @@ class AppController
 ***REMOVED***
 
     /**
-     * Return Error JSON Response
-     *
-     * @param Response $response
-     * @param string $message
-     * @param int $status
-     * @param array $data
-     * @return Response
-     */
-    public function error(Response $response, string $message = null, int $status = 404, array $data = []): Response
-    ***REMOVED***
-        $message = empty($message) ? __('Not found') : $message;
-
-        $data['message'] = $message;
-        $data['code'] = $status;
-        return $response->withJson($data, $status);
-***REMOVED***
-
-    /**
      * Return JSON Response.
      *
      * @param Response $response
@@ -79,13 +62,29 @@ class AppController
     ***REMOVED***
 
         if ($status === 200) ***REMOVED***
-            $data['message'] = 'Success';
+            $message = 'Success';
     ***REMOVED*** else ***REMOVED***
-            $data['message'] = 'Error ' . $status;
+            $message = 'Error ' . $status;
     ***REMOVED***
 
-        $data['code'] = $status;
-        return $response->withJson($data, $status);
+        $responseData = JsonResponseFactory::success($data, $status, $message);
+        return $response->withJson($responseData, $status);
+***REMOVED***
+
+    /**
+     * Return Error JSON Response
+     *
+     * @param Response $response
+     * @param string $message
+     * @param int $status
+     * @param array $data
+     * @return Response
+     */
+    public function error(Response $response, string $message = null, int $status = 404, array $data = []): Response
+    ***REMOVED***
+        $message = empty($message) ? __('Not found') : $message;
+        $responseData = JsonResponseFactory::error($data, $status, $message);
+        return $response->withJson($responseData, $status);
 ***REMOVED***
 
     /**

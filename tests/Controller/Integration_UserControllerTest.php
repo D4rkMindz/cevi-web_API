@@ -79,7 +79,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
     public function testGetAllUsersAction()
     ***REMOVED***
         $actual = $this->request('GET', '/v2/users');
-        $expected = JsonResponseFactory::createSuccess(['users' => $this->data['users']]);
+        $expected = json_encode(JsonResponseFactory::success(['users' => $this->data['users']]));
 
         $this->assertInstanceOf(Response::class, $actual);
         $this->assertSame($expected, (string)$actual->getBody());
@@ -96,7 +96,7 @@ class Integration_UserControllerTest extends DbUnitBaseTest
         $userId = $this->data['users'][0]['id'];
 
         $actual = $this->request('GET', '/v2/users/' . $userId);
-        $expected = JsonResponseFactory::createSuccess(['user' => $this->data['users'][0]]);
+        $expected = json_encode(JsonResponseFactory::success(['user' => $this->data['users'][0]]));
 
         $this->assertInstanceOf(Response::class, $actual);
         $this->assertSame($expected, (string)$actual->getBody());

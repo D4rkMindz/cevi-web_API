@@ -1,5 +1,7 @@
 <?php
 
+use App\Factory\JsonResponseFactory;
+use App\JwtAuthRules\PassthroughRule;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication;
@@ -37,7 +39,7 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
         $language = explode('-', $language)[0];
 ***REMOVED***
 
-    $language = empty($language) ? $language : 'de';
+    $language = !empty($language) ? $language : 'de';
     $language = $whitelist[$language];
 
     if (empty($language)) ***REMOVED***
@@ -52,24 +54,15 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
 $jwt = $container->get('settings')->get('jwt');
 if ($jwt['active']) ***REMOVED***
     $secret = $container->get('settings')->get('jwt')['secret'];
-    $passthrough = $container->get('settings')->get('jwt')['passthrough'];
     $app->add(new JwtAuthentication([
-        'environment' => 'HTTP_X_TOKEN',
         'header' => 'X-Token',
-        'secret' => $secret,
-        'passthrough' => $passthrough,
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt'] = $arguments['decoded'];
     ***REMOVED***,
         'error' => function (Request $request, Response $response) ***REMOVED***
-            $errormessage = [
-                'code' => 403,
-                'message' => 'Forbidden',
-                'info' => [
-                    'message' => 'Please append a token in the correct header'
-                ],
-            ];
-            return $response->withStatus(403)->withJson($errormessage);
+            $errorMessage = JsonResponseFactory::error(['message' => 'Invalid token']);
+            return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
+        'rules' => [new PassthroughRule($container)],
     ]));
 ***REMOVED***

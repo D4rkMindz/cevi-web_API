@@ -123,8 +123,7 @@ class UserController extends AppController
         $this->userRepository->updateUser($data, $args['user_id']);
 
         $responseData = [
-            'code' => 200,
-            'message' => __('Udpated user successfully')
+            'message' => __('Updated user successfully')
         ];
 
         return $this->json($response, $responseData);
