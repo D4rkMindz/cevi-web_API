@@ -4,7 +4,6 @@
 namespace App\Controller;
 
 
-use App\Factory\JsonResponseFactory;
 use App\Factory\JWTFactory;
 use App\Service\Login\LoginValidation;
 use Firebase\JWT\JWT;
@@ -55,9 +54,10 @@ class AuthenticationController extends AppController
         $password = (string)$data['password'];
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
             $tokendata = JWTFactory::generate($username);
+            $expiresAt = $tokendata['exp'];
             $token = JWT::encode($tokendata, $this->secret);
-            return $response->withJson(['token' => $token]);
+            return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt]);
     ***REMOVED***
-        return $response->withJson(['code' => 422, 'message' => 'Unprocessable entity', 'info' => ['message' => __('invalid user data')]], 422);//todo continue here 20171230
+        return $this->error($response, 'Unprocessable entity', 422, ['message' => __('invalid user data')]);
 ***REMOVED***
 ***REMOVED***

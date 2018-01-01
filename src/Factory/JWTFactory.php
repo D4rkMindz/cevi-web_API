@@ -18,8 +18,8 @@ class JWTFactory
             'iss' => 'cevi-web',
             'aud' => 'cevi-web',
             'sub' => $scope,
-            'exp' => time() + $exp,
-            'iat' => time(),
+            'exp' => date('Y-m-d H:i:s',time() + $exp),
+            'iat' => date('Y-m-d H:i:s'),
             'data' => [
                 'username' => $username,
             ]

@@ -34,7 +34,7 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
 
     if (empty($language)) ***REMOVED***
         // Browser language
-        $language = $request->getHeader('accept-language')[0];
+        $language = array_key_exists(0, $request->getHeader('accept-language')) ? $request->getHeader('accept-language')[0] : 'de-CH,';
         $language = explode(',', $language)[0];
         $language = explode('-', $language)[0];
 ***REMOVED***
@@ -55,12 +55,13 @@ $jwt = $container->get('settings')->get('jwt');
 if ($jwt['active']) ***REMOVED***
     $secret = $container->get('settings')->get('jwt')['secret'];
     $app->add(new JwtAuthentication([
+        'secret' => $secret,
         'header' => 'X-Token',
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt'] = $arguments['decoded'];
     ***REMOVED***,
-        'error' => function (Request $request, Response $response) ***REMOVED***
-            $errorMessage = JsonResponseFactory::error(['message' => 'Invalid token']);
+        'error' => function (Request $request, Response $response, $x) ***REMOVED***
+            $errorMessage = JsonResponseFactory::error(['message' => $x['message'], 'token' => $x['token']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
         'rules' => [new PassthroughRule($container)],
