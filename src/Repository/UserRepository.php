@@ -9,6 +9,7 @@ use App\Table\GenderTable;
 use App\Table\LanguageTable;
 use App\Table\PositionTable;
 use App\Table\UserTable;
+use Cake\Database\Query;
 use Exception;
 use Slim\Container;
 
@@ -368,7 +369,7 @@ class UserRepository
     /**
      * @return \Cake\Database\Query
      */
-    private function getUserQuery(): \Cake\Database\Query
+    private function getUserQuery(): Query
     ***REMOVED***
         $query = $this->userTable->newSelect();
 
