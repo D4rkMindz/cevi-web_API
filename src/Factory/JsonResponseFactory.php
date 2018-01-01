@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Björn Pfoster
- * Date: 14.12.2017
- * Time: 18:16
- */
 
 namespace App\Factory;
 

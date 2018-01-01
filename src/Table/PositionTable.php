@@ -6,5 +6,5 @@ namespace App\Table;
 
 class PositionTable extends AppTable
 ***REMOVED***
-    protected $table = 'position';
+    protected $table = 'app_position';
 ***REMOVED***

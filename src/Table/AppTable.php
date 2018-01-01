@@ -26,6 +26,16 @@ class AppTable
 ***REMOVED***
 
     /**
+     * Get table name.
+     *
+     * @return string table name
+     */
+    public function getTablename()
+    ***REMOVED***
+        return $this->table;
+***REMOVED***
+
+    /**
      * Get all entries from database.
      *
      * @return array $rows
