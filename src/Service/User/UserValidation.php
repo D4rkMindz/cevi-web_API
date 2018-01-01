@@ -69,17 +69,14 @@ class UserValidation extends AppValidation
      * Validate update data.
      *
      * @param array $data
+     * @param string $modifier
      * @return ValidationContext
      */
-    public function validateUpdate(array $data): ValidationContext
+    public function validateUpdate(array $data, string $modifier): ValidationContext
     ***REMOVED***
         $validationContext = new ValidationContext(__('Please check your data'));
 
-        if (array_key_exists('modifier', $data)) ***REMOVED***
-            $this->validateModifier($data['modifier'], $validationContext);
-    ***REMOVED*** else ***REMOVED***
-            $validationContext->setError('modifier', __('Modifier must be defined'));
-    ***REMOVED***
+        $this->validateModifier($modifier, $validationContext);
 
         if (array_key_exists('city_id', $data)) ***REMOVED***
             $this->validateCity((string)$data['city_id'], $validationContext);
@@ -148,6 +145,19 @@ class UserValidation extends AppValidation
     ***REMOVED***
 
         return $validationContext;
+***REMOVED***
+
+    /**
+     * Validate modifier.
+     *
+     * @param string $modifier
+     * @param ValidationContext $validationContext
+     */
+    private function validateModifier(string $modifier, ValidationContext $validationContext): void
+    ***REMOVED***
+        if (!$this->userRepository->existsUser($modifier)) ***REMOVED***
+            $validationContext->setError('modifier', __('Modifier does not exist'));
+    ***REMOVED***
 ***REMOVED***
 
     /**
@@ -355,19 +365,6 @@ class UserValidation extends AppValidation
     ***REMOVED***
         if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
             $validationContext->setError('postcode', _('Does not exist'));
-    ***REMOVED***
-***REMOVED***
-
-    /**
-     * Validate modifier.
-     *
-     * @param string $modifier
-     * @param ValidationContext $validationContext
-     */
-    private function validateModifier(string $modifier, ValidationContext $validationContext): void
-    ***REMOVED***
-        if (!$this->userRepository->existsUser($modifier)) ***REMOVED***
-            $validationContext->setError('modifier', __('Modifier does not exist'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

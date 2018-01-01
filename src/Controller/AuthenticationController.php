@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Factory\JWTFactory;
+use App\Repository\UserRepository;
 use App\Service\Login\LoginValidation;
 use Firebase\JWT\JWT;
 use Slim\Container;
@@ -21,6 +22,11 @@ class AuthenticationController extends AppController
     private $loginValidation;
 
     /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
      * AuthenticationController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -30,6 +36,7 @@ class AuthenticationController extends AppController
         parent::__construct($container);
         $this->loginValidation = $container->get(LoginValidation::class);
         $this->secret = $container->get('settings')->get('jwt')['secret'];
+        $this->userRepository = $container->get(UserRepository::class);
 ***REMOVED***
 
     /**
@@ -53,7 +60,8 @@ class AuthenticationController extends AppController
         $username = (string)$data['username'];
         $password = (string)$data['password'];
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
-            $tokendata = JWTFactory::generate($username);
+            $userId = $this->userRepository->getIdByusername($username);
+            $tokendata = JWTFactory::generate($username, $userId);
             $expiresAt = $tokendata['exp'];
             $token = JWT::encode($tokendata, $this->secret);
             return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt]);

@@ -28,6 +28,8 @@ class JsonResponseFactory
      * Create default error resonse
      *
      * @param array|null $body
+     * @param int $status
+     * @param string $message
      * @return array
      */
     public static function error(array $body = null, int $status = 403, string $message = 'forbidden')

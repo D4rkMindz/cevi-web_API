@@ -77,13 +77,13 @@ class AppController
      * @param Response $response
      * @param string $message
      * @param int $status
-     * @param array $data
+     * @param array $info
      * @return Response
      */
-    public function error(Response $response, string $message = null, int $status = 404, array $data = []): Response
+    public function error(Response $response, string $message = null, int $status = 404, array $info = []): Response
     ***REMOVED***
         $message = empty($message) ? __('Not found') : $message;
-        $responseData = JsonResponseFactory::error($data, $status, $message);
+        $responseData = JsonResponseFactory::error($info, $status, $message);
         return $response->withJson($responseData, $status);
 ***REMOVED***
 

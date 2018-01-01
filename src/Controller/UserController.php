@@ -10,6 +10,10 @@ use Slim\Http\Response;
 
 class UserController extends AppController
 ***REMOVED***
+    private $secret;
+
+    private $jwt;
+
     /**
      * @var UserRepository;
      */
@@ -30,6 +34,8 @@ class UserController extends AppController
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
         $this->userValidation = $container->get(UserValidation::class);
+        $this->secret = $container->get('settings')->get('jwt')['secret'];
+        $this->jwt = (array)$container->get('jwt_decoded')['data'];
 ***REMOVED***
 
     /**
@@ -115,15 +121,16 @@ class UserController extends AppController
     ***REMOVED***
         $data = $request->getParams();
 
-        $validationContext = $this->userValidation->validateUpdate($data);
+        $validationContext = $this->userValidation->validateUpdate($data, $this->jwt['user_id']);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $this->userRepository->updateUser($data, $args['user_id']);
+        $singupCompleted = $this->userRepository->updateUser($data, $args['user_id'], $this->jwt['user_id']);
 
         $responseData = [
-            'message' => __('Updated user successfully')
+            'message' => __('Updated user successfully'),
+            'signup_completed' => (bool) $singupCompleted,
         ];
 
         return $this->json($response, $responseData);
@@ -139,7 +146,9 @@ class UserController extends AppController
      */
     public function deleteUserAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $this->userRepository->deleteUser($args['user_id'], 0); // TODO get executor ID from token.
+        if (!$this->userRepository->deleteUser($args['user_id'], $this->jwt['user_id'])) ***REMOVED***
+            $this->error($response, 'Forbidden', 403, ['message'=> __('Can not delete user')]);
+    ***REMOVED***
         return $this->json($response,[]);
 ***REMOVED***
 ***REMOVED***

@@ -58,10 +58,10 @@ if ($jwt['active']) ***REMOVED***
         'secret' => $secret,
         'header' => 'X-Token',
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
-            $container['jwt'] = $arguments['decoded'];
+            $container['jwt_decoded'] = (array)$arguments['decoded'];
     ***REMOVED***,
-        'error' => function (Request $request, Response $response, $x) ***REMOVED***
-            $errorMessage = JsonResponseFactory::error(['message' => $x['message'], 'token' => $x['token']]);
+        'error' => function (Request $request, Response $response, $message) ***REMOVED***
+            $errorMessage = JsonResponseFactory::error(['message' => $message['message'], 'token' => $message['token']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
         'rules' => [new PassthroughRule($container)],
