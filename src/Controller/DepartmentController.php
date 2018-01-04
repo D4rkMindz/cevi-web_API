@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Repository\DepartmentRepository;
+use App\Service\Department\DepartmentValidation;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -22,6 +23,11 @@ class DepartmentController extends AppController
     private $departmentRepository;
 
     /**
+     * @var DepartmentValidation
+     */
+    private $departmentValidation;
+
+    /**
      * DepartmentController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -30,6 +36,7 @@ class DepartmentController extends AppController
     ***REMOVED***
         parent::__construct($container);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
+        $this->departmentValidation = $container->get(DepartmentValidation::class);
 ***REMOVED***
 
     /**
@@ -57,5 +64,16 @@ class DepartmentController extends AppController
         ];
 
         return $this->json($response, $responseData);
+***REMOVED***
+
+    public function createDepartmentAction(Request $request, Response $response): Response
+    ***REMOVED***
+        $lang = (string)$request->getParam('lang');
+        $name = (string)$request->getParam('name');
+        $postcode = (string)$request->getParam('postcode');
+        $departmentGroupId = (string)$request->getParam('department_group_id');
+
+        $validationContext = $this->departmentValidation->validateCreate($lang, $name, $postcode, $departmentGroupId);
+        //todo insertion
 ***REMOVED***
 ***REMOVED***

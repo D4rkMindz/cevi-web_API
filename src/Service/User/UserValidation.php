@@ -57,6 +57,7 @@ class UserValidation extends AppValidation
      */
     public function __construct(Container $container)
     ***REMOVED***
+        parent::__construct($container);
         $this->cityRepository = $container->get(CityRepository::class);
         $this->userRepository = $container->get(UserRepository::class);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
@@ -353,18 +354,5 @@ class UserValidation extends AppValidation
         $this->validateLanguage($languageId, $validationContext);
 
         return $validationContext;
-***REMOVED***
-
-    /**
-     * Validate postcode.
-     *
-     * @param string $postcode
-     * @param ValidationContext $validationContext
-     */
-    private function validatePostcode(string $postcode, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
-            $validationContext->setError('postcode', _('Does not exist'));
-    ***REMOVED***
 ***REMOVED***
 ***REMOVED***

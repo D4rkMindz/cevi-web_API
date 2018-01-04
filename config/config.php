@@ -35,6 +35,13 @@ $config['db_test'] = [
     'collation' => 'utf8_unicode_ci',
 ];
 
+$config['language_whitelist'] = [
+    'de' => 'de_CH',
+    'fr' => 'en_GB',
+    'en' => 'fr_CH',
+    'it' => 'it_CH',
+];
+
 $config['logger'] = [
     'main' => 'app',
     'context' => [

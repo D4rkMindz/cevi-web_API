@@ -40,4 +40,12 @@ class DepartmentGroupRepository
         $rows = $query->execute()->fetchAll('assoc');
         return !empty($rows) ? $rows : [];
 ***REMOVED***
+
+    public function existsDepartment(string $departmentGroupId): bool
+    ***REMOVED***
+        $query = $this->departmentGroupTable->newSelect();
+        $query->select(1)->where(['id'=>$departmentGroupId]);
+        $row = $query->execute()->fetch();
+        return !empty($row);
+***REMOVED***
 ***REMOVED***

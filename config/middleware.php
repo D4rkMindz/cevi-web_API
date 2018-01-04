@@ -21,13 +21,8 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     return $next($request, $response);
 ***REMOVED***);
 
-$app->add(function (Request $request, Response $response, $next) ***REMOVED***
-    $whitelist = [
-        'de' => 'de_CH',
-        'fr' => 'fr_CH',
-        'it' => 'it_CH',
-        'en' => 'en_GB',
-    ];
+$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    $whitelist = $container->get('settings')->get('language_whitelist');
 
     $language = $request->getParam('lang');
     $language = !empty($language) ? $language : $request->getHeader('X-App-Language');

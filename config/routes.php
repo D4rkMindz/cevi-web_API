@@ -24,6 +24,11 @@ $app->get('/v2/cities', route(['App\Controller\BasicInformationController', 'cit
 $app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eventAction']))->setName('get.events');
 
 /***********************************************************************************************************************
+ * Department routes
+ */
+$app->get('/v2/departments', route(['App\Controller\DepartmentController', 'getAllAction']))->setName('get.departments');
+
+/***********************************************************************************************************************
  * Error routes
  */
 $app->get('/v2/user-error', route(['App\Controller\ErrorController', 'notFoundAction']))->setName('get.notFound');

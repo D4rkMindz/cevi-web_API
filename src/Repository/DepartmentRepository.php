@@ -65,11 +65,39 @@ class DepartmentRepository
     public function existsDepartment(string $departmentId): bool
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select('id')->where(['id' => $departmentId, 'deleted = ' => '0']);
+        $query->select(1)->where(['id' => $departmentId, 'deleted = ' => '0']);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
 
+    /**
+     * Check if department exists by name.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function existsDepartmentByName(string $name)
+    ***REMOVED***
+        $query = $this->departmentTable->newSelect();
+        $query->select(1)->where([
+            'OR' => [
+                ['name_de LIKE' => '%' . $name . '%'],
+                ['name_en LIKE' => '%' . $name . '%'],
+                ['name_fr LIKE' => '%' . $name . '%'],
+                ['name_it LIKE' => '%' . $name . '%'],
+            ],
+        ]);
+        $row = $query->execute()->fetch();
+        return !empty($row);
+***REMOVED***
+
+    /**
+     * Get all departments
+     *
+     * @param int $limit
+     * @param int $page
+     * @return array
+     */
     public function getAll(int $limit, int $page)
     ***REMOVED***
         $departmentTableName = $this->departmentTable->getTablename();

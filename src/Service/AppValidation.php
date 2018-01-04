@@ -4,13 +4,30 @@
 namespace App\Service;
 
 
+use App\Repository\DepartmentRepository;
 use App\Util\ValidationContext;
+use Slim\Container;
 
 /**
  * Class AppValidation
  */
 class AppValidation
 ***REMOVED***
+    /**
+     * @var DepartmentRepository
+     */
+    protected $departmentRepository;
+
+    /**
+     * AppValidation constructor.
+     * @param Container $container
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    protected function __construct(Container $container)
+    ***REMOVED***
+        $this->departmentRepository = $container->get(DepartmentRepository::class);
+***REMOVED***
+
     /**
      * Validate length of text.
      *
@@ -43,6 +60,19 @@ class AppValidation
         $this->validateLength($email, 'email', $validationContext);
         if (!is_email($email)) ***REMOVED***
             $validationContext->setError('email', _('Not a valid email address'));
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Validate postcode.
+     *
+     * @param string $postcode
+     * @param ValidationContext $validationContext
+     */
+    protected function validatePostcode(string $postcode, ValidationContext $validationContext)
+    ***REMOVED***
+        if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
+            $validationContext->setError('postcode', _('Does not exist'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
