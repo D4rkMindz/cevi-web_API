@@ -114,14 +114,14 @@ class AppController
         $params['limit'] = !empty($params['limit']) ? $params['limit'] : 10000;
 
         $params['page'] = (int)$request->getParam('page');
-        $params['page'] = !empty($params['empty']) ? $params['page'] : 0;
+        $params['page'] = !empty($params['empty']) ? $params['page'] : 1;
 
         $params['offset'] = (int)$request->getParam('offset');
-        $page = round($params['offset'] / $params['limit'], 0);
+        $page = round($params['offset'] / $params['limit'], 0) + 1;
         $params['page'] = !empty($params['offset']) ? $page : $params['page'];
 
         if (empty($params['page']) && $params['page'] !== 0) ***REMOVED***
-            $params['page'] = 0;
+            $params['page'] = 1;
     ***REMOVED***
 
         if (empty($params['limit'])) ***REMOVED***

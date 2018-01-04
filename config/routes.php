@@ -21,6 +21,7 @@ $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAc
  */
 $app->get('/v2/departmentgroups', route(['App\Controller\BasicInformationController','departmentGroupAction']))->setName('get.departmentGroups');
 $app->get('/v2/cities', route(['App\Controller\BasicInformationController', 'cityAction']))->setName('get.cities');
+$app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eventAction']))->setName('get.events');
 
 /***********************************************************************************************************************
  * Error routes

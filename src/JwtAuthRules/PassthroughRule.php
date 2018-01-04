@@ -11,6 +11,8 @@ namespace App\JwtAuthRules;
 
 use Psr\Http\Message\RequestInterface;
 use Slim\Container;
+use Slim\Exception\NotFoundException;
+use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication\RuleInterface;
 
 class PassthroughRule implements RuleInterface
@@ -34,7 +36,11 @@ class PassthroughRule implements RuleInterface
      */
     public function __invoke(RequestInterface $request)
     ***REMOVED***
-        $requestedRoute = $request->getAttribute('route')->getPattern();
+        $route = $request->getAttribute('route');
+        if (empty($route)) ***REMOVED***
+            throw new NotFoundException($request, new Response());
+    ***REMOVED***
+        $requestedRoute = $route->getPattern();
         $method = $request->getMethod();
         $pass = in_array($method, $this->passthrough[$requestedRoute]);
         return !$pass;

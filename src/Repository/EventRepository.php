@@ -68,11 +68,11 @@ class EventRepository
      * @param int $until date in the future (format: time(), @see http://php.net/manual/de/function.time.php)
      * @param string $departmentGroupId
      * @param string $departmentId
-     * @param bool $inclPassed include passed events
+     * @param int $since
      * @param string $descriptionFormat either parsed or plain. If null, both formats will be returned
      * @return array
      */
-    public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, bool $inclPassed, string $descriptionFormat = null): array
+    public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null): array
     ***REMOVED***
         $eventTableName = $this->eventTable->getTablename();
         $eventTitleTableName = $this->eventTitleTable->getTablename();
@@ -82,7 +82,7 @@ class EventRepository
         $fields = [
             'id' => $eventTableName . '.id',
             'event_name_de' => $eventTitleTableName . '.name_de',
-            'event_name_en' => $eventTitleTableName . ',name_en',
+            'event_name_en' => $eventTitleTableName . '.name_en',
             'event_name_fr' => $eventTitleTableName . '.name_fr',
             'event_name_it' => $eventTitleTableName . '.name_it',
             'description_name_de' => $eventDescriptionTableName . '.name_de',
@@ -104,18 +104,15 @@ class EventRepository
         ];
 
         $where = [$eventTableName . '.public' => 1];
-        $where[$eventTableName . '.start'] = '<=' . $until;
+        $where[$eventTableName . '.start <='] = date('Y-m-d H:i:s', $until);
+        $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
 
-        if (!$inclPassed) ***REMOVED***
-            $where[$eventTableName . '.start'] = '>=' . date('Y-m-d H:i:s');
-    ***REMOVED***
-
-        if (!empty($department)) ***REMOVED***
-            $where[$departmentEventTableName . '.department_id'] = '=' . $departmentId;
+        if (!empty($departmentId)) ***REMOVED***
+            $where[$departmentEventTableName . '.department_id'] = $departmentId;
     ***REMOVED***
 
         if (!empty($departmentGroupId)) ***REMOVED***
-            $where[$departmentEventTableName . '.department_group_id'] = '=' . $departmentGroupId;
+            $where[$departmentEventTableName . '.department_group_id'] = $departmentGroupId;
     ***REMOVED***
 
         $query = $this->eventTable->newSelect();
@@ -124,11 +121,11 @@ class EventRepository
                 [
                     'table' => $eventTitleTableName,
                     'type' => 'INNER',
-                    'conditions' => $eventTableName . '.title_id=' . $eventTitleTableName . '.id',
+                    'conditions' => $eventTableName . '.event_title_id=' . $eventTitleTableName . '.id',
                 ],
                 [
                     'table' => $departmentEventTableName,
-                    'type' => 'RIGHT',
+                    'type' => 'LEFT',
                     'conditions' => $departmentEventTableName . '.event_id=' . $eventTableName . '.id',
                 ],
                 [
@@ -140,15 +137,15 @@ class EventRepository
             ->where($where)
             ->limit($limit)
             ->page($page);
-        $rows = $query->execute()->fetchAll('assoc');
-        if (empty($rows)) ***REMOVED***
+        $events = $query->execute()->fetchAll('assoc');
+        if (empty($events)) ***REMOVED***
             return [];
     ***REMOVED***
 
-        foreach ($rows as $key => $event) ***REMOVED***
-            $rows[$key] = $this->formatter->formatEvent($event, $descriptionFormat);
+        foreach ($events as $key => $event) ***REMOVED***
+            $events[$key] = $this->formatter->formatEvent($event, $descriptionFormat);
     ***REMOVED***
 
-        return $rows;
+        return $events;
 ***REMOVED***
 ***REMOVED***

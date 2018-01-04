@@ -46,6 +46,11 @@ class BasicInformationController extends AppController
     /**
      * Get all department groups.
      *
+     * @auth none
+     * @get int|string limit
+     * @get int|string page
+     * @get int|string offset
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
@@ -61,6 +66,11 @@ class BasicInformationController extends AppController
     /**
      * Get all cities.
      *
+     * @auth none
+     * @get int|string limit
+     * @get int|string page
+     * @get int|string offset
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
@@ -74,27 +84,47 @@ class BasicInformationController extends AppController
 ***REMOVED***
 
     /**
+     * Get all events.
+     *
+     * @auth none
+     * @get int|string limit
+     * @get int|string page
+     * @get int|string offset
+     * @get int|string department_group_id
+     * @get int|string department_id (is ignored if department_group_id is set.)
+     * @get int|string until (as time())
+     * @get int|string since (as time())
+     * @get nulll|string description_format (null, 'plain' or 'parsed' Markdown description)
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
+     *
+     * @todo implement language selection for events. (@get lang)
      */
     public function eventAction(Request $request, Response $response): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
 
-        $until = $request->getParam('until');
-        $params['until'] = (int)!empty($until) ? $until : time() + (60 * 60 * 24 * 365 * 2);
+        $until = (int)$request->getParam('until');
+        $until = !empty($until) ? $until : time() + (60 * 60 * 24 * 365 * 2);
 
-        $departmentGroup = (string)$request->getParam('department_group');
-        $department = (string)$request->getParam('department');
-        $inclPassed = (bool)$request->getParam('incl_passed');
+        $since = (int)$request->getParam('since');
+        $since = !empty($since) ? $since : time();
+
+        $departmentGroup = (string)$request->getParam('department_group_id');
+        if (empty($departmentGroup)) ***REMOVED***
+            $department = (string)$request->getParam('department_id');
+    ***REMOVED*** else ***REMOVED***
+            $department = '';
+    ***REMOVED***
         $descriptionFormat = (string)$request->getParam('description_format');
 //        $lang = (string)$request->getParam('lang'); // TODO implement language selection for events.
 
-        $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $params['until'], $departmentGroup, $department, $inclPassed, $descriptionFormat);
+        $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, $departmentGroup, $department, $since, $descriptionFormat);
 
-        if (empty($events))***REMOVED***
-            return $this->error($response, 'Not found', 404, ['info'=> __('No events found')]);
+        if (empty($events)) ***REMOVED***
+            return $this->error($response, 'Not found', 404, ['info' => __('No events found')]);
     ***REMOVED***
 
         $department = $department ?: 'all';
@@ -102,11 +132,11 @@ class BasicInformationController extends AppController
         $descriptionFormat = $descriptionFormat ?: 'both';
 
         $responseData = [
-            'until'=> $until,
-            'description_format'=> $descriptionFormat,
+            'until' => $until,
+            'description_format' => $descriptionFormat,
             'department_group' => $departmentGroup,
             'department' => $department,
-            'incl_passed' => $inclPassed,
+            'since' => $since,
             'events' => $events,
         ];
 
