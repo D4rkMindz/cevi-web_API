@@ -6,7 +6,8 @@
     "monolog/monolog": "^1.23",
     "symfony/translation": "^3.4",
     "tuupola/slim-jwt-auth": "^2.3",
-    "robmorgan/phinx": "^0.9.1"
+    "robmorgan/phinx": "^0.9.1",
+    "erusev/parsedown": "^1.6"
   ***REMOVED***,
   "require-dev": ***REMOVED***
     "php-http/curl-client": "^1.7",

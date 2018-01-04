@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0c9cefc65592b79628b9530233b5491",
+    "content-hash": "680186ddf60e277d9bcefdf69b70cc40",
     "packages": [
         ***REMOVED***
             "name": "cakephp/core",
@@ -285,6 +285,51 @@
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
             "time": "2017-02-14T19:40:03+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "erusev/parsedown",
+            "version": "1.6.4",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": ">=5.3.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "^4.8.35"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-0": ***REMOVED***
+                    "Parsedown": ""
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+            ***REMOVED***
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2017-11-14T20:44:03+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "firebase/php-jwt",
@@ -847,7 +892,7 @@
                     "email": "tobias.nyholm@gmail.com"
             ***REMOVED***
             ],
-            "description": "A builder class that help you success a multipart stream",
+            "description": "A builder class that help you create a multipart stream",
             "homepage": "http://php-http.org",
             "keywords": [
                 "factory",

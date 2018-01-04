@@ -8,6 +8,7 @@ class ValidationContext
 ***REMOVED***
     protected $message;
     protected $errors = [];
+
     /**
      * ValidationContext constructor.
      *
@@ -15,8 +16,9 @@ class ValidationContext
      */
     public function __construct(string $message = 'Please check your data')
     ***REMOVED***
-        $this->message = $message;
+        $this->message = $message === 'Please check your data' ? __('Please check your data') : $message;
 ***REMOVED***
+
     /**
      * Get message.
      *
@@ -26,6 +28,7 @@ class ValidationContext
     ***REMOVED***
         return $this->message;
 ***REMOVED***
+
     /**
      * Set message.
      *
@@ -50,6 +53,7 @@ class ValidationContext
             "message" => $message,
         ];
 ***REMOVED***
+
     /**
      * Get errors.
      *
@@ -59,6 +63,7 @@ class ValidationContext
     ***REMOVED***
         return $this->errors;
 ***REMOVED***
+
     /**
      * Fail.
      *
@@ -70,6 +75,7 @@ class ValidationContext
     ***REMOVED***
         return !empty($this->errors);
 ***REMOVED***
+
     /**
      * Success
      *
@@ -81,6 +87,7 @@ class ValidationContext
     ***REMOVED***
         return empty($this->errors);
 ***REMOVED***
+
     /**
      * Clear.
      *
@@ -91,6 +98,7 @@ class ValidationContext
         $this->message = null;
         $this->errors = [];
 ***REMOVED***
+
     /**
      * Validation To Array.
      *

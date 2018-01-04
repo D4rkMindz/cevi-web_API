@@ -17,6 +17,12 @@ $app->delete('/v2/users/***REMOVED***user_id***REMOVED***', route(['App\Controll
 $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAction']))->setName('post.signup');
 
 /***********************************************************************************************************************
+ * Basic Information routes
+ */
+$app->get('/v2/departmentgroups', route(['App\Controller\BasicInformationController','departmentGroupAction']))->setName('get.departmentGroups');
+$app->get('/v2/cities', route(['App\Controller\BasicInformationController', 'cityAction']))->setName('get.cities');
+
+/***********************************************************************************************************************
  * Error routes
  */
 $app->get('/v2/user-error', route(['App\Controller\ErrorController', 'notFoundAction']))->setName('get.notFound');

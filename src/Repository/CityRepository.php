@@ -28,6 +28,29 @@ class CityRepository
 ***REMOVED***
 
     /**
+     * @param int $limit
+     * @param int $page
+     * @return array
+     */
+    public function getAll(int $limit=10000, int $page = 0): array
+    ***REMOVED***
+        $query = $this->cityTable->newSelect();
+        $fields = [
+            'id',
+            'postcode' => 'number',
+            'name_de' => 'title_de',
+            'name_en' => 'title_en',
+            'name_fr' => 'title_fr',
+            'name_it' => 'title_it',
+        ];
+        $query->select($fields)
+            ->limit($limit)
+            ->page($page);
+        $row = $query->execute()->fetchAll('assoc');
+        return !empty($row) ? $row : [];
+***REMOVED***
+
+    /**
      * Check if postcode exists in repository.
      *
      * @param string $postcode
@@ -50,7 +73,7 @@ class CityRepository
     public function existsCity(string $cityId)
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select('id')->where(['id'=> $cityId, 'deleted = ' => '0']);
+        $query->select('id')->where(['id' => $cityId, 'deleted = ' => '0']);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

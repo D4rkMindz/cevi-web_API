@@ -1,7 +1,9 @@
 <?php
 
 use App\Repository\CityRepository;
+use App\Repository\DepartmentGroupRepository;
 use App\Repository\DepartmentRepository;
+use App\Repository\EventRepository;
 use App\Repository\GenderRepository;
 use App\Repository\LanguageRepository;
 use App\Repository\PositionRepository;
@@ -14,8 +16,16 @@ $container[CityRepository::class] = function (Container $container) ***REMOVED**
     return new CityRepository($container);
 ***REMOVED***;
 
+$container[DepartmentGroupRepository::class] = function (Container $container) ***REMOVED***
+    return new DepartmentGroupRepository($container);
+***REMOVED***;
+
 $container[DepartmentRepository::class] = function (Container $container) ***REMOVED***
     return new DepartmentRepository($container);
+***REMOVED***;
+
+$container[EventRepository::class] = function (Container $container) ***REMOVED***
+    return new EventRepository($container);
 ***REMOVED***;
 
 $container[GenderRepository::class] = function (Container $container) ***REMOVED***

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 
+use App\Service\Formatter;
 use App\Table\CityTable;
 use App\Table\DepartmentTable;
 use App\Table\GenderTable;
@@ -49,6 +50,11 @@ class UserRepository
     private $cityTable;
 
     /**
+     * @var Formatter
+     */
+    private $formatter;
+
+    /**
      * UserRepository constructor.
      *
      * @param Container $container
@@ -62,6 +68,8 @@ class UserRepository
         $this->genderTable = $container->get(GenderTable::class);
         $this->departmentTable = $container->get(DepartmentTable::class);
         $this->cityTable = $container->get(CityTable::class);
+
+        $this->formatter = new Formatter();
 ***REMOVED***
 
     /**
@@ -131,7 +139,7 @@ class UserRepository
     ***REMOVED***
 
         foreach ($users as $key => $user) ***REMOVED***
-            $users[$key] = $this->formatUser($user);
+            $users[$key] = $this->formatter->formatUser($user);
     ***REMOVED***
 
         return $users;
@@ -223,64 +231,6 @@ class UserRepository
 ***REMOVED***
 
     /**
-     * Format user data.
-     *
-     * @param $user
-     * @return mixed
-     */
-    private function formatUser($user)
-    ***REMOVED***
-        $tmp['id'] = (int)$user['id'];
-        $tmp['department'] = [
-            'id' => $user['department_id'],
-            'name' => $user['department_name'],
-        ];
-        $tmp['position'] = [
-            'name_de' => $user['position_name_de'],
-            'name_en' => $user['position_name_en'],
-            'name_fr' => $user['position_name_fr'],
-            'name_it' => $user['position_name_it'],
-        ];
-        $tmp['gender'] = [
-            'id' => $user['gender_id'],
-            'name' => $user['gender_name'],
-        ];
-        $tmp['language'] = [
-            'full_name' => $user['language_full'],
-            'abbreviation' => $user['language_abbr'],
-        ];
-        $tmp['last_name'] = $user['last_name'];
-        $tmp['first_name'] = $user['first_name'];
-        $tmp['cevi_name'] = $user['cevi_name'];
-        $tmp['email'] = $user['email'];
-        $tmp['username'] = $user['username'];
-        $tmp['address'] = [
-            'city' => [
-                'id' => $user['city_id'],
-                'name_de' => $user['city_name_de'],
-                'name_en' => $user['city_name_en'],
-                'name_fr' => $user['city_name_fr'],
-                'name_it' => $user['city_name_it'],
-            ],
-            'street' => $user['street'],
-        ];
-        $tmp['birthdate'] = $user['birthdate'];
-        $tmp['js_certificate'] = (bool)$user['js_certificate'];
-        $tmp['js_certificate'] = date('Y-m-d H:i:s', $user['js_certificate_until']);
-        $tmp['signup_completed'] = (bool)$user['signup_completed'];
-        $tmp['url'] = baseurl('/v2/users/' . $user['id']);
-        $tmp['created'] = date('Y-m-d H:i:s', $user['created']);
-        $tmp['created_by'] = $user['modified_by'];
-        $tmp['modified'] = date('Y-m-d H:i:s', $user['modified']);
-        $tmp['modified_by'] = $user['modified_by'];
-        $tmp['deleted'] = (bool)$user['deleted'];
-        $tmp['deleted_by'] = (int)$user['deleted_by'];
-        $tmp['deleted_at'] = date('Y-m-d H:i:s', $user['deleted_at']);
-
-        return $tmp;
-***REMOVED***
-
-    /**
      * Get single user.
      *
      * @param int $id
@@ -296,7 +246,7 @@ class UserRepository
             return [];
     ***REMOVED***
 
-        return $this->formatUser($user);
+        return $this->formatter->formatUser($user);
 ***REMOVED***
 
     /**

@@ -99,4 +99,36 @@ class AppController
     ***REMOVED***
         return $response->withRedirect($url, $status);
 ***REMOVED***
+
+
+    /**
+     * Get required params for limitation.
+     *
+     * @param Request $request
+     * @return array
+     */
+    protected function getLimitationParams(Request $request): array
+    ***REMOVED***
+        $params = [];
+        $params['limit'] = (int)$request->getParam('limit');
+        $params['limit'] = !empty($params['limit']) ? $params['limit'] : 10000;
+
+        $params['page'] = (int)$request->getParam('page');
+        $params['page'] = !empty($params['empty']) ? $params['page'] : 0;
+
+        $params['offset'] = (int)$request->getParam('offset');
+        $page = round($params['offset'] / $params['limit'], 0);
+        $params['page'] = !empty($params['offset']) ? $page : $params['page'];
+
+        if (empty($params['page']) && $params['page'] !== 0) ***REMOVED***
+            $params['page'] = 0;
+    ***REMOVED***
+
+        if (empty($params['limit'])) ***REMOVED***
+            $params['limit'] = 10000;
+    ***REMOVED***
+
+        unset($params['offset']);
+        return $params;
+***REMOVED***
 ***REMOVED***
