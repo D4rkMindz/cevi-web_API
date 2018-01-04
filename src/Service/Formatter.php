@@ -148,4 +148,42 @@ class Formatter
     ***REMOVED***
         return $tmp;
 ***REMOVED***
+
+    public function formatDepartment(array $department)
+    ***REMOVED***
+        $tmp = [];
+        $tmp['id'] = $department['id'];
+        $tmp['name'] = $department['name'];
+        $tmp['city'] = [
+            'id' => $department['city_id'],
+            'postcode' => $department['city_postcode'],
+            'name_de' => $department['city_name_de'],
+            'name_en' => $department['city_name_en'],
+            'name_fr' => $department['city_name_fr'],
+            'name_it' => $department['city_name_it'],
+        ];
+        $tmp['department_group'] = [
+            'id' => $department['department_group_id'],
+            'name_de' => $department['department_group_name_de'],
+            'name_en' => $department['department_group_name_en'],
+            'name_fr' => $department['department_group_name_fr'],
+            'name_it' => $department['department_group_name_it'],
+        ];
+        $tmp['department_type'] = [
+            'id'=>$department['department_type_id'],
+            'name_de'=>$department['department_type_name_de'],
+            'name_en'=>$department['department_type_name_en'],
+            'name_fr'=>$department['department_type_name_fr'],
+            'name_it'=>$department['department_type_name_it'],
+            ];
+        $tmp['created'] = $department['created'];
+        $tmp['created_by'] = $department['created_by'];
+        $tmp['modified'] = $department['modified'];
+        $tmp['modified_by'] = $department['modified_by'];
+        $tmp['deleted'] = $department['deleted'];
+        $tmp['deleted_at'] = $department['deleted_at'];
+        $tmp['deleted_by'] = $department['deleted_by'];
+
+        return $tmp;
+***REMOVED***
 ***REMOVED***

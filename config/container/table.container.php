@@ -4,6 +4,7 @@ use App\Table\AppTable;
 use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
+use App\Table\DepartmentTypeTable;
 use App\Table\EventDescriptionTable;
 use App\Table\EventTable;
 use App\Table\EventTitleTable;
@@ -27,6 +28,10 @@ $container[CityTable::class] = function (Container $container) ***REMOVED***
 
 $container[DepartmentGroupTable::class] = function (Container $container)  ***REMOVED***
     return new DepartmentGroupTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[DepartmentTypeTable::class] = function (Container $container)  ***REMOVED***
+    return new DepartmentTypeTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[DepartmentTable::class] = function (Container $container)  ***REMOVED***

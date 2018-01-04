@@ -132,6 +132,8 @@ class BasicInformationController extends AppController
         $descriptionFormat = $descriptionFormat ?: 'both';
 
         $responseData = [
+            'limit'=> $params['limit'],
+            'page'=> $params['page'],
             'until' => $until,
             'description_format' => $descriptionFormat,
             'department_group' => $departmentGroup,
