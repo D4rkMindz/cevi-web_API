@@ -79,14 +79,7 @@ class DepartmentRepository
     public function existsDepartmentByName(string $name)
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select(1)->where([
-            'OR' => [
-                ['name_de LIKE' => '%' . $name . '%'],
-                ['name_en LIKE' => '%' . $name . '%'],
-                ['name_fr LIKE' => '%' . $name . '%'],
-                ['name_it LIKE' => '%' . $name . '%'],
-            ],
-        ]);
+        $query->select(1)->where(['name LIKE' => $name]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -165,5 +158,34 @@ class DepartmentRepository
     ***REMOVED***
 
         return $departments;
+***REMOVED***
+
+    /**
+     * Insert new department.
+     *
+     * @param string $name
+     * @param string $postcode
+     * @param string $departmentGroupId
+     * @param string $departmentTypeId
+     * @param string $userId
+     * @return int
+     */
+    public function insertDepartment(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): int
+    ***REMOVED***
+        $query = $this->cityTable->newSelect();
+        $query->select(['id'])->where(['number'=> $postcode]);
+        $row = $query->execute()->fetch('assoc');
+        $cityId = $row['id'];
+        $data = [
+            'department_group_id' => $departmentGroupId,
+            'department_type_id' => $departmentTypeId,
+            'city_id' => $cityId,
+            'name' => $name,
+            'created' => date('Y-m-d H:i:s'),
+            'created_by' => $userId,
+        ];
+        $lastInsertedId = $this->departmentTable->insert($data);
+
+        return $lastInsertedId;
 ***REMOVED***
 ***REMOVED***

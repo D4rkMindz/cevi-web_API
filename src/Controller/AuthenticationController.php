@@ -14,8 +14,6 @@ use Slim\Http\Response;
 
 class AuthenticationController extends AppController
 ***REMOVED***
-    private $secret;
-
     /**
      * @var LoginValidation
      */
@@ -54,8 +52,8 @@ class AuthenticationController extends AppController
         $data = $request->getParams();
         $type = $data['type'] ?: 'login';
         if ($type === 'refresh') ***REMOVED***
-            $jwt = $request->getHeader('X-Token');
-            $data = JWT::decode($jwt, $this->secret);
+            $jwt = $request->getHeader('X-Token')[0];
+            $data = JWT::decode($jwt, $this->secret, ['HS256']);
     ***REMOVED***
         $username = (string)$data['username'];
         $password = (string)$data['password'];

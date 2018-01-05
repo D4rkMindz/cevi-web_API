@@ -27,6 +27,7 @@ $app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eve
  * Department routes
  */
 $app->get('/v2/departments', route(['App\Controller\DepartmentController', 'getAllAction']))->setName('get.departments');
+$app->post('/v2/departments', route(['App\Controller\DepartmentController', 'createDepartmentAction']))->setName('post.departments');
 
 /***********************************************************************************************************************
  * Error routes

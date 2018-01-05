@@ -4,6 +4,7 @@
 namespace App\Service;
 
 
+use App\Repository\CityRepository;
 use App\Repository\DepartmentRepository;
 use App\Util\ValidationContext;
 use Slim\Container;
@@ -19,6 +20,11 @@ class AppValidation
     protected $departmentRepository;
 
     /**
+     * @var CityRepository
+     */
+    protected $cityRepository;
+
+    /**
      * AppValidation constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -26,6 +32,7 @@ class AppValidation
     protected function __construct(Container $container)
     ***REMOVED***
         $this->departmentRepository = $container->get(DepartmentRepository::class);
+        $this->cityRepository = $container->get(CityRepository::class);
 ***REMOVED***
 
     /**

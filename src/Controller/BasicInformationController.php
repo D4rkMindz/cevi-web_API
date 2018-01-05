@@ -105,21 +105,22 @@ class BasicInformationController extends AppController
     public function eventAction(Request $request, Response $response): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
+        $data = $request->getParams();
 
-        $until = (int)$request->getParam('until');
+        $until = (int)$data['until'];
         $until = !empty($until) ? $until : time() + (60 * 60 * 24 * 365 * 2);
 
-        $since = (int)$request->getParam('since');
+        $since = (int)$data['since'];
         $since = !empty($since) ? $since : time();
 
-        $departmentGroup = (string)$request->getParam('department_group_id');
+        $departmentGroup = (string)$data['department_group_id'];
         if (empty($departmentGroup)) ***REMOVED***
-            $department = (string)$request->getParam('department_id');
+            $department = (string)$data['department_id'];
     ***REMOVED*** else ***REMOVED***
             $department = '';
     ***REMOVED***
-        $descriptionFormat = (string)$request->getParam('description_format');
-//        $lang = (string)$request->getParam('lang'); // TODO implement language selection for events.
+        $descriptionFormat = (string)$data['description_format'];
+//        $lang = (string)$data['lang']; // TODO implement language selection for events.
 
         $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, $departmentGroup, $department, $since, $descriptionFormat);
 

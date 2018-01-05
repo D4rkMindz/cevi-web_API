@@ -33,6 +33,7 @@ class PassthroughRule implements RuleInterface
      * Invoke method.
      * @param RequestInterface $request
      * @return bool
+     * @throws NotFoundException
      */
     public function __invoke(RequestInterface $request)
     ***REMOVED***
@@ -42,7 +43,7 @@ class PassthroughRule implements RuleInterface
     ***REMOVED***
         $requestedRoute = $route->getPattern();
         $method = $request->getMethod();
-        $pass = in_array($method, $this->passthrough[$requestedRoute]);
+        $pass = in_array($method, (array)$this->passthrough[$requestedRoute]) ? true : false;
         return !$pass;
 ***REMOVED***
 ***REMOVED***

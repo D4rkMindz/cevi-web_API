@@ -6,7 +6,9 @@ namespace App\Service\Department;
 
 use App\Repository\DepartmentGroupRepository;
 use App\Repository\DepartmentRepository;
+use App\Repository\DepartmentTypeRepository;
 use App\Service\AppValidation;
+use App\Table\DepartmentGroupTable;
 use App\Util\ValidationContext;
 use Slim\Container;
 
@@ -15,12 +17,15 @@ use Slim\Container;
  */
 class DepartmentValidation extends AppValidation
 ***REMOVED***
-    private $languageWhitelist;
-
     /**
-     * @var DepartmentRepository
+     * @var DepartmentGroupRepository
      */
     private $departmentGroupRepository;
+
+    /**
+     * @var DepartmentTypeRepository
+     */
+    private $departmentTypeRepository;
 
     /**
      * DepartmentValidation constructor.
@@ -30,39 +35,29 @@ class DepartmentValidation extends AppValidation
     public function __construct(Container $container)
     ***REMOVED***
         parent::__construct($container);
-        $this->languageWhitelist = $container->get('settings')->get('language_whitelist');
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->departmentGroupRepository = $container->get(DepartmentGroupRepository::class);
+        $this->departmentTypeRepository = $container->get(DepartmentTypeRepository::class);
 ***REMOVED***
 
     /**
      * Validate create department.
      *
-     * @param string $lang
      * @param string $name
      * @param string $postcode
      * @param string $departmentGroupId
+     * @param string $departmentTypeId
+     * @return ValidationContext
      */
-    public function validateCreate(string $lang, string $name, string $postcode, string $departmentGroupId)
+    public function validateCreate(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId): ValidationContext
     ***REMOVED***
         $validationContext = new ValidationContext();
-        $this->validateLang($lang, $validationContext);
         $this->validateName($name, $validationContext);
         $this->validatePostcode($postcode, $validationContext);
         $this->validateDepartmentGroup($departmentGroupId, $validationContext);
-***REMOVED***
+        $this->validateDepartmentType($departmentTypeId, $validationContext);
 
-    /**
-     * Validate language.
-     *
-     * @param string $lang
-     * @param ValidationContext $validationContext
-     */
-    private function validateLang(string $lang, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!in_array($lang, $this->languageWhitelist)) ***REMOVED***
-            $validationContext->setError('lang', __('Language does not exist'));
-    ***REMOVED***
+        return $validationContext;
 ***REMOVED***
 
     /**
@@ -88,8 +83,21 @@ class DepartmentValidation extends AppValidation
      */
     private function validateDepartmentGroup(string $departmentGroupId, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->departmentGroupRepository->existsDepartment($departmentGroupId))***REMOVED***
+        if (empty($departmentGroupId) || !$this->departmentGroupRepository->existsDepartment($departmentGroupId)) ***REMOVED***
             $validationContext->setError('department_group_id', __('Department group does not exist'));
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Validate department type.
+     *
+     * @param string $departmentTypeId
+     * @param ValidationContext $validationContext
+     */
+    private function validateDepartmentType(string $departmentTypeId, ValidationContext $validationContext)
+    ***REMOVED***
+        if (empty($departmentTypeId) || !$this->departmentTypeRepository->existsDepartmentType($departmentTypeId)) ***REMOVED***
+            $validationContext->setError('department_type_id', __('Department type does not exist'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

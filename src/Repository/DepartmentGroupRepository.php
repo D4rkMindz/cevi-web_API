@@ -41,6 +41,12 @@ class DepartmentGroupRepository
         return !empty($rows) ? $rows : [];
 ***REMOVED***
 
+    /**
+     * Check if department exists.
+     *
+     * @param string $departmentGroupId
+     * @return bool
+     */
     public function existsDepartment(string $departmentGroupId): bool
     ***REMOVED***
         $query = $this->departmentGroupTable->newSelect();

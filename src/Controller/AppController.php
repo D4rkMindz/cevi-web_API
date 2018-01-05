@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Factory\JsonResponseFactory;
+use Exception;
 use Http\Client\Common\Exception\ServerErrorException;
 use Interop\Container\Exception\ContainerException;
 use Monolog\Logger;
@@ -15,6 +16,10 @@ use Slim\Http\Response;
  */
 class AppController
 ***REMOVED***
+    protected $jwt;
+
+    protected $secret;
+
     /**
      * @var Logger
      */
@@ -28,8 +33,14 @@ class AppController
      */
     public function __construct(Container $container)
     ***REMOVED***
+        try***REMOVED***
+            $this->jwt = (array)$container->get('jwt_decoded')['data'];
+    ***REMOVED*** catch (Exception $e) ***REMOVED***
+            //do nothing about that
+    ***REMOVED***
         try ***REMOVED***
             $this->logger = $container->get(Logger::class);
+            $this->secret = $container->get('settings')->get('jwt')['secret'];
     ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
             throw new ServerErrorException('SERVER ERROR', $container->get('request'), $container->get('response'));
     ***REMOVED***
@@ -109,14 +120,15 @@ class AppController
      */
     protected function getLimitationParams(Request $request): array
     ***REMOVED***
+        $data = $request->getParams();
         $params = [];
-        $params['limit'] = (int)$request->getParam('limit');
+        $params['limit'] = (int)$data['limit'];
         $params['limit'] = !empty($params['limit']) ? $params['limit'] : 10000;
 
-        $params['page'] = (int)$request->getParam('page');
+        $params['page'] = (int)$data['page'];
         $params['page'] = !empty($params['empty']) ? $params['page'] : 1;
 
-        $params['offset'] = (int)$request->getParam('offset');
+        $params['offset'] = (int)$data['offset'];
         $page = round($params['offset'] / $params['limit'], 0) + 1;
         $params['page'] = !empty($params['offset']) ? $page : $params['page'];
 

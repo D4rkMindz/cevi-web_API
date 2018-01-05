@@ -5360,7 +5360,7 @@ insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_
 
 /*Data for the table `language` */
 
-insert  into `language`(`id`,`name`,`abbreviation`) values 
+insert  into `app_language`(`id`,`name`,`abbreviation`) values
 (1,'de_CH','de'),
 (2,'en_GB','en'),
 (3,'it_CH','it'),
@@ -5393,7 +5393,7 @@ insert  into `phinxlog`(`version`,`migration_name`,`start_time`,`end_time`,`brea
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`city_id`,`language_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created`,`created_by`,`modified`,`modified_by`,`deleted`,`deleted_at`,`deleted_by`) values 
+insert  into `app_user`(`id`,`city_id`,`language_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created`,`created_by`,`modified`,`modified_by`,`deleted`,`deleted_at`,`deleted_by`) values
 (6,1759,1,NULL,NULL,NULL,'Bj?rn','bjoern.pfoster@gmail.com','bjoern','$2y$10$9.mGFCUZL3lDkTD7waH2H.6oSjoXUossVLJR3NjV13EmNOx1nm0Mq',0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

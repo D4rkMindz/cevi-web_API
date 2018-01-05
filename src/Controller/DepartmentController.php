@@ -37,6 +37,7 @@ class DepartmentController extends AppController
         parent::__construct($container);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->departmentValidation = $container->get(DepartmentValidation::class);
+
 ***REMOVED***
 
     /**
@@ -66,14 +67,40 @@ class DepartmentController extends AppController
         return $this->json($response, $responseData);
 ***REMOVED***
 
+    /**
+     * Create department.
+     *
+     * @auth JWT
+     * @post string name Departmentname
+     * @post string postcode Four digit integer submitted as string
+     * @post string department_group_id Department group ID
+     * @post string department_type_id Department type
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function createDepartmentAction(Request $request, Response $response): Response
     ***REMOVED***
-        $lang = (string)$request->getParam('lang');
-        $name = (string)$request->getParam('name');
-        $postcode = (string)$request->getParam('postcode');
-        $departmentGroupId = (string)$request->getParam('department_group_id');
+        $data = $request->getParams();
+        $name = (string)$data['name'];
+        $postcode = (string)$data['postcode'];
+        $departmentGroupId = (string)$data['department_group_id'];
+        $departmentTypeId = (string)$data['department_type_id'];
 
-        $validationContext = $this->departmentValidation->validateCreate($lang, $name, $postcode, $departmentGroupId);
-        //todo insertion
+        $validationContext = $this->departmentValidation->validateCreate($name, $postcode, $departmentGroupId, $departmentTypeId);
+
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(),422, ['info'=> $validationContext->toArray()]);
+    ***REMOVED***
+
+        $lastInsertedId = $this->departmentRepository->insertDepartment($name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['userid']);
+        $url = baseurl('/v2/departments/' . $lastInsertedId);
+        $responseData = [
+            'department_id' => $lastInsertedId,
+            'url' => $url,
+        ];
+
+        return $this->json($response, $responseData);
 ***REMOVED***
 ***REMOVED***

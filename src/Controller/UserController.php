@@ -10,10 +10,6 @@ use Slim\Http\Response;
 
 class UserController extends AppController
 ***REMOVED***
-    private $secret;
-
-    private $jwt;
-
     /**
      * @var UserRepository;
      */
@@ -34,8 +30,6 @@ class UserController extends AppController
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
         $this->userValidation = $container->get(UserValidation::class);
-        $this->secret = $container->get('settings')->get('jwt')['secret'];
-        $this->jwt = (array)$container->get('jwt_decoded')['data'];
 ***REMOVED***
 
     /**
