@@ -8,6 +8,7 @@ use App\Table\CityTable;
 use App\Table\DepartmentTable;
 use App\Table\GenderTable;
 use App\Table\LanguageTable;
+use App\Table\PermissionTable;
 use App\Table\PositionTable;
 use App\Table\UserTable;
 use Cake\Database\Query;
@@ -50,6 +51,11 @@ class UserRepository
     private $cityTable;
 
     /**
+     * @var PermissionTable
+     */
+    private $permissionTable;
+
+    /**
      * @var Formatter
      */
     private $formatter;
@@ -68,6 +74,7 @@ class UserRepository
         $this->genderTable = $container->get(GenderTable::class);
         $this->departmentTable = $container->get(DepartmentTable::class);
         $this->cityTable = $container->get(CityTable::class);
+        $this->permissionTable = $container->get(PermissionTable::class);
 
         $this->formatter = new Formatter();
 ***REMOVED***
@@ -247,6 +254,34 @@ class UserRepository
     ***REMOVED***
 
         return $this->formatter->formatUser($user);
+***REMOVED***
+
+    /**
+     * Get permission.
+     *
+     * @param string $userId
+     * @return array
+     */
+    public function getPermission(string $userId): array
+    ***REMOVED***
+        $permissionTablename = $this->permissionTable->getTablename();
+        $userTableName = $this->userTable->getTablename();
+
+        $fields = [
+            'id' => $permissionTablename . '.id',
+            'level' => $permissionTablename . '.level',
+        ];
+
+        $query = $this->userTable->newSelect();
+        $query->select($fields)->where([$userTableName . '.id' => $userId])->join([
+            [
+                'table' => $permissionTablename,
+                'type' => 'INNER',
+                'conditions' => $userTableName . '.permission_id = ' . $permissionTablename . '.id',
+            ],
+        ]);
+        $row = $query->execute()->fetch('assoc');
+        return !empty($row) ? $row : [];
 ***REMOVED***
 
     /**

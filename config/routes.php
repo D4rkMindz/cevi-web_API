@@ -10,9 +10,9 @@ $app->post('/v2/auth', route(['App\Controller\AuthenticationController', 'authen
  * Users routes
  */
 $app->get('/v2/users', route(['App\Controller\UserController', 'getAllUsersAction']))->setName('get.getAllUsers');
-$app->get('/v2/users/***REMOVED***user_id***REMOVED***', route(['App\Controller\UserController', 'getUserAction']))->setName('get.getUser');
-$app->put('/v2/users/***REMOVED***user_id***REMOVED***', route(['App\Controller\UserController', 'updateUserAction']))->setName('put.updateUser');
-$app->delete('/v2/users/***REMOVED***user_id***REMOVED***', route(['App\Controller\UserController', 'deleteUserAction']))->setName('delete.deleteUser');
+$app->get('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'getUserAction']))->setName('get.getUser');
+$app->put('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'updateUserAction']))->setName('put.updateUser');
+$app->delete('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'deleteUserAction']))->setName('delete.deleteUser');
 
 $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAction']))->setName('post.signup');
 
@@ -28,6 +28,9 @@ $app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eve
  */
 $app->get('/v2/departments', route(['App\Controller\DepartmentController', 'getAllAction']))->setName('get.departments');
 $app->post('/v2/departments', route(['App\Controller\DepartmentController', 'createDepartmentAction']))->setName('post.departments');
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', route(['App\Controller\DepartmentController', 'getDepartmentAction']))->setName('get.department');
+$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', route(['App\Controller\DepartmentController', 'updateDepartmentAction']))->setName('put.department');
+$app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', route(['App\Controller\DepartmentController', 'deleteDepartmentAction']))->setName('delete.department');
 
 /***********************************************************************************************************************
  * Error routes

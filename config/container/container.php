@@ -168,7 +168,7 @@ $container[Translator::class] = function (Container $container): Translator ***R
  */
 $container['notFoundHandler'] = function (Container $container) ***REMOVED***
     return function (Request $request, Response $response) use ($container) ***REMOVED***
-        $response = $response->withRedirect($container->get('router')->pathFor('notFound'));
+        $response = $response->withRedirect($container->get('router')->pathFor('get.notFound'));
         return $response;
 ***REMOVED***;
 ***REMOVED***;

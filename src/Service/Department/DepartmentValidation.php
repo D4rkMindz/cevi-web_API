@@ -8,7 +8,6 @@ use App\Repository\DepartmentGroupRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\DepartmentTypeRepository;
 use App\Service\AppValidation;
-use App\Table\DepartmentGroupTable;
 use App\Util\ValidationContext;
 use Slim\Container;
 
@@ -56,6 +55,37 @@ class DepartmentValidation extends AppValidation
         $this->validatePostcode($postcode, $validationContext);
         $this->validateDepartmentGroup($departmentGroupId, $validationContext);
         $this->validateDepartmentType($departmentTypeId, $validationContext);
+
+        return $validationContext;
+***REMOVED***
+
+    /**
+     * Validate update data.
+     *
+     * @param string $name
+     * @param string $postcode
+     * @param string $departmentGroupId
+     * @param string $departmentTypeId
+     * @return ValidationContext
+     */
+    public function validateUpdate(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId): ValidationContext
+    ***REMOVED***
+        $validationContext = new ValidationContext();
+        if (!empty($name)) ***REMOVED***
+            $this->validateName($name, $validationContext);
+    ***REMOVED***
+
+        if (!empty($postcode)) ***REMOVED***
+            $this->validatePostcode($postcode, $validationContext);
+    ***REMOVED***
+
+        if (!empty($departmentGroupId)) ***REMOVED***
+            $this->validateDepartmentGroup($departmentGroupId, $validationContext);
+    ***REMOVED***
+
+        if (!empty($departmentTypeId)) ***REMOVED***
+            $this->validateDepartmentType($departmentTypeId, $validationContext);
+    ***REMOVED***
 
         return $validationContext;
 ***REMOVED***

@@ -2,6 +2,8 @@
 
 use App\Factory\JsonResponseFactory;
 use App\JwtAuthRules\PassthroughRule;
+use App\Service\Permissions;
+use App\Service\Role;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication;
@@ -52,8 +54,18 @@ if ($jwt['active']) ***REMOVED***
     $app->add(new JwtAuthentication([
         'secret' => $secret,
         'header' => 'X-Token',
+        'message'=> __('Authentication failed'),
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
-            $container['jwt_decoded'] = (array)$arguments['decoded'];
+            $container['jwt_decoded'] = $decoded = (array)$arguments['decoded'];
+            $method = $request->getMethod();
+            $permission = new Permissions();
+            $userId = $decoded['data']->user_id;
+            $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
+            $hasPermission = Role::hasPermission($level, $userId);
+            if (!$hasPermission) ***REMOVED***
+                return false;
+        ***REMOVED***
+            return true;
     ***REMOVED***,
         'error' => function (Request $request, Response $response, $message) ***REMOVED***
             $errorMessage = JsonResponseFactory::error(['message' => $message['message'], 'token' => $message['token']]);

@@ -33,7 +33,7 @@ class AppController
      */
     public function __construct(Container $container)
     ***REMOVED***
-        try***REMOVED***
+        try ***REMOVED***
             $this->jwt = (array)$container->get('jwt_decoded')['data'];
     ***REMOVED*** catch (Exception $e) ***REMOVED***
             //do nothing about that
@@ -91,7 +91,7 @@ class AppController
      * @param array $info
      * @return Response
      */
-    public function error(Response $response, string $message = null, int $status = 404, array $info = []): Response
+    public function error(Response $response, string $message = null, int $status = 404, array $info = ['message' => 'Not Found']): Response
     ***REMOVED***
         $message = empty($message) ? __('Not found') : $message;
         $responseData = JsonResponseFactory::error($info, $status, $message);

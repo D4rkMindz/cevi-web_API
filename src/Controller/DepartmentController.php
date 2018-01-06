@@ -68,6 +68,86 @@ class DepartmentController extends AppController
 ***REMOVED***
 
     /**
+     * Get single department.
+     *
+     * @auth none
+     *
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function getDepartmentAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $department = $this->departmentRepository->getDepartment($args['department_id']);
+        if (empty($department)) ***REMOVED***
+            return $this->error($response, 'Not found', 404, ['message' => __('Department does not exist')]);
+    ***REMOVED***
+        $responseData = [
+            'department' => $department,
+        ];
+
+        return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Update department
+     *
+     * @auth JWT
+     * @put string name
+     * @put int|string postcode
+     * @put int|string department_group_id
+     * @put int|string department_type_id
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function updateDepartmentAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $data = $request->getParams();
+        $name = (string)$data['name'];
+        $postcode = (string)$data['postcode'];
+        $departmentGroupId = (string)$data['department_group_id'];
+        $departmentTypeId = (string)$data['department_type_id'];
+        $validationContext = $this->departmentValidation->validateUpdate($name, $postcode, $departmentGroupId, $departmentTypeId);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
+    ***REMOVED***
+
+        $success = $this->departmentRepository->updateDepartment($args['department_id'], $name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['user_id']);
+        if (!$success) ***REMOVED***
+            return $this->error($response, 'Unprocessable Entity', 404, ['message' => __('Update failed')]);
+    ***REMOVED***
+
+        return $this->json($response, ['message' => __('Updated department successfully')]);
+***REMOVED***
+
+    /**
+     * Delete user.
+     *
+     * @auth JWT
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function deleteDepartmentAction(Request $request, Response $response, array $args)
+    ***REMOVED***
+        $deleted = $this->departmentRepository->deleteDepartment($args['department_id'], $this->jwt['user_id']);
+        if (!$deleted) ***REMOVED***
+            return $this->error($response, 'Internal Server Error', 500, ['message' => __('Deleting user failed')]);
+    ***REMOVED***
+
+        return $this->json($response, ['message' => __('Deleted user successfully')]);
+***REMOVED***
+
+    /**
      * Create department.
      *
      * @auth JWT
@@ -91,7 +171,7 @@ class DepartmentController extends AppController
         $validationContext = $this->departmentValidation->validateCreate($name, $postcode, $departmentGroupId, $departmentTypeId);
 
         if ($validationContext->fails()) ***REMOVED***
-            return $this->error($response, $validationContext->getMessage(),422, ['info'=> $validationContext->toArray()]);
+            return $this->error($response, $validationContext->getMessage(), 422, ['message' => $validationContext->toArray()]);
     ***REMOVED***
 
         $lastInsertedId = $this->departmentRepository->insertDepartment($name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['userid']);

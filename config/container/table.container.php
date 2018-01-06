@@ -11,6 +11,7 @@ use App\Table\EventTitleTable;
 use App\Table\GenderTable;
 use App\Table\LanguageTable;
 use App\Table\CityTable;
+use App\Table\PermissionTable;
 use App\Table\PositionTable;
 use App\Table\UserTable;
 use Cake\Database\Connection;
@@ -64,6 +65,10 @@ $container[LanguageTable::class] = function (Container $container) ***REMOVED***
 
 $container[PositionTable::class] = function (Container $container) ***REMOVED***
     return new PositionTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[PermissionTable::class] = function (Container $container) ***REMOVED***
+   return new PermissionTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[UserTable::class] = function (Container $container)***REMOVED***

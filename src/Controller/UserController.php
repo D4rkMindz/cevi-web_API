@@ -63,7 +63,7 @@ class UserController extends AppController
     ***REMOVED***
         $userId = (int)$request->getAttribute('route')->getArgument('user_id');
         if (!is_numeric($userId)) ***REMOVED***
-            return $this->error($response, 'Unprocessable Entity', 422, ['info' => ['message' => __('Please define user_id correctly')]]);
+            return $this->error($response, 'Unprocessable Entity', 422, ['message' => __('Please define user_id correctly')]);
     ***REMOVED***
         $user = $this->userRepository->getUser($userId);
         if (empty($user)) ***REMOVED***
@@ -124,7 +124,7 @@ class UserController extends AppController
 
         $responseData = [
             'message' => __('Updated user successfully'),
-            'signup_completed' => (bool) $singupCompleted,
+            'signup_completed' => (bool)$singupCompleted,
         ];
 
         return $this->json($response, $responseData);
@@ -141,8 +141,8 @@ class UserController extends AppController
     public function deleteUserAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         if (!$this->userRepository->deleteUser($args['user_id'], $this->jwt['user_id'])) ***REMOVED***
-            $this->error($response, 'Forbidden', 403, ['message'=> __('Can not delete user')]);
+            $this->error($response, 'Forbidden', 403, ['message' => __('Can not delete user')]);
     ***REMOVED***
-        return $this->json($response,[]);
+        return $this->json($response, []);
 ***REMOVED***
 ***REMOVED***

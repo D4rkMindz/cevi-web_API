@@ -9,6 +9,7 @@ use App\Table\CityTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
 use App\Table\DepartmentTypeTable;
+use Exception;
 use Slim\Container;
 
 /**
@@ -93,6 +94,29 @@ class DepartmentRepository
      */
     public function getAll(int $limit, int $page)
     ***REMOVED***
+        $query = $this->getDepartmentQuery();
+        $query->limit($limit)
+            ->page($page);
+        $departments = $query->execute()->fetchAll('assoc');
+
+        if (empty($departments)) ***REMOVED***
+            return [];
+    ***REMOVED***
+
+        foreach ($departments as $key => $department) ***REMOVED***
+            $departments[$key] = $this->formatter->formatDepartment($department);
+    ***REMOVED***
+
+        return $departments;
+***REMOVED***
+
+    /**
+     * Get join query.
+     *
+     * @return \Cake\Database\Query
+     */
+    private function getDepartmentQuery(): \Cake\Database\Query
+    ***REMOVED***
         $departmentTableName = $this->departmentTable->getTablename();
         $cityTableName = $this->cityTable->getTablename();
         $departmentGroupTableName = $this->departmentGroupTable->getTablename();
@@ -144,20 +168,26 @@ class DepartmentRepository
                     'type' => 'INNER',
                     'conditions' => $departmentTableName . '.department_type_id = ' . $departmentTypeTableName . '.id',
                 ],
-            ])
-            ->limit($limit)
-            ->page($page);
-        $departments = $query->execute()->fetchAll('assoc');
+            ]);
+        return $query;
+***REMOVED***
 
-        if (empty($departments)) ***REMOVED***
+    /**
+     * Get single department by ID.
+     *
+     * @param string $departmentId
+     * @return array|false
+     */
+    public function getDepartment(string $departmentId)
+    ***REMOVED***
+        $query = $this->getDepartmentQuery();
+        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId]);
+        $row = $query->execute()->fetch('assoc');
+        if (empty($row)) ***REMOVED***
             return [];
     ***REMOVED***
-
-        foreach ($departments as $key => $department) ***REMOVED***
-            $departments[$key] = $this->formatter->formatDepartment($department);
-    ***REMOVED***
-
-        return $departments;
+        $department = $this->formatter->formatDepartment($row);
+        return $department;
 ***REMOVED***
 
     /**
@@ -173,7 +203,7 @@ class DepartmentRepository
     public function insertDepartment(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): int
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select(['id'])->where(['number'=> $postcode]);
+        $query->select(['id'])->where(['number' => $postcode]);
         $row = $query->execute()->fetch('assoc');
         $cityId = $row['id'];
         $data = [
@@ -187,5 +217,77 @@ class DepartmentRepository
         $lastInsertedId = $this->departmentTable->insert($data);
 
         return $lastInsertedId;
+***REMOVED***
+
+    /**
+     * Update department.
+     *
+     * @param string $departmentId
+     * @param string $name
+     * @param string $postcode
+     * @param string $departmentGroupId
+     * @param string $departmentTypeId
+     * @param string $userId
+     * @return bool
+     */
+    public function updateDepartment(string $departmentId, string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): bool
+    ***REMOVED***
+        $row = [
+            'modified' => date('Y-m-d H:i:s'),
+            'modified_by' => $userId,
+        ];
+
+        if (!empty($name)) ***REMOVED***
+            $row['name'] = $name;
+    ***REMOVED***
+
+        if (!empty($postcode)) ***REMOVED***
+            $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode]);
+            $row['city_id'] = $cityId;
+    ***REMOVED***
+
+        if (!empty($departmentGroupId)) ***REMOVED***
+            $row['department_group_id'] = $departmentGroupId;
+    ***REMOVED***
+
+        if (!empty($departmentTypeId)) ***REMOVED***
+            $row['department_type_id'] = $departmentTypeId;
+    ***REMOVED***
+
+        $error = false;
+
+        try ***REMOVED***
+            $this->departmentTable->update($row, $departmentId);
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            $error = true;
+    ***REMOVED***
+
+        return !$error;
+***REMOVED***
+
+    /**
+     * Soft delete department.
+     *
+     * @param string $departmentId
+     * @param string $userId
+     * @return bool
+     */
+    public function deleteDepartment(string $departmentId, string $userId)
+    ***REMOVED***
+        $row = [
+            'deleted'=> true,
+            'deleted_at' => date('Y-m-d H:i:s'),
+            'deleted_by' => $userId,
+        ];
+
+        $error = false;
+
+        try ***REMOVED***
+            $this->departmentTable->update($row, $departmentId);
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            $error = true;
+    ***REMOVED***
+
+        return !$error;
 ***REMOVED***
 ***REMOVED***

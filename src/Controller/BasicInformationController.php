@@ -125,7 +125,7 @@ class BasicInformationController extends AppController
         $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, $departmentGroup, $department, $since, $descriptionFormat);
 
         if (empty($events)) ***REMOVED***
-            return $this->error($response, 'Not found', 404, ['info' => __('No events found')]);
+            return $this->error($response, 'Not found', 404, ['message' => __('No events found')]);
     ***REMOVED***
 
         $department = $department ?: 'all';

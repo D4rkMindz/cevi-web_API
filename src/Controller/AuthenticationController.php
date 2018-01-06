@@ -40,6 +40,10 @@ class AuthenticationController extends AppController
     /**
      * Get JWT token.
      *
+     * @auth none
+     * @post username
+     * @post password
+     *
      * @see https://github.com/firebase/php-jwt
      * @see https://github.com/tuupola/slim-jwt-auth
      *
@@ -50,11 +54,6 @@ class AuthenticationController extends AppController
     public function authenticateAction(Request $request, Response $response): Response
     ***REMOVED***
         $data = $request->getParams();
-        $type = $data['type'] ?: 'login';
-        if ($type === 'refresh') ***REMOVED***
-            $jwt = $request->getHeader('X-Token')[0];
-            $data = JWT::decode($jwt, $this->secret, ['HS256']);
-    ***REMOVED***
         $username = (string)$data['username'];
         $password = (string)$data['password'];
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
