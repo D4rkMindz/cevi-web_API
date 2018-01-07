@@ -1,6 +1,10 @@
 <?php
 
 use App\Table\AppTable;
+use App\Table\ArticleDescriptionTable;
+use App\Table\ArticleQualityTable;
+use App\Table\ArticleTable;
+use App\Table\ArticleTitleTable;
 use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
@@ -9,10 +13,12 @@ use App\Table\EventDescriptionTable;
 use App\Table\EventTable;
 use App\Table\EventTitleTable;
 use App\Table\GenderTable;
+use App\Table\ImageTable;
 use App\Table\LanguageTable;
 use App\Table\CityTable;
 use App\Table\PermissionTable;
 use App\Table\PositionTable;
+use App\Table\StoragePlaceTable;
 use App\Table\UserTable;
 use Cake\Database\Connection;
 use Slim\Container;
@@ -21,6 +27,22 @@ $container = app()->getContainer();
 
 $container[AppTable::class] = function (Container $container) ***REMOVED***
     return new AppTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[ArticleTable::class] = function (Container $container) ***REMOVED***
+    return new ArticleTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[ArticleDescriptionTable::class] = function (Container $container) ***REMOVED***
+    return new ArticleDescriptionTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[ArticleTitleTable::class] = function (Container $container) ***REMOVED***
+    return new ArticleTitleTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[ArticleQualityTable::class] = function (Container $container) ***REMOVED***
+    return new ArticleQualityTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[CityTable::class] = function (Container $container) ***REMOVED***
@@ -59,6 +81,11 @@ $container[GenderTable::class] = function (Container $container) ***REMOVED***
     return new GenderTable($container->get(Connection::class));
 ***REMOVED***;
 
+
+$container[ImageTable::class] = function (Container $container) ***REMOVED***
+    return new ImageTable($container->get(Connection::class));
+***REMOVED***;
+
 $container[LanguageTable::class] = function (Container $container) ***REMOVED***
     return new LanguageTable($container->get(Connection::class));
 ***REMOVED***;
@@ -69,6 +96,10 @@ $container[PositionTable::class] = function (Container $container) ***REMOVED***
 
 $container[PermissionTable::class] = function (Container $container) ***REMOVED***
    return new PermissionTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[StoragePlaceTable::class] = function (Container $container) ***REMOVED***
+   return new StoragePlaceTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[UserTable::class] = function (Container $container)***REMOVED***
