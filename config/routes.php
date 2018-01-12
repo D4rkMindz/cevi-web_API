@@ -33,6 +33,12 @@ $app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', rout
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', route(['App\Controller\DepartmentController', 'deleteDepartmentAction']))->setName('delete.department');
 
 /***********************************************************************************************************************
+ * Article routes
+ */
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles', route(['App\Controller\ArticleController', 'getAllArticlesAction']))->setName('get.allArticles');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles', route(['App\Controller\ArticleController', 'createArticleAction']))->setName('post.createArticle');
+
+/***********************************************************************************************************************
  * Error routes
  */
 $app->get('/v2/user-error', route(['App\Controller\ErrorController', 'notFoundAction']))->setName('get.notFound');

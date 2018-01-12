@@ -6,11 +6,17 @@ use Symfony\Component\Translation\Translator;
 /**
  * Get app.
  *
+ * @param App|null $inst
  * @return App
  */
-function app(): App
+function app(App $inst = null): App
 ***REMOVED***
     static $app = null;
+
+    if ($inst instanceof App) ***REMOVED***
+        $app = $inst;
+***REMOVED***
+
     if ($app === null) ***REMOVED***
         $config = ['settings' => require __DIR__ . '/../config/config.php'];
         $app = new App($config);

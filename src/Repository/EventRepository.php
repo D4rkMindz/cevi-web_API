@@ -13,7 +13,10 @@ use App\Table\EventTable;
 use App\Table\EventTitleTable;
 use Slim\Container;
 
-class EventRepository
+/**
+ * Class EventRepository
+ */
+class EventRepository extends AppRepository
 ***REMOVED***
     /**
      * @var DepartmentEventTable
@@ -103,7 +106,7 @@ class EventRepository
             'deleted_by' => $eventTableName . '.deleted_by',
         ];
 
-        $where = [$eventTableName . '.public' => 1];
+        $where = [$eventTableName . '.public' => 1, 'deleted' => false];
         $where[$eventTableName . '.start <='] = date('Y-m-d H:i:s', $until);
         $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
 

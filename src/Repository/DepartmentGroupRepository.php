@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Table\DepartmentGroupTable;
 use Slim\Container;
 
-class DepartmentGroupRepository
+class DepartmentGroupRepository extends AppRepository
 ***REMOVED***
     /**
      * @var DepartmentGroupTable
@@ -50,7 +50,7 @@ class DepartmentGroupRepository
     public function existsDepartment(string $departmentGroupId): bool
     ***REMOVED***
         $query = $this->departmentGroupTable->newSelect();
-        $query->select(1)->where(['id'=>$departmentGroupId]);
+        $query->select(1)->where(['id'=>$departmentGroupId, 'deleted' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

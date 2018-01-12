@@ -1,11 +1,16 @@
 <?php
 
+use App\Service\Article\ArticleValidation;
 use App\Service\Department\DepartmentValidation;
 use App\Service\Login\LoginValidation;
 use App\Service\User\UserValidation;
 use Slim\Container;
 
 $container = app()->getContainer();
+
+$container[ArticleValidation::class] = function (Container $container) ***REMOVED***
+    return  new ArticleValidation($container);
+***REMOVED***;
 
 $container[UserValidation::class] = function (Container $container) ***REMOVED***
     return new UserValidation($container);

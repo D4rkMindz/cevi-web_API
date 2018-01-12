@@ -10,7 +10,7 @@ use Slim\Container;
 /**
  * Class CityRepository
  */
-class CityRepository
+class CityRepository extends AppRepository
 ***REMOVED***
     /**
      * @var CityTable
@@ -59,7 +59,7 @@ class CityRepository
     public function existsPostcode(string $postcode): bool
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select('number')->where(['number' => $postcode, 'deleted = ' => '0']);
+        $query->select('number')->where(['number' => $postcode, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -73,7 +73,7 @@ class CityRepository
     public function existsCity(string $cityId)
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select('id')->where(['id' => $cityId, 'deleted = ' => '0']);
+        $query->select('id')->where(['id' => $cityId, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

@@ -15,7 +15,7 @@ use Slim\Container;
 /**
  * Class DepartmentRepository
  */
-class DepartmentRepository
+class DepartmentRepository extends AppRepository
 ***REMOVED***
     /**
      * @var DepartmentTable
@@ -66,7 +66,7 @@ class DepartmentRepository
     public function existsDepartment(string $departmentId): bool
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select(1)->where(['id' => $departmentId, 'deleted = ' => '0']);
+        $query->select(1)->where(['id' => $departmentId, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -80,7 +80,7 @@ class DepartmentRepository
     public function existsDepartmentByName(string $name)
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select(1)->where(['name LIKE' => $name]);
+        $query->select(1)->where(['name LIKE' => $name, 'deleted' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -181,7 +181,7 @@ class DepartmentRepository
     public function getDepartment(string $departmentId)
     ***REMOVED***
         $query = $this->getDepartmentQuery();
-        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId]);
+        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId, 'deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return [];
@@ -203,7 +203,7 @@ class DepartmentRepository
     public function insertDepartment(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): int
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select(['id'])->where(['number' => $postcode]);
+        $query->select(['id'])->where(['number' => $postcode, 'deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         $cityId = $row['id'];
         $data = [
@@ -242,7 +242,7 @@ class DepartmentRepository
     ***REMOVED***
 
         if (!empty($postcode)) ***REMOVED***
-            $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode]);
+            $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode, 'deleted' => false]);
             $row['city_id'] = $cityId;
     ***REMOVED***
 

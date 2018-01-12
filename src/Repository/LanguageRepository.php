@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Table\LanguageTable;
 use Slim\Container;
 
-class LanguageRepository
+class LanguageRepository extends AppRepository
 ***REMOVED***
     /**
      * @var LanguageTable
@@ -33,7 +33,7 @@ class LanguageRepository
     public function existsLanguage(string $languageId)
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $languageId, 'deleted = ' => '0']);
+        $query->select('id')->where(['id' => $languageId, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

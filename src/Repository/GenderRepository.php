@@ -10,7 +10,7 @@ use Slim\Container;
 /**
  * Class GenderRepository
  */
-class GenderRepository
+class GenderRepository extends AppRepository
 ***REMOVED***
     /**
      * @var GenderTable
@@ -36,7 +36,7 @@ class GenderRepository
     public function existsGender(string $genderId): bool
     ***REMOVED***
         $query = $this->genderTable->newSelect();
-        $query->select('id')->where(['id'=> $genderId, 'deleted = ' => '0']);
+        $query->select('id')->where(['id'=> $genderId, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

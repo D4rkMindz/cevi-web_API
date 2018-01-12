@@ -612,7 +612,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_chest", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_chest')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_chest')->hasColumn('id')) ***REMOVED***
             $this->table("sp_chest")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_chest")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -628,7 +628,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_corridor", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_corridor')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_corridor')->hasColumn('id')) ***REMOVED***
             $this->table("sp_corridor")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_corridor")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -644,7 +644,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_location", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_location')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_location')->hasColumn('id')) ***REMOVED***
             $this->table("sp_location")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_location")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -660,7 +660,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_room", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_room')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_room')->hasColumn('id')) ***REMOVED***
             $this->table("sp_room")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_room")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -676,7 +676,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_shelf", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_shelf')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_shelf')->hasColumn('id')) ***REMOVED***
             $this->table("sp_shelf")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_shelf")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -692,7 +692,7 @@ class Init extends AbstractMigration
         $table->save();
         $table = $this->table("sp_tray", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
-        if ($this->table('sp_tray')->hasColumn('id')) ***REMOVED***
+        if ($this->table('sl_tray')->hasColumn('id')) ***REMOVED***
             $this->table("sp_tray")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
             $this->table("sp_tray")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();

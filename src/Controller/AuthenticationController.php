@@ -43,6 +43,7 @@ class AuthenticationController extends AppController
      * @auth none
      * @post username
      * @post password
+     * @post lang
      *
      * @see https://github.com/firebase/php-jwt
      * @see https://github.com/tuupola/slim-jwt-auth
@@ -56,9 +57,10 @@ class AuthenticationController extends AppController
         $data = $request->getParams();
         $username = (string)$data['username'];
         $password = (string)$data['password'];
+        $lang = (string)$data['lang'];
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
             $userId = $this->userRepository->getIdByusername($username);
-            $tokendata = JWTFactory::generate($username, $userId);
+            $tokendata = JWTFactory::generate($username, $userId, $lang);
             $expiresAt = $tokendata['exp'];
             $token = JWT::encode($tokendata, $this->secret);
             return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt]);

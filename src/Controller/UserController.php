@@ -35,13 +35,19 @@ class UserController extends AppController
     /**
      * Get all users.
      *
+     * @auth JWT
+     * @get int|string limit
+     * @get int|string page
+     * @get int|string offset
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
      */
     public function getAllUsersAction(Request $request, Response $response): Response
     ***REMOVED***
-        $users = $this->userRepository->getUsers();
+        $data = $this->getLimitationParams($request);
+        $users = $this->userRepository->getUsers($data['limit'], $data['page']);
 
         if (empty($users)) ***REMOVED***
             return $this->error($response, __('No users found'), 404);

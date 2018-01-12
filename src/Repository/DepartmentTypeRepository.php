@@ -15,7 +15,7 @@ use Slim\Container;
 /**
  * Class DepartmentTypeRepository
  */
-class DepartmentTypeRepository
+class DepartmentTypeRepository extends AppRepository
 ***REMOVED***
     /**
      * @var DepartmentTypeTable
@@ -41,7 +41,7 @@ class DepartmentTypeRepository
     public function existsDepartmentType(string $departmentTypeId): bool
     ***REMOVED***
         $query = $this->departmentTypeTable->newSelect();
-        $query->select(1)->where(['id'=> $departmentTypeId]);
+        $query->select(1)->where(['id'=> $departmentTypeId, 'deleted' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

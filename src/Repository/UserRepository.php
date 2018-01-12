@@ -18,7 +18,7 @@ use Slim\Container;
 /**
  * Class UserRepository
  */
-class UserRepository
+class UserRepository extends AppRepository
 ***REMOVED***
     /**
      * @var UserTable
@@ -88,7 +88,7 @@ class UserRepository
     public function getIdByusername(string $username): string
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('id')->where(['username' => $username]);
+        $query->select('id')->where(['username' => $username, 'deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row['id'] : '';
 ***REMOVED***
@@ -103,7 +103,7 @@ class UserRepository
     public function checkLoginByUsername(string $username, string $password): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(['password'])->where(['username' => $username]);
+        $query->select(['password'])->where(['username' => $username, 'deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return false;
@@ -122,7 +122,7 @@ class UserRepository
     public function checkLoginByEmail(string $email, string $password): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(['password'])->where(['email' => $email]);
+        $query->select(['password'])->where(['email' => $email, 'deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return false;
@@ -134,11 +134,13 @@ class UserRepository
     /**
      * Get all users.
      *
+     * @param int $limit
+     * @param int $page
      * @return array with userData
      */
-    public function getUsers(): array
+    public function getUsers(int $limit, int $page): array
     ***REMOVED***
-        $query = $this->getUserQuery();
+        $query = $this->getUserQuery()->limit($limit)->page($page);
         $users = $query->execute()->fetchAll('assoc');
 
         if (empty($users)) ***REMOVED***
@@ -247,7 +249,7 @@ class UserRepository
     ***REMOVED***
         $userTableName = $this->userTable->getTablename();
         $query = $this->getUserQuery();
-        $query->where([$userTableName . '.id' => $id]);
+        $query->where([$userTableName . '.id' => $id, 'deleted' => false]);
         $user = $query->execute()->fetch('assoc');
         if (empty($user)) ***REMOVED***
             return [];
@@ -273,7 +275,7 @@ class UserRepository
         ];
 
         $query = $this->userTable->newSelect();
-        $query->select($fields)->where([$userTableName . '.id' => $userId])->join([
+        $query->select($fields)->where([$userTableName . '.id' => $userId, 'deleted' => false])->join([
             [
                 'table' => $permissionTablename,
                 'type' => 'INNER',
@@ -298,12 +300,12 @@ class UserRepository
     public function signupUser(string $email, string $firstName, string $postcode, string $username, string $password, string $langId): string
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $langId, 'deleted=' => '0']);
+        $query->select('id')->where(['id' => $langId, 'deleted=' => false]);
         $row = $query->execute()->fetch('assoc');
         $languageId = !empty($row) ? $row['id'] : '';
 
         $query = $this->cityTable->newSelect();
-        $query->select('id')->where(['number' => $postcode, 'deleted=' => '0']);
+        $query->select('id')->where(['number' => $postcode, 'deleted=' => false]);
         $row = $query->execute()->fetch('assoc');
         $cityId = !empty($row) ? (string)$row['id'] : '';
 
@@ -330,7 +332,7 @@ class UserRepository
     public function existsUsername(string $username): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('username')->where(['username' => $username, 'deleted=' => '0']);
+        $query->select('username')->where(['username' => $username, 'deleted=' => false]);
         $row = $query->execute()->fetch();
         return empty($row);
 ***REMOVED***
@@ -344,7 +346,7 @@ class UserRepository
     public function existsUser(string $userId): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(1)->where(['id' => $userId, 'deleted' => '0']);
+        $query->select(1)->where(['id' => $userId, 'deleted' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -397,7 +399,11 @@ class UserRepository
     ***REMOVED***
 
         if (array_key_exists('js_certificate', $data)) ***REMOVED***
-            $update['js_certificate'] = $data['js_certificate'];
+            $update['js_certificate'] = (bool)$data['js_certificate'];
+    ***REMOVED***
+
+        if (array_key_exists('js_certificate_until', $data)) ***REMOVED***
+            $update['js_certificate_until'] = date('Y-m-d H:i:s',$data['js_certificate_until']);
     ***REMOVED***
 
         if (array_key_exists('last_name', $data)) ***REMOVED***
@@ -413,7 +419,7 @@ class UserRepository
     ***REMOVED***
 
         if (array_key_exists('birthdate', $data)) ***REMOVED***
-            $update['birthdate'] = $data['birthdate'];
+            $update['birthdate'] = date('Y-m-d H:i:s',$data['birthdate']);
     ***REMOVED***
 
         if (array_key_exists('phone', $data)) ***REMOVED***
@@ -429,7 +435,7 @@ class UserRepository
 
         $this->userTable->update($update, $where);
         $query = $this->userTable->newSelect();
-        $query->select('signup_completed')->where(['id' => $where]);
+        $query->select('signup_completed')->where(['id' => $where, 'deleted' => false]);
         $row = $query->execute()->fetch();
         if (!(bool)$row['signup_completed']) ***REMOVED***
             $fields = [
@@ -449,7 +455,7 @@ class UserRepository
                 'phone',
                 'mobile',
             ];
-            $query->select($fields)->where(['id' => $where]);
+            $query->select($fields)->where(['id' => $where, 'deleted' => false]);
             $row = $query->execute()->fetch('assoc');
             if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
                 $this->userTable->update(['signup_completed' => true], $where);

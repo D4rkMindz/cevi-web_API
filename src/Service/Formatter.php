@@ -149,6 +149,12 @@ class Formatter
         return $tmp;
 ***REMOVED***
 
+    /**
+     * Format department.
+     *
+     * @param array $department
+     * @return array
+     */
     public function formatDepartment(array $department)
     ***REMOVED***
         $tmp = [];
@@ -170,12 +176,12 @@ class Formatter
             'name_it' => $department['department_group_name_it'],
         ];
         $tmp['department_type'] = [
-            'id'=>$department['department_type_id'],
-            'name_de'=>$department['department_type_name_de'],
-            'name_en'=>$department['department_type_name_en'],
-            'name_fr'=>$department['department_type_name_fr'],
-            'name_it'=>$department['department_type_name_it'],
-            ];
+            'id' => $department['department_type_id'],
+            'name_de' => $department['department_type_name_de'],
+            'name_en' => $department['department_type_name_en'],
+            'name_fr' => $department['department_type_name_fr'],
+            'name_it' => $department['department_type_name_it'],
+        ];
         $tmp['created'] = $department['created'];
         $tmp['created_by'] = $department['created_by'];
         $tmp['modified'] = $department['modified'];
@@ -183,6 +189,126 @@ class Formatter
         $tmp['deleted'] = $department['deleted'];
         $tmp['deleted_at'] = $department['deleted_at'];
         $tmp['deleted_by'] = $department['deleted_by'];
+
+        return $tmp;
+***REMOVED***
+
+    /**
+     * Format article
+     *
+     * @param array $article
+     * @param string|null $descriptionFormat
+     * @return array
+     */
+    public function formatArticle(array $article, string $descriptionFormat = null): array
+    ***REMOVED***
+        $tmp = [];
+        $tmp['id'] = $article['id'];
+        $tmp['title'] = [
+            'name_de' => $article['title_name_de'],
+            'name_en' => $article['title_name_en'],
+            'name_fr' => $article['title_name_fr'],
+            'name_it' => $article['title_name_it'],
+        ];
+
+        if ($descriptionFormat === 'parsed') ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'parsed' => MDParser::parse($article['description_name_de']),
+                ],
+                'name_en' => [
+                    'parsed' => MDParser::parse($article['description_name_en']),
+                ],
+                'name_fr' => [
+                    'parsed' => MDParser::parse($article['description_name_fr']),
+                ],
+                'name_it' => [
+                    'parsed' => MDParser::parse($article['description_name_it']),
+                ],
+            ];
+    ***REMOVED*** else if ($descriptionFormat === 'plain') ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'plain' => $article['description_name_de'],
+                    'parsed' => MDParser::parse($article['description_name_de']),
+                ],
+                'name_en' => [
+                    'plain' => $article['description_name_en'],
+                    'parsed' => MDParser::parse($article['description_name_en']),
+                ],
+                'name_fr' => [
+                    'plain' => $article['description_name_fr'],
+                    'parsed' => MDParser::parse($article['description_name_fr']),
+                ],
+                'name_it' => [
+                    'plain' => $article['description_name_it'],
+                    'parsed' => MDParser::parse($article['description_name_it']),
+                ],
+            ];
+    ***REMOVED*** else ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'plain' => $article['description_name_de']
+                ],
+                'name_en' => [
+                    'plain' => $article['description_name_en']
+                ],
+                'name_fr' => [
+                    'plain' => $article['description_name_fr']
+                ],
+                'name_it' => [
+                    'plain' => $article['description_name_it']
+                ],
+            ];
+    ***REMOVED***
+        $tmp['purchase_date'] = $article['purchase_date'];
+        $tmp['quantity'] = (int)$article['quantity'];
+        $tmp['quality'] = [
+            'level' => (int)$article['quality_level'],
+            'name' => $article['quality_name'],
+        ];
+        $tmp['storage'] = [
+            'id' => $article['location_id'],
+            'name' => $article['location_name'],
+            'url' => baseurl('/v2/articles/' . $article['location_id']),
+        ];
+        $tmp['room'] = [
+            'id' => $article['room_id'],
+            'name' => $article['room_name'],
+            'url' => baseurl('/v2/articles/' . $article['room_id']),
+        ];
+        $tmp['corridor'] = [
+            'id' => $article['corridor_id'],
+            'name' => $article['corridor_name'],
+            'url' => baseurl('/v2/articles/' . $article['corridor_id']),
+        ];
+        $tmp['shelf'] = [
+            'id' => $article['shelf_id'],
+            'name' => $article['shelf_name'],
+            'url' => baseurl('/v2/articles/' . $article['shelf_id']),
+        ];
+        $tmp['tray'] = [
+            'id' => $article['tray_id'],
+            'name' => $article['tray_name'],
+            'url' => baseurl('/v2/articles/' . $article['tray_id']),
+        ];
+        $tmp['chest'] = [
+            'id' => $article['chest_id'],
+            'name' => $article['chest_name'],
+            'url' => baseurl('/v2/articles/' . $article['chest_id']),
+        ];
+        $tmp['replacement'] = [
+            'needed' => strtotime($article['replace']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
+            'date' => $article['replace'],
+        ];
+        $tmp['barcode'] = $article['barcode'];
+        $tmp['created'] = $article['created'];
+        $tmp['created_by'] = $article['created_by'];
+        $tmp['modified'] = $article['modified'];
+        $tmp['modified_by'] = $article['modified_by'];
+        $tmp['deleted'] = (bool)$article['deleted'];
+        $tmp['deleted_by'] = $article['deleted_by'];
+        $tmp['deleted_at'] = $article['deleted_at'];
 
         return $tmp;
 ***REMOVED***

@@ -18,6 +18,12 @@ use App\Table\LanguageTable;
 use App\Table\CityTable;
 use App\Table\PermissionTable;
 use App\Table\PositionTable;
+use App\Table\SlChestTable;
+use App\Table\SlCorridorTable;
+use App\Table\SlLocationTable;
+use App\Table\SlRoomTable;
+use App\Table\SlShelfTable;
+use App\Table\SlTrayTable;
 use App\Table\StoragePlaceTable;
 use App\Table\UserTable;
 use Cake\Database\Connection;
@@ -81,7 +87,6 @@ $container[GenderTable::class] = function (Container $container) ***REMOVED***
     return new GenderTable($container->get(Connection::class));
 ***REMOVED***;
 
-
 $container[ImageTable::class] = function (Container $container) ***REMOVED***
     return new ImageTable($container->get(Connection::class));
 ***REMOVED***;
@@ -96,6 +101,30 @@ $container[PositionTable::class] = function (Container $container) ***REMOVED***
 
 $container[PermissionTable::class] = function (Container $container) ***REMOVED***
    return new PermissionTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlLocationTable::class] = function (Container $container) ***REMOVED***
+   return new SlLocationTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlRoomTable::class] = function (Container $container) ***REMOVED***
+   return new SlRoomTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlCorridorTable::class] = function (Container $container) ***REMOVED***
+   return new SlCorridorTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlShelfTable::class] = function (Container $container) ***REMOVED***
+   return new SlShelfTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlTrayTable::class] = function (Container $container) ***REMOVED***
+   return new SlTrayTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[SlChestTable::class] = function (Container $container) ***REMOVED***
+   return new SlChestTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[StoragePlaceTable::class] = function (Container $container) ***REMOVED***

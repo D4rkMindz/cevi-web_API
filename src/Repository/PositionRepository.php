@@ -10,7 +10,7 @@ use Slim\Container;
 /**
  * Class PositionRepository
  */
-class PositionRepository
+class PositionRepository extends AppRepository
 ***REMOVED***
     /**
      * @var PositionTable
@@ -36,7 +36,7 @@ class PositionRepository
     public function existsPosition(string $positionId): bool
     ***REMOVED***
         $query = $this->positionTable->newSelect();
-        $query->select('id')->where(['id'=> $positionId, 'deleted = ' => '0']);
+        $query->select('id')->where(['id'=> $positionId, 'deleted = ' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

@@ -287,7 +287,7 @@ class UserValidation extends AppValidation
                 $validationContext->setError('js_certificate', __('Date required'));
         ***REMOVED*** else ***REMOVED***
                 // allow dates
-                if (strtotime($data['js_certificate_until']) <= strtotime(time() - (60 * 60 * 24 * 365 * 2))) ***REMOVED***
+                if ((int)$data['js_certificate_until'] <= (time() - (60 * 60 * 24 * 365 * 2))) ***REMOVED***
                     $validationContext->setError('js_certificate_until', __('JS Certificate is outdated'));
             ***REMOVED***
         ***REMOVED***
@@ -313,8 +313,10 @@ class UserValidation extends AppValidation
      */
     private function validateBirthdate(string $birthdate, ValidationContext $validationContext)
     ***REMOVED***
+        $this->validateDate((int)$birthdate, 'birthday', $validationContext, true);
+
         // minimum age of 4 years
-        if (strtotime($birthdate) >= strtotime(time() - (60 * 60 * 24 * 365 * 4))) ***REMOVED***
+        if ($birthdate >= (time() - (60 * 60 * 24 * 365 * 4))) ***REMOVED***
             $validationContext->setError('birthday', sprintf(__('Birthday not valid (minimum age: %s years'), 4));
     ***REMOVED***
 ***REMOVED***

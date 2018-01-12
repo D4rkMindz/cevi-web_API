@@ -36,6 +36,20 @@ class AppValidation
 ***REMOVED***
 
     /**
+     * Validate value not empty.
+     *
+     * @param $value
+     * @param string $elementName
+     * @param ValidationContext $validationContext
+     */
+    protected function validateNotEmpty($value, string $elementName, ValidationContext $validationContext)
+    ***REMOVED***
+        if (empty($value)) ***REMOVED***
+            $validationContext->setError($elementName, __('Required'));
+    ***REMOVED***
+***REMOVED***
+
+    /**
      * Validate length of text.
      *
      * @param string $text
@@ -46,6 +60,7 @@ class AppValidation
      */
     protected function validateLength(string $text, string $elementName, ValidationContext $validationContext, int $min = 3, int $max = 255)
     ***REMOVED***
+        $this->validateNotEmpty($text, $elementName, $validationContext);
         $length = strlen(trim($text));
         if ($length < $min) ***REMOVED***
             $validationContext->setError($elementName, __('too short'));
@@ -80,6 +95,13 @@ class AppValidation
     ***REMOVED***
         if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
             $validationContext->setError('postcode', _('Does not exist'));
+    ***REMOVED***
+***REMOVED***
+
+    protected function validateDate(int $time, string $elementName, ValidationContext $validationContext, bool $acceptPassed = false)
+    ***REMOVED***
+        if (!$acceptPassed && $time < time()) ***REMOVED***
+            $validationContext->setError($elementName, __('Date already passed'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

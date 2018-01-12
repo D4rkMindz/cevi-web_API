@@ -57,9 +57,9 @@ $config['mailgun'] = [
 ];
 
 if (file_exists(__DIR__ . '/env.php')) ***REMOVED***
-    $env = require_once __DIR__ . '/env.php';
+    $env = require __DIR__ . '/env.php';
 ***REMOVED*** else if (file_exists(__DIR__ . '/../../env.php')) ***REMOVED***
-    $env = require_once __DIR__ . '/../../env.php';
+    $env = require __DIR__ . '/../../env.php';
 ***REMOVED*** else ***REMOVED***
     throw new Exception('ENV.php not found');
 ***REMOVED***

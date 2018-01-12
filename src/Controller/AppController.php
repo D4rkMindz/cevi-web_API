@@ -62,20 +62,21 @@ class AppController
      * Return JSON Response.
      *
      * @param Response $response
-     * @param array $data
+     * @param array $data with optional key message. If message is not defined, message will be "Success"
      * @param int $status
+     * @param string $message
      * @return Response
      */
-    public function json(Response $response, array $data, int $status = 200): Response
+    public function json(Response $response, array $data, int $status = 200, string $message = 'Success'): Response
     ***REMOVED***
         if (empty($data)) ***REMOVED***
             return $this->error($response, __('No data available'), 404);
     ***REMOVED***
 
         if ($status === 200) ***REMOVED***
-            $message = 'Success';
+            $message = array_key_exists('message', $data) ? $data['message'] : $message;
     ***REMOVED*** else ***REMOVED***
-            $message = 'Error ' . $status;
+            $message = array_key_exists('message', $data) ? $data['message'] : 'Error ' . $status;
     ***REMOVED***
 
         $responseData = JsonResponseFactory::success($data, $status, $message);
@@ -122,23 +123,12 @@ class AppController
     ***REMOVED***
         $data = $request->getParams();
         $params = [];
-        $params['limit'] = (int)$data['limit'];
-        $params['limit'] = !empty($params['limit']) ? $params['limit'] : 10000;
+        $params['limit'] = (int)array_key_exists('limit', $data) ? $data['limit'] : 1000;
+        $params['page'] = (int)array_key_exists('page', $data) ? $data['limit'] : 1;
 
-        $params['page'] = (int)$data['page'];
-        $params['page'] = !empty($params['empty']) ? $params['page'] : 1;
-
-        $params['offset'] = (int)$data['offset'];
+        $params['offset'] = array_key_exists('offset', $data) ? (int)$data['offset'] : null;
         $page = round($params['offset'] / $params['limit'], 0) + 1;
         $params['page'] = !empty($params['offset']) ? $page : $params['page'];
-
-        if (empty($params['page']) && $params['page'] !== 0) ***REMOVED***
-            $params['page'] = 1;
-    ***REMOVED***
-
-        if (empty($params['limit'])) ***REMOVED***
-            $params['limit'] = 10000;
-    ***REMOVED***
 
         unset($params['offset']);
         return $params;
