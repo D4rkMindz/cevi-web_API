@@ -20,19 +20,9 @@ use Slim\Container;
 class UserValidation extends AppValidation
 ***REMOVED***
     /**
-     * @var CityRepository
-     */
-    private $cityRepository;
-
-    /**
      * @var UserRepository
      */
     private $userRepository;
-
-    /**
-     * @var DepartmentRepository
-     */
-    private $departmentRepository;
 
     /**
      * @var LanguageRepository

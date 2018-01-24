@@ -84,12 +84,12 @@ class StorageRepository extends AppRepository
     ***REMOVED***
         $query = $this->storagePlaceTable->newSelect();
         $query->select(1)->where([
-            'sl_location_id' => $locationId,
-            'sl_room_id' => $roomId,
-            'sl_corridor_id' => $corridorId,
-            'sl_shelf_id' => $shelfId,
-            'sl_tray_id' => $trayId,
-            'sl_chest_id' => $chestId,
+            'sl_location_id' => $locationId ?: null,
+            'sl_room_id' => $roomId ?: null,
+            'sl_corridor_id' => $corridorId ?: null,
+            'sl_shelf_id' => $shelfId ?: null,
+            'sl_tray_id' => $trayId ?: null,
+            'sl_chest_id' => $chestId ?: null,
             'deleted' => false,
         ]);
         $row = $query->execute()->fetch();
@@ -104,7 +104,7 @@ class StorageRepository extends AppRepository
      */
     public function existsLocation(string $locationId): bool
     ***REMOVED***
-        return $this->exists($locationId, $this->slLocationTable);
+        return $this->exists($this->slLocationTable, ['id' => $locationId]);
 ***REMOVED***
 
     /**
@@ -115,7 +115,7 @@ class StorageRepository extends AppRepository
      */
     public function existsRoom(string $roomId): bool
     ***REMOVED***
-        return $this->exists($roomId, $this->slRoomTable);
+        return $this->exists($this->slRoomTable, ['id' => $roomId]);
 ***REMOVED***
 
     /**
@@ -126,7 +126,7 @@ class StorageRepository extends AppRepository
      */
     public function existsCorridor(string $corridorId): bool
     ***REMOVED***
-        return $this->exists($corridorId, $this->slCorridorTable);
+        return $this->exists($this->slCorridorTable, ['id' => $corridorId]);
 ***REMOVED***
 
     /**
@@ -137,7 +137,7 @@ class StorageRepository extends AppRepository
      */
     public function existsShelf(string $shelfId): bool
     ***REMOVED***
-        return $this->exists($shelfId, $this->slShelfTable);
+        return $this->exists($this->slShelfTable, ['id' => $shelfId]);
 ***REMOVED***
 
     /**
@@ -148,7 +148,7 @@ class StorageRepository extends AppRepository
      */
     public function existsTray(string $trayId): bool
     ***REMOVED***
-        return $this->exists($trayId, $this->slTrayTable);
+        return $this->exists($this->slTrayTable, ['id' => $trayId]);
 ***REMOVED***
 
     /**
@@ -159,6 +159,6 @@ class StorageRepository extends AppRepository
      */
     public function existsChest(string $chestId): bool
     ***REMOVED***
-        return $this->exists($chestId, $this->slChestTable);
+        return $this->exists($this->slChestTable, ['id' => $chestId]);
 ***REMOVED***
 ***REMOVED***

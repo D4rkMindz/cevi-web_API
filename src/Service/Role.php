@@ -4,9 +4,25 @@ namespace App\Service;
 
 
 use App\Repository\UserRepository;
+use Slim\Container;
 
 class Role
 ***REMOVED***
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * Role constructor.
+     * @param Container $container
+     * @throws \Interop\Container\Exception\ContainerException
+     */
+    public function __construct(Container $container)
+    ***REMOVED***
+        $this->userRepository = $container->get(UserRepository::class);
+***REMOVED***
+
     /**
      * Check if user has permission.
      *
@@ -16,10 +32,9 @@ class Role
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public static function hasPermission(int $level, string $userId): bool
+    public function hasPermission(int $level, string $userId): bool
     ***REMOVED***
-        $userRepository = app()->getContainer()->get(UserRepository::class);
-        $permission = $userRepository->getPermission($userId);
+        $permission = $this->userRepository->getPermission($userId);
         if ($level < (int)$permission['level']) ***REMOVED***
             return false;
     ***REMOVED***

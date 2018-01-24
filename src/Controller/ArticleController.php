@@ -35,6 +35,25 @@ class ArticleController extends AppController
 ***REMOVED***
 
     /**
+     * Get article.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function getArticleAction(Request $request, Response $response, array $args)
+    ***REMOVED***
+        $article = $this->articleRepository->getArticle($args['department_id'], $args['article_id']);
+
+        if (empty($articles)) ***REMOVED***
+            return $this->error($response, 'Not found', 404, ['message' => __('No article found')]);
+    ***REMOVED***
+
+        return $this->json($response, ['article' => $article]);
+***REMOVED***
+
+    /**
      * Get all articles
      *
      * @auth JWT
@@ -50,7 +69,7 @@ class ArticleController extends AppController
     public function getAllArticlesAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $articles = $this->articleRepository->getAllArticles((int)$args['department_id'],$params['limit'], $params['page']);
+        $articles = $this->articleRepository->getAllArticles((int)$args['department_id'], $params['limit'], $params['page']);
 
         if (empty($articles)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('No articles found')]);
@@ -74,7 +93,8 @@ class ArticleController extends AppController
      * @post int purchase_date Time of the article purchase as time(). Cannot be more than one year in the future
      * @post int quanity ***REMOVED***0|10000***REMOVED***
      * @post int quality_id
-     * @post int|string location_id
+     * @post int|string|null storage_place_id (prioritized)
+     * @post int|string|null location_id
      * @post int|string|null room_id
      * @post int|string|null corridor_id
      * @post int|string|null shelf_id
@@ -105,5 +125,79 @@ class ArticleController extends AppController
         ];
 
         return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Update article
+     *
+     * @auth JWT
+     * @post string|null title ***REMOVED***3|255***REMOVED***
+     * @post string|null description ***REMOVED***10|10000***REMOVED***
+     * @post int|null purchase_date Time of the article purchase as time(). Cannot be more than one year in the future
+     * @post int|null quanity ***REMOVED***0|10000***REMOVED***
+     * @post int|null quality_id
+     * @post int|string|null storage_place_id (prioritized)
+     * @post int|string|null location_id
+     * @post int|string|null room_id
+     * @post int|string|null corridor_id
+     * @post int|string|null shelf_id
+     * @post int|string|null tray_id
+     * @post int|string|null chest_id
+     * @post string|null storage_place_name Name of the storage place (if not exists, it will be created).
+     * @post int|string|null replacement_date Date of the required replacement in the future (maybe also in the past) as time()
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function updateArticleAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $params = $request->getParams();
+        $params['department_id'] = $args['department_id'];
+        $params['article_id'] = $args['article_id'];
+
+        $validationContext = $this->articleValidation->validateUpdate($params);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
+    ***REMOVED***
+
+        $updated = $this->articleRepository->updateArticle($params, $this->jwt['lang'], $this->jwt['user_id']);
+
+        if (!$updated) ***REMOVED***
+            return $this->error($response, __('Updating user failed'), 422, ['message' => __('Updating user failed')]);
+    ***REMOVED***
+
+        return $this->json($response, ['message' => __('Updated user successfully')]);
+***REMOVED***
+
+    /**
+     * Delete article action.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function deleteArticleAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        $articleExists = $this->articleRepository->existsArticle($args['article_id'], $args['department_id']);
+        if (!$this->articleRepository->deleteArticle((int)$args['article_id'], $this->jwt['user_id']) && $articleExists) ***REMOVED***
+            $this->error($response, 'Forbidden', 403, ['message' => __('Deleting article failed')]);
+    ***REMOVED***
+        return $this->json($response, ['message' => __('Deleted article successfully')]);
+***REMOVED***
+
+    /**
+     * Get all qualities.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function getQualitiesAction(Request $request, Response $response): Response
+    ***REMOVED***
+        $qualities = $this->articleRepository->getQualities();
+        return $this->json($response, ['qualities'=> $qualities]);
 ***REMOVED***
 ***REMOVED***

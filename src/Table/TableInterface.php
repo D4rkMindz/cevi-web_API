@@ -1,0 +1,81 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Björn
+ * Date: 16.01.2018
+ * Time: 22:13
+ */
+
+namespace App\Table;
+
+
+use Cake\Database\Connection;
+use Cake\Database\Query;
+use Cake\Database\StatementInterface;
+
+interface TableInterface
+***REMOVED***
+    /**
+     * AppTable constructor.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection = null);
+
+    /**
+     * Get table name.
+     *
+     * @return string table name
+     */
+    public function getTablename();
+
+    /**
+     * Get all entries from database.
+     *
+     * @return array $rows
+     */
+    public function getAll(): array;
+
+    /**
+     * Get Query.
+     *
+     * @return Query
+     */
+    public function newSelect(): Query;
+
+    /**
+     * Get entity by id.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function getById($id): array;
+
+    /**
+     * Insert into database.
+     *
+     * @param array $row with data to insertUser into database
+     * @param string $userId
+     * @return string last inserted ID
+     */
+    public function insert(array $row, string $userId): string;
+
+    /**
+     * Update database
+     *
+     * @param array $row
+     * @param string $where should be the id
+     * @param string $userId
+     * @return StatementInterface
+     */
+    public function update(array $row, array $where, string $userId): StatementInterface;
+
+    /**
+     * Delete from database.
+     *
+     * @param string $executorId
+     * @param array $where
+     * @return bool
+     */
+    public function delete(string $executorId, array $where): bool;
+***REMOVED***

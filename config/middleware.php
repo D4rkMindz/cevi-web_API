@@ -9,7 +9,6 @@ use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication;
 use Symfony\Component\Translation\Translator;
 
-$app = app();
 $container = $app->getContainer();
 
 //
@@ -61,7 +60,7 @@ if ($jwt['active']) ***REMOVED***
             $permission = new Permissions();
             $userId = $decoded['data']->user_id;
             $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
-            $hasPermission = Role::hasPermission($level, $userId);
+            $hasPermission = $container->get(Role::class)->hasPermission($level, $userId);
             if (!$hasPermission) ***REMOVED***
                 return false;
         ***REMOVED***

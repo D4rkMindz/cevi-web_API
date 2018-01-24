@@ -1,5 +1,4 @@
 <?php
-$app = app();
 
 $app->get('/', route(['App\Controller\AppController', 'redirectToCeviWeb']))->setName('root');
 
@@ -37,6 +36,11 @@ $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***', r
  */
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles', route(['App\Controller\ArticleController', 'getAllArticlesAction']))->setName('get.allArticles');
 $app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles', route(['App\Controller\ArticleController', 'createArticleAction']))->setName('post.createArticle');
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/***REMOVED***article_id:[0-9]+***REMOVED***', route(['App\Controller\ArticleController', 'getArticleAction']))->setName('get.article');
+$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/***REMOVED***article_id:[0-9]+***REMOVED***', route(['App\Controller\ArticleController', 'updateArticleAction']))->setName('put.article');
+$app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/***REMOVED***article_id:[0-9]+***REMOVED***', route(['App\Controller\ArticleController', 'deleteArticleAction']))->setName('delete.article');
+$app->get('/v2/articles/quality', route(['App\Controller\ArticleController', 'getQualitiesAction']))->setName('get.article.qualities');
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/quality', route(['App\Controller\ArticleController', 'getQualitiesAction']))->setName('get.department.article.qualities');
 
 /***********************************************************************************************************************
  * Error routes

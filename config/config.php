@@ -1,69 +1,22 @@
 <?php
 
-use App\Service\Mail\MailerInterface;
+$defaults = require __DIR__ . '/defaults.php';
 
-$config = [];
+$env = [];
 
-$config = [
-    'displayErrorDetails' => false,
-    'determineRouteBeforeAppMiddleware' => true,
-    'addContentLengthHeader' => false,
-];
-$config['migrations'] = __DIR__ . '/../resources/migrations';
-
-$config['jwt'] = [
-    'active' => true,
-    'secret' => '',
-    'passthrough' => [
-        '/' => ['GET'],
-        '/v2/users/signup' => ['POST'],
-        '/v2/auth' => ['POST'],
-        '/v2/departments/***REMOVED***department_id***REMOVED***' => ['GET'],
-    ]
-];
-
-$config['db'] = [
-    'database' => 'cevi_web',
-    'charset' => 'utf8',
-    'encoding' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-];
-
-$config['db_test'] = [
-    'database' => 'cevi_web_test',
-    'charset' => 'utf8',
-    'encoding' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-];
-
-$config['language_whitelist'] = [
-    'de' => 'de_CH',
-    'fr' => 'en_GB',
-    'en' => 'fr_CH',
-    'it' => 'it_CH',
-];
-
-$config['logger'] = [
-    'main' => 'app',
-    'context' => [
-        MailerInterface::class => 'mail',
-    ],
-];
-
-$config['mailgun'] = [
-    'from' => '',
-    'apikey' => '',
-    'domain' => '',
-];
-
-if (file_exists(__DIR__ . '/env.php')) ***REMOVED***
-    $env = require __DIR__ . '/env.php';
-***REMOVED*** else if (file_exists(__DIR__ . '/../../env.php')) ***REMOVED***
-    $env = require __DIR__ . '/../../env.php';
-***REMOVED*** else ***REMOVED***
-    throw new Exception('ENV.php not found');
+if (defined('APP_ENV')) ***REMOVED***
+    $config = require __DIR__ . '/' . APP_ENV . '.php';
+    $defaults = array_replace_recursive($defaults, $config);
 ***REMOVED***
 
-$config = array_replace_recursive($config, $env);
+if (file_exists(__DIR__ . '/../../env.php')) ***REMOVED***
+    $env = require __DIR__ . '/../../env.php';
+***REMOVED*** elseif (file_exists(__DIR__ . '/env.php')) ***REMOVED***
+    $env = require __DIR__ . '/env.php';
+***REMOVED*** else ***REMOVED***
+    throw new RuntimeException('Env not found');
+***REMOVED***
 
-return $config;
+$defaults = array_replace_recursive($defaults, $env);
+
+return $defaults;

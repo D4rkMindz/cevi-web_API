@@ -4,12 +4,25 @@
 namespace App\Repository;
 
 
+use App\Table\TableInterface;
+
+/**
+ * Class AppRepository
+ */
 abstract class AppRepository
 ***REMOVED***
-    protected function exists(string $id, $table, string $param = 'id'): bool
+    /**
+     * Check if something exists in table.
+     *
+     * @param TableInterface $table
+     * @param array $condition
+     * @return bool
+     */
+    protected function exists(TableInterface $table, array $condition): bool
     ***REMOVED***
+        $condition['deleted'] = false;
         $query = $table->newSelect();
-        $query->select(1)->where([$param => $id]);
+        $query->select(1)->where($condition);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

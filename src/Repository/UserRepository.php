@@ -88,7 +88,7 @@ class UserRepository extends AppRepository
     public function getIdByusername(string $username): string
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('id')->where(['username' => $username, 'deleted' => false]);
+        $query->select('id')->where(['username' => $username]);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row['id'] : '';
 ***REMOVED***
@@ -103,7 +103,7 @@ class UserRepository extends AppRepository
     public function checkLoginByUsername(string $username, string $password): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(['password'])->where(['username' => $username, 'deleted' => false]);
+        $query->select(['password'])->where(['username' => $username]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return false;
@@ -122,7 +122,7 @@ class UserRepository extends AppRepository
     public function checkLoginByEmail(string $email, string $password): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(['password'])->where(['email' => $email, 'deleted' => false]);
+        $query->select(['password'])->where(['email' => $email]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return false;
@@ -155,91 +155,6 @@ class UserRepository extends AppRepository
 ***REMOVED***
 
     /**
-     * @return \Cake\Database\Query
-     */
-    private function getUserQuery(): Query
-    ***REMOVED***
-        $query = $this->userTable->newSelect();
-
-        $userTableName = $this->userTable->getTablename();
-        $positionTableName = $this->positionTable->getTablename();
-        $cityTableName = $this->cityTable->getTablename();
-        $genderTableName = $this->genderTable->getTablename();
-        $departmentTableName = $this->departmentTable->getTablename();
-        $languageTableName = $this->languageTable->getTablename();
-
-        $fields = [
-            'id' => $userTableName . '.id',
-            'department_id' => $userTableName . '.department_id',
-            'department_name' => $departmentTableName . '.name',
-            'gender_id' => $userTableName . '.gender_id',
-            'gender_name' => $genderTableName . '.name',
-            'position_id' => $userTableName . '.position_id',
-            'position_name_de' => $positionTableName . '.name_de',
-            'position_name_en' => $positionTableName . '.name_en',
-            'position_name_fr' => $positionTableName . '.name_fr',
-            'position_name_it' => $positionTableName . '.name_it',
-            'language_full' => $languageTableName . '.name',
-            'language_abbr' => $languageTableName . '.abbreviation',
-            'last_name' => $userTableName . '.last_name',
-            'first_name' => $userTableName . '.first_name',
-            'cevi_name' => $userTableName . '.cevi_name',
-            'email' => $userTableName . '.email',
-            'username' => $userTableName . '.username',
-            'phone' => $userTableName . '.phone',
-            'mobile' => $userTableName . '.mobile',
-            'city_id' => $cityTableName . '.id',
-            'city_name_de' => $cityTableName . '.title_de',
-            'city_name_en' => $cityTableName . '.title_en',
-            'city_name_fr' => $cityTableName . '.title_fr',
-            'city_name_it' => $cityTableName . '.title_it',
-            'city_code' => $cityTableName . '.number',
-            'street' => $userTableName . '.address',
-            'birthdate' => $userTableName . '.birthdate',
-            'js_certificate' => $userTableName . '.js_certificate',
-            'js_certificate_until' => $userTableName . '.js_certificate_until',
-            'signup_completed' => $userTableName . '.signup_completed',
-            'created' => $userTableName . '.created',
-            'created_by' => $userTableName . '.created_by',
-            'modified' => $userTableName . '.modified',
-            'modified_by' => $userTableName . '.modified_by',
-            'deleted' => $userTableName . '.deleted',
-            'deleted_by' => $userTableName . '.deleted_by',
-            'deleted_at' => $userTableName . '.deleted_at',
-        ];
-
-        $query->select($fields)
-            ->join([
-                [
-                    'table' => $cityTableName,
-                    'type' => 'INNER',
-                    'conditions' => $userTableName . '.city_id=' . $cityTableName . '.id',
-                ],
-                [
-                    'table' => $departmentTableName,
-                    'type' => 'INNER',
-                    'conditions' => $userTableName . '.department_id=' . $departmentTableName . '.id',
-                ],
-                [
-                    'table' => $genderTableName,
-                    'type' => 'INNER',
-                    'conditions' => $userTableName . '.gender_id=' . $genderTableName . '.id',
-                ],
-                [
-                    'table' => $positionTableName,
-                    'type' => 'INNER',
-                    'conditions' => $userTableName . '.position_id=' . $positionTableName . '.id',
-                ],
-                [
-                    'table' => $languageTableName,
-                    'type' => 'INNER',
-                    'conditions' => $userTableName . '.language_id=' . $languageTableName . '.id',
-                ],
-            ]);
-        return $query;
-***REMOVED***
-
-    /**
      * Get single user.
      *
      * @param int $id
@@ -249,7 +164,7 @@ class UserRepository extends AppRepository
     ***REMOVED***
         $userTableName = $this->userTable->getTablename();
         $query = $this->getUserQuery();
-        $query->where([$userTableName . '.id' => $id, 'deleted' => false]);
+        $query->where([$userTableName . '.id' => $id]);
         $user = $query->execute()->fetch('assoc');
         if (empty($user)) ***REMOVED***
             return [];
@@ -275,7 +190,7 @@ class UserRepository extends AppRepository
         ];
 
         $query = $this->userTable->newSelect();
-        $query->select($fields)->where([$userTableName . '.id' => $userId, 'deleted' => false])->join([
+        $query->select($fields)->where([$userTableName . '.id' => $userId])->join([
             [
                 'table' => $permissionTablename,
                 'type' => 'INNER',
@@ -300,12 +215,12 @@ class UserRepository extends AppRepository
     public function signupUser(string $email, string $firstName, string $postcode, string $username, string $password, string $langId): string
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $langId, 'deleted=' => false]);
+        $query->select('id')->where(['id' => $langId]);
         $row = $query->execute()->fetch('assoc');
         $languageId = !empty($row) ? $row['id'] : '';
 
         $query = $this->cityTable->newSelect();
-        $query->select('id')->where(['number' => $postcode, 'deleted=' => false]);
+        $query->select('id')->where(['number' => $postcode]);
         $row = $query->execute()->fetch('assoc');
         $cityId = !empty($row) ? (string)$row['id'] : '';
 
@@ -316,7 +231,7 @@ class UserRepository extends AppRepository
             'first_name' => $firstName,
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
-            'created' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 0
         ];
 
@@ -332,7 +247,7 @@ class UserRepository extends AppRepository
     public function existsUsername(string $username): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('username')->where(['username' => $username, 'deleted=' => false]);
+        $query->select('username')->where(['username' => $username]);
         $row = $query->execute()->fetch();
         return empty($row);
 ***REMOVED***
@@ -356,10 +271,10 @@ class UserRepository extends AppRepository
      *
      * @param array $data
      * @param string $where
-     * @param string $modifier
+     * @param string $userId
      * @return bool true if users signup is completed
      */
-    public function updateUser(array $data, string $where, string $modifier): bool
+    public function updateUser(array $data, string $where, string $userId): bool
     ***REMOVED***
         $update = [];
         if (array_key_exists('city_id', $data)) ***REMOVED***
@@ -403,7 +318,7 @@ class UserRepository extends AppRepository
     ***REMOVED***
 
         if (array_key_exists('js_certificate_until', $data)) ***REMOVED***
-            $update['js_certificate_until'] = date('Y-m-d H:i:s',$data['js_certificate_until']);
+            $update['js_certificate_until'] = date('Y-m-d H:i:s', $data['js_certificate_until']);
     ***REMOVED***
 
         if (array_key_exists('last_name', $data)) ***REMOVED***
@@ -419,7 +334,7 @@ class UserRepository extends AppRepository
     ***REMOVED***
 
         if (array_key_exists('birthdate', $data)) ***REMOVED***
-            $update['birthdate'] = date('Y-m-d H:i:s',$data['birthdate']);
+            $update['birthdate'] = date('Y-m-d H:i:s', $data['birthdate']);
     ***REMOVED***
 
         if (array_key_exists('phone', $data)) ***REMOVED***
@@ -431,9 +346,9 @@ class UserRepository extends AppRepository
     ***REMOVED***
 
         $update['modified'] = date('Y-m-d H:i:s');
-        $update['modified_by'] = $modifier;
+        $update['modified_by'] = $userId;
 
-        $this->userTable->update($update, $where);
+        $this->userTable->update($update, ['id' => $where], $userId);
         $query = $this->userTable->newSelect();
         $query->select('signup_completed')->where(['id' => $where, 'deleted' => false]);
         $row = $query->execute()->fetch();
@@ -458,7 +373,7 @@ class UserRepository extends AppRepository
             $query->select($fields)->where(['id' => $where, 'deleted' => false]);
             $row = $query->execute()->fetch('assoc');
             if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
-                $this->userTable->update(['signup_completed' => true], $where);
+                $this->userTable->update(['signup_completed' => true], ['id' => $where], $userId);
                 return true;
         ***REMOVED***
             return false;
@@ -475,16 +390,100 @@ class UserRepository extends AppRepository
      */
     public function deleteUser(string $userId, string $executorId): bool
     ***REMOVED***
-        $update = [
-            'deleted' => 1,
-            'deleted_by' => $executorId,
-            'deleted_at' => date('Y-m-d H:i:s'),
-        ];
         try ***REMOVED***
-            $this->userTable->update($update, $userId);
+            $this->userTable->delete($executorId, ['id' => $userId]);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
         return true;
+***REMOVED***
+
+    /**
+     * Get user query.
+     *
+     * @return Query
+     */
+    private function getUserQuery(): Query
+    ***REMOVED***
+        $query = $this->userTable->newSelect();
+
+        $userTableName = $this->userTable->getTablename();
+        $positionTableName = $this->positionTable->getTablename();
+        $cityTableName = $this->cityTable->getTablename();
+        $genderTableName = $this->genderTable->getTablename();
+        $departmentTableName = $this->departmentTable->getTablename();
+        $languageTableName = $this->languageTable->getTablename();
+
+        $fields = [
+            'id' => $userTableName . '.id',
+            'department_id' => $userTableName . '.department_id',
+            'department_name' => $departmentTableName . '.name',
+            'gender_id' => $userTableName . '.gender_id',
+            'gender_name_de' => $genderTableName . '.name_de',
+            'gender_name_en' => $genderTableName . '.name_en',
+            'gender_name_fr' => $genderTableName . '.name_fr',
+            'gender_name_it' => $genderTableName . '.name_it',
+            'position_id' => $userTableName . '.position_id',
+            'position_name_de' => $positionTableName . '.name_de',
+            'position_name_en' => $positionTableName . '.name_en',
+            'position_name_fr' => $positionTableName . '.name_fr',
+            'position_name_it' => $positionTableName . '.name_it',
+            'language_full' => $languageTableName . '.name',
+            'language_abbr' => $languageTableName . '.abbreviation',
+            'last_name' => $userTableName . '.last_name',
+            'first_name' => $userTableName . '.first_name',
+            'cevi_name' => $userTableName . '.cevi_name',
+            'email' => $userTableName . '.email',
+            'username' => $userTableName . '.username',
+            'phone' => $userTableName . '.phone',
+            'mobile' => $userTableName . '.mobile',
+            'city_id' => $cityTableName . '.id',
+            'city_name_de' => $cityTableName . '.title_de',
+            'city_name_en' => $cityTableName . '.title_en',
+            'city_name_fr' => $cityTableName . '.title_fr',
+            'city_name_it' => $cityTableName . '.title_it',
+            'city_code' => $cityTableName . '.number',
+            'street' => $userTableName . '.address',
+            'birthdate' => $userTableName . '.birthdate',
+            'js_certificate' => $userTableName . '.js_certificate',
+            'js_certificate_until' => $userTableName . '.js_certificate_until',
+            'signup_completed' => $userTableName . '.signup_completed',
+            'created_at' => $userTableName . '.created_at',
+            'created_by' => $userTableName . '.created_by',
+            'modified_at' => $userTableName . '.modified_at',
+            'modified_by' => $userTableName . '.modified_by',
+            'archived_by' => $userTableName . '.archived_by',
+            'archived_at' => $userTableName . '.archived_at',
+        ];
+
+        $query->select($fields)
+            ->join([
+                [
+                    'table' => $cityTableName,
+                    'type' => 'INNER',
+                    'conditions' => $userTableName . '.city_id=' . $cityTableName . '.id',
+                ],
+                [
+                    'table' => $departmentTableName,
+                    'type' => 'INNER',
+                    'conditions' => $userTableName . '.department_id=' . $departmentTableName . '.id',
+                ],
+                [
+                    'table' => $genderTableName,
+                    'type' => 'INNER',
+                    'conditions' => $userTableName . '.gender_id=' . $genderTableName . '.id',
+                ],
+                [
+                    'table' => $positionTableName,
+                    'type' => 'INNER',
+                    'conditions' => $userTableName . '.position_id=' . $positionTableName . '.id',
+                ],
+                [
+                    'table' => $languageTableName,
+                    'type' => 'INNER',
+                    'conditions' => $userTableName . '.language_id=' . $languageTableName . '.id',
+                ],
+            ]);
+        return $query;
 ***REMOVED***
 ***REMOVED***

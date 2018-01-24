@@ -16,7 +16,7 @@ class Init extends AbstractMigration
     ***REMOVED*** else ***REMOVED***
             $this->table("app_language")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
-        $table->addColumn('name', 'string', ['null' => false, 'limit' => 4, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
+        $table->addColumn('name', 'string', ['null' => false, 'limit' => 5, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('abbreviation', 'string', ['null' => false, 'limit' => 2, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name'])->update();
         $table->save();
         $table = $this->table("app_position", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
@@ -26,8 +26,7 @@ class Init extends AbstractMigration
     ***REMOVED*** else ***REMOVED***
             $this->table("app_position")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
-        $table->addColumn('permission_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
-        $table->addColumn('name_de', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'permission_id'])->update();
+        $table->addColumn('name_de', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('name_en', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_de'])->update();
         $table->addColumn('name_fr', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_en'])->update();
         $table->addColumn('name_it', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_fr'])->update();
@@ -38,12 +37,7 @@ class Init extends AbstractMigration
         $table->addColumn('deleted', 'integer', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'modified_by'])->update();
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
-        $table->addColumn('positioncol', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'deleted_by'])->update();
         $table->save();
-        if($this->table('app_position')->hasIndex('fk_position_permission1_idx')) ***REMOVED***
-            $this->table("app_position")->removeIndexByName('fk_position_permission1_idx');
-    ***REMOVED***
-        $this->table("app_position")->addIndex(['permission_id'], ['name' => "fk_position_permission1_idx", 'unique' => false])->save();
         $table = $this->table("app_user", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('app_user')->hasColumn('id')) ***REMOVED***
@@ -54,14 +48,15 @@ class Init extends AbstractMigration
         $table->addColumn('city_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
         $table->addColumn('language_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'city_id'])->update();
         $table->addColumn('department_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'language_id'])->update();
-        $table->addColumn('position_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_id'])->update();
+        $table->addColumn('permission_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_id'])->update();
+        $table->addColumn('position_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'permission_id'])->update();
         $table->addColumn('gender_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'position_id'])->update();
         $table->addColumn('first_name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'gender_id'])->update();
         $table->addColumn('email', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'first_name'])->update();
         $table->addColumn('username', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'email'])->update();
         $table->addColumn('password', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'username'])->update();
-        $table->addColumn('signup_completed', 'integer', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'password'])->update();
-        $table->addColumn('js_certificate', 'integer', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'signup_completed'])->update();
+        $table->addColumn('signup_completed', 'boolean', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'password'])->update();
+        $table->addColumn('js_certificate', 'boolean', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'signup_completed'])->update();
         $table->addColumn('last_name', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'js_certificate'])->update();
         $table->addColumn('address', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'last_name'])->update();
         $table->addColumn('cevi_name', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'address'])->update();
@@ -69,13 +64,12 @@ class Init extends AbstractMigration
         $table->addColumn('phone', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'birthdate'])->update();
         $table->addColumn('mobile', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'phone'])->update();
         $table->addColumn('js_certificate_until', 'year', ['null' => true, 'limit' => 4, 'after' => 'mobile'])->update();
-        $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'js_certificate_until'])->update();
-        $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created'])->update();
-        $table->addColumn('modified', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
-        $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified'])->update();
-        $table->addColumn('deleted', 'integer', ['null' => false, 'default' => '0', 'limit' => MysqlAdapter::INT_TINY, 'precision' => 3, 'after' => 'modified_by'])->update();
-        $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
-        $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
+        $table->addColumn('created_at', 'datetime', ['null' => true, 'after' => 'js_certificate_until'])->update();
+        $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created_at'])->update();
+        $table->addColumn('modified_at', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
+        $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified_at'])->update();
+        $table->addColumn('archived_at', 'datetime', ['null' => true, 'after' => 'modified_by'])->update();
+        $table->addColumn('archived_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'archived_at'])->update();
         $table->save();
         if($this->table('app_user')->hasIndex('fk_user_department1_idx')) ***REMOVED***
             $this->table("app_user")->removeIndexByName('fk_user_department1_idx');
@@ -97,6 +91,10 @@ class Init extends AbstractMigration
             $this->table("app_user")->removeIndexByName('fk_user_city1_idx');
     ***REMOVED***
         $this->table("app_user")->addIndex(['city_id'], ['name' => "fk_user_city1_idx", 'unique' => false])->save();
+        if($this->table('app_user')->hasIndex('fk_user_permission1')) ***REMOVED***
+            $this->table("app_user")->removeIndexByName('fk_user_permission1');
+    ***REMOVED***
+        $this->table("app_user")->addIndex(['permission_id'], ['name' => "fk_user_permission1", 'unique' => false])->save();
         $table = $this->table("article", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('article')->hasColumn('id')) ***REMOVED***
@@ -108,10 +106,11 @@ class Init extends AbstractMigration
         $table->addColumn('article_description_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'article_title_id'])->update();
         $table->addColumn('article_quality_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'article_description_id'])->update();
         $table->addColumn('storage_place_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'article_quality_id'])->update();
-        $table->addColumn('date', 'datetime', ['null' => false, 'after' => 'storage_place_id'])->update();
+        $table->addColumn('department_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'storage_place_id'])->update();
+        $table->addColumn('date', 'datetime', ['null' => false, 'after' => 'department_id'])->update();
         $table->addColumn('quantity', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'date'])->update();
         $table->addColumn('replace', 'datetime', ['null' => false, 'after' => 'quantity'])->update();
-        $table->addColumn('barcode', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'replace'])->update();
+        $table->addColumn('barcode', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'replace'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'barcode'])->update();
         $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created'])->update();
         $table->addColumn('modified', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
@@ -136,6 +135,10 @@ class Init extends AbstractMigration
             $this->table("article")->removeIndexByName('fk_article_storage_place1_idx');
     ***REMOVED***
         $this->table("article")->addIndex(['storage_place_id'], ['name' => "fk_article_storage_place1_idx", 'unique' => false])->save();
+        if($this->table('article')->hasIndex('fk_article_department_id')) ***REMOVED***
+            $this->table("article")->removeIndexByName('fk_article_department_id');
+    ***REMOVED***
+        $this->table("article")->addIndex(['department_id'], ['name' => "fk_article_department_id", 'unique' => false])->save();
         $table = $this->table("article_description", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('article_description')->hasColumn('id')) ***REMOVED***
@@ -233,8 +236,7 @@ class Init extends AbstractMigration
             $this->table("department")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('department_group_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
-        $table->addColumn('department_region_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_group_id'])->update();
-        $table->addColumn('department_type_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_region_id'])->update();
+        $table->addColumn('department_type_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_group_id'])->update();
         $table->addColumn('city_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'department_type_id'])->update();
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'city_id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -248,7 +250,7 @@ class Init extends AbstractMigration
         if($this->table('department')->hasIndex('fk_department_department_group_idx')) ***REMOVED***
             $this->table("department")->removeIndexByName('fk_department_department_group_idx');
     ***REMOVED***
-        $this->table("department")->addIndex(['department_region_id'], ['name' => "fk_department_department_group_idx", 'unique' => false])->save();
+        $this->table("department")->addIndex(['department_group_id'], ['name' => "fk_department_department_group_idx", 'unique' => false])->save();
         if($this->table('department')->hasIndex('fk_department_city1_idx')) ***REMOVED***
             $this->table("department")->removeIndexByName('fk_department_city1_idx');
     ***REMOVED***
@@ -257,10 +259,6 @@ class Init extends AbstractMigration
             $this->table("department")->removeIndexByName('fk_department_department_type1_idx');
     ***REMOVED***
         $this->table("department")->addIndex(['department_type_id'], ['name' => "fk_department_department_type1_idx", 'unique' => false])->save();
-        if($this->table('department')->hasIndex('fk_department_department_group1_idx')) ***REMOVED***
-            $this->table("department")->removeIndexByName('fk_department_department_group1_idx');
-    ***REMOVED***
-        $this->table("department")->addIndex(['department_group_id'], ['name' => "fk_department_department_group1_idx", 'unique' => false])->save();
         $table = $this->table("department_event", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('department_event')->hasColumn('id')) ***REMOVED***
@@ -280,11 +278,11 @@ class Init extends AbstractMigration
             $this->table("department_event")->removeIndexByName('fk_department_has_event_department1_idx');
     ***REMOVED***
         $this->table("department_event")->addIndex(['department_id'], ['name' => "fk_department_has_event_department1_idx", 'unique' => false])->save();
-        if($this->table('department_event')->hasIndex('fk_department_event_department_group1_idx')) ***REMOVED***
-            $this->table("department_event")->removeIndexByName('fk_department_event_department_group1_idx');
+        if($this->table('department_event')->hasIndex('fk_department_has_event_department_group1')) ***REMOVED***
+            $this->table("department_event")->removeIndexByName('fk_department_has_event_department_group1');
     ***REMOVED***
-        $this->table("department_event")->addIndex(['department_group_id'], ['name' => "fk_department_event_department_group1_idx", 'unique' => false])->save();
-        $table = $this->table("department_group", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => "epart"]);
+        $this->table("department_event")->addIndex(['department_group_id'], ['name' => "fk_department_has_event_department_group1", 'unique' => false])->save();
+        $table = $this->table("department_group", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('department_group')->hasColumn('id')) ***REMOVED***
             $this->table("department_group")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
@@ -293,8 +291,8 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('name_de', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('name_en', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_de'])->update();
-        $table->addColumn('name_it', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_en'])->update();
-        $table->addColumn('name_fr', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_it'])->update();
+        $table->addColumn('name_fr', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_en'])->update();
+        $table->addColumn('name_it', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_fr'])->update();
         $table->save();
         $table = $this->table("department_region", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
@@ -610,12 +608,12 @@ class Init extends AbstractMigration
         $table->addColumn('level', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'level'])->update();
         $table->save();
-        $table = $this->table("sp_chest", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_chest", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_chest')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_chest")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_chest")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_chest")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_chest")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -626,12 +624,12 @@ class Init extends AbstractMigration
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
         $table->save();
-        $table = $this->table("sp_corridor", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_corridor", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_corridor')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_corridor")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_corridor")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_corridor")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_corridor")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -642,12 +640,12 @@ class Init extends AbstractMigration
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
         $table->save();
-        $table = $this->table("sp_location", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_location", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_location')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_location")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_location")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_location")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_location")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -658,12 +656,12 @@ class Init extends AbstractMigration
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
         $table->save();
-        $table = $this->table("sp_room", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_room", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_room')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_room")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_room")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_room")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_room")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -674,12 +672,12 @@ class Init extends AbstractMigration
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
         $table->save();
-        $table = $this->table("sp_shelf", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_shelf", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_shelf')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_shelf")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_shelf")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_shelf")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_shelf")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -690,12 +688,12 @@ class Init extends AbstractMigration
         $table->addColumn('deleted_at', 'datetime', ['null' => true, 'after' => 'deleted'])->update();
         $table->addColumn('deleted_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'deleted_at'])->update();
         $table->save();
-        $table = $this->table("sp_tray", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table = $this->table("sl_tray", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('sl_tray')->hasColumn('id')) ***REMOVED***
-            $this->table("sp_tray")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_tray")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED*** else ***REMOVED***
-            $this->table("sp_tray")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+            $this->table("sl_tray")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
@@ -719,7 +717,8 @@ class Init extends AbstractMigration
         $table->addColumn('sl_shelf_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'sl_corridor_id'])->update();
         $table->addColumn('sl_tray_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'sl_shelf_id'])->update();
         $table->addColumn('sl_chest_id', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'sl_tray_id'])->update();
-        $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'sl_chest_id'])->update();
+        $table->addColumn('name', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'sl_chest_id'])->update();
+        $table->addColumn('created', 'datetime', ['null' => true, 'after' => 'name'])->update();
         $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created'])->update();
         $table->addColumn('modified', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
         $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified'])->update();

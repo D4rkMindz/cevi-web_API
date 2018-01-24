@@ -147,8 +147,8 @@ class UserController extends AppController
     public function deleteUserAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         if (!$this->userRepository->deleteUser($args['user_id'], $this->jwt['user_id'])) ***REMOVED***
-            $this->error($response, 'Forbidden', 403, ['message' => __('Can not delete user')]);
+            $this->error($response, 'Forbidden', 403, ['message' => __('Deleting user failed')]);
     ***REMOVED***
-        return $this->json($response, []);
+        return $this->json($response, ['message' => __('User deleted successfully')]);
 ***REMOVED***
 ***REMOVED***

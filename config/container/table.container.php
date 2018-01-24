@@ -29,7 +29,7 @@ use App\Table\UserTable;
 use Cake\Database\Connection;
 use Slim\Container;
 
-$container = app()->getContainer();
+$container = $app->getContainer();
 
 $container[AppTable::class] = function (Container $container) ***REMOVED***
     return new AppTable($container->get(Connection::class));

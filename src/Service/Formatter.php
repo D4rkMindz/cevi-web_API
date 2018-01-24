@@ -27,7 +27,10 @@ class Formatter
         ];
         $tmp['gender'] = [
             'id' => $user['gender_id'],
-            'name' => $user['gender_name'],
+            'name_de' => $user['gender_name_de'],
+            'name_en' => $user['gender_name_en'],
+            'name_fr' => $user['gender_name_fr'],
+            'name_it' => $user['gender_name_it'],
         ];
         $tmp['language'] = [
             'full_name' => $user['language_full'],
@@ -50,16 +53,15 @@ class Formatter
         ];
         $tmp['birthdate'] = $user['birthdate'];
         $tmp['js_certificate'] = (bool)$user['js_certificate'];
-        $tmp['js_certificate'] = date('Y-m-d H:i:s', $user['js_certificate_until']);
+        $tmp['js_certificate_until'] = $user['js_certificate_until'];
         $tmp['signup_completed'] = (bool)$user['signup_completed'];
         $tmp['url'] = baseurl('/v2/users/' . $user['id']);
-        $tmp['created'] = date('Y-m-d H:i:s', $user['created']);
-        $tmp['created_by'] = $user['modified_by'];
-        $tmp['modified'] = date('Y-m-d H:i:s', $user['modified']);
+        $tmp['created_at'] = $user['created_at'];
+        $tmp['created_by'] = $user['created_by'];
+        $tmp['modified_at'] = $user['modified_at'];
         $tmp['modified_by'] = $user['modified_by'];
-        $tmp['deleted'] = (bool)$user['deleted'];
-        $tmp['deleted_by'] = (int)$user['deleted_by'];
-        $tmp['deleted_at'] = date('Y-m-d H:i:s', $user['deleted_at']);
+        $tmp['archived_by'] = (int)$user['archived_by'];
+        $tmp['archived_at'] = $user['archived_at'];
 
         return $tmp;
 ***REMOVED***
@@ -265,7 +267,12 @@ class Formatter
         $tmp['quantity'] = (int)$article['quantity'];
         $tmp['quality'] = [
             'level' => (int)$article['quality_level'],
-            'name' => $article['quality_name'],
+            'name' => [
+                'name_de' => $article['quality_name_de'],
+                'name_en' => $article['quality_name_en'],
+                'name_fr' => $article['quality_name_fr'],
+                'name_it' => $article['quality_name_it'],
+            ],
         ];
         $tmp['storage'] = [
             'id' => $article['location_id'],

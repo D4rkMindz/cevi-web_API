@@ -13,7 +13,7 @@ use App\Repository\StorageRepository;
 use App\Repository\UserRepository;
 use Slim\Container;
 
-$container = app()->getContainer();
+$container = $app->getContainer();
 
 $container[ArticleRepository::class] = function (Container $container) ***REMOVED***
     return new ArticleRepository($container);

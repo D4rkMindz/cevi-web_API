@@ -5,6 +5,7 @@
 
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
+use App\Service\Role;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
@@ -16,7 +17,6 @@ use Symfony\Component\Translation\Loader\MoFileLoader;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator;
 
-$app = app();
 $container = $app->getContainer();
 
 /**
@@ -40,42 +40,6 @@ $container['environment'] = function (): Environment ***REMOVED***
  */
 $container[Connection::class] = function (Container $container): Connection ***REMOVED***
     $config = $container->get('settings')->get('db');
-    $driver = new Mysql([
-        'host' => $config['host'],
-        'port' => $config['port'],
-        'database' => $config['database'],
-        'username' => $config['username'],
-        'password' => $config['password'],
-        'encoding' => $config['encoding'],
-        'charset' => $config['charset'],
-        'collation' => $config['collation'],
-        'prefix' => '',
-        'flags' => [
-            // Enable exceptions
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            // Set default fetch mode
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_PERSISTENT => false,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8 COLLATE utf8_unicode_ci",
-        ],
-    ]);
-    $db = new Connection([
-        'driver' => $driver,
-    ]);
-    $db->connect();
-
-    return $db;
-***REMOVED***;
-
-/**
- * Database test connection container.
- *
- * @param Container $container
- * @return Connection
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Connection::class . '_test'] = function (Container $container): Connection ***REMOVED***
-    $config = $container->get('settings')->get('db_test');
     $driver = new Mysql([
         'host' => $config['host'],
         'port' => $config['port'],
@@ -158,6 +122,16 @@ $container[Translator::class] = function (Container $container): Translator ***R
     $translator->addResource('mo', $resource, $locale);
     $translator->setLocale($locale);
     return $translator;
+***REMOVED***;
+
+/**
+ * Role Container.
+ *
+ * @param Container $container
+ * @return Role
+ */
+$container[Role::class] = function (Container $container) ***REMOVED***
+    return new Role($container);
 ***REMOVED***;
 
 /**

@@ -39,25 +39,23 @@ function route(callable $callback): string
 /**
  * Translation function (i18n).
  *
- * @param $message
+ * @param mixed $message
  * @return string
  */
-function __($message)
-***REMOVED***
+function __($message): string ***REMOVED***
+    static $translator = null;
     /* @var $translator Translator */
-    try ***REMOVED***
-        $translator = app()->getContainer()->get(Translator::class);
-***REMOVED*** catch (\Psr\Container\NotFoundExceptionInterface $e) ***REMOVED***
-***REMOVED*** catch (\Psr\Container\ContainerExceptionInterface $e) ***REMOVED***
+    if ($message instanceof Translator) ***REMOVED***
+        $translator = $message;
+        return '';
 ***REMOVED***
-
     $translated = $translator->trans($message);
     $context = array_slice(func_get_args(), 1);
     if (!empty($context)) ***REMOVED***
         $translated = vsprintf($translated, $context);
 ***REMOVED***
     return $translated;
-***REMOVED***
+***REMOVED***;
 
 /**
  * Get Container.

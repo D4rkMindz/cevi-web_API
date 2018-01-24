@@ -9,6 +9,7 @@ use App\Table\CityTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
 use App\Table\DepartmentTypeTable;
+use Cake\Database\Query;
 use Exception;
 use Slim\Container;
 
@@ -113,9 +114,9 @@ class DepartmentRepository extends AppRepository
     /**
      * Get join query.
      *
-     * @return \Cake\Database\Query
+     * @return Query
      */
-    private function getDepartmentQuery(): \Cake\Database\Query
+    private function getDepartmentQuery(): Query
     ***REMOVED***
         $departmentTableName = $this->departmentTable->getTablename();
         $cityTableName = $this->cityTable->getTablename();
@@ -181,7 +182,7 @@ class DepartmentRepository extends AppRepository
     public function getDepartment(string $departmentId)
     ***REMOVED***
         $query = $this->getDepartmentQuery();
-        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId, 'deleted' => false]);
+        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId, $this->departmentTable->getTablename() . '.deleted' => false]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return [];
@@ -211,10 +212,8 @@ class DepartmentRepository extends AppRepository
             'department_type_id' => $departmentTypeId,
             'city_id' => $cityId,
             'name' => $name,
-            'created' => date('Y-m-d H:i:s'),
-            'created_by' => $userId,
         ];
-        $lastInsertedId = $this->departmentTable->insert($data);
+        $lastInsertedId = $this->departmentTable->insert($data, $userId);
 
         return $lastInsertedId;
 ***REMOVED***
@@ -257,7 +256,7 @@ class DepartmentRepository extends AppRepository
         $error = false;
 
         try ***REMOVED***
-            $this->departmentTable->update($row, $departmentId);
+            $this->departmentTable->update($row, [ 'id' =>  $departmentId], $userId);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             $error = true;
     ***REMOVED***
@@ -283,7 +282,7 @@ class DepartmentRepository extends AppRepository
         $error = false;
 
         try ***REMOVED***
-            $this->departmentTable->update($row, $departmentId);
+            $this->departmentTable->update($row, ['id'=>$departmentId], $userId);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             $error = true;
     ***REMOVED***

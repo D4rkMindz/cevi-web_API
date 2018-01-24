@@ -1,9 +1,8 @@
 RewriteEngine on
 
-RewriteCond %***REMOVED***HTTPS***REMOVED*** !on
-RewriteRule .* https://%***REMOVED***SERVER_NAME***REMOVED***%***REMOVED***REQUEST_URI***REMOVED*** [R=301,L]
-
 # RewriteBase /
-RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-d
+# Allow directories (in public folder)
+# RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-d
+# Allow files (in public folder)
 RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-f
 RewriteRule ^ index.php [QSA,L]

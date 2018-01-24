@@ -5,11 +5,12 @@ namespace App\Table;
 use Cake\Database\Connection;
 use Cake\Database\Query;
 use Cake\Database\StatementInterface;
+use Exception;
 
 /**
  * Class AppTable
  */
-class AppTable
+class AppTable implements TableInterface
 ***REMOVED***
     protected $table = null;
 
@@ -77,22 +78,27 @@ class AppTable
      * Insert into database.
      *
      * @param array $row with data to insertUser into database
+     * @param string $userId
      * @return string last inserted ID
      */
-    public function insert(array $row): string
+    public function insert(array $row, string $userId): string
     ***REMOVED***
+        $row['created'] = date('Y-m-d H:i:s');
+        $row['created'] = $userId;
         return $this->connection->insert($this->table, $row)->lastInsertId($this->table);
 ***REMOVED***
 
     /**
      * Update database
      *
-     * @param string $where should be the id
      * @param array $row
+     * @param string $where should be the id
+     * @param string $userId
      * @return StatementInterface
      */
-    public function update(array $row, string $where): StatementInterface
+    public function update(array $row, array $where, string $userId): StatementInterface
     ***REMOVED***
+        // todo add user id to all update calls
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
@@ -103,11 +109,28 @@ class AppTable
     /**
      * Delete from database.
      *
-     * @param string $id
+     * @param string $executorId
+     * @param array $where
      * @return StatementInterface
      */
-    public function delete(string $id): StatementInterface
+    public function delete(string $executorId, array $where): bool
     ***REMOVED***
-        return $this->connection->delete($this->table, ['id' => $id, 'deleted = ' => false]);
+        $row = [
+            'deleted' => true,
+            'deleted_by' => $executorId,
+            'deleted_at' => date('Y-m-d H:i:s'),
+        ];
+        $query = $this->connection->newQuery();
+        $query->update($this->table)
+            ->set($row)
+            ->where($where);
+
+        $result = true;
+        try ***REMOVED***
+            return $query->execute();
+    ***REMOVED*** catch (Exception $exception)***REMOVED***
+            $result = false;
+    ***REMOVED***
+        return $result;
 ***REMOVED***
 ***REMOVED***

@@ -6,7 +6,7 @@ use App\Service\Login\LoginValidation;
 use App\Service\User\UserValidation;
 use Slim\Container;
 
-$container = app()->getContainer();
+$container = $app->getContainer();
 
 $container[ArticleValidation::class] = function (Container $container) ***REMOVED***
     return  new ArticleValidation($container);

@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Factory\JWTFactory;
 use App\Repository\UserRepository;
 use App\Service\Login\LoginValidation;
-use Firebase\JWT\JWT;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -60,9 +59,9 @@ class AuthenticationController extends AppController
         $lang = (string)$data['lang'];
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
             $userId = $this->userRepository->getIdByusername($username);
-            $tokendata = JWTFactory::generate($username, $userId, $lang);
-            $expiresAt = $tokendata['exp'];
-            $token = JWT::encode($tokendata, $this->secret);
+            $expireOffset = 60 * 60 * 8;
+            $token = JWTFactory::generate($username, $userId, $lang, $this->secret, $expireOffset);
+            $expiresAt = time() + $expireOffset;
             return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt]);
     ***REMOVED***
         return $this->error($response, 'Unprocessable entity', 422, ['message' => __('invalid user data')]);
