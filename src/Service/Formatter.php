@@ -200,9 +200,10 @@ class Formatter
      *
      * @param array $article
      * @param string|null $descriptionFormat
+     * @param bool $withStorageplaces
      * @return array
      */
-    public function formatArticle(array $article, string $descriptionFormat = null): array
+    public function formatArticle(array $article, string $descriptionFormat = null, bool $withStorageplaces = true): array
     ***REMOVED***
         $tmp = [];
         $tmp['id'] = $article['id'];
@@ -231,6 +232,21 @@ class Formatter
     ***REMOVED*** else if ($descriptionFormat === 'plain') ***REMOVED***
             $tmp['description'] = [
                 'name_de' => [
+                    'plain' => $article['description_name_de']
+                ],
+                'name_en' => [
+                    'plain' => $article['description_name_en']
+                ],
+                'name_fr' => [
+                    'plain' => $article['description_name_fr']
+                ],
+                'name_it' => [
+                    'plain' => $article['description_name_it']
+                ],
+            ];
+    ***REMOVED*** else ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
                     'plain' => $article['description_name_de'],
                     'parsed' => MDParser::parse($article['description_name_de']),
                 ],
@@ -247,21 +263,6 @@ class Formatter
                     'parsed' => MDParser::parse($article['description_name_it']),
                 ],
             ];
-    ***REMOVED*** else ***REMOVED***
-            $tmp['description'] = [
-                'name_de' => [
-                    'plain' => $article['description_name_de']
-                ],
-                'name_en' => [
-                    'plain' => $article['description_name_en']
-                ],
-                'name_fr' => [
-                    'plain' => $article['description_name_fr']
-                ],
-                'name_it' => [
-                    'plain' => $article['description_name_it']
-                ],
-            ];
     ***REMOVED***
         $tmp['purchase_date'] = $article['purchase_date'];
         $tmp['quantity'] = (int)$article['quantity'];
@@ -274,36 +275,38 @@ class Formatter
                 'name_it' => $article['quality_name_it'],
             ],
         ];
-        $tmp['storage'] = [
-            'id' => $article['location_id'],
-            'name' => $article['location_name'],
-            'url' => baseurl('/v2/articles/' . $article['location_id']),
-        ];
-        $tmp['room'] = [
-            'id' => $article['room_id'],
-            'name' => $article['room_name'],
-            'url' => baseurl('/v2/articles/' . $article['room_id']),
-        ];
-        $tmp['corridor'] = [
-            'id' => $article['corridor_id'],
-            'name' => $article['corridor_name'],
-            'url' => baseurl('/v2/articles/' . $article['corridor_id']),
-        ];
-        $tmp['shelf'] = [
-            'id' => $article['shelf_id'],
-            'name' => $article['shelf_name'],
-            'url' => baseurl('/v2/articles/' . $article['shelf_id']),
-        ];
-        $tmp['tray'] = [
-            'id' => $article['tray_id'],
-            'name' => $article['tray_name'],
-            'url' => baseurl('/v2/articles/' . $article['tray_id']),
-        ];
-        $tmp['chest'] = [
-            'id' => $article['chest_id'],
-            'name' => $article['chest_name'],
-            'url' => baseurl('/v2/articles/' . $article['chest_id']),
-        ];
+        if ($withStorageplaces) ***REMOVED***
+            $tmp['storage'] = [
+                'id' => $article['location_id'],
+                'name' => $article['location_name'],
+                'url' => baseurl('/v2/articles/' . $article['location_id']),
+            ];
+            $tmp['room'] = [
+                'id' => $article['room_id'],
+                'name' => $article['room_name'],
+                'url' => baseurl('/v2/articles/' . $article['room_id']),
+            ];
+            $tmp['corridor'] = [
+                'id' => $article['corridor_id'],
+                'name' => $article['corridor_name'],
+                'url' => baseurl('/v2/articles/' . $article['corridor_id']),
+            ];
+            $tmp['shelf'] = [
+                'id' => $article['shelf_id'],
+                'name' => $article['shelf_name'],
+                'url' => baseurl('/v2/articles/' . $article['shelf_id']),
+            ];
+            $tmp['tray'] = [
+                'id' => $article['tray_id'],
+                'name' => $article['tray_name'],
+                'url' => baseurl('/v2/articles/' . $article['tray_id']),
+            ];
+            $tmp['chest'] = [
+                'id' => $article['chest_id'],
+                'name' => $article['chest_name'],
+                'url' => baseurl('/v2/articles/' . $article['chest_id']),
+            ];
+    ***REMOVED***
         $tmp['replacement'] = [
             'needed' => strtotime($article['replace']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
             'date' => $article['replace'],
@@ -317,6 +320,44 @@ class Formatter
         $tmp['deleted_by'] = $article['deleted_by'];
         $tmp['deleted_at'] = $article['deleted_at'];
 
+        return $tmp;
+***REMOVED***
+
+    public function formatStoragePlace(array $storagePlace, string $departmentId): array
+    ***REMOVED***
+        $tmp = [];
+        $tmp['location'] = [
+            'id' => $storagePlace['location_id'],
+            'name' => $storagePlace['location_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/locations/' . $storagePlace['location_id']),
+        ];
+        $tmp['room'] = [
+            'id' => $storagePlace['room_id'],
+            'name' => $storagePlace['room_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/rooms/' . $storagePlace['room_id']),
+        ];
+        $tmp['corridor'] = [
+            'id' => $storagePlace['corridor_id'],
+            'name' => $storagePlace['corridor_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/corridors/' . $storagePlace['corridor_id']),
+        ];
+        $tmp['shelf'] = [
+            'id' => $storagePlace['shelf_id'],
+            'name' => $storagePlace['shelf_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/shelfs/' . $storagePlace['shelf_id']),
+        ];
+        $tmp['tray'] = [
+            'id' => $storagePlace['tray_id'],
+            'name' => $storagePlace['tray_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/trays/' . $storagePlace['tray_id']),
+        ];
+        $tmp['chest'] = [
+            'id' => $storagePlace['chest_id'],
+            'name' => $storagePlace['chest_name'],
+            'url' => baseurl('/v2/departments/' . $departmentId . '/chests/' . $storagePlace['chest_id']),
+        ];
+        $tmp['name'] = $storagePlace['name'];
+        $tmp['id'] = $storagePlace['id'];
         return $tmp;
 ***REMOVED***
 ***REMOVED***

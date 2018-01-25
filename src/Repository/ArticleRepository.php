@@ -128,6 +128,79 @@ class ArticleRepository extends AppRepository
 ***REMOVED***
 
     /**
+     * Get all articles for storage place
+     *
+     * @param string $storagePlaceId
+     * @param string $descriptionFormat 'both'||'plain'||'parsed'
+     * @return array
+     */
+    public function getArticleForStorageplace(string $storagePlaceId, string $descriptionFormat = 'both')
+    ***REMOVED***
+        $articleTableName = $this->articleTable->getTablename();
+        $articleTitleTableName = $this->articleTitleTable->getTablename();
+        $articleDescriptionTableName = $this->articleDescrtiptionTable->getTablename();
+        $articleQualityTableName = $this->articleQualtityTable->getTablename();
+
+        $fields = [
+            'id' => $articleTableName . '.id',
+            'title_name_de' => $articleTitleTableName . '.name_de',
+            'title_name_en' => $articleTitleTableName . '.name_en',
+            'title_name_fr' => $articleTitleTableName . '.name_fr',
+            'title_name_it' => $articleTitleTableName . '.name_it',
+            'description_name_de' => $articleDescriptionTableName . '.name_de',
+            'description_name_en' => $articleDescriptionTableName . '.name_en',
+            'description_name_fr' => $articleDescriptionTableName . '.name_fr',
+            'description_name_it' => $articleDescriptionTableName . '.name_it',
+            'purchase_date' => $articleTableName . '.date',
+            'quantity' => $articleTableName . '.quantity',
+            'quality_level' => $articleQualityTableName . '.level',
+            'quality_name_de' => $articleQualityTableName . '.name_de',
+            'quality_name_en' => $articleQualityTableName . '.name_en',
+            'quality_name_fr' => $articleQualityTableName . '.name_fr',
+            'quality_name_it' => $articleQualityTableName . '.name_it',
+            'replace' => $articleTableName . '.replace',
+            'barcode' => $articleTableName . '.barcode',
+            'created' => $articleTableName . '.created',
+            'created_by' => $articleTableName . '.created_by',
+            'modified' => $articleTableName . '.modified',
+            'modified_by' => $articleTableName . '.modified_by',
+            'deleted' => $articleTableName . '.deleted',
+            'deleted_by' => $articleTableName . '.deleted_by',
+            'deleted_at' => $articleTableName . '.deleted_at',
+        ];
+
+        $join = [
+            [
+                'table' => $articleTitleTableName,
+                'type' => 'INNER',
+                'conditions' => $articleTableName . '.article_title_id = ' . $articleTitleTableName . '.id',
+            ],
+            [
+                'table' => $articleDescriptionTableName,
+                'type' => 'INNER',
+                'conditions' => $articleTableName . '.article_description_id = ' . $articleDescriptionTableName . '.id',
+            ],
+            [
+                'table' => $articleQualityTableName,
+                'type' => 'INNER',
+                'conditions' => $articleTableName . '.article_quality_id = ' . $articleQualityTableName . '.id',
+            ],
+        ];
+        $query = $this->articleTable->newSelect();
+        $query->select($fields)->join($join)->where([$this->articleTable->getTablename(). '.storage_place_id' => $storagePlaceId]);
+        $articles = $query->execute()->fetchAll('assoc');
+        if (empty($articles)) ***REMOVED***
+            return [];
+    ***REMOVED***
+
+        foreach ($articles as $key => $article) ***REMOVED***
+            $articles[$key] = $this->formatter->formatArticle($article, $descriptionFormat, false);
+    ***REMOVED***
+
+        return $articles;
+***REMOVED***
+
+    /**
      * Get all articles.
      *
      * @param int $departmentId

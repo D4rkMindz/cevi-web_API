@@ -18,7 +18,7 @@ $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAc
 /***********************************************************************************************************************
  * Basic Information routes
  */
-$app->get('/v2/departmentgroups', route(['App\Controller\BasicInformationController','departmentGroupAction']))->setName('get.departmentGroups');
+$app->get('/v2/departmentgroups', route(['App\Controller\BasicInformationController', 'departmentGroupAction']))->setName('get.departmentGroups');
 $app->get('/v2/cities', route(['App\Controller\BasicInformationController', 'cityAction']))->setName('get.cities');
 $app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eventAction']))->setName('get.events');
 
@@ -41,6 +41,13 @@ $app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articl
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/***REMOVED***article_id:[0-9]+***REMOVED***', route(['App\Controller\ArticleController', 'deleteArticleAction']))->setName('delete.article');
 $app->get('/v2/articles/quality', route(['App\Controller\ArticleController', 'getQualitiesAction']))->setName('get.article.qualities');
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articles/quality', route(['App\Controller\ArticleController', 'getQualitiesAction']))->setName('get.department.article.qualities');
+
+/***********************************************************************************************************************
+ * Storage Places routes
+ */
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages', route(['App\Controller\StorageController', 'getAllStoragePlacesAction']))->setName('get.all-storages');
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages/***REMOVED***storage_id:[0-9]+***REMOVED***', route(['App\Controller\StorageController', 'getStoragPlaceAction']))->setName('get.storage');
+
 
 /***********************************************************************************************************************
  * Error routes
