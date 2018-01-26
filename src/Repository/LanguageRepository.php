@@ -33,7 +33,7 @@ class LanguageRepository extends AppRepository
     public function existsLanguage(string $languageId)
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $languageId, 'deleted = ' => false]);
+        $query->select('id')->where(['id' => $languageId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

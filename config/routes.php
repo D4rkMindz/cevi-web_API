@@ -46,7 +46,9 @@ $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/articl
  * Storage Places routes
  */
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages', route(['App\Controller\StorageController', 'getAllStoragePlacesAction']))->setName('get.all-storages');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages', route(['App\Controller\StorageController', 'createStoragePlaceAction']))->setName('post.storage');
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages/***REMOVED***storage_id:[0-9]+***REMOVED***', route(['App\Controller\StorageController', 'getStoragPlaceAction']))->setName('get.storage');
+$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/storages/***REMOVED***storage_id:[0-9]+***REMOVED***', route(['App\Controller\StorageController', 'updateStoragePlaceAction']))->setName('put.storage');
 
 
 /***********************************************************************************************************************

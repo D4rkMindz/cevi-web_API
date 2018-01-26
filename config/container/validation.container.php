@@ -3,6 +3,7 @@
 use App\Service\Article\ArticleValidation;
 use App\Service\Department\DepartmentValidation;
 use App\Service\Login\LoginValidation;
+use App\Service\Storage\StorageValidation;
 use App\Service\User\UserValidation;
 use Slim\Container;
 
@@ -22,4 +23,8 @@ $container[LoginValidation::class] = function (Container $container) ***REMOVED*
 
 $container[DepartmentValidation::class] = function (Container $container) ***REMOVED***
     return new DepartmentValidation($container);
+***REMOVED***;
+
+$container[StorageValidation::class] = function (Container $container) ***REMOVED***
+    return new StorageValidation($container);
 ***REMOVED***;

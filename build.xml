@@ -57,13 +57,13 @@
         <!-- Upload deploy.php -->
         <echo message="Uploading deploy.php ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/deploy.php"
-             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Upload clean-up.php -->
         <echo message="uploading clean-up.php ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/clean-up.php"
-             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Deleting clean-up.php and deploy.php -->
@@ -74,7 +74,7 @@
         <!-- Upload zip-file -->
         <echo message="Uploading $***REMOVED***filename***REMOVED*** ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/$***REMOVED***filename***REMOVED***"
-             todir="$***REMOVED***build.ftp.user***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Delete old directories -->
@@ -85,7 +85,7 @@
 
         <!-- Call deploy.php for zip-file -->
         <sshexec host="$***REMOVED***build.ftp.host***REMOVED***"
-                 username="$***REMOVED***build.ftp.user***REMOVED***"
+                 username="$***REMOVED***build.ftp.users***REMOVED***"
                  password="$***REMOVED***build.ftp.password***REMOVED***"
                  command="cd $***REMOVED***build.ftp.dir***REMOVED***;php deploy.php $***REMOVED***filename***REMOVED***"
                  usepty="true"

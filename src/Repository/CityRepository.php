@@ -59,7 +59,7 @@ class CityRepository extends AppRepository
     public function existsPostcode(string $postcode): bool
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select('number')->where(['number' => $postcode, 'deleted = ' => false]);
+        $query->select('number')->where(['number' => $postcode, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -73,7 +73,7 @@ class CityRepository extends AppRepository
     public function existsCity(string $cityId)
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select('id')->where(['id' => $cityId, 'deleted = ' => false]);
+        $query->select('id')->where(['id' => $cityId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

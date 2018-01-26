@@ -160,13 +160,12 @@ class ArticleRepository extends AppRepository
             'quality_name_it' => $articleQualityTableName . '.name_it',
             'replace' => $articleTableName . '.replace',
             'barcode' => $articleTableName . '.barcode',
-            'created' => $articleTableName . '.created',
+            'created_at' => $articleTableName . '.created_at',
             'created_by' => $articleTableName . '.created_by',
-            'modified' => $articleTableName . '.modified',
+            'modified_at' => $articleTableName . '.modified_at',
             'modified_by' => $articleTableName . '.modified_by',
-            'deleted' => $articleTableName . '.deleted',
-            'deleted_by' => $articleTableName . '.deleted_by',
-            'deleted_at' => $articleTableName . '.deleted_at',
+            'archived_by' => $articleTableName . '.archived_by',
+            'archived_at' => $articleTableName . '.archived_at',
         ];
 
         $join = [
@@ -216,7 +215,7 @@ class ArticleRepository extends AppRepository
             ->page($page)
             ->where([
                 $articleTableName . '.department_id' => $departmentId,
-                $articleTableName . '.deleted' => false,
+                $articleTableName . '.archived_at' => date('Y-m-d H:i:s'),
             ]);
         $articles = $query->execute()->fetchAll('assoc');
 
@@ -273,7 +272,7 @@ class ArticleRepository extends AppRepository
     public function updateArticle(array $article, string $lang, string $userId): bool
     ***REMOVED***
         $row = [
-            'modified' => date('Y-m-d H:i:s'),
+            'modified_at' => date('Y-m-d H:i:s'),
             'modified_by' => $userId,
         ];
         if (array_key_exists('title', $article)) ***REMOVED***
@@ -365,7 +364,7 @@ class ArticleRepository extends AppRepository
     public function existsQuality(string $qualityId): bool
     ***REMOVED***
         $query = $this->articleQualtityTable->newSelect();
-        $query->select(1)->where(['id' => $qualityId, 'deleted' => false]);
+        $query->select(1)->where(['id' => $qualityId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -433,13 +432,12 @@ class ArticleRepository extends AppRepository
             'chest_name' => $slChestTableName . '.name',
             'replace' => $articleTableName . '.replace',
             'barcode' => $articleTableName . '.barcode',
-            'created' => $articleTableName . '.created',
+            'created_at' => $articleTableName . '.created_at',
             'created_by' => $articleTableName . '.created_by',
-            'modified' => $articleTableName . '.modified',
+            'modified_at' => $articleTableName . '.modified_at',
             'modified_by' => $articleTableName . '.modified_by',
-            'deleted' => $articleTableName . '.deleted',
-            'deleted_by' => $articleTableName . '.deleted_by',
-            'deleted_at' => $articleTableName . '.deleted_at',
+            'archived_by' => $articleTableName . '.archived_by',
+            'archived_at' => $articleTableName . '.archived_at',
         ];
 
         $join = [
@@ -562,7 +560,7 @@ class ArticleRepository extends AppRepository
             'sl_shelf_id' => $shelfId,
             'sl_tray_id' => $trayId,
             'sl_chest_id' => $chestId,
-            'deleted' => false,
+            'archived_at' => date('Y-m-d H:i:s'),
         ];
         $query = $this->storagePlaceTable->newSelect();
         $query->select('id')->where($row);
@@ -573,7 +571,7 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
 
         $row['name'] = $name;
-        $row['created'] = date('Y-m-d H:i:s');
+        $row['created_at'] = date('Y-m-d H:i:s');
         $row['created_by'] = $userId;
 
         return $this->storagePlaceTable->insert($row, $userId);

@@ -67,7 +67,7 @@ class DepartmentRepository extends AppRepository
     public function existsDepartment(string $departmentId): bool
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select(1)->where(['id' => $departmentId, 'deleted = ' => false]);
+        $query->select(1)->where(['id' => $departmentId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -81,7 +81,7 @@ class DepartmentRepository extends AppRepository
     public function existsDepartmentByName(string $name)
     ***REMOVED***
         $query = $this->departmentTable->newSelect();
-        $query->select(1)->where(['name LIKE' => $name, 'deleted' => false]);
+        $query->select(1)->where(['name LIKE' => $name, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -142,9 +142,9 @@ class DepartmentRepository extends AppRepository
             'department_type_name_en' => $departmentTypeTableName . '.name_en',
             'department_type_name_fr' => $departmentTypeTableName . '.name_fr',
             'department_type_name_it' => $departmentTypeTableName . '.name_it',
-            'created' => $departmentTableName . '.created',
+            'created_at' => $departmentTableName . '.created_at',
             'created_by' => $departmentTableName . '.created_by',
-            'modified' => $departmentTableName . '.modified',
+            'modified_at' => $departmentTableName . '.modified_at',
             'modified_by' => $departmentTableName . '.modified_by',
             'deleted' => $departmentTableName . '.deleted',
             'deleted_at' => $departmentTableName . '.deleted_at',
@@ -182,7 +182,7 @@ class DepartmentRepository extends AppRepository
     public function getDepartment(string $departmentId)
     ***REMOVED***
         $query = $this->getDepartmentQuery();
-        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId, $this->departmentTable->getTablename() . '.deleted' => false]);
+        $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId, $this->departmentTable->getTablename() . '.archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return [];
@@ -204,7 +204,7 @@ class DepartmentRepository extends AppRepository
     public function insertDepartment(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): int
     ***REMOVED***
         $query = $this->cityTable->newSelect();
-        $query->select(['id'])->where(['number' => $postcode, 'deleted' => false]);
+        $query->select(['id'])->where(['number' => $postcode, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch('assoc');
         $cityId = $row['id'];
         $data = [
@@ -232,7 +232,7 @@ class DepartmentRepository extends AppRepository
     public function updateDepartment(string $departmentId, string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): bool
     ***REMOVED***
         $row = [
-            'modified' => date('Y-m-d H:i:s'),
+            'modified_at' => date('Y-m-d H:i:s'),
             'modified_by' => $userId,
         ];
 
@@ -241,7 +241,7 @@ class DepartmentRepository extends AppRepository
     ***REMOVED***
 
         if (!empty($postcode)) ***REMOVED***
-            $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode, 'deleted' => false]);
+            $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode, 'archived_at' => date('Y-m-d H:i:s')]);
             $row['city_id'] = $cityId;
     ***REMOVED***
 

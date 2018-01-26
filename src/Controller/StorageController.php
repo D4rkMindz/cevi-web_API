@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Repository\ArticleRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\StorageRepository;
+use App\Service\Storage\StorageValidation;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -29,6 +30,11 @@ class StorageController extends AppController
     private $departmentRepository;
 
     /**
+     * @var StorageValidation
+     */
+    private $storageValidation;
+
+    /**
      * StorageController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -39,6 +45,7 @@ class StorageController extends AppController
         $this->storageRepository = $container->get(StorageRepository::class);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->articleRepository = $container->get(ArticleRepository::class);
+        $this->storageValidation = $container->get(StorageValidation::class);
 ***REMOVED***
 
     /**
@@ -98,5 +105,56 @@ class StorageController extends AppController
         ];
 
         return $this->json($response, $responseData, 200);
+***REMOVED***
+
+    /**
+     * Create storage place.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function createStoragePlaceAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+            return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exits')]);
+    ***REMOVED***
+
+        $params = $request->getParams();
+
+        $validationContext = $this->storageValidation->validateStorage($params);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
+    ***REMOVED***
+
+        $storageId = $this->storageRepository->createStorage($args['department_id'], $params, $this->jwt['user_id']);
+        $responseData = [
+            'info' => [
+                'url' => baseurl('/v2/departments/' . $args['department_id'] . '/storages/' . $storageId),
+                'message' => __('Created storage successfully'),
+            ],
+        ];
+
+        return $this->json($response, $responseData);
+***REMOVED***
+
+    public function updateStoragePlaceAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+            return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exits')]);
+    ***REMOVED***
+
+        $params = $request->getParams();
+        $validationContext = $this->storageValidation->validateStorage($params);
+        if ($validationContext->fails()) ***REMOVED***
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
+    ***REMOVED***
+
+        $updated = $this->storageRepository->updateStorage($args['department_id'], $args['storage_id'], $params, $this->jwt['user_id']);
+        if (!$updated) ***REMOVED***
+            return $this->error($response, __('Server Error'), 500, ['message' => __('Updating storage failed')]);
+    ***REMOVED***
+        return $this->json($response, ['info' => ['message' => __('Updated storage successfullly')]]);
 ***REMOVED***
 ***REMOVED***

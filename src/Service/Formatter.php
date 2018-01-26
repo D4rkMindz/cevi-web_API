@@ -90,13 +90,12 @@ class Formatter
         $tmp['end'] = $event['end'];
         $tmp['end_leader'] = $event['end_leader'];
         $tmp['start_leader'] = $event['start_leader'];
-        $tmp['created'] = $event['created'];
+        $tmp['created_at'] = $event['created_at'];
         $tmp['created_by'] = $event['created_by'];
-        $tmp['modified'] = $event['modified'];
+        $tmp['modified_at'] = $event['modified_at'];
         $tmp['modified_by'] = $event['modified_by'];
-        $tmp['deleted'] = $event['deleted'];
-        $tmp['deleted_at'] = $event['deleted_at'];
-        $tmp['deleted_by'] = $event['deleted_by'];
+        $tmp['archived_at'] = $event['archived_at'];
+        $tmp['archived_by'] = $event['archived_by'];
 
         if ($descriptionFormat === 'plain') ***REMOVED***
             $tmp['description'] = [
@@ -184,13 +183,12 @@ class Formatter
             'name_fr' => $department['department_type_name_fr'],
             'name_it' => $department['department_type_name_it'],
         ];
-        $tmp['created'] = $department['created'];
+        $tmp['created_at'] = $department['created_at'];
         $tmp['created_by'] = $department['created_by'];
-        $tmp['modified'] = $department['modified'];
+        $tmp['modified_at'] = $department['modified_at'];
         $tmp['modified_by'] = $department['modified_by'];
-        $tmp['deleted'] = $department['deleted'];
-        $tmp['deleted_at'] = $department['deleted_at'];
-        $tmp['deleted_by'] = $department['deleted_by'];
+        $tmp['archived_at'] = $department['archived_at'];
+        $tmp['archived_by'] = $department['archived_by'];
 
         return $tmp;
 ***REMOVED***
@@ -311,14 +309,12 @@ class Formatter
             'needed' => strtotime($article['replace']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
             'date' => $article['replace'],
         ];
-        $tmp['barcode'] = $article['barcode'];
-        $tmp['created'] = $article['created'];
+        $tmp['created_at'] = $article['created_at'];
         $tmp['created_by'] = $article['created_by'];
-        $tmp['modified'] = $article['modified'];
+        $tmp['modified_at'] = $article['modified_at'];
         $tmp['modified_by'] = $article['modified_by'];
-        $tmp['deleted'] = (bool)$article['deleted'];
-        $tmp['deleted_by'] = $article['deleted_by'];
-        $tmp['deleted_at'] = $article['deleted_at'];
+        $tmp['archived_at'] = $article['archived_at'];
+        $tmp['archived_by'] = $article['archived_by'];
 
         return $tmp;
 ***REMOVED***

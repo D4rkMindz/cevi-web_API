@@ -15,7 +15,6 @@ use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 
 /**
  * Class DbUserControllerTest
- * @group actual
  * @coversDefaultClass App\Controller\UserController
  */
 class DbUserControllerTest extends DbTestCase
@@ -91,7 +90,7 @@ class DbUserControllerTest extends DbTestCase
     protected function getDataSet()
     ***REMOVED***
         $mockbuilder = new Mockbuilder();
-        $this->data = $mockbuilder->user();
+        $this->data = $mockbuilder->users();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 ***REMOVED***

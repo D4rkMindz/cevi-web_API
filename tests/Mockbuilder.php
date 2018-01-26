@@ -16,12 +16,12 @@ class Mockbuilder
      *
      * @return array
      */
-    public function user()
+    public function users()
     ***REMOVED***
         return [
-            'app_language' => $this->app_language(),
-            'app_user' => $this->app_user(),
-            'app_position' => $this->app_position(),
+            'language' => $this->language(),
+            'app_user' => $this->user(),
+            'position' => $this->position(),
             'city' => $this->city(3),
             'permission' => $this->permission(),
             'gender' => $this->gender(),
@@ -32,11 +32,34 @@ class Mockbuilder
         ];
 ***REMOVED***
 
+    public function storage()
+    ***REMOVED***
+        return [
+            'language' => $this->language(),
+            'app_user' => $this->app_user(),
+            'position' => $this->position(),
+            'city' => $this->city(3),
+            'permission' => $this->permission(),
+            'gender' => $this->gender(),
+            'department' => $this->department(),
+            'department_group' => $this->department_group(),
+            'department_region' => $this->department_region(),
+            'department_type' => $this->department_type(),
+            'storage_place' => $this->storage_location(),
+            'sl_room' => $this->sl_room(),
+            'sl_corridor' => $this->sl_corridor(),
+            'sl_shelf' => $this->sl_shelf(),
+            'sl_tray' => $this->sl_tray(),
+            'sl_chest' => $this->sl_chest(),
+            'sl_location' => $this->sl_location(),
+        ];
+***REMOVED***
+
     /**
-     * Get app_language table data.
+     * Get language table data.
      * @return array
      */
-    private function app_language()
+    private function language()
     ***REMOVED***
         return [
             [
@@ -62,7 +85,7 @@ class Mockbuilder
         ];
 ***REMOVED***
 
-    private function app_position()
+    private function position()
     ***REMOVED***
         return [
             [
@@ -110,7 +133,7 @@ class Mockbuilder
         ];
 ***REMOVED***
 
-    private function app_user()
+    private function user()
     ***REMOVED***
         return [
             [
@@ -202,7 +225,7 @@ class Mockbuilder
                 'quantity' => '10',
                 'replace' => '2018-03-01 00:00:00',
                 'barcode' => 'CEVIWEB-A1_L1_D1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -216,7 +239,7 @@ class Mockbuilder
                 'quantity' => '10',
                 'replace' => '2018-12-01 00:00:00',
                 'barcode' => 'CEVIWEB-A2_L2_D2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -230,7 +253,7 @@ class Mockbuilder
                 'quantity' => '10',
                 'replace' => '2018-12-01 00:00:00',
                 'barcode' => 'CEVIWEB-A3_L3_D3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -245,7 +268,7 @@ class Mockbuilder
                 'name_en' => 'Artikel 1',
                 'name_fr' => 'Artikel 1',
                 'name_it' => 'Artikel 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -254,7 +277,7 @@ class Mockbuilder
                 'name_en' => 'Artikel 2',
                 'name_fr' => 'Artikel 2',
                 'name_it' => 'Artikel 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -263,7 +286,7 @@ class Mockbuilder
                 'name_en' => 'Artikel 3',
                 'name_fr' => 'Artikel 3',
                 'name_it' => 'Artikel 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -278,7 +301,7 @@ class Mockbuilder
                 'name_en' => 'Beschreibung 1',
                 'name_fr' => 'Beschreibung 1',
                 'name_it' => 'Beschreibung 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -287,7 +310,7 @@ class Mockbuilder
                 'name_en' => 'Beschreibung 2',
                 'name_fr' => 'Beschreibung 2',
                 'name_it' => 'Beschreibung 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -296,7 +319,7 @@ class Mockbuilder
                 'name_en' => 'Beschreibung 3',
                 'name_fr' => 'Beschreibung 3',
                 'name_it' => 'Beschreibung 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -381,7 +404,7 @@ class Mockbuilder
                 'department_type_id' => '1',
                 'city_id' => '1',
                 'name' => 'Department 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -390,7 +413,7 @@ class Mockbuilder
                 'department_type_id' => '2',
                 'city_id' => '2',
                 'name' => 'Department 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -399,7 +422,7 @@ class Mockbuilder
                 'department_type_id' => '3',
                 'city_id' => '3',
                 'name' => 'Department 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -531,19 +554,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Kiste 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Kiste 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Kiste 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ]
         ];
@@ -555,19 +578,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Korriodor 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Korriodor 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Korriodor 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ]
         ];
@@ -579,19 +602,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Ort 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Ort 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Ort 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -603,19 +626,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Raum 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Raum 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Raum 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -627,19 +650,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Regal 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Regal 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Regal 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -651,19 +674,19 @@ class Mockbuilder
             [
                 'id' => '1',
                 'name' => 'Tablar 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
                 'name' => 'Tablar 2',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
                 'name' => 'Tablar 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];
@@ -681,7 +704,7 @@ class Mockbuilder
                 'sl_tray_id' => '1',
                 'sl_chest_id' => '1',
                 'name' => 'Platz 1',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -693,7 +716,7 @@ class Mockbuilder
                 'sl_tray_id' => '2',
                 'sl_chest_id' => '2',
                 'name' => 'Platz 2',
-                'created' => '2027-02-01 00:00:00',
+                'created_at' => '2027-02-01 00:00:00',
                 'created_by' => '1',
             ],
             [
@@ -705,7 +728,7 @@ class Mockbuilder
                 'sl_tray_id' => '3',
                 'sl_chest_id' => '3',
                 'name' => 'Platz 3',
-                'created' => '2017-01-01 00:00:00',
+                'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
         ];

@@ -31,8 +31,9 @@ class PassthroughRule implements RuleInterface
 
     /**
      * Invoke method.
+     *
      * @param RequestInterface $request
-     * @return bool
+     * @return bool true if the user MUST authenticate.
      * @throws NotFoundException
      */
     public function __invoke(RequestInterface $request)
@@ -43,7 +44,10 @@ class PassthroughRule implements RuleInterface
     ***REMOVED***
         $requestedRoute = $route->getPattern();
         $method = $request->getMethod();
-        $pass = in_array($method, (array)$this->passthrough[$requestedRoute]) ? true : false;
+        if (!in_array($requestedRoute, $this->passthrough)) ***REMOVED***
+            return true;
+    ***REMOVED***
+        $pass = in_array($method, (array)$this->passthrough[$requestedRoute]);
         return !$pass;
 ***REMOVED***
 ***REMOVED***

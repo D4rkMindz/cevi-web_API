@@ -11,6 +11,7 @@ use App\Table\SlRoomTable;
 use App\Table\SlShelfTable;
 use App\Table\SlTrayTable;
 use App\Table\StoragePlaceTable;
+use Exception;
 use Slim\Container;
 
 /**
@@ -121,6 +122,77 @@ class StorageRepository extends AppRepository
 ***REMOVED***
 
     /**
+     * Create storage.
+     *
+     * @param string $departmentId
+     * @param array $params
+     * @param string $userId
+     * @return string Last inserted ID
+     */
+    public function createStorage(string $departmentId, array $params, string $userId): string
+    ***REMOVED***
+        $row = [
+            'department_id' => $departmentId,
+            'sl_location_id' => $params['location_id'],
+            'sl_room_id' => $params['room_id'],
+            'sl_corridor_id' => $params['corridor_id'],
+            'sl_shelf_id' => $params['shelf_id'],
+            'sl_tray_id' => $params['tray_id'],
+            'sl_chest_id' => $params['chest_id'],
+            'name' => $params['name']
+        ];
+        return $this->storagePlaceTable->insert($row, $userId);
+***REMOVED***
+
+    /**
+     * @param string $departmentId
+     * @param string $storageId
+     * @param array $params
+     * @param string $userId
+     * @return bool
+     */
+    public function updateStorage(string $departmentId, string $storageId, array $params, string $userId): bool
+    ***REMOVED***
+        $row = [];
+
+        if (array_key_exists('location_id', $params)) ***REMOVED***
+            $row['sl_location_id'] = $params['location_id'];
+    ***REMOVED***
+
+        if (array_key_exists('room_id', $params)) ***REMOVED***
+            $row['sl_room_id'] = $params['room_id'];
+    ***REMOVED***
+
+        if (array_key_exists('corridor_id', $params)) ***REMOVED***
+            $row['sl_corridor_id'] = $params['corridor_id'];
+    ***REMOVED***
+
+        if (array_key_exists('shelf_id', $params)) ***REMOVED***
+            $row['sl_shelf_id'] = $params['shelf_id'];
+    ***REMOVED***
+
+        if (array_key_exists('tray_id', $params)) ***REMOVED***
+            $row['sl_tray_id'] = $params['tray_id'];
+    ***REMOVED***
+
+        if (array_key_exists('chest_id', $params)) ***REMOVED***
+            $row['sl_chest_id'] = $params['chest_id'];
+    ***REMOVED***
+
+        if (array_key_exists('name', $params)) ***REMOVED***
+            $row['name'] = $params['name'];
+    ***REMOVED***
+
+        try ***REMOVED***
+            $this->storagePlaceTable->update($row, ['department_id' => $departmentId, 'id' => $storageId], $userId);
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            return false;
+    ***REMOVED***
+
+        return true;
+***REMOVED***
+
+    /**
      * Check if storage exists.
      *
      * @param string $locationId
@@ -141,7 +213,7 @@ class StorageRepository extends AppRepository
             'sl_shelf_id' => $shelfId ?: null,
             'sl_tray_id' => $trayId ?: null,
             'sl_chest_id' => $chestId ?: null,
-            'deleted' => false,
+            'archived_at' => date('Y-m-d H:i:s'),
         ]);
         $row = $query->execute()->fetch();
         return !empty($row);
@@ -153,9 +225,9 @@ class StorageRepository extends AppRepository
      * @param string $storageId
      * @return bool
      */
-    public function existsStorageById(string $storageId):bool
+    public function existsStorageById(string $storageId): bool
     ***REMOVED***
-        return $this->exists($this->storagePlaceTable, ['id'=> $storageId]);
+        return $this->exists($this->storagePlaceTable, ['id' => $storageId]);
 ***REMOVED***
 
     /**
@@ -291,7 +363,7 @@ class StorageRepository extends AppRepository
             ])
             ->where([
                 $storagePlaceTablename . '.department_id' => $departmentId,
-                $storagePlaceTablename . '.deleted' => false,
+                $storagePlaceTablename . '.archived_at' => date('Y-m-d H:i:s'),
             ]);
         return $query;
 ***REMOVED***

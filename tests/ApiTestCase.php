@@ -62,10 +62,10 @@ abstract class ApiTestCase extends TestCase
      * @param array $jwtAuthUser
      * @return Request
      */
-    protected function createRequest(string $method, string $url, bool $withJwt = false, $jwtAuthUser = ['user' => 'test_user', 'id' => 1, 'lang' => 'en', 'scope' => '/']): Request
+    protected function createRequest(string $method, string $url, bool $withJwt = false, $jwtAuthUser = ['users' => 'test_user', 'id' => 1, 'lang' => 'en', 'scope' => '/']): Request
     ***REMOVED***
         $env = Environment::mock();
-        $uri = Uri::createFromString($url);
+        $uri = Uri::createFromString('http://localhost' . $url);
         $headers = Headers::createFromEnvironment($env);
         $cookies = [];
         $serverParams = $env->all();
@@ -76,7 +76,7 @@ abstract class ApiTestCase extends TestCase
 
         if ($withJwt) ***REMOVED***
             $secret = $this->getContainer()->get('settings')->get('jwt')['secret'];
-            $token = JWTFactory::generate($jwtAuthUser['user'], $jwtAuthUser['id'], $jwtAuthUser['lang'], $secret, 60 * 60 * 8, $jwtAuthUser['scope']);
+            $token = JWTFactory::generate($jwtAuthUser['users'], $jwtAuthUser['id'], $jwtAuthUser['lang'], $secret, 60 * 60 * 8, $jwtAuthUser['scope']);
             $request = $request->withHeader('X-Token', $token);
     ***REMOVED***
 

@@ -36,7 +36,7 @@ class PositionRepository extends AppRepository
     public function existsPosition(string $positionId): bool
     ***REMOVED***
         $query = $this->positionTable->newSelect();
-        $query->select('id')->where(['id'=> $positionId, 'deleted = ' => false]);
+        $query->select('id')->where(['id'=> $positionId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

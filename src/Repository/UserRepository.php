@@ -261,7 +261,7 @@ class UserRepository extends AppRepository
     public function existsUser(string $userId): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(1)->where(['id' => $userId, 'deleted' => false]);
+        $query->select(1)->where(['id' => $userId, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -345,12 +345,12 @@ class UserRepository extends AppRepository
             $update['mobile'] = $data['mobile'];
     ***REMOVED***
 
-        $update['modified'] = date('Y-m-d H:i:s');
+        $update['modified_at'] = date('Y-m-d H:i:s');
         $update['modified_by'] = $userId;
 
         $this->userTable->update($update, ['id' => $where], $userId);
         $query = $this->userTable->newSelect();
-        $query->select('signup_completed')->where(['id' => $where, 'deleted' => false]);
+        $query->select('signup_completed')->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch();
         if (!(bool)$row['signup_completed']) ***REMOVED***
             $fields = [
@@ -370,7 +370,7 @@ class UserRepository extends AppRepository
                 'phone',
                 'mobile',
             ];
-            $query->select($fields)->where(['id' => $where, 'deleted' => false]);
+            $query->select($fields)->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
             $row = $query->execute()->fetch('assoc');
             if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
                 $this->userTable->update(['signup_completed' => true], ['id' => $where], $userId);

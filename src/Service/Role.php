@@ -35,7 +35,7 @@ class Role
     public function hasPermission(int $level, string $userId): bool
     ***REMOVED***
         $permission = $this->userRepository->getPermission($userId);
-        if ($level < (int)$permission['level']) ***REMOVED***
+        if ($level > (int)$permission['level']) ***REMOVED***
             return false;
     ***REMOVED***
 

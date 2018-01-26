@@ -8,5 +8,5 @@ namespace App\Table;
  */
 class LanguageTable extends AppTable
 ***REMOVED***
-    protected $table = 'app_language';
+    protected $table = 'language';
 ***REMOVED***

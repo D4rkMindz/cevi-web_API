@@ -44,7 +44,7 @@ class AppTable implements TableInterface
     public function getAll(): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['deleted' => false]);
+        $query->select('*')->where(['archived_at' => date('Y-m-d H:i:s')]);
         $rows = $query->execute()->fetchAll('assoc');
 
         return $rows;
@@ -69,7 +69,7 @@ class AppTable implements TableInterface
     public function getById($id): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['id' => $id, 'deleted = ' => false]);
+        $query->select('*')->where(['id' => $id, 'archived_at' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row : [];
 ***REMOVED***
@@ -83,8 +83,8 @@ class AppTable implements TableInterface
      */
     public function insert(array $row, string $userId): string
     ***REMOVED***
-        $row['created'] = date('Y-m-d H:i:s');
-        $row['created'] = $userId;
+        $row['created_at'] = date('Y-m-d H:i:s');
+        $row['created_by'] = $userId;
         return $this->connection->insert($this->table, $row)->lastInsertId($this->table);
 ***REMOVED***
 
@@ -99,10 +99,12 @@ class AppTable implements TableInterface
     public function update(array $row, array $where, string $userId): StatementInterface
     ***REMOVED***
         // todo add user id to all update calls
+        $row['modified_at'] = date('Y-m-d H:i:s');
+        $row['modified_by'] = $userId;
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
-            ->where(['id' => $where, 'deleted = ' => false]);
+            ->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
         return $query->execute();
 ***REMOVED***
 

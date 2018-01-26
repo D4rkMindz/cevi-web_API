@@ -41,7 +41,7 @@ class DepartmentTypeRepository extends AppRepository
     public function existsDepartmentType(string $departmentTypeId): bool
     ***REMOVED***
         $query = $this->departmentTypeTable->newSelect();
-        $query->select(1)->where(['id'=> $departmentTypeId, 'deleted' => false]);
+        $query->select(1)->where(['id'=> $departmentTypeId, '' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
