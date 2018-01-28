@@ -101,12 +101,11 @@ class EventRepository extends AppRepository
             'created_by' => $eventTableName . '.created_by',
             'modified_at' => $eventTableName . '.modified_at',
             'modified_by' => $eventTableName . '.modified_by',
-            'deleted' => $eventTableName . '.deleted',
-            'deleted_at' => $eventTableName . '.deleted_at',
-            'deleted_by' => $eventTableName . '.deleted_by',
+            'archived_at' => $eventTableName . '.archived_at',
+            'archived_by' => $eventTableName . '.archived_by',
         ];
 
-        $where = [$eventTableName . '.public' => 1, 'archived_at' => date('Y-m-d H:i:s')];
+        $where = [$eventTableName . '.public' => 1];
         $where[$eventTableName . '.start <='] = date('Y-m-d H:i:s', $until);
         $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
 

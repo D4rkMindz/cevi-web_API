@@ -50,7 +50,7 @@ class DepartmentGroupRepository extends AppRepository
     public function existsDepartment(string $departmentGroupId): bool
     ***REMOVED***
         $query = $this->departmentGroupTable->newSelect();
-        $query->select(1)->where(['id'=>$departmentGroupId, 'archived_at' => date('Y-m-d H:i:s')]);
+        $query->select(1)->where(['id'=>$departmentGroupId]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

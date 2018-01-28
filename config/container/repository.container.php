@@ -8,6 +8,7 @@ use App\Repository\DepartmentTypeRepository;
 use App\Repository\EventRepository;
 use App\Repository\GenderRepository;
 use App\Repository\LanguageRepository;
+use App\Repository\LocationRepository;
 use App\Repository\PositionRepository;
 use App\Repository\StorageRepository;
 use App\Repository\UserRepository;
@@ -45,6 +46,10 @@ $container[GenderRepository::class] = function (Container $container) ***REMOVED
 
 $container[LanguageRepository::class] = function (Container $container) ***REMOVED***
     return new LanguageRepository($container);
+***REMOVED***;
+
+$container[LocationRepository::class] = function (Container $container) ***REMOVED***
+    return new LocationRepository($container);
 ***REMOVED***;
 
 $container[PositionRepository::class] = function (Container $container) ***REMOVED***

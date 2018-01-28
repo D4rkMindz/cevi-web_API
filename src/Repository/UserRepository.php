@@ -261,7 +261,7 @@ class UserRepository extends AppRepository
     public function existsUser(string $userId): bool
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select(1)->where(['id' => $userId, 'archived_at' => date('Y-m-d H:i:s')]);
+        $query->select(1)->where(['id' => $userId]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -350,7 +350,7 @@ class UserRepository extends AppRepository
 
         $this->userTable->update($update, ['id' => $where], $userId);
         $query = $this->userTable->newSelect();
-        $query->select('signup_completed')->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
+        $query->select('signup_completed')->where(['id' => $where]);
         $row = $query->execute()->fetch();
         if (!(bool)$row['signup_completed']) ***REMOVED***
             $fields = [
@@ -370,7 +370,7 @@ class UserRepository extends AppRepository
                 'phone',
                 'mobile',
             ];
-            $query->select($fields)->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
+            $query->select($fields)->where(['id' => $where]);
             $row = $query->execute()->fetch('assoc');
             if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
                 $this->userTable->update(['signup_completed' => true], ['id' => $where], $userId);
@@ -391,7 +391,7 @@ class UserRepository extends AppRepository
     public function deleteUser(string $userId, string $executorId): bool
     ***REMOVED***
         try ***REMOVED***
-            $this->userTable->delete($executorId, ['id' => $userId]);
+            $this->userTable->archive($executorId, ['id' => $userId]);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***

@@ -171,7 +171,7 @@ class DepartmentController extends AppController
         $validationContext = $this->departmentValidation->validateCreate($name, $postcode, $departmentGroupId, $departmentTypeId);
 
         if ($validationContext->fails()) ***REMOVED***
-            return $this->error($response, $validationContext->getMessage(), 422, ['message' => $validationContext->toArray()]);
+            return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
         $lastInsertedId = $this->departmentRepository->insertDepartment($name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['userid']);

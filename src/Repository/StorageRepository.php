@@ -193,6 +193,19 @@ class StorageRepository extends AppRepository
 ***REMOVED***
 
     /**
+     * Delete storage.
+     *
+     * @param string $departmentId
+     * @param string $storageId
+     * @param string $userId
+     * @return bool
+     */
+    public function deleteStorage(string $departmentId, string $storageId, string $userId): bool
+    ***REMOVED***
+        return (bool)$this->storagePlaceTable->archive($userId, ['id' => $storageId, 'department_id' => $departmentId]);
+***REMOVED***
+
+    /**
      * Check if storage exists.
      *
      * @param string $locationId
@@ -213,7 +226,6 @@ class StorageRepository extends AppRepository
             'sl_shelf_id' => $shelfId ?: null,
             'sl_tray_id' => $trayId ?: null,
             'sl_chest_id' => $chestId ?: null,
-            'archived_at' => date('Y-m-d H:i:s'),
         ]);
         $row = $query->execute()->fetch();
         return !empty($row);
@@ -363,7 +375,6 @@ class StorageRepository extends AppRepository
             ])
             ->where([
                 $storagePlaceTablename . '.department_id' => $departmentId,
-                $storagePlaceTablename . '.archived_at' => date('Y-m-d H:i:s'),
             ]);
         return $query;
 ***REMOVED***

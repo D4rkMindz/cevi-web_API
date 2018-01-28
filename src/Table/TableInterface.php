@@ -68,7 +68,7 @@ interface TableInterface
      * @param string $userId
      * @return StatementInterface
      */
-    public function update(array $row, array $where, string $userId): StatementInterface;
+    public function update(array $row, array $where, string $userId): bool;
 
     /**
      * Delete from database.
@@ -77,5 +77,21 @@ interface TableInterface
      * @param array $where
      * @return bool
      */
-    public function delete(string $executorId, array $where): bool;
+    public function archive(string $executorId, array $where): bool;
+
+    /**
+     * Unarchive element.
+     *
+     * @param string $executorId
+     * @param array $where
+     * @return bool true if unarchived successfully
+     */
+    public function unarchive(string $executorId, array $where): bool;
+
+    /**
+     * Check if table has not metadata like created, modified and archived information.
+     *
+     * @return bool
+     */
+    public function hasMetadata(): bool;
 ***REMOVED***

@@ -26,19 +26,19 @@ class Role
     /**
      * Check if user has permission.
      *
-     * @param int $level
+     * @param int $requiredLevel
      * @param string $userId
      * @return bool
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function hasPermission(int $level, string $userId): bool
+    public function hasPermission(int $requiredLevel, string $userId): bool
     ***REMOVED***
-        $permission = $this->userRepository->getPermission($userId);
-        if ($level > (int)$permission['level']) ***REMOVED***
-            return false;
+        $usersPermission = $this->userRepository->getPermission($userId);
+        if ($requiredLevel <= (int)$usersPermission['level']) ***REMOVED***
+            return true;
     ***REMOVED***
 
-        return true;
+        return false;
 ***REMOVED***
 ***REMOVED***

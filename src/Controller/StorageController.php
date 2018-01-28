@@ -51,6 +51,8 @@ class StorageController extends AppController
     /**
      * Get all storage places.
      *
+     * @auth JWT
+     *
      * @param Request $request
      * @param Response $response
      * @param array $args
@@ -74,6 +76,8 @@ class StorageController extends AppController
 
     /**
      * Get single storage place.
+     *
+     * @auth JWT
      *
      * @param Request $request
      * @param Response $response
@@ -104,11 +108,21 @@ class StorageController extends AppController
             'articles' => $articles,
         ];
 
-        return $this->json($response, $responseData, 200);
+        return $this->json($response, $responseData);
 ***REMOVED***
 
     /**
      * Create storage place.
+     *
+     *
+     * @auth JWT
+     * @post string|null name
+     * @post string|int|null location_id
+     * @post string|int|null room_id
+     * @post string|int|null corridor_id
+     * @post string|int|null shelf_id
+     * @post string|int|null tray_id
+     * @post string|int|null chest_id
      *
      * @param Request $request
      * @param Response $response
@@ -139,14 +153,34 @@ class StorageController extends AppController
         return $this->json($response, $responseData);
 ***REMOVED***
 
+    /**
+     * Update storage place
+     *
+     * @auth JWT
+     * @put string|null name
+     * @put string|int|null location_id
+     * @put string|int|null room_id
+     * @put string|int|null corridor_id
+     * @put string|int|null shelf_id
+     * @put string|int|null tray_id
+     * @put string|int|null chest_id
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
     public function updateStoragePlaceAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
-            return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exits')]);
+        if (
+            !$this->departmentRepository->existsDepartment($args['department_id'])
+            || !$this->storageRepository->existsStorageById($args['storage_id'])
+        ) ***REMOVED***
+            return $this->error($response, __('Not found'), 404, ['message' => __('Storage does not exits')]);
     ***REMOVED***
 
         $params = $request->getParams();
-        $validationContext = $this->storageValidation->validateStorage($params);
+        $validationContext = $this->storageValidation->validateUpdateStorage($params);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
@@ -155,6 +189,33 @@ class StorageController extends AppController
         if (!$updated) ***REMOVED***
             return $this->error($response, __('Server Error'), 500, ['message' => __('Updating storage failed')]);
     ***REMOVED***
-        return $this->json($response, ['info' => ['message' => __('Updated storage successfullly')]]);
+        return $this->json($response, ['message' => __('Updated storage successfullly')]);
+***REMOVED***
+
+    /**
+     * Delete storage
+     *
+     * @auth JWT
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     * @return Response
+     */
+    public function deleteStoragePlaceAction(Request $request, Response $response, array $args): Response
+    ***REMOVED***
+        if (
+            !$this->departmentRepository->existsDepartment($args['department_id'])
+            || !$this->storageRepository->existsStorageById($args['storage_id'])
+        ) ***REMOVED***
+            return $this->error($response, __('Not found'), 404, ['message' => __('Storage does not exits')]);
+    ***REMOVED***
+
+        $deleted = $this->storageRepository->deleteStorage($args['department_id'], $args['storage_id'], $this->jwt['user_id']);
+        if (!$deleted) ***REMOVED***
+            return $this->error($response, __('Server error'), 500, ['message' => __('Deleting storage failed')]);
+    ***REMOVED***
+
+        return $this->json($response, ['message' => __('Deleted storage successfully')]);
 ***REMOVED***
 ***REMOVED***

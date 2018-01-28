@@ -61,6 +61,9 @@ class AppValidation
     protected function validateLength(string $text, string $elementName, ValidationContext $validationContext, int $min = 3, int $max = 255)
     ***REMOVED***
         $this->validateNotEmpty($text, $elementName, $validationContext);
+        if ($validationContext->fails()) ***REMOVED***
+            return;
+    ***REMOVED***
         $length = strlen(trim($text));
         if ($length < $min) ***REMOVED***
             $validationContext->setError($elementName, __('too short'));

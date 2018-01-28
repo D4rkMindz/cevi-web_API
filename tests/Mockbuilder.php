@@ -20,7 +20,7 @@ class Mockbuilder
     ***REMOVED***
         return [
             'language' => $this->language(),
-            'app_user' => $this->user(),
+            'user' => $this->user(),
             'position' => $this->position(),
             'city' => $this->city(3),
             'permission' => $this->permission(),
@@ -36,7 +36,7 @@ class Mockbuilder
     ***REMOVED***
         return [
             'language' => $this->language(),
-            'app_user' => $this->app_user(),
+            'user' => $this->user(),
             'position' => $this->position(),
             'city' => $this->city(3),
             'permission' => $this->permission(),
@@ -45,13 +45,54 @@ class Mockbuilder
             'department_group' => $this->department_group(),
             'department_region' => $this->department_region(),
             'department_type' => $this->department_type(),
-            'storage_place' => $this->storage_location(),
+            'storage_place' => $this->storage_place(),
             'sl_room' => $this->sl_room(),
             'sl_corridor' => $this->sl_corridor(),
             'sl_shelf' => $this->sl_shelf(),
             'sl_tray' => $this->sl_tray(),
             'sl_chest' => $this->sl_chest(),
             'sl_location' => $this->sl_location(),
+        ];
+***REMOVED***
+
+    public function location()
+    ***REMOVED***
+        return [
+            'storage_place' => $this->storage_place(),
+            'sl_location' => $this->sl_location(),
+            'language' => $this->language(),
+            'user' => $this->user(),
+            'position' => $this->position(),
+            'city' => $this->city(3),
+            'permission' => $this->permission(),
+            'gender' => $this->gender(),
+            'department' => $this->department(),
+            'department_group' => $this->department_group(),
+            'department_region' => $this->department_region(),
+            'department_type' => $this->department_type(),
+        ];
+***REMOVED***
+
+    public function sl_locations()
+    ***REMOVED***
+        return [
+            'language' => $this->language(),
+            'user' => $this->user(),
+            'position' => $this->position(),
+            'city' => $this->city(3),
+            'permission' => $this->permission(),
+            'gender' => $this->gender(),
+            'department' => $this->department(),
+            'department_group' => $this->department_group(),
+            'department_region' => $this->department_region(),
+            'department_type' => $this->department_type(),
+            'storage_place' => $this->storage_place(),
+            'sl_location' => $this->sl_location(),
+            'sl_room' => $this->sl_room(),
+            'sl_corridor' => $this->sl_corridor(),
+            'sl_shelf' => $this->sl_shelf(),
+            'sl_tray' => $this->sl_tray(),
+            'sl_chest' => $this->sl_chest(),
         ];
 ***REMOVED***
 
@@ -425,6 +466,15 @@ class Mockbuilder
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
+            [
+                'id' => '4',
+                'department_group_id' => '2',
+                'department_type_id' => '1',
+                'city_id' => '3',
+                'name' => 'Department 4',
+                'created_at' => '2017-01-01 00:00:00',
+                'created_by' => '1',
+            ],
         ];
 ***REMOVED***
 
@@ -528,7 +578,7 @@ class Mockbuilder
             [
                 'id' => '1',
                 'level' => '64',
-                'name' => 'delete',
+                'name' => 'archive',
             ],
             [
                 'id' => '2',
@@ -577,19 +627,19 @@ class Mockbuilder
         return [
             [
                 'id' => '1',
-                'name' => 'Korriodor 1',
+                'name' => 'Korridor 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '2',
-                'name' => 'Korriodor 2',
+                'name' => 'Korridor 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ],
             [
                 'id' => '3',
-                'name' => 'Korriodor 3',
+                'name' => 'Korridor 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
             ]
@@ -692,7 +742,7 @@ class Mockbuilder
         ];
 ***REMOVED***
 
-    private function storage_location()
+    private function storage_place()
     ***REMOVED***
         return [
             [
@@ -703,9 +753,12 @@ class Mockbuilder
                 'sl_shelf_id' => '1',
                 'sl_tray_id' => '1',
                 'sl_chest_id' => '1',
+                'department_id' => '1',
                 'name' => 'Platz 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
+                'archived_at' => null,
+                'archived_by' => null,
             ],
             [
                 'id' => '2',
@@ -715,9 +768,12 @@ class Mockbuilder
                 'sl_shelf_id' => '2',
                 'sl_tray_id' => '2',
                 'sl_chest_id' => '2',
+                'department_id' => '1',
                 'name' => 'Platz 2',
                 'created_at' => '2027-02-01 00:00:00',
                 'created_by' => '1',
+                'archived_at' => null,
+                'archived_by' => null,
             ],
             [
                 'id' => '3',
@@ -727,9 +783,27 @@ class Mockbuilder
                 'sl_shelf_id' => '3',
                 'sl_tray_id' => '3',
                 'sl_chest_id' => '3',
+                'department_id' => '2',
                 'name' => 'Platz 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => '1',
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '4',
+                'sl_location_id' => '1',
+                'sl_room_id' => '2',
+                'sl_corridor_id' => '2',
+                'sl_shelf_id' => '2',
+                'sl_tray_id' => '1',
+                'sl_chest_id' => '1',
+                'department_id' => '2',
+                'name' => 'Platz 3',
+                'created_at' => '2017-01-01 00:00:00',
+                'created_by' => '1',
+                'archived_at' => '2017-12-30 00:00:00',
+                'archived_by' => '1',
             ],
         ];
 ***REMOVED***

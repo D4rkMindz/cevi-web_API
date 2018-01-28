@@ -20,7 +20,6 @@ abstract class AppRepository
      */
     protected function exists(TableInterface $table, array $condition): bool
     ***REMOVED***
-        $condition['archived_at'] = date('Y-m-d H:i:s');
         $query = $table->newSelect();
         $query->select(1)->where($condition);
         $row = $query->execute()->fetch();

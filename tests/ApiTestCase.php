@@ -62,7 +62,7 @@ abstract class ApiTestCase extends TestCase
      * @param array $jwtAuthUser
      * @return Request
      */
-    protected function createRequest(string $method, string $url, bool $withJwt = false, $jwtAuthUser = ['users' => 'test_user', 'id' => 1, 'lang' => 'en', 'scope' => '/']): Request
+    protected function createRequest(string $method, string $url, bool $withJwt = true, $jwtAuthUser = ['users' => 'test_user', 'id' => 1, 'lang' => 'en', 'scope' => '/']): Request
     ***REMOVED***
         $env = Environment::mock();
         $uri = Uri::createFromString('http://localhost' . $url);

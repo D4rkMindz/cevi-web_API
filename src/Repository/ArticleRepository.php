@@ -215,7 +215,6 @@ class ArticleRepository extends AppRepository
             ->page($page)
             ->where([
                 $articleTableName . '.department_id' => $departmentId,
-                $articleTableName . '.archived_at' => date('Y-m-d H:i:s'),
             ]);
         $articles = $query->execute()->fetchAll('assoc');
 
@@ -322,7 +321,7 @@ class ArticleRepository extends AppRepository
     public function deleteArticle(int $articleId, string $executorId)
     ***REMOVED***
         try ***REMOVED***
-            $this->articleTable->delete($executorId, ['id' => $articleId]);
+            $this->articleTable->archive($executorId, ['id' => $articleId]);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
@@ -364,7 +363,7 @@ class ArticleRepository extends AppRepository
     public function existsQuality(string $qualityId): bool
     ***REMOVED***
         $query = $this->articleQualtityTable->newSelect();
-        $query->select(1)->where(['id' => $qualityId, 'archived_at' => date('Y-m-d H:i:s')]);
+        $query->select(1)->where(['id' => $qualityId]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -560,7 +559,6 @@ class ArticleRepository extends AppRepository
             'sl_shelf_id' => $shelfId,
             'sl_tray_id' => $trayId,
             'sl_chest_id' => $chestId,
-            'archived_at' => date('Y-m-d H:i:s'),
         ];
         $query = $this->storagePlaceTable->newSelect();
         $query->select('id')->where($row);

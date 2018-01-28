@@ -53,11 +53,16 @@ class AppTable implements TableInterface
     /**
      * Get Query.
      *
+     * @param bool $includeArchived
      * @return Query
      */
-    public function newSelect(): Query
+    public function newSelect(bool $includeArchived = false): Query
     ***REMOVED***
-        return $this->connection->newQuery()->from($this->table);
+        if (!$this->hasMetadata() || $includeArchived)***REMOVED***
+            return $this->connection->newQuery()->from($this->table);
+    ***REMOVED***;
+
+        return $this->connection->newQuery()->from($this->table)->where(['OR' => [[$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')], [$this->table . '.archived_at IS NULL']]]);
 ***REMOVED***
 
     /**
@@ -69,7 +74,7 @@ class AppTable implements TableInterface
     public function getById($id): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['id' => $id, 'archived_at' => date('Y-m-d H:i:s')]);
+        $query->select('*')->where(['id' => $id, 'OR' => [[$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')], [$this->table . '.archived_at IS NULL']]]);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row : [];
 ***REMOVED***
@@ -92,20 +97,27 @@ class AppTable implements TableInterface
      * Update database
      *
      * @param array $row
-     * @param string $where should be the id
+     * @param array $where should be the id
      * @param string $userId
-     * @return StatementInterface
+     * @return bool
      */
-    public function update(array $row, array $where, string $userId): StatementInterface
+    public function update(array $row, array $where, string $userId): bool
     ***REMOVED***
-        // todo add user id to all update calls
-        $row['modified_at'] = date('Y-m-d H:i:s');
-        $row['modified_by'] = $userId;
+        if (!$this->hasMetadata()) ***REMOVED***
+            return false;
+    ***REMOVED***
+        $row['modified_at'] = (string)date('Y-m-d H:i:s');
+        $row['modified_by'] = (string)$userId;
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
-            ->where(['id' => $where, 'archived_at' => date('Y-m-d H:i:s')]);
-        return $query->execute();
+            ->where($where);
+        try ***REMOVED***
+            $query->execute();
+    ***REMOVED***catch (Exception $exception)***REMOVED***
+            return false;
+    ***REMOVED***
+        return true;
 ***REMOVED***
 
     /**
@@ -115,24 +127,88 @@ class AppTable implements TableInterface
      * @param array $where
      * @return StatementInterface
      */
-    public function delete(string $executorId, array $where): bool
+    public function archive(string $executorId, array $where): bool
     ***REMOVED***
         $row = [
-            'deleted' => true,
-            'deleted_by' => $executorId,
-            'deleted_at' => date('Y-m-d H:i:s'),
+            'archived_by' => $executorId,
+            'archived_at' => date('Y-m-d H:i:s'),
+        ];
+        if ($this->hasMetadata())***REMOVED***
+            $where['OR'] = [
+                [$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')],
+                [$this->table . '.archived_at IS NULL']
+            ];
+    ***REMOVED***
+        $query = $this->connection->newQuery();
+        $query->update($this->table)
+            ->set($row)
+            ->where($where);
+        try ***REMOVED***
+            $query->execute();
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            return false;
+    ***REMOVED***
+
+        return true;
+***REMOVED***
+
+    /**
+     * Unarchive element.
+     *
+     * @param string $executorId
+     * @param array $where
+     * @return bool true if unarchived successfully
+     */
+    public function unarchive(string $executorId, array $where): bool
+    ***REMOVED***
+        if (!$this->hasMetadata()) ***REMOVED***
+            return false;
+    ***REMOVED***
+        $row = [
+            'modified_by' => $executorId,
+            'modified_at' => date('Y-m-d H:i:s')
         ];
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
             ->where($where);
-
-        $result = true;
         try ***REMOVED***
-            return $query->execute();
-    ***REMOVED*** catch (Exception $exception)***REMOVED***
-            $result = false;
+            $query->execute();
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            return false;
     ***REMOVED***
-        return $result;
+
+        return true;
+***REMOVED***
+
+    /**
+     * Check if table has not metadata like created, modified and archived information.
+     *
+     * @return bool
+     */
+    public function hasMetadata(): bool
+    ***REMOVED***
+        $blacklist = [
+            'article_image' => 1,
+            'article_quality' => 1,
+            'department_event' => 1,
+            'department_group' => 1,
+            'department_region' => 1,
+            'educational_course_image' => 1,
+            'educational_course_organiser' => 1,
+            'educational_course_participant' => 1,
+            'event_image' => 1,
+            'event_participant' => 1,
+            'gender' => 1,
+            'language' => 1,
+            'permission' => 1,
+            'position' => 1,
+        ];
+
+        if (isset($blacklist[$this->table])) ***REMOVED***
+            return false;
+    ***REMOVED***
+
+        return true;
 ***REMOVED***
 ***REMOVED***

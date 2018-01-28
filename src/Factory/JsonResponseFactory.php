@@ -32,7 +32,7 @@ class JsonResponseFactory
      * @param string $message
      * @return array
      */
-    public static function error(array $body = null, int $status = 403, string $message = 'forbidden')
+    public static function error(array $body = null, int $status = 403, string $message = 'Forbidden')
     ***REMOVED***
         $responseData = [
             'code' => $status,
