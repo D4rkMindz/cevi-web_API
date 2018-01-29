@@ -84,6 +84,10 @@ $app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/chest
 $app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/chests/***REMOVED***storage_id***REMOVED***', route(['App\Controller\ChestController', 'updateLocation']))->setName('put.all-locations.sl_chest');
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/chests/***REMOVED***storage_id***REMOVED***', route(['App\Controller\ChestController', 'deleteLocation']))->setName('delete.all-locations.sl_chest');
 
+/**
+ * Events
+ */
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'getAllEventsAction']))->setName('get.all-events');
 
 /***********************************************************************************************************************
  * Error routes

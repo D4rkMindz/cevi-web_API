@@ -139,7 +139,7 @@ class RoomController extends AppController
         $params = $request->getParams();
         $params['storage_id'] = $args['storage_id'];
 
-        $validationContext = $this->storageValidation->validateDelete($params);
+        $validationContext = $this->storageValidation->validateLocation($params);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
@@ -170,7 +170,7 @@ class RoomController extends AppController
         $params = $request->getParams();
         $params['storage_id'] = $args['storage_id'];
 
-        $validationContext = $this->storageValidation->validateLocation($params);
+        $validationContext = $this->storageValidation->validateDelete($params);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***

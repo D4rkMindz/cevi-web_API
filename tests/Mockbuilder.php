@@ -11,6 +11,22 @@ namespace App\Test;
 
 class Mockbuilder
 ***REMOVED***
+    public function events()
+    ***REMOVED***
+        return [
+            'language' => $this->language(),
+            'user' => $this->user(),
+            'position' => $this->position(),
+            'city' => $this->city(3),
+            'permission' => $this->permission(),
+            'gender' => $this->gender(),
+            'department' => $this->department(),
+            'department_group' => $this->department_group(),
+            'department_region' => $this->department_region(),
+            'department_type' => $this->department_type(),
+        ];
+***REMOVED***
+
     /**
      * Get User data
      *
@@ -400,6 +416,41 @@ class Mockbuilder
                 'name' => 'Kaputt',
             ],
         ];
+***REMOVED***
+
+    private function department_event()
+    ***REMOVED***
+        // todo
+***REMOVED***
+
+    private function educational_course()
+    ***REMOVED***
+        // todo
+***REMOVED***
+
+    private function educational_course_description()
+    ***REMOVED***
+        // todo
+***REMOVED***
+
+    private function event()
+    ***REMOVED***
+        // todo    
+***REMOVED***
+
+    private function event_description()
+    ***REMOVED***
+        // todo
+***REMOVED***
+
+    private function event_participant()
+    ***REMOVED***
+        // todo
+***REMOVED***
+
+    private function event_title()
+    ***REMOVED***
+        // todo
 ***REMOVED***
 
     private function city(int $count = 1)

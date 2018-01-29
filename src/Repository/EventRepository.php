@@ -73,9 +73,10 @@ class EventRepository extends AppRepository
      * @param string $departmentId
      * @param int $since
      * @param string $descriptionFormat either parsed or plain. If null, both formats will be returned
+     * @param bool $isPublic
      * @return array
      */
-    public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null): array
+    public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null, bool $isPublic = true): array
     ***REMOVED***
         $eventTableName = $this->eventTable->getTablename();
         $eventTitleTableName = $this->eventTitleTable->getTablename();
@@ -105,7 +106,10 @@ class EventRepository extends AppRepository
             'archived_by' => $eventTableName . '.archived_by',
         ];
 
-        $where = [$eventTableName . '.public' => 1];
+        $where = [];
+        if ($isPublic) ***REMOVED***
+            $where[$eventTableName . '.public'] = true;
+    ***REMOVED***
         $where[$eventTableName . '.start <='] = date('Y-m-d H:i:s', $until);
         $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
 
