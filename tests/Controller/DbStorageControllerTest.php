@@ -10,7 +10,7 @@ namespace Controller;
 
 
 use App\Test\DbTestCase;
-use App\Test\Mockbuilder;
+use App\Test\TestDatabase;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use PHPUnit\DbUnit\DataSet\IDataSet;
 
@@ -30,8 +30,8 @@ class DbStorageControllerTest extends DbTestCase
      */
     public function getDataSet()
     ***REMOVED***
-        $mockbuilder = new Mockbuilder();
-        $this->data = $mockbuilder->storage();
+        $testDatabase = new TestDatabase();
+        $this->data = $testDatabase->storage();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 

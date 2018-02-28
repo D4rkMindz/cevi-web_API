@@ -5,7 +5,7 @@ namespace Controller;
 
 
 use App\Test\DbTestCase;
-use App\Test\Mockbuilder;
+use App\Test\TestDatabase;
 use Exception;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use PHPUnit\DbUnit\DataSet\IDataSet;
@@ -26,8 +26,8 @@ class LocationControllerTest extends DbTestCase
      */
     public function getDataSet()
     ***REMOVED***
-        $mockbuilder = new Mockbuilder();
-        $this->data = $mockbuilder->location();
+        $testDatabase = new TestDatabase();
+        $this->data = $testDatabase->location();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 

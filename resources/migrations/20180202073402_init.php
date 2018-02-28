@@ -249,8 +249,8 @@ class Init extends AbstractMigration
         $table->addColumn('department_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'comment' => "The organizer", 'after' => 'educational_course_organiser_id'])->update();
         $table->addColumn('city_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'comment' => "Where the edu_course is taking place", 'after' => 'department_id'])->update();
         $table->addColumn('position_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'comment' => "The minimum required position to participate", 'after' => 'city_id'])->update();
-        $table->addColumn('number', 'decimal', ['null' => false, 'precision' => 10, 'after' => 'position_id'])->update();
-        $table->addColumn('start_date', 'datetime', ['null' => false, 'after' => 'number'])->update();
+        $table->addColumn('price', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2, 'comment' => "price", 'after' => 'position_id'])->update();
+        $table->addColumn('start_date', 'datetime', ['null' => false, 'after' => 'price'])->update();
         $table->addColumn('end_date', 'datetime', ['null' => false, 'after' => 'start_date'])->update();
         $table->addColumn('minimum_age', 'year', ['null' => false, 'limit' => 4, 'after' => 'end_date'])->update();
         $table->addColumn('created_at', 'datetime', ['null' => true, 'after' => 'minimum_age'])->update();
@@ -328,8 +328,7 @@ class Init extends AbstractMigration
             $this->table("educational_course_organiser")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
     ***REMOVED***
         $table->addColumn('user_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
-        $table->addColumn('name', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'user_id'])->update();
-        $table->addColumn('phone', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name'])->update();
+        $table->addColumn('phone', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'user_id'])->update();
         $table->addColumn('email', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'phone'])->update();
         $table->addColumn('notes', 'string', ['null' => true, 'limit' => 1500, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'email'])->update();
         $table->addColumn('mobile', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'notes'])->update();
@@ -347,6 +346,13 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('educational_course_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
         $table->addColumn('user_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'educational_course_id'])->update();
+        $table->addColumn('participation_status_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'user_id'])->update();
+        $table->addColumn('created_at', 'datetime', ['null' => false, 'after' => 'participation_status_id'])->update();
+        $table->addColumn('created_by', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created_at'])->update();
+        $table->addColumn('modified_at', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
+        $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified_at'])->update();
+        $table->addColumn('archived_at', 'datetime', ['null' => true, 'after' => 'modified_by'])->update();
+        $table->addColumn('archived_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'archived_at'])->update();
         $table->save();
         if($this->table('educational_course_participant')->hasIndex('fk_educational_course_has_user_user1_idx')) ***REMOVED***
             $this->table("educational_course_participant")->removeIndexByName('fk_educational_course_has_user_user1_idx');
@@ -356,6 +362,10 @@ class Init extends AbstractMigration
             $this->table("educational_course_participant")->removeIndexByName('fk_educational_course_has_user_educational_course1_idx');
     ***REMOVED***
         $this->table("educational_course_participant")->addIndex(['educational_course_id'], ['name' => "fk_educational_course_has_user_educational_course1_idx", 'unique' => false])->save();
+        if($this->table('educational_course_participant')->hasIndex('fk_educational_course_participation_status_id1')) ***REMOVED***
+            $this->table("educational_course_participant")->removeIndexByName('fk_educational_course_participation_status_id1');
+    ***REMOVED***
+        $this->table("educational_course_participant")->addIndex(['participation_status_id'], ['name' => "fk_educational_course_participation_status_id1", 'unique' => false])->save();
         $table = $this->table("educational_course_title", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('educational_course_title')->hasColumn('id')) ***REMOVED***
@@ -383,7 +393,7 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('event_title_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
         $table->addColumn('event_description_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'event_title_id'])->update();
-        $table->addColumn('price', 'decimal', ['null' => false, 'precision' => 10, 'after' => 'event_description_id'])->update();
+        $table->addColumn('price', 'decimal', ['null' => false, 'precision' => 10, 'scale' => 2, 'after' => 'event_description_id'])->update();
         $table->addColumn('start', 'datetime', ['null' => false, 'after' => 'price'])->update();
         $table->addColumn('end', 'datetime', ['null' => false, 'after' => 'start'])->update();
         $table->addColumn('start_leader', 'datetime', ['null' => false, 'after' => 'end'])->update();
@@ -450,6 +460,13 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('user_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'id'])->update();
         $table->addColumn('event_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'user_id'])->update();
+        $table->addColumn('participation_status_id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'event_id'])->update();
+        $table->addColumn('created_at', 'datetime', ['null' => false, 'after' => 'participation_status_id'])->update();
+        $table->addColumn('created_by', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created_at'])->update();
+        $table->addColumn('modified_at', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
+        $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified_at'])->update();
+        $table->addColumn('archived_at', 'datetime', ['null' => true, 'after' => 'modified_by'])->update();
+        $table->addColumn('archived_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'archived_at'])->update();
         $table->save();
         if($this->table('event_participant')->hasIndex('fk_user_has_event_event1_idx')) ***REMOVED***
             $this->table("event_participant")->removeIndexByName('fk_user_has_event_event1_idx');
@@ -459,6 +476,10 @@ class Init extends AbstractMigration
             $this->table("event_participant")->removeIndexByName('fk_user_has_event_user1_idx');
     ***REMOVED***
         $this->table("event_participant")->addIndex(['user_id'], ['name' => "fk_user_has_event_user1_idx", 'unique' => false])->save();
+        if($this->table('event_participant')->hasIndex('fk_event_participant_participation_status_id1')) ***REMOVED***
+            $this->table("event_participant")->removeIndexByName('fk_event_participant_participation_status_id1');
+    ***REMOVED***
+        $this->table("event_participant")->addIndex(['participation_status_id'], ['name' => "fk_event_participant_participation_status_id1", 'unique' => false])->save();
         $table = $this->table("event_title", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();
         if ($this->table('event_title')->hasColumn('id')) ***REMOVED***
@@ -498,7 +519,11 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('url', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('type', 'string', ['null' => false, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'url'])->update();
-        $table->addColumn('created_at', 'datetime', ['null' => true, 'after' => 'type'])->update();
+        $table->addColumn('name_de', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'type'])->update();
+        $table->addColumn('name_en', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_de'])->update();
+        $table->addColumn('name_fr', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_en'])->update();
+        $table->addColumn('name_it', 'string', ['null' => true, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_fr'])->update();
+        $table->addColumn('created_at', 'datetime', ['null' => true, 'after' => 'name_it'])->update();
         $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created_at'])->update();
         $table->addColumn('modified_at', 'datetime', ['null' => true, 'after' => 'created_by'])->update();
         $table->addColumn('modified_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'modified_at'])->update();
@@ -514,6 +539,18 @@ class Init extends AbstractMigration
     ***REMOVED***
         $table->addColumn('name', 'string', ['null' => false, 'limit' => 5, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
         $table->addColumn('abbreviation', 'string', ['null' => false, 'limit' => 2, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name'])->update();
+        $table->save();
+        $table = $this->table("participation_status", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
+        $table->save();
+        if ($this->table('participation_status')->hasColumn('id')) ***REMOVED***
+            $this->table("participation_status")->changeColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+    ***REMOVED*** else ***REMOVED***
+            $this->table("participation_status")->addColumn('id', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'identity' => 'enable'])->update();
+    ***REMOVED***
+        $table->addColumn('name_de', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'id'])->update();
+        $table->addColumn('name_en', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_de'])->update();
+        $table->addColumn('name_fr', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_en'])->update();
+        $table->addColumn('name_it', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'name_fr'])->update();
         $table->save();
         $table = $this->table("permission", ['engine' => "InnoDB", 'encoding' => "utf8", 'collation' => "utf8_general_ci", 'comment' => ""]);
         $table->save();

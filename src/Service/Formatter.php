@@ -96,6 +96,7 @@ class Formatter
         $tmp['modified_by'] = $event['modified_by'];
         $tmp['archived_at'] = $event['archived_at'];
         $tmp['archived_by'] = $event['archived_by'];
+        $tmp['images'] = $event['images'];
 
         if ($descriptionFormat === 'plain') ***REMOVED***
             $tmp['description'] = [

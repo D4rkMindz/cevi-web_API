@@ -5,7 +5,7 @@ namespace Controller;
 
 
 use App\Test\DbTestCase;
-use App\Test\Mockbuilder;
+use App\Test\TestDatabase;
 use Exception;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use Slim\Exception\MethodNotAllowedException;
@@ -17,8 +17,8 @@ class SlControllersTest extends DbTestCase
 
     public function getDataSet()
     ***REMOVED***
-        $mockbuilder = new Mockbuilder();
-        $this->data = $mockbuilder->sl_locations();
+        $testDatabase = new TestDatabase();
+        $this->data = $testDatabase->sl_locations();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 

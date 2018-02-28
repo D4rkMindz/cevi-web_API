@@ -66,10 +66,7 @@ class DepartmentRepository extends AppRepository
      */
     public function existsDepartment(string $departmentId): bool
     ***REMOVED***
-        $query = $this->departmentTable->newSelect();
-        $query->select(1)->where(['id' => $departmentId]);
-        $row = $query->execute()->fetch();
-        return !empty($row);
+        return $this->exists($this->departmentTable, ['id' => $departmentId]);
 ***REMOVED***
 
     /**

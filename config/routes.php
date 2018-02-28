@@ -88,6 +88,10 @@ $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/che
  * Events
  */
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'getAllEventsAction']))->setName('get.all-events');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'createEventAction']))->setName('get.create-event');
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'getEventAction']))->setName('get.single-event');
+$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'updateEventAction']))->setName('put.update-event');
+$app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'deleteEventAction']))->setName('delete.delete-event');
 
 /***********************************************************************************************************************
  * Error routes

@@ -9,7 +9,7 @@
 namespace App\Test;
 
 
-class Mockbuilder
+class TestDatabase
 ***REMOVED***
     public function events()
     ***REMOVED***
@@ -24,6 +24,12 @@ class Mockbuilder
             'department_group' => $this->department_group(),
             'department_region' => $this->department_region(),
             'department_type' => $this->department_type(),
+            'event' => $this->event(),
+            'event_description' => $this->event_description(),
+            'event_title' => $this->event_title(),
+            'event_participant' => $this->event_participant(),
+            'event_image' => $this->event_image(),
+            'image' => $this->image(),
         ];
 ***REMOVED***
 
@@ -418,39 +424,449 @@ class Mockbuilder
         ];
 ***REMOVED***
 
+    private function participation_status()
+    ***REMOVED***
+        return [
+            [
+                'id' => '1',
+                'name_de' => 'Zugesagt',
+                'name_en' => 'Participated',
+                'name_fr' => 'Participaté',
+                'name_it' => 'Participatés',
+            ],
+            [
+                'id' => '2',
+                'name_de' => 'Abgesagt',
+                'name_en' => 'Departicipated',
+                'name_fr' => 'Departicipaté',
+                'name_it' => 'Departicipatés',
+            ],
+            [
+                'id' => '3',
+                'name_de' => 'Vielleicht',
+                'name_en' => 'Probably',
+                'name_fr' => 'Peutetre',
+                'name_it' => 'Peutetros',
+            ],
+        ];
+***REMOVED***
+
     private function department_event()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'department_id' => '1',
+                'event_id' => '1',
+                'department_group_id' => '1',
+            ],
+            [
+                'id' => '2',
+                'department_id' => '2',
+                'event_id' => '2',
+                'department_group_id' => '2',
+            ],
+            [
+                'id' => '3',
+                'department_id' => '3',
+                'event_id' => '3',
+                'department_group_id' => '1',
+            ],
+        ];
 ***REMOVED***
 
     private function educational_course()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'educational_course_title_id' => '1',
+                'educational_course_description_id' => '1',
+                'educational_course_organiser_id' => '1',
+                'department_id' => '1',
+                'city_id' => '1',
+                'position_id' => '1',
+                'price' => '100,00',
+                'start_date' => '2018-04-07 10:00:00',
+                'end_date' => '2018-04-14 16:00:00',
+                'minimum_age' => '16',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'educational_course_title_id' => '2',
+                'educational_course_description_id' => '2',
+                'educational_course_organiser_id' => '2',
+                'department_id' => '2',
+                'city_id' => '2',
+                'position_id' => '2',
+                'price' => '120,00',
+                'start_date' => '2018-04-07 10:00:00',
+                'end_date' => '2018-04-14 16:00:00',
+                'minimum_age' => '16',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '3',
+                'educational_course_title_id' => '3',
+                'educational_course_description_id' => '3',
+                'educational_course_organiser_id' => '3',
+                'department_id' => '3',
+                'city_id' => '3',
+                'position_id' => '2',
+                'price' => '350,00',
+                'start_date' => '2018-04-07 10:00:00',
+                'end_date' => '2018-04-14 16:00:00',
+                'minimum_age' => '16',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2018-04-07 09:00:00',
+                'archived_by' => '1',
+            ],
+        ];
+***REMOVED***
+
+    private function educational_course_organiser()
+    ***REMOVED***
+        return [
+            [
+                'id' => '1',
+                'user_id' => '1',
+                'phone' => '061 456 12 78',
+                'email' => 'contact@llm.ch',
+                'notes' => 'Ist auf Milch allergisch',
+                'mobile' => '079 456 12 79',
+            ],
+            [
+                'id' => '2',
+                'user_id' => '2',
+                'phone' => '061 457 12 78',
+                'email' => 'contact@glk.ch',
+                'notes' => 'Ist auf Kühe allergisch',
+                'mobile' => '079 456 12 78',
+            ],
+            [
+                'id' => '3',
+                'user_id' => '3',
+                'phone' => '061 357 12 78',
+                'email' => 'contact@heku.ch',
+                'notes' => 'Ist auf Dummheit allergisch',
+                'mobile' => '079 456 12 99',
+            ],
+        ];
 ***REMOVED***
 
     private function educational_course_description()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'name_de' => 'GLK',
+                'name_en' => 'GLK',
+                'name_fr' => 'GLK',
+                'name_it' => 'GLK',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'name_de' => 'LLM',
+                'name_en' => 'LLM',
+                'name_fr' => 'LLM',
+                'name_it' => 'LLM',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2018-04-07 09:00:00',
+                'archived_by' => '1',
+            ],
+            [
+                'id' => '3',
+                'name_de' => 'HEKU',
+                'name_en' => 'HEKU',
+                'name_fr' => 'HEKU',
+                'name_it' => 'HEKU',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+        ];
+***REMOVED***
+
+    private function educational_course_title()
+    ***REMOVED***
+        return [
+            [
+                'id' => '1',
+                'name_de' => 'GLK',
+                'name_en' => 'GLK',
+                'name_fr' => 'GLK',
+                'name_it' => 'GLK',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'name_de' => 'LLM',
+                'name_en' => 'LLM',
+                'name_fr' => 'LLM',
+                'name_it' => 'LLM',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2018-04-07 09:00:00',
+                'archived_by' => '1',
+            ],
+            [
+                'id' => '3',
+                'name_de' => 'HEKU',
+                'name_en' => 'HEKU',
+                'name_fr' => 'HEKU',
+                'name_it' => 'HEKU',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+        ];
 ***REMOVED***
 
     private function event()
     ***REMOVED***
-        // todo    
+        return [
+            [
+                'id' => '1',
+                'event_title_id' => '1',
+                'event_description_id' => '1',
+                'price' => '123,00',
+                'start' => '2018-07-05 10:00:00',
+                'end' => '2018-07-12 16:00:00',
+                'start_leader' => '2018-07-05 08:00:00',
+                'end_leader' => '2018-07-12 18:00:00',
+                'public' => '1',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'event_title_id' => '2',
+                'event_description_id' => '2',
+                'price' => '150,50',
+                'start' => '2018-07-05 10:00:00',
+                'end' => '2018-07-12 16:00:00',
+                'start_leader' => '2018-07-05 08:00:00',
+                'end_leader' => '2018-07-12 18:00:00',
+                'public' => '1',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '3',
+                'event_title_id' => '3',
+                'event_description_id' => '3',
+                'price' => '300,00',
+                'start' => '2018-07-05 10:00:00',
+                'end' => '2018-07-12 16:00:00',
+                'start_leader' => '2018-07-05 08:00:00',
+                'end_leader' => '2018-07-12 18:00:00',
+                'public' => '0',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+        ];
 ***REMOVED***
 
     private function event_description()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'name_de' => 'Beschreibung des Events',
+                'name_en' => 'Description of the event',
+                'name_fr' => 'Description de l\'event',
+                'name_it' => 'Descriptione della evente',
+            ],
+            [
+                'id' => '2',
+                'name_de' => 'Beschreibung des Events 2',
+                'name_en' => 'Description of the event 2',
+                'name_fr' => 'Description de l\'event 2',
+                'name_it' => 'Descriptione della evente 2',
+            ],
+            [
+                'id' => '3',
+                'name_de' => 'Beschreibung des Events 3',
+                'name_en' => 'Description of the event 3',
+                'name_fr' => 'Description de l\'event 3',
+                'name_it' => 'Descriptione della evente 3',
+            ],
+        ];
 ***REMOVED***
 
     private function event_participant()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'user_id' => '1',
+                'event_id' => '1',
+                'participation_status_id' => '1',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'user_id' => '2',
+                'event_id' => '2',
+                'participation_status_id' => '1',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'user_id' => '2',
+                'event_id' => '2',
+                'participation_status_id' => '1',
+                'publicize_at' => '2018-02-01 10:00:00',
+                'created_at' => '2017-05-10 16:32:15',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2018-02-01 10:00:00',
+                'archived_by' => '2',
+            ],
+        ];
 ***REMOVED***
 
     private function event_title()
     ***REMOVED***
-        // todo
+        return [
+            [
+                'id' => '1',
+                'name_de' => 'GLK',
+                'name_en' => 'GLK',
+                'name_fr' => 'GLK',
+                'name_it' => 'GLK',
+                'created_at' => '2017-01-01 00:00:10',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'name_de' => 'LLM',
+                'name_en' => 'LLM',
+                'name_fr' => 'LLM',
+                'name_it' => 'LLM',
+                'created_at' => '2017-01-01 00:00:10',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '3',
+                'name_de' => 'HEKU',
+                'name_en' => 'HEKU',
+                'name_fr' => 'HEKU',
+                'name_it' => 'HEKU',
+                'created_at' => '2017-01-01 00:00:10',
+                'created_by' => '2',
+                'modified_at' => '2017-12-01 00:00:00',
+                'modified_by' => '2',
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '4',
+                'name_de' => 'HEKU',
+                'name_en' => 'HEKU',
+                'name_fr' => 'HEKU',
+                'name_it' => 'HEKU',
+                'created_at' => '2017-01-01 00:00:10',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2018-01-01 00:00:12',
+                'archived_by' => '1',
+            ],
+        ];
+***REMOVED***
+
+    private function event_image()
+    ***REMOVED***
+        return [
+            [
+                'id' => '1',
+                'image_id' => '1',
+                'event_id' => '1',
+            ],
+            [
+                'id' => '2',
+                'image_id' => '2',
+                'event_id' => '2',
+            ],
+            [
+                'id' => '3',
+                'image_id' => '3',
+                'event_id' => '3',
+            ],
+        ];
 ***REMOVED***
 
     private function city(int $count = 1)
@@ -619,6 +1035,45 @@ class Mockbuilder
                 'name_en' => 'Miss',
                 'name_fr' => 'Madame',
                 'name_it' => 'Signora',
+            ],
+        ];
+***REMOVED***
+
+    private function image()
+    ***REMOVED***
+        return [
+            [
+                'id' => '1',
+                'url' => baseurl('/img/events/image-url-1.jpg'),
+                'type' => 'jpg',
+                'created_at' => '2017-01-01 10:00:00',
+                'created_by' => '1',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '2',
+                'url' => baseurl('/img/events/image-url-2.jpg'),
+                'type' => 'jpg',
+                'created_at' => '2017-01-01 10:00:00',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => null,
+                'archived_by' => null,
+            ],
+            [
+                'id' => '3',
+                'url' => baseurl('/img/events/image-url-3.jpg'),
+                'type' => 'jpg',
+                'created_at' => '2017-01-01 10:00:00',
+                'created_by' => '2',
+                'modified_at' => null,
+                'modified_by' => null,
+                'archived_at' => '2017-01-01 11:00:00',
+                'archived_by' => '1',
             ],
         ];
 ***REMOVED***

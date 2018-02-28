@@ -10,7 +10,7 @@ namespace Controller;
 
 
 use App\Test\DbTestCase;
-use App\Test\Mockbuilder;
+use App\Test\TestDatabase;
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 
 /**
@@ -89,8 +89,8 @@ class DbUserControllerTest extends DbTestCase
      */
     protected function getDataSet()
     ***REMOVED***
-        $mockbuilder = new Mockbuilder();
-        $this->data = $mockbuilder->users();
+        $testDatabase = new TestDatabase();
+        $this->data = $testDatabase->users();
         return new ArrayDataSet($this->data);
 ***REMOVED***
 ***REMOVED***
