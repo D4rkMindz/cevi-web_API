@@ -199,6 +199,7 @@ class AppTable implements TableInterface
             'educational_course_participant' => 1,
             'event_image' => 1,
             'event_participant' => 1,
+            'event_participation_status' => 1,
             'gender' => 1,
             'language' => 1,
             'permission' => 1,

@@ -320,6 +320,13 @@ class Formatter
         return $tmp;
 ***REMOVED***
 
+    /**
+     * Format storage place.
+     *
+     * @param array $storagePlace
+     * @param string $departmentId
+     * @return array
+     */
     public function formatStoragePlace(array $storagePlace, string $departmentId): array
     ***REMOVED***
         $tmp = [];
@@ -355,6 +362,136 @@ class Formatter
         ];
         $tmp['name'] = $storagePlace['name'];
         $tmp['id'] = $storagePlace['id'];
+        return $tmp;
+***REMOVED***
+
+    /**
+     * Format participation.
+     *
+     * @param array $participation
+     * @param string $departmentId
+     * @param string $format
+     * @return array
+     */
+    public function formatParticipation(array $participation, string $departmentId, string $format): array
+    ***REMOVED***
+        // works, because in the Participation Repository
+        // are the same array keys used for getting all
+        // and getting only users
+        $tmp = $this->formatParticipatingUser($participation);
+        if ($format === 'plain') ***REMOVED***
+            $tmp['event'] = [
+                'id' => $participation['event_id'],
+                'title' => [
+                    'name_de' => $participation['event_title_de'],
+                    'name_en' => $participation['event_title_en'],
+                    'name_fr' => $participation['event_title_fr'],
+                    'name_it' => $participation['event_title_it'],
+                ],
+                'description' => [
+                    'name_de' => [
+                        'plain' => $participation['event_description_de'],
+                    ],
+                    'name_en' => [
+                        'plain' => $participation['event_description_en'],
+                    ],
+                    'name_fr' => [
+                        'plain' => $participation['event_description_fr'],
+                    ],
+                    'name_it' => [
+                        'plain' => $participation['event_description_it'],
+                    ],
+                ]
+            ];
+    ***REMOVED*** elseif ($format === 'parsed') ***REMOVED***
+            $tmp['event'] = [
+                'id' => $participation['event_id'],
+                'title' => [
+                    'name_de' => $participation['event_title_de'],
+                    'name_en' => $participation['event_title_en'],
+                    'name_fr' => $participation['event_title_fr'],
+                    'name_it' => $participation['event_title_it'],
+                ],
+                'description' => [
+                    'name_de' => [
+                        'parsed' => MDParser::parse($participation['event_description_de']),
+                    ],
+                    'name_en' => [
+                        'parsed' => MDParser::parse($participation['event_description_en']),
+                    ],
+                    'name_fr' => [
+                        'parsed' => MDParser::parse($participation['event_description_fr']),
+                    ],
+                    'name_it' => [
+                        'parsed' => MDParser::parse($participation['event_description_it']),
+                    ],
+                ]
+            ];
+    ***REMOVED*** else ***REMOVED***
+            $tmp['event'] = [
+                'id' => $participation['event_id'],
+                'title' => [
+                    'name_de' => $participation['event_title_de'],
+                    'name_en' => $participation['event_title_en'],
+                    'name_fr' => $participation['event_title_fr'],
+                    'name_it' => $participation['event_title_it'],
+                ],
+                'description' => [
+                    'name_de' => [
+                        'plain' => $participation['event_description_de'],
+                        'parsed' => MDParser::parse($participation['event_description_de']),
+                    ],
+                    'name_en' => [
+                        'plain' => $participation['event_description_en'],
+                        'parsed' => MDParser::parse($participation['event_description_en']),
+                    ],
+                    'name_fr' => [
+                        'plain' => $participation['event_description_fr'],
+                        'parsed' => MDParser::parse($participation['event_description_fr']),
+                    ],
+                    'name_it' => [
+                        'plain' => $participation['event_description_it'],
+                        'parsed' => MDParser::parse($participation['event_description_it']),
+                    ],
+                ]
+            ];
+    ***REMOVED***
+
+        $tmp['event']['url'] = baseurl('/v2/departments/' . $departmentId . '/events/' . $participation['event_id']);
+
+        return $tmp;
+***REMOVED***
+
+    /**
+     * Format user who's participating at an event.
+     *
+     * @param array $user
+     */
+    public function formatParticipatingUser(array $user)
+    ***REMOVED***
+        $tmp['user_id'] = $user['user_id'];
+        $tmp['department'] = [
+            'id' => $user['department_id'],
+            'name' => $user['department_name'],
+        ];
+        $tmp['last_name'] = $user['last_name'];
+        $tmp['first_name'] = $user['first_name'];
+        $tmp['cevi_name'] = $user['cevi_name'];
+        $tmp['language'] = [
+            'id' => $user['language_id'],
+            'name' => $user['language_name'],
+            'abbreviation' => $user['language_abbreviation'],
+        ];
+        $tmp['city'] = [
+            'id' => $user['city_id'],
+            'postcode' => $user['city_postcode'],
+            'name_de' => $user['city_name_de'],
+            'name_en' => $user['city_name_en'],
+            'name_fr' => $user['city_name_fr'],
+            'name_it' => $user['city_name_it'],
+        ];
+        $tmp['user_url'] = baseurl('/v2/users/' . $user['user_id']);
+
         return $tmp;
 ***REMOVED***
 ***REMOVED***

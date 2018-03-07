@@ -5,12 +5,17 @@ namespace App\Repository;
 
 
 use App\Service\Formatter;
+use App\Service\TranslateService;
 use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
 use App\Table\EventDescriptionTable;
+use App\Table\EventImageTable;
 use App\Table\EventTable;
 use App\Table\EventTitleTable;
+use App\Table\ImageTable;
+use Cake\Database\Query;
+use Exception;
 use Slim\Container;
 
 /**
@@ -49,6 +54,16 @@ class EventRepository extends AppRepository
     private $eventDescriptionTable;
 
     /**
+     * @var EventImageTable
+     */
+    private $eventImageTable;
+
+    /**
+     * @var ImageTable
+     */
+    private $imageTable;
+
+    /**
      * @var Formatter
      */
     private $formatter;
@@ -61,6 +76,8 @@ class EventRepository extends AppRepository
         $this->departmentEventTable = $container->get(DepartmentEventTable::class);
         $this->departmentGroupTable = $container->get(DepartmentGroupTable::class);
         $this->eventDescriptionTable = $container->get(EventDescriptionTable::class);
+        $this->eventImageTable = $container->get(EventImageTable::class);
+        $this->imageTable = $container->get(ImageTable::class);
 
         $this->formatter = new Formatter();
 ***REMOVED***
@@ -77,6 +94,201 @@ class EventRepository extends AppRepository
      * @return array
      */
     public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null, bool $isPublic = true): array
+    ***REMOVED***
+        $query = $this->getEventQuery($limit, $page, $until, $departmentGroupId, $departmentId, $since, $isPublic);
+        $events = $query->execute()->fetchAll('assoc');
+        if (empty($events)) ***REMOVED***
+            return [];
+    ***REMOVED***
+
+        $events = $this->addEventImages($descriptionFormat, $events);
+
+        return $events;
+***REMOVED***
+
+    /**
+     * Get single event.
+     *
+     * @param string $eventId
+     * @param int $limit
+     * @param int $page
+     * @param int $until
+     * @param string $departmentGroupId
+     * @param string $departmentId
+     * @param int $since
+     * @param string|null $descriptionFormat
+     * @param bool $isPublic
+     * @return array
+     */
+    public function getEvent(string $eventId, int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null, bool $isPublic = true): array
+    ***REMOVED***
+        $query = $this->getEventQuery($limit, $page, $until, $departmentGroupId, $departmentId, $since, $isPublic);
+        $query->andWhere([$this->eventTable->getTablename() . '.id' => $eventId]);
+        $event = $query->execute()->fetch('assoc');
+        if (empty($event)) ***REMOVED***
+            return [];
+    ***REMOVED***
+
+        $event = $this->addEventImages($descriptionFormat, $event);
+
+        return $event;
+***REMOVED***
+
+    /**
+     * Create event.
+     *
+     * @param array $data
+     * @param string $lang
+     * @param string $userId
+     * @return array
+     */
+    public function createEvent(array $data, string $lang, string $userId): array
+    ***REMOVED***
+        $eventTitleId = $this->insertEventTitle((string)$data['title'], $lang, $userId);
+        $eventDescriptionId = $this->insertEventDescription((string)$data['description'], $lang, $userId);
+
+        $row = [
+            'event_title_id' => $eventTitleId,
+            'event_description_id' => $eventDescriptionId,
+            'price' => (float)$data['price'],
+            'start' => date('Y-m-d H:i:s', (int)$data['start']),
+            'end' => date('Y-m-d H:i:s', (int)$data['end']),
+            'start_leaders' => date('Y-m-d H:i:s', (int)$data['start_leaders']),
+            'end_leaders' => date('Y-m-d H:i:s', (int)$data['end_leaders']),
+            'public' => (bool)$data['public'],
+            'publicize_at' => date('Y-m-d H:i:s', (int)$data['publicize_at']),
+        ];
+
+        return $this->eventTable->insert($row, $userId);
+***REMOVED***
+
+    /**
+     * Update event.
+     *
+     * @param array $data
+     * @param int $eventId
+     * @param string $lang
+     * @param string $userId
+     * @return bool
+     */
+    public function updateEvent(array $data, int $eventId, string $lang, string $userId): bool
+    ***REMOVED***
+        $row = [];
+
+        if (array_key_exists('title', $data)) ***REMOVED***
+            $row['title_id'] = $this->insertEventTitle((string)$data['title'], $lang, $userId);
+    ***REMOVED***
+        if (array_key_exists('description', $data)) ***REMOVED***
+            $row['description_id'] = $this->insertEventDescription((string)$data['description'], $lang, $userId);
+    ***REMOVED***
+        if (array_key_exists('start', $data)) ***REMOVED***
+            $row['start'] = date('Y-m-d H:i:s', (int)$data['start']);
+    ***REMOVED***
+        if (array_key_exists('end', $data)) ***REMOVED***
+            $row['start'] = date('Y-m-d H:i:s', (int)$data['end']);
+    ***REMOVED***
+        if (array_key_exists('start_leaders', $data)) ***REMOVED***
+            $row['start'] = date('Y-m-d H:i:s', (int)$data['start_leaders']);
+    ***REMOVED***
+        if (array_key_exists('end_leaders', $data)) ***REMOVED***
+            $row['start'] = date('Y-m-d H:i:s', (int)$data['end_leaders']);
+    ***REMOVED***
+        if (array_key_exists('price', $data)) ***REMOVED***
+            $row['price'] = (float)$data['price'];
+    ***REMOVED***
+
+        if (array_key_exists('public', $data)) ***REMOVED***
+            $row['public'] = (bool)$data['public'];
+            $row['publicize_at'] = !empty($data['publicize_at']) ? date('Y-m-d H:i:s', (int)$data['publicize_at']) : null;
+    ***REMOVED***
+
+        return $this->eventTable->update($row, [$this->eventTable->getTablename() . '.id' => $eventId], $userId);
+***REMOVED***
+
+    /**
+     * Check if event exists.
+     *
+     * @param string $eventId
+     * @param string $departmentId
+     * @return bool
+     */
+    public function existsEvent(string $eventId, string $departmentId): bool
+    ***REMOVED***
+        return $this->exists($this->departmentEventTable, ['event_id' => $eventId, 'department_id'=> $departmentId]);
+***REMOVED***
+
+    /**
+     * Insert event title.
+     *
+     * @param string $eventTitle
+     * @param string $lang
+     * @param string $userId
+     * @return string
+     */
+    private function insertEventTitle(string $eventTitle, string $lang, string $userId)
+    ***REMOVED***
+        $translated = TranslateService::trans($eventTitle, $lang);
+        $row = [
+            'name_de' => $translated['de'],
+            'name_en' => $translated['en'],
+            'name_fr' => $translated['fr'],
+            'name_it' => $translated['it'],
+        ];
+
+        return $this->eventTitleTable->insert($row, $userId);
+***REMOVED***
+
+    /**
+     * Insert event description.
+     *
+     * @param string $eventDescription
+     * @param string $lang
+     * @param string $userId
+     * @return int
+     */
+    private function insertEventDescription(string $eventDescription, string $lang, string $userId): int
+    ***REMOVED***
+        $translated = TranslateService::trans($eventDescription, $lang);
+        $row = [
+            'name_de' => $translated['de'],
+            'name_en' => $translated['en'],
+            'name_fr' => $translated['fr'],
+            'name_it' => $translated['it'],
+        ];
+
+        return $this->eventDescriptionTable->insert($row, $userId);
+***REMOVED***
+
+    /**
+     * Delete event.
+     *
+     * @param string $eventId
+     * @param string $executorId
+     * @return bool
+     */
+    public function deleteEvent(string $eventId, string $executorId)
+    ***REMOVED***
+        try ***REMOVED***
+            $this->eventTable->archive($executorId, ['id' => $eventId]);
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+            return false;
+    ***REMOVED***
+        return true;
+***REMOVED***
+
+    /**
+     * Get event selection query.
+     *
+     * @param int $limit
+     * @param int $page
+     * @param int $until
+     * @param string $departmentGroupId
+     * @param string $departmentId
+     * @param int $since
+     * @param bool $isPublic
+     * @return Query
+     */
+    private function getEventQuery(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, bool $isPublic): Query
     ***REMOVED***
         $eventTableName = $this->eventTable->getTablename();
         $eventTitleTableName = $this->eventTitleTable->getTablename();
@@ -143,15 +355,47 @@ class EventRepository extends AppRepository
             ->where($where)
             ->limit($limit)
             ->page($page);
-        $events = $query->execute()->fetchAll('assoc');
-        if (empty($events)) ***REMOVED***
-            return [];
+        return $query;
+***REMOVED***
+
+    /**
+     * Add all event images to the event array
+     *
+     * @param string $descriptionFormat
+     * @param $events
+     * @return mixed
+     */
+    private function addEventImages(string $descriptionFormat, $events)
     ***REMOVED***
+        $imageTablename = $this->imageTable->getTablename();
+        $eventImageTablename = $this->eventImageTable->getTablename();
+
+        $fields = [
+            'id' => $imageTablename . '.id',
+            'url' => $imageTablename . '.url',
+            'name_de' => $imageTablename . '.name_de',
+            'name_en' => $imageTablename . '.name_en',
+            'name_it' => $imageTablename . '.name_fr',
+            'name_fr' => $imageTablename . '.name_it',
+        ];
+
+        $query = $this->eventImageTable->newSelect();
+        $query->select($fields)
+            ->join([
+                [
+                    'table' => $imageTablename,
+                    'type' => 'RIGHT',
+                    'conditions' => $eventImageTablename . '.image_id = ' . $imageTablename . '.id',
+                ],
+            ]);
 
         foreach ($events as $key => $event) ***REMOVED***
+            $q = $query;
+            $q->where([$eventImageTablename . '.event_id' => $event['id']]);
+
+            $event['images'] = $q->execute()->fetchAll('assoc') ?: ['message' => __('No images available')];
             $events[$key] = $this->formatter->formatEvent($event, $descriptionFormat);
     ***REMOVED***
-
         return $events;
 ***REMOVED***
 ***REMOVED***

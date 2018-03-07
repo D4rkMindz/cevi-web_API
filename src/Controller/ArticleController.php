@@ -121,7 +121,7 @@ class ArticleController extends AppController
         $responseData = [
             'article_id' => $articleId,
             'url' => baseurl('/v2/departments/' . $params['department_id'] . '/articles/' . $articleId),
-            'message' => __('Inserted user successfully'),
+            'message' => __('Inserted article successfully'),
         ];
 
         return $this->json($response, $responseData);
@@ -165,10 +165,10 @@ class ArticleController extends AppController
         $updated = $this->articleRepository->updateArticle($params, $this->jwt['lang'], $this->jwt['user_id']);
 
         if (!$updated) ***REMOVED***
-            return $this->error($response, __('Updating user failed'), 422, ['message' => __('Updating user failed')]);
+            return $this->error($response, __('Updating article failed'), 422, ['message' => __('Updating article failed')]);
     ***REMOVED***
 
-        return $this->json($response, ['message' => __('Updated user successfully')]);
+        return $this->json($response, ['message' => __('Updated article successfully')]);
 ***REMOVED***
 
     /**
@@ -181,9 +181,9 @@ class ArticleController extends AppController
      */
     public function deleteArticleAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $articleExists = $this->articleRepository->existsArticle($args['article_id'], $args['department_id']);
-        if (!$this->articleRepository->deleteArticle((int)$args['article_id'], $this->jwt['user_id']) && $articleExists) ***REMOVED***
-            $this->error($response, 'Forbidden', 403, ['message' => __('Deleting article failed')]);
+        $articleExists = $this->articleRepository->existsArticle((string)$args['article_id'], (string)$args['department_id']);
+        if (!$articleExists || !$this->articleRepository->deleteArticle((string)$args['article_id'], $this->jwt['user_id'])) ***REMOVED***
+            $this->error($response, 'Not found', 404, ['message' => __('Deleting article failed')]);
     ***REMOVED***
         return $this->json($response, ['message' => __('Deleted article successfully')]);
 ***REMOVED***
@@ -198,6 +198,6 @@ class ArticleController extends AppController
     public function getQualitiesAction(Request $request, Response $response): Response
     ***REMOVED***
         $qualities = $this->articleRepository->getQualities();
-        return $this->json($response, ['qualities'=> $qualities]);
+        return $this->json($response, ['qualities' => $qualities]);
 ***REMOVED***
 ***REMOVED***

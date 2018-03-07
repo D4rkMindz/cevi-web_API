@@ -11,6 +11,8 @@ use App\Table\DepartmentTable;
 use App\Table\DepartmentTypeTable;
 use App\Table\EventDescriptionTable;
 use App\Table\EventImageTable;
+use App\Table\EventParticipantTable;
+use App\Table\EventParticipationStatusTable;
 use App\Table\EventTable;
 use App\Table\EventTitleTable;
 use App\Table\GenderTable;
@@ -78,6 +80,14 @@ $container[EventTable::class] = function (Container $container) ***REMOVED***
 
 $container[EventImageTable::class] = function (Container $container) ***REMOVED***
     return new EventImageTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[EventParticipantTable::class] = function (Container $container) ***REMOVED***
+    return new EventParticipantTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[EventParticipationStatusTable::class] = function (Container $container) ***REMOVED***
+    return new EventParticipationStatusTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[EventTitleTable::class] = function (Container $container) ***REMOVED***

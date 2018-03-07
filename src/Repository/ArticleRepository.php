@@ -308,7 +308,7 @@ class ArticleRepository extends AppRepository
             $row['storage_place_id'] = (string)$this->getStoragePlaceId($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
     ***REMOVED***
 
-        $this->articleTable->update($row, ['id' => $article['article_id']], $userId);
+        return $this->articleTable->update($row, ['id' => $article['article_id']], $userId);
 ***REMOVED***
 
     /**
@@ -318,7 +318,7 @@ class ArticleRepository extends AppRepository
      * @param string $executorId
      * @return bool
      */
-    public function deleteArticle(int $articleId, string $executorId)
+    public function deleteArticle(string $articleId, string $executorId)
     ***REMOVED***
         try ***REMOVED***
             $this->articleTable->archive($executorId, ['id' => $articleId]);
@@ -505,7 +505,7 @@ class ArticleRepository extends AppRepository
      * @param string $userId
      * @return string
      */
-    private function insertArticleTitle(string $articleTitle, string $lang, string $userId)
+    private function insertArticleTitle(string $articleTitle, string $lang, string $userId): int
     ***REMOVED***
         $translated = TranslateService::trans($articleTitle, $lang);
         $row = [
@@ -525,7 +525,7 @@ class ArticleRepository extends AppRepository
      * @param string $userId
      * @return string
      */
-    private function insertArticleDescription(string $articleDescription, string $lang, string $userId)
+    private function insertArticleDescription(string $articleDescription, string $lang, string $userId): int
     ***REMOVED***
         $translated = TranslateService::trans($articleDescription, $lang);
         $row = [
