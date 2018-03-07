@@ -44,7 +44,7 @@ class EventArticleController extends AppController
      * @param array $args
      * @return Response
      */
-    public function getAllAcion(Request $request, Response $response, array $args): Response
+    public function getAllAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $departmentId = (string)$args['department_id'];
         $eventId = (string)$args['event_id'];

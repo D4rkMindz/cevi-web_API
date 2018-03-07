@@ -105,6 +105,13 @@ $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/eve
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/users', route(['App\Controller\ParticipationController', 'getParticipatingUsersAction']))->setName('get.event-participating-users');
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/users', route(['App\Controller\ParticipationController', 'deleteAllParticipationsAction']))->setName('delete.cancel-event');
 
+/**
+ * Event articles
+ */
+$app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/articles', route(['App\Controller\EventArticleController', 'getAllAction']))->setName('get.event-articles');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/articles', route(['App\Controller\EventArticleController', 'linkArticleAction']))->setName('get.event-articles');
+$app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/articles/***REMOVED***article_id:[0-9]+***REMOVED***', route(['App\Controller\EventArticleController', 'unlinkArticleAction']))->setName('get.event-articles');
+
 /***********************************************************************************************************************
  * Error routes
  */
