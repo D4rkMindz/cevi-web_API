@@ -205,9 +205,10 @@ class ArticleRepository extends AppRepository
      * @param int $departmentId
      * @param int $limit
      * @param int $page
+     * @param string $descriptionFormat
      * @return array
      */
-    public function getAllArticles(int $departmentId, int $limit, int $page)
+    public function getAllArticles(int $departmentId, int $limit, int $page, string $descriptionFormat)
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery()
@@ -223,10 +224,26 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article);
+            $articles[$key] = $this->formatter->formatArticle($article, $descriptionFormat);
     ***REMOVED***
 
         return $articles;
+***REMOVED***
+
+    /**
+     * Check if quantity is possible to use for article. Measured with the full, possible quantity.
+     *
+     * @param string $articleId
+     * @param int $quantity
+     * @return bool
+     */
+    public function hasQuantity(string $articleId, int $quantity): bool
+    ***REMOVED***
+        $query = $this->articleTable->newSelect();
+        $query->select('quantity')->where(['id' => $articleId]);
+        $quantityAvailable = $query->execute()->fetch('assoc')[0];
+        return $quantity <= $quantityAvailable;
+
 ***REMOVED***
 
     /**
@@ -255,7 +272,7 @@ class ArticleRepository extends AppRepository
 
         $articleId = $this->articleTable->insert($row, $userId);
         $barcode = Barcode::generate($articleId, $storagePlaceId, $article['department_id']);
-        $this->articleTable->update(['barcode' => $barcode], $articleId, $userId);
+        $this->articleTable->modify(['barcode' => $barcode], $articleId, $userId);
 
         return $articleId;
 ***REMOVED***
@@ -308,7 +325,7 @@ class ArticleRepository extends AppRepository
             $row['storage_place_id'] = (string)$this->getStoragePlaceId($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
     ***REMOVED***
 
-        return $this->articleTable->update($row, ['id' => $article['article_id']], $userId);
+        return $this->articleTable->modify($row, ['id' => $article['article_id']], $userId);
 ***REMOVED***
 
     /**

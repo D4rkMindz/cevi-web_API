@@ -184,7 +184,7 @@ class StorageRepository extends AppRepository
     ***REMOVED***
 
         try ***REMOVED***
-            $this->storagePlaceTable->update($row, ['department_id' => $departmentId, 'id' => $storageId], $userId);
+            $this->storagePlaceTable->modify($row, ['department_id' => $departmentId, 'id' => $storageId], $userId);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***

@@ -57,7 +57,7 @@ class UserValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate update data.
+     * Validate modify data.
      *
      * @param array $data
      * @param string $modifier

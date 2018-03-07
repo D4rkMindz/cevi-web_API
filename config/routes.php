@@ -88,16 +88,16 @@ $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/che
  * Events
  */
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'getAllEventsAction']))->setName('get.all-events');
-$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'createEventAction']))->setName('get.create-event');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events', route(['App\Controller\EventController', 'createEventAction']))->setName('get.insert-event');
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'getEventAction']))->setName('get.single-event');
-$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'updateEventAction']))->setName('put.update-event');
+$app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'updateEventAction']))->setName('put.modify-event');
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***', route(['App\Controller\EventController', 'deleteEventAction']))->setName('delete.delete-event');
 
 /**
  * Participations
  */
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations', route(['App\Controller\ParticipationController', 'getAllParticipationsAction']))->setName('get.all-event-participations');
-$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations', route(['App\Controller\ParticipationController', 'createParticipationAction']))->setName('post.create-event-participations');
+$app->post('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations', route(['App\Controller\ParticipationController', 'createParticipationAction']))->setName('post.insert-event-participations');
 $app->get('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\ParticipationController', 'getParticipationAction']))->setName('get.event-participation');
 $app->put('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\ParticipationController', 'updateParticipationAction']))->setName('put.event-participation');
 $app->delete('/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***/events/***REMOVED***event_id:[0-9]+***REMOVED***/participations/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\ParticipationController', 'deleteParticipationAction']))->setName('put.event-participation');

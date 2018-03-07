@@ -9,6 +9,7 @@ use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
 use App\Table\DepartmentTypeTable;
+use App\Table\EventArticleTable;
 use App\Table\EventDescriptionTable;
 use App\Table\EventImageTable;
 use App\Table\EventParticipantTable;
@@ -88,6 +89,10 @@ $container[EventParticipantTable::class] = function (Container $container) ***RE
 
 $container[EventParticipationStatusTable::class] = function (Container $container) ***REMOVED***
     return new EventParticipationStatusTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[EventArticleTable::class] = function (Container $container) ***REMOVED***
+    return new EventArticleTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[EventTitleTable::class] = function (Container $container) ***REMOVED***

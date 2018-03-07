@@ -235,7 +235,7 @@ class UserRepository extends AppRepository
             'created_by' => 0
         ];
 
-        return $this->userTable->insert($row);
+        return $this->userTable->insert($row, 0);
 ***REMOVED***
 
     /**
@@ -348,7 +348,7 @@ class UserRepository extends AppRepository
         $update['modified_at'] = date('Y-m-d H:i:s');
         $update['modified_by'] = $userId;
 
-        $this->userTable->update($update, ['id' => $where], $userId);
+        $this->userTable->modify($update, ['id' => $where], $userId);
         $query = $this->userTable->newSelect();
         $query->select('signup_completed')->where(['id' => $where]);
         $row = $query->execute()->fetch();
@@ -373,7 +373,7 @@ class UserRepository extends AppRepository
             $query->select($fields)->where(['id' => $where]);
             $row = $query->execute()->fetch('assoc');
             if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
-                $this->userTable->update(['signup_completed' => true], ['id' => $where], $userId);
+                $this->userTable->modify(['signup_completed' => true], ['id' => $where], $userId);
                 return true;
         ***REMOVED***
             return false;

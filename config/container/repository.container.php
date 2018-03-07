@@ -5,6 +5,7 @@ use App\Repository\CityRepository;
 use App\Repository\DepartmentGroupRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\DepartmentTypeRepository;
+use App\Repository\EventArticleRepository;
 use App\Repository\EventRepository;
 use App\Repository\GenderRepository;
 use App\Repository\LanguageRepository;
@@ -67,4 +68,8 @@ $container[UserRepository::class] = function (Container $container)***REMOVED***
 
 $container[ParticipationRepository::class] = function (Container $container) ***REMOVED***
     return new ParticipationRepository($container);
+***REMOVED***;
+
+$container[EventArticleRepository::class] = function (Container $container) ***REMOVED***
+    return new EventArticleRepository($container);
 ***REMOVED***;

@@ -58,7 +58,7 @@ class AppTable implements TableInterface
      */
     public function newSelect(bool $includeArchived = false): Query
     ***REMOVED***
-        if (!$this->hasMetadata() || $includeArchived)***REMOVED***
+        if (!$this->hasMetadata() || $includeArchived) ***REMOVED***
             return $this->connection->newQuery()->from($this->table);
     ***REMOVED***;
 
@@ -88,8 +88,10 @@ class AppTable implements TableInterface
      */
     public function insert(array $row, string $userId): string
     ***REMOVED***
-        $row['created_at'] = date('Y-m-d H:i:s');
-        $row['created_by'] = $userId;
+        if ($this->hasMetadata()) ***REMOVED***
+            $row['created_at'] = date('Y-m-d H:i:s');
+            $row['created_by'] = $userId;
+    ***REMOVED***
         return $this->connection->insert($this->table, $row)->lastInsertId($this->table);
 ***REMOVED***
 
@@ -101,7 +103,7 @@ class AppTable implements TableInterface
      * @param string $userId
      * @return bool
      */
-    public function update(array $row, array $where, string $userId): bool
+    public function modify(array $row, array $where, string $userId): bool
     ***REMOVED***
         if (!$this->hasMetadata()) ***REMOVED***
             return false;
@@ -114,7 +116,7 @@ class AppTable implements TableInterface
             ->where($where);
         try ***REMOVED***
             $query->execute();
-    ***REMOVED***catch (Exception $exception)***REMOVED***
+    ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
         return true;
@@ -133,7 +135,7 @@ class AppTable implements TableInterface
             'archived_by' => $executorId,
             'archived_at' => date('Y-m-d H:i:s'),
         ];
-        if ($this->hasMetadata())***REMOVED***
+        if ($this->hasMetadata()) ***REMOVED***
             $where['OR'] = [
                 [$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')],
                 [$this->table . '.archived_at IS NULL']

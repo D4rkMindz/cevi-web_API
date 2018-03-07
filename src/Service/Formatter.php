@@ -152,6 +152,84 @@ class Formatter
 ***REMOVED***
 
     /**
+     * Format simple event array.
+     *
+     * @param array $event
+     * @param string|null $descriptionFormat
+     * @return array
+     */
+    public function formatEventSimple(array $event,  string $descriptionFormat = null): array
+    ***REMOVED***
+        $tmp = [];
+        $tmp['id'] = $event['id'];
+        $tmp['name'] = [
+            'name_de' => $event['event_name_de'],
+            'name_en' => $event['event_name_en'],
+            'name_fr' => $event['event_name_fr'],
+            'name_it' => $event['event_name_it'],
+        ];
+
+        $tmp['created_at'] = $event['created_at'];
+        $tmp['created_by'] = $event['created_by'];
+        $tmp['modified_at'] = $event['modified_at'];
+        $tmp['modified_by'] = $event['modified_by'];
+        $tmp['archived_at'] = $event['archived_at'];
+        $tmp['archived_by'] = $event['archived_by'];
+
+        if ($descriptionFormat === 'plain') ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'plain' => $event['description_name_de'],
+                ],
+                'name_en' => [
+                    'plain' => $event['description_name_en'],
+                ],
+                'name_fr' => [
+                    'plain' => $event['description_name_fr'],
+                ],
+                'name_it' => [
+                    'plain' => $event['description_name_it'],
+                ],
+            ];
+    ***REMOVED*** else if ($descriptionFormat === 'parsed') ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'parsed' => MDParser::parse($event['description_name_de']),
+                ],
+                'name_en' => [
+                    'parsed' => MDParser::parse($event['description_name_en']),
+                ],
+                'name_fr' => [
+                    'parsed' => MDParser::parse($event['description_name_fr']),
+                ],
+                'name_it' => [
+                    'parsed' => MDParser::parse($event['description_name_it']),
+                ],
+            ];
+    ***REMOVED*** else ***REMOVED***
+            $tmp['description'] = [
+                'name_de' => [
+                    'plain' => $event['description_name_de'],
+                    'parsed' => MDParser::parse($event['description_name_de']),
+                ],
+                'name_en' => [
+                    'plain' => $event['description_name_en'],
+                    'parsed' => MDParser::parse($event['description_name_en']),
+                ],
+                'name_fr' => [
+                    'plain' => $event['description_name_fr'],
+                    'parsed' => MDParser::parse($event['description_name_fr']),
+                ],
+                'name_it' => [
+                    'plain' => $event['description_name_it'],
+                    'parsed' => MDParser::parse($event['description_name_it']),
+                ],
+            ];
+    ***REMOVED***
+        return $tmp;
+***REMOVED***
+
+    /**
      * Format department.
      *
      * @param array $department

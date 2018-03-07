@@ -40,7 +40,7 @@ class DepartmentValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate create department.
+     * Validate insert department.
      *
      * @param string $name
      * @param string $postcode
@@ -60,7 +60,7 @@ class DepartmentValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate update data.
+     * Validate modify data.
      *
      * @param string $name
      * @param string $postcode

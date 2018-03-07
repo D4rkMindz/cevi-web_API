@@ -102,7 +102,7 @@ class LocationRepository extends AppRepository
      */
     public function updateStorage(TableInterface $table, string $id, string $name, string $userId)
     ***REMOVED***
-        return $table->update(['name' => (string)$name], ['id' => $id], $userId);
+        return $table->modify(['name' => (string)$name], ['id' => $id], $userId);
 ***REMOVED***
 
     /**

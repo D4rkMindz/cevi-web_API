@@ -182,7 +182,7 @@ class ParticipationRepository extends AppRepository
      */
     public function updateParticipation(string $eventId, string $userId, string $statusId, string $executorId): bool
     ***REMOVED***
-        return $this->eventParticipantTable->update(['status_id' => $statusId], ['event_id' => $eventId, 'user_id' => $userId], $executorId);
+        return $this->eventParticipantTable->modify(['status_id' => $statusId], ['event_id' => $eventId, 'user_id' => $userId], $executorId);
 ***REMOVED***
 
     /**
@@ -285,7 +285,7 @@ class ParticipationRepository extends AppRepository
      */
     public function cancelEvent(string $eventId, string $message, string $executorId): bool
     ***REMOVED***
-        $updated = $this->eventParticipantTable->update(['message' => $message], ['event_id' => $eventId], $executorId);
+        $updated = $this->eventParticipantTable->modify(['message' => $message], ['event_id' => $eventId], $executorId);
         if (!$updated) ***REMOVED***
             return false;
     ***REMOVED***

@@ -38,7 +38,7 @@ class ArticleValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate update article.
+     * Validate modify article.
      *
      * @param array $article
      * @return ValidationContext
@@ -99,7 +99,7 @@ class ArticleValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate create article.
+     * Validate insert article.
      *
      * @param array $article
      * @return ValidationContext

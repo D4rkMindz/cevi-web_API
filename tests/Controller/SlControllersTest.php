@@ -45,7 +45,7 @@ class SlControllersTest extends DbTestCase
 ***REMOVED***
 
     /**
-     * Test create all.
+     * Test insert all.
      *
      * @dataProvider createAllDataProvider
      * @param string $type
@@ -69,7 +69,7 @@ class SlControllersTest extends DbTestCase
 ***REMOVED***
 
     /**
-     * Test update all
+     * Test modify all
      *
      * @dataProvider updateAllDataProvider
      * @param string $departmentId
@@ -468,7 +468,7 @@ class SlControllersTest extends DbTestCase
     public function createAllDataProvider()
     ***REMOVED***
         return [
-            'sl_location Test create success' => [
+            'sl_location Test insert success' => [
                 'locations',
                 [
                     'name' => 'New name',
@@ -539,7 +539,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ]
             ],
-            'sl_room Test create success' => [
+            'sl_room Test insert success' => [
                 'rooms',
                 [
                     'name' => 'New name',
@@ -610,7 +610,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ]
             ],
-            'sl_corridor Test create success' => [
+            'sl_corridor Test insert success' => [
                 'corridors',
                 [
                     'name' => 'New name',
@@ -681,7 +681,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ]
             ],
-            'sl_shelf Test create success' => [
+            'sl_shelf Test insert success' => [
                 'shelfs',
                 [
                     'name' => 'New name',
@@ -752,7 +752,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ]
             ],
-            'sl_tray Test create success' => [
+            'sl_tray Test insert success' => [
                 'trays',
                 [
                     'name' => 'New name',
@@ -823,7 +823,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ]
             ],
-            'sl_chest Test create success' => [
+            'sl_chest Test insert success' => [
                 'chests',
                 [
                     'name' => 'New name',
@@ -900,7 +900,7 @@ class SlControllersTest extends DbTestCase
     public function updateAllDataProvider()
     ***REMOVED***
         return [
-            'sl_location Test update success' => [
+            'sl_location Test modify success' => [
                 '1',
                 'locations',
                 '1',
@@ -911,7 +911,7 @@ class SlControllersTest extends DbTestCase
                     'message' => 'Updated location successfully',
                 ],
             ],
-            'sl_location Test update name too short' => [
+            'sl_location Test modify name too short' => [
                 '1',
                 'locations',
                 '1',
@@ -931,7 +931,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ],
             ],
-            'sl_location Test update name too long' => [
+            'sl_location Test modify name too long' => [
                 '1',
                 'locations',
                 '1',
@@ -951,7 +951,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ],
             ],
-            'sl_location Test update name empty' => [
+            'sl_location Test modify name empty' => [
                 '1',
                 'locations',
                 '1',
@@ -971,7 +971,7 @@ class SlControllersTest extends DbTestCase
                     ],
                 ],
             ],
-            'sl_location Test update not existing department' => [
+            'sl_location Test modify not existing department' => [
                 '1000',
                 'locations',
                 '1',
@@ -985,7 +985,7 @@ class SlControllersTest extends DbTestCase
                     ]
                 ],
             ],
-            'sl_location Test update not existing location' => [
+            'sl_location Test modify not existing location' => [
                 '1',
                 'locations',
                 '100',

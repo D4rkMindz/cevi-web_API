@@ -8,7 +8,7 @@ use App\Util\ValidationContext;
 class EventValidation extends AppValidation
 ***REMOVED***
     /**
-     * Validate create event action data.
+     * Validate insert event action data.
      *
      * The data array MUST include:
      *
@@ -49,7 +49,7 @@ class EventValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate create event action data.
+     * Validate insert event action data.
      *
      * The data array MUST include:
      *

@@ -2,6 +2,7 @@
 
 use App\Service\Article\ArticleValidation;
 use App\Service\Department\DepartmentValidation;
+use App\Service\EventArticle\EventArticleValidation;
 use App\Service\Login\LoginValidation;
 use App\Service\Participation\ParticipationValidation;
 use App\Service\Storage\StorageValidation;
@@ -32,4 +33,8 @@ $container[StorageValidation::class] = function (Container $container) ***REMOVE
 
 $container[ParticipationValidation::class] = function (Container $container) ***REMOVED***
     return new ParticipationValidation($container);
+***REMOVED***;
+
+$container[EventArticleValidation::class] = function (Container $container) ***REMOVED***
+    return new EventArticleValidation($container);
 ***REMOVED***;

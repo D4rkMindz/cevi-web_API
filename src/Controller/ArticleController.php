@@ -69,7 +69,8 @@ class ArticleController extends AppController
     public function getAllArticlesAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $articles = $this->articleRepository->getAllArticles((int)$args['department_id'], $params['limit'], $params['page']);
+        $params['description_format'] = (string) $request->getParam('description_format');
+        $articles = $this->articleRepository->getAllArticles((int)$args['department_id'], $params['limit'], $params['page'], $params['description_format']);
 
         if (empty($articles)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('No articles found')]);

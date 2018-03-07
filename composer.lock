@@ -892,7 +892,7 @@
                     "email": "tobias.nyholm@gmail.com"
             ***REMOVED***
             ],
-            "description": "A builder class that help you create a multipart stream",
+            "description": "A builder class that help you insert a multipart stream",
             "homepage": "http://php-http.org",
             "keywords": [
                 "factory",

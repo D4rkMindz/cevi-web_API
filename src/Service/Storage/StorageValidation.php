@@ -51,7 +51,7 @@ class StorageValidation extends AppValidation
 ***REMOVED***
 
     /**
-     * Validate update storage
+     * Validate modify storage
      *
      * @param array $storage
      * @return ValidationContext

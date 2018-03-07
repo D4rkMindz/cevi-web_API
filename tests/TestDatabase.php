@@ -1089,12 +1089,12 @@ class TestDatabase
             [
                 'id' => '2',
                 'level' => '32',
-                'name' => 'update',
+                'name' => 'modify',
             ],
             [
                 'id' => '3',
                 'level' => '16',
-                'name' => 'create',
+                'name' => 'insert',
             ],
             [
                 'id' => '4',

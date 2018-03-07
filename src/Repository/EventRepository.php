@@ -202,7 +202,7 @@ class EventRepository extends AppRepository
             $row['publicize_at'] = !empty($data['publicize_at']) ? date('Y-m-d H:i:s', (int)$data['publicize_at']) : null;
     ***REMOVED***
 
-        return $this->eventTable->update($row, [$this->eventTable->getTablename() . '.id' => $eventId], $userId);
+        return $this->eventTable->modify($row, [$this->eventTable->getTablename() . '.id' => $eventId], $userId);
 ***REMOVED***
 
     /**

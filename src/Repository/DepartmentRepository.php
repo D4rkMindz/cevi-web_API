@@ -252,7 +252,7 @@ class DepartmentRepository extends AppRepository
         $error = false;
 
         try ***REMOVED***
-            $this->departmentTable->update($row, [ 'id' =>  $departmentId], $userId);
+            $this->departmentTable->modify($row, [ 'id' =>  $departmentId], $userId);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             $error = true;
     ***REMOVED***

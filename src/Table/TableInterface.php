@@ -68,7 +68,7 @@ interface TableInterface
      * @param string $userId
      * @return StatementInterface
      */
-    public function update(array $row, array $where, string $userId): bool;
+    public function modify(array $row, array $where, string $userId): bool;
 
     /**
      * Delete from database.
