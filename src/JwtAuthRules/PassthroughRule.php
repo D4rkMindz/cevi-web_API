@@ -44,7 +44,7 @@ class PassthroughRule implements RuleInterface
     ***REMOVED***
         $requestedRoute = $route->getPattern();
         $method = $request->getMethod();
-        if (!in_array($requestedRoute, $this->passthrough)) ***REMOVED***
+        if (!isset($this->passthrough[$requestedRoute])) ***REMOVED***
             return true;
     ***REMOVED***
         $pass = in_array($method, (array)$this->passthrough[$requestedRoute]);

@@ -74,3 +74,10 @@ if ($jwt['active']) ***REMOVED***
         'rules' => [new PassthroughRule($container)],
     ]));
 ***REMOVED***
+
+
+$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    $response = $next($request, $response);
+    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    return $response;
+***REMOVED***);
