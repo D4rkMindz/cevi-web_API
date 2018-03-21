@@ -7,5 +7,5 @@ namespace App\Table;
  */
 class UserTable extends AppTable
 ***REMOVED***
-    protected $table = 'user';
+    protected $table = 'app_user';
 ***REMOVED***

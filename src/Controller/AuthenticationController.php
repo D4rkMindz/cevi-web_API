@@ -53,10 +53,11 @@ class AuthenticationController extends AppController
      */
     public function authenticateAction(Request $request, Response $response): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
         $username = (string)$data['username'];
         $password = (string)$data['password'];
-        $lang = (string)$data['lang'];
+        $lang = (string)$request->getParam('lang');
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
             $userId = $this->userRepository->getIdByusername($username);
             $expireOffset = 60 * 60 * 8;

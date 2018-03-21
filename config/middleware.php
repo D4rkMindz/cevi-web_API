@@ -39,7 +39,8 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $language = $whitelist[$language];
 
     if (empty($language)) ***REMOVED***
-        throw new \Slim\Exception\NotFoundException($request, $response);
+        $language = 'de';
+        //throw new \Slim\Exception\NotFoundException($request, $response);
 ***REMOVED***
 
     $request = $request->withAttribute('lang', $language);
@@ -53,7 +54,7 @@ if ($jwt['active']) ***REMOVED***
     $app->add(new JwtAuthentication([
         'secret' => $secret,
         'header' => 'X-Token',
-        'message'=> __('Authentication failed'),
+        'message' => __('Authentication failed'),
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt_decoded'] = $decoded = (array)$arguments['decoded'];
             $method = $request->getMethod();
