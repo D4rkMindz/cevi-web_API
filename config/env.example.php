@@ -7,6 +7,7 @@ $env['jwt'] = [
 ];
 
 $env['db'] = [
+    'database' => '',
     'host' => '',
     'port' => '',
     'username' => '',
