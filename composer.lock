@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b00f8e481fc3773fe403c372b0fdfd7",
+    "content-hash": "fdb17b10736424f5f5a9afe51494d0fa",
     "packages": [
         ***REMOVED***
             "name": "D4rkMindz/slim-jwt-auth",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/D4rkMindz/slim-jwt-auth.git",
-                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32"
+                "reference": "09cee5864a7fba59a958519d0373a0f5bf09a1be"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/D4rkMindz/slim-jwt-auth/zipball/1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
-                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
+                "url": "https://api.github.com/repos/D4rkMindz/slim-jwt-auth/zipball/09cee5864a7fba59a958519d0373a0f5bf09a1be",
+                "reference": "09cee5864a7fba59a958519d0373a0f5bf09a1be",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -27,6 +27,7 @@
                 "psr/log": "^1.0"
         ***REMOVED***,
             "require-dev": ***REMOVED***
+                "overtrue/phplint": "^0.2.4",
                 "phpunit/phpunit": "^4.6",
                 "squizlabs/php_codesniffer": "^2.3",
                 "zendframework/zend-diactoros": "^1.3"
@@ -42,23 +43,6 @@
                     "Slim\\Middleware\\": "tests"
             ***REMOVED***
         ***REMOVED***,
-            "scripts": ***REMOVED***
-                "test": [
-                    "composer phplint && composer phpcs && composer phpunit"
-                ],
-                "phpcs": [
-                    "vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=*/vendor/*,*/tests/* . -p"
-                ],
-                "phpunit": [
-                    "vendor/bin/phpunit --coverage-text --coverage-html ./report"
-                ],
-                "phplint": [
-                    "env phplint  '**/*.php' '!vendor/**'"
-                ],
-                "watch": [
-                    "find . -name \"*.php\" -not -path \"./vendor/*\" -o -name \"*.json\" -not -path \"./vendor/*\"| entr -c composer test"
-                ]
-        ***REMOVED***,
             "license": [
                 "MIT"
             ],
@@ -71,7 +55,7 @@
             ***REMOVED***
             ],
             "description": "PSR-7 JWT Authentication Middleware",
-            "homepage": "https://github.com/tuupola/slim-jwt-auth",
+            "homepage": "https://github.com/d4rkmindz/slim-jwt-auth",
             "keywords": [
                 "auth",
                 "json",
@@ -80,9 +64,9 @@
                 "psr-7"
             ],
             "support": ***REMOVED***
-                "source": "https://github.com/D4rkMindz/slim-jwt-auth/tree/2.3.3"
+                "source": "https://github.com/D4rkMindz/slim-jwt-auth/tree/2.3.4"
         ***REMOVED***,
-            "time": "2017-07-12T09:57:35+00:00"
+            "time": "2018-04-09T20:25:14+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/cache",
