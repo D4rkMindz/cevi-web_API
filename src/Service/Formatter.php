@@ -20,6 +20,7 @@ class Formatter
             'name' => $user['department_name'],
         ];
         $tmp['position'] = [
+            'id' => $user['position_id'],
             'name_de' => $user['position_name_de'],
             'name_en' => $user['position_name_en'],
             'name_fr' => $user['position_name_fr'],
@@ -158,7 +159,7 @@ class Formatter
      * @param string|null $descriptionFormat
      * @return array
      */
-    public function formatEventSimple(array $event,  string $descriptionFormat = null): array
+    public function formatEventSimple(array $event, string $descriptionFormat = null): array
     ***REMOVED***
         $tmp = [];
         $tmp['id'] = $event['id'];

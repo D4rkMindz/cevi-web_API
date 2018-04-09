@@ -68,16 +68,60 @@ if ($jwt['active']) ***REMOVED***
             return true;
     ***REMOVED***,
         'error' => function (Request $request, Response $response, $message) ***REMOVED***
-            $errorMessage = JsonResponseFactory::error(['message' => $message['message'], 'token' => $message['token']]);
+            $errorMessage = JsonResponseFactory::error(['message' => $message['message']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
         'rules' => [new PassthroughRule($container)],
     ]));
 ***REMOVED***
 
-
+/**
+ * For CORS
+ * TODO remove this in prod for security reasons
+ */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
     $response = $next($request, $response);
-    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
     return $response;
+***REMOVED***);
+
+$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    /**
+     * @var \Monolog\Logger $logger
+     */
+    $logger = $container->get(Monolog\Logger::class . '_request');
+    $method = $request->getMethod();
+    $route = $request->getRequestTarget();
+    /**
+     * @var Response $response
+     */
+    $start = (int)(microtime(true) * 1000);
+    $response = $next($request, $response);
+    $end = (int)(microtime(true) * 1000);
+    $time = $end - $start;
+    $statusCode = $response->getStatusCode();
+    // TODO find better solution to get $_SERVER data
+    $ip = $request->getServerParam('REMOTE_ADDR');
+    $userAgent = $request->getServerParam('HTTP_USER_AGENT');
+    $xToken = $request->getHeader('X-Token');
+
+    $logger->info(sprintf(
+        '[%s] %sms %s -> %s from %s [%s] using %s',
+        $statusCode,
+        $time,
+        $method,
+        $route,
+        $ip,
+        $userAgent,
+        $xToken
+    ));
+    return $response;
+***REMOVED***);
+
+$app->add(function (Request $request, Response $response, $next) ***REMOVED***
+    $method = $request->getMethod();
+    if (strtoupper($method) == 'OPTIONS') ***REMOVED***
+        return $response->withStatus(200);
+***REMOVED***
+    return $next($request, $response);
 ***REMOVED***);

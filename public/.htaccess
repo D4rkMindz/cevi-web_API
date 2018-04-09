@@ -1,5 +1,8 @@
 RewriteEngine on
 
+RewriteCond %***REMOVED***HTTPS***REMOVED*** !on
+RewriteRule .* https://%***REMOVED***SERVER_NAME***REMOVED***%***REMOVED***REQUEST_URI***REMOVED*** [R=301,L]
+
 # RewriteBase /
 # Allow directories (in public folder)
 # RewriteCond %***REMOVED***REQUEST_FILENAME***REMOVED*** !-d

@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Factory\JWTFactory;
 use App\Repository\UserRepository;
 use App\Service\Login\LoginValidation;
+use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -24,6 +25,11 @@ class AuthenticationController extends AppController
     private $userRepository;
 
     /**
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * AuthenticationController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -34,6 +40,7 @@ class AuthenticationController extends AppController
         $this->loginValidation = $container->get(LoginValidation::class);
         $this->secret = $container->get('settings')->get('jwt')['secret'];
         $this->userRepository = $container->get(UserRepository::class);
+        $this->logger = $container->get(Logger::class);
 ***REMOVED***
 
     /**
@@ -62,8 +69,9 @@ class AuthenticationController extends AppController
             $userId = $this->userRepository->getIdByusername($username);
             $expireOffset = 60 * 60 * 8;
             $token = JWTFactory::generate($username, $userId, $lang, $this->secret, $expireOffset);
-            $expiresAt = time() + $expireOffset;
-            return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt]);
+            $expiresAt = (time() + $expireOffset) * 1000;
+            $this->logger->info(sprintf('%s (ID: %s)issued a token. Expires at: %s', $username, $userId, $expiresAt));
+            return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt, 'user_id' => $userId]);
     ***REMOVED***
         return $this->error($response, 'Unprocessable entity', 422, ['message' => __('invalid user data')]);
 ***REMOVED***

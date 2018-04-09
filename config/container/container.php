@@ -134,6 +134,18 @@ $container[Role::class] = function (Container $container) ***REMOVED***
     return new Role($container);
 ***REMOVED***;
 
+$container[Monolog\Logger::class . '_request'] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_access.log', date('y-m-d')));
+    $logger = new Logger('request',[$rotatingFileHandler]);
+    return $logger;
+***REMOVED***;
+
+$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_app.log', date('y-m-d')));
+    $logger = new Logger('app',[$rotatingFileHandler]);
+    return $logger;
+***REMOVED***;
+
 /**
  * Not found handler
  *
