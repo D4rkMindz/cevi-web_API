@@ -5,9 +5,9 @@
     "mailgun/mailgun-php": "^2.3",
     "monolog/monolog": "^1.23",
     "symfony/translation": "^3.4",
-    "tuupola/slim-jwt-auth": "^2.3",
     "robmorgan/phinx": "^0.9.1",
-    "erusev/parsedown": "^1.6"
+    "erusev/parsedown": "^1.6",
+    "d4rkmindz/slim-jwt-auth": "^2.3.3"
   ***REMOVED***,
   "require-dev": ***REMOVED***
     "php-http/curl-client": "^1.7",
@@ -15,6 +15,15 @@
     "phpunit/phpunit": "^6.4",
     "fzaninotto/faker": "^1.7",
     "phpunit/dbunit": "^3.0"
+  ***REMOVED***,
+  "repositories": [
+    ***REMOVED***
+      "type": "vcs",
+      "url": "git@github.com:D4rkMindz/slim-jwt-auth.git"
+***REMOVED***
+  ],
+  "config": ***REMOVED***
+    "preferred-install": "dist"
   ***REMOVED***,
   "autoload": ***REMOVED***
     "psr-4": ***REMOVED***

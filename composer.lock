@@ -4,20 +4,141 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "680186ddf60e277d9bcefdf69b70cc40",
+    "content-hash": "0b00f8e481fc3773fe403c372b0fdfd7",
     "packages": [
         ***REMOVED***
-            "name": "cakephp/core",
-            "version": "3.5.10",
+            "name": "D4rkMindz/slim-jwt-auth",
+            "version": "2.3.3",
             "source": ***REMOVED***
                 "type": "git",
-                "url": "https://github.com/cakephp/core.git",
-                "reference": "80e5807f6f484def52be60a3c5e2374d7dc47ed2"
+                "url": "https://github.com/D4rkMindz/slim-jwt-auth.git",
+                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/core/zipball/80e5807f6f484def52be60a3c5e2374d7dc47ed2",
-                "reference": "80e5807f6f484def52be60a3c5e2374d7dc47ed2",
+                "url": "https://api.github.com/repos/D4rkMindz/slim-jwt-auth/zipball/1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
+                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "firebase/php-jwt": "^3.0 || ^4.0 || ^5.0",
+                "php": "^5.5 || ^7.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "^4.6",
+                "squizlabs/php_codesniffer": "^2.3",
+                "zendframework/zend-diactoros": "^1.3"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Slim\\Middleware\\": "src"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload-dev": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Slim\\Middleware\\": "tests"
+            ***REMOVED***
+        ***REMOVED***,
+            "scripts": ***REMOVED***
+                "test": [
+                    "composer phplint && composer phpcs && composer phpunit"
+                ],
+                "phpcs": [
+                    "vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=*/vendor/*,*/tests/* . -p"
+                ],
+                "phpunit": [
+                    "vendor/bin/phpunit --coverage-text --coverage-html ./report"
+                ],
+                "phplint": [
+                    "env phplint  '**/*.php' '!vendor/**'"
+                ],
+                "watch": [
+                    "find . -name \"*.php\" -not -path \"./vendor/*\" -o -name \"*.json\" -not -path \"./vendor/*\"| entr -c composer test"
+                ]
+        ***REMOVED***,
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Mika Tuupola",
+                    "email": "tuupola@appelsiini.net",
+                    "homepage": "http://www.appelsiini.net/",
+                    "role": "Developer"
+            ***REMOVED***
+            ],
+            "description": "PSR-7 JWT Authentication Middleware",
+            "homepage": "https://github.com/tuupola/slim-jwt-auth",
+            "keywords": [
+                "auth",
+                "json",
+                "jwt",
+                "middleware",
+                "psr-7"
+            ],
+            "support": ***REMOVED***
+                "source": "https://github.com/D4rkMindz/slim-jwt-auth/tree/2.3.3"
+        ***REMOVED***,
+            "time": "2017-07-12T09:57:35+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "cakephp/cache",
+            "version": "3.5.14",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/cakephp/cache.git",
+                "reference": "62ea04b0f93c205bb0e66a0fb97d1d526b029ffa"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/cache/zipball/62ea04b0f93c205bb0e66a0fb97d1d526b029ffa",
+                "reference": "62ea04b0f93c205bb0e66a0fb97d1d526b029ffa",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "cakephp/core": "^3.0.0",
+                "php": ">=5.6.0"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Cake\\Cache\\": "."
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/cache/graphs/contributors"
+            ***REMOVED***
+            ],
+            "description": "Easy to use Caching library with support for multiple caching backends",
+            "homepage": "https://cakephp.org",
+            "keywords": [
+                "cache",
+                "caching",
+                "cakephp"
+            ],
+            "time": "2018-03-19T14:39:12+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "cakephp/core",
+            "version": "3.5.14",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/cakephp/core.git",
+                "reference": "b489603e4d137dd47894d98129616460e19e286f"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/core/zipball/b489603e4d137dd47894d98129616460e19e286f",
+                "reference": "b489603e4d137dd47894d98129616460e19e286f",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -50,29 +171,29 @@
                 "core",
                 "framework"
             ],
-            "time": "2017-12-16T20:39:54+00:00"
+            "time": "2018-02-10T21:51:32+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/database",
-            "version": "3.5.10",
+            "version": "3.5.14",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/cakephp/database.git",
-                "reference": "7236b9520e023e1f9f22624c555b0b09a0898783"
+                "reference": "c85ab29ddb25fe058e5eaed4946696749db9d8c4"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/database/zipball/7236b9520e023e1f9f22624c555b0b09a0898783",
-                "reference": "7236b9520e023e1f9f22624c555b0b09a0898783",
+                "url": "https://api.github.com/repos/cakephp/database/zipball/c85ab29ddb25fe058e5eaed4946696749db9d8c4",
+                "reference": "c85ab29ddb25fe058e5eaed4946696749db9d8c4",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
+                "cakephp/cache": "^3.0.0",
                 "cakephp/core": "^3.0.0",
                 "cakephp/datasource": "^3.0.0",
                 "php": ">=5.6.0"
         ***REMOVED***,
             "suggest": ***REMOVED***
-                "cakephp/cache": "Require this if you decide to use the schema caching feature",
                 "cakephp/log": "Require this if you want to use the built-in query logger"
         ***REMOVED***,
             "type": "library",
@@ -100,20 +221,20 @@
                 "database abstraction",
                 "pdo"
             ],
-            "time": "2017-12-17T03:03:58+00:00"
+            "time": "2018-03-19T00:00:03+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/datasource",
-            "version": "3.5.10",
+            "version": "3.5.14",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/cakephp/datasource.git",
-                "reference": "f9f11c5e2bf586216845827540178b70837a035c"
+                "reference": "58d45363742b667612cd59943800f0fb687c4ef8"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/datasource/zipball/f9f11c5e2bf586216845827540178b70837a035c",
-                "reference": "f9f11c5e2bf586216845827540178b70837a035c",
+                "url": "https://api.github.com/repos/cakephp/datasource/zipball/58d45363742b667612cd59943800f0fb687c4ef8",
+                "reference": "58d45363742b667612cd59943800f0fb687c4ef8",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -121,8 +242,9 @@
                 "php": ">=5.6.0"
         ***REMOVED***,
             "suggest": ***REMOVED***
-                "cakephp/collection": "Require this if you decide to use ResultSetInterface",
-                "cakephp/utility": "Require this if you decide to use EntityTrait"
+                "cakephp/cache": "If you decide to use Query caching.",
+                "cakephp/collection": "If you decide to use ResultSetInterface.",
+                "cakephp/utility": "If you decide to use EntityTrait."
         ***REMOVED***,
             "type": "library",
             "autoload": ***REMOVED***
@@ -149,20 +271,20 @@
                 "entity",
                 "query"
             ],
-            "time": "2017-12-20T13:54:02+00:00"
+            "time": "2018-03-19T13:42:12+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "cakephp/utility",
-            "version": "3.5.10",
+            "version": "3.5.14",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/cakephp/utility.git",
-                "reference": "a5d42fdc2607051e210f8ee42936f99ef6e100af"
+                "reference": "523d6019dea4c0ac9e30d58ae2be6114d0cfd139"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/utility/zipball/a5d42fdc2607051e210f8ee42936f99ef6e100af",
-                "reference": "a5d42fdc2607051e210f8ee42936f99ef6e100af",
+                "url": "https://api.github.com/repos/cakephp/utility/zipball/523d6019dea4c0ac9e30d58ae2be6114d0cfd139",
+                "reference": "523d6019dea4c0ac9e30d58ae2be6114d0cfd139",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -201,7 +323,7 @@
                 "string",
                 "utility"
             ],
-            "time": "2017-12-28T08:12:52+00:00"
+            "time": "2018-01-04T15:33:21+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "clue/stream-filter",
@@ -288,19 +410,20 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "erusev/parsedown",
-            "version": "1.6.4",
+            "version": "1.7.1",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548"
+                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fbe3fe878f4fe69048bb8a52783a09802004f548",
-                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
+                "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
+                "ext-mbstring": "*",
                 "php": ">=5.3.0"
         ***REMOVED***,
             "require-dev": ***REMOVED***
@@ -329,7 +452,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2017-11-14T20:44:03+00:00"
+            "time": "2018-03-08T01:11:30+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "firebase/php-jwt",
@@ -379,16 +502,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "mailgun/mailgun-php",
-            "version": "v2.4.0",
+            "version": "2.5.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/mailgun/mailgun-php.git",
-                "reference": "20783215042b181b0dec92c9e01947b93cb5d085"
+                "reference": "0bd1d8bfc5c56a9e59deb8526422a04b9e83a80a"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/20783215042b181b0dec92c9e01947b93cb5d085",
-                "reference": "20783215042b181b0dec92c9e01947b93cb5d085",
+                "url": "https://api.github.com/repos/mailgun/mailgun-php/zipball/0bd1d8bfc5c56a9e59deb8526422a04b9e83a80a",
+                "reference": "0bd1d8bfc5c56a9e59deb8526422a04b9e83a80a",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -422,7 +545,7 @@
             ***REMOVED***
             ],
             "description": "The Mailgun SDK provides methods for all API functions.",
-            "time": "2017-12-07T21:05:43+00:00"
+            "time": "2018-04-08T10:40:14+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "monolog/monolog",
@@ -504,20 +627,23 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "nikic/fast-route",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6"
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/b5f95749071c82a8e0f58586987627054400cdf6",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
                 "php": ">=5.4.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "phpunit/phpunit": "^4.8.35|~5.7"
         ***REMOVED***,
             "type": "library",
             "autoload": ***REMOVED***
@@ -543,7 +669,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-01-19T11:35:12+00:00"
+            "time": "2018-02-13T20:26:39+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/client-common",
@@ -608,16 +734,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/discovery",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "7b50ab4d6c9fdaa1ed53ae310c955900af6e3372"
+                "reference": "9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/7b50ab4d6c9fdaa1ed53ae310c955900af6e3372",
-                "reference": "7b50ab4d6c9fdaa1ed53ae310c955900af6e3372",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33",
+                "reference": "9a6cb24de552bfe1aa9d7d1569e2d49c5b169a33",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -666,7 +792,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2017-08-03T10:12:53+00:00"
+            "time": "2018-02-06T10:55:24+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/httplug",
@@ -955,16 +1081,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "pimple/pimple",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
-                "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1001,7 +1127,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-07-23T07:32:15+00:00"
+            "time": "2018-01-21T07:42:36+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "psr/container",
@@ -1293,28 +1419,31 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/config",
-            "version": "v4.0.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "0e86d267db0851cf55f339c97df00d693fe8592f"
+                "reference": "7c2a9d44f4433863e9bca682e7f03609234657f9"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/0e86d267db0851cf55f339c97df00d693fe8592f",
-                "reference": "0e86d267db0851cf55f339c97df00d693fe8592f",
+                "url": "https://api.github.com/repos/symfony/config/zipball/7c2a9d44f4433863e9bca682e7f03609234657f9",
+                "reference": "7c2a9d44f4433863e9bca682e7f03609234657f9",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3",
-                "symfony/filesystem": "~3.4|~4.0"
+                "php": "^5.5.9|>=7.0.8",
+                "symfony/filesystem": "~2.8|~3.0|~4.0"
         ***REMOVED***,
             "conflict": ***REMOVED***
-                "symfony/finder": "<3.4"
+                "symfony/dependency-injection": "<3.3",
+                "symfony/finder": "<3.3"
         ***REMOVED***,
             "require-dev": ***REMOVED***
-                "symfony/finder": "~3.4|~4.0",
-                "symfony/yaml": "~3.4|~4.0"
+                "symfony/dependency-injection": "~3.3|~4.0",
+                "symfony/event-dispatcher": "~3.3|~4.0",
+                "symfony/finder": "~3.3|~4.0",
+                "symfony/yaml": "~3.0|~4.0"
         ***REMOVED***,
             "suggest": ***REMOVED***
                 "symfony/yaml": "To use the yaml reference dumper"
@@ -1322,7 +1451,7 @@
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1349,20 +1478,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:38:00+00:00"
+            "time": "2018-03-19T22:32:39+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/console",
-            "version": "v3.4.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d"
+                "reference": "d4bb70fa24d540c309d88a9d6e43fb2d339b1fbf"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8394c8ef121949e8f858f13bc1e34f05169e4e7d",
-                "reference": "8394c8ef121949e8f858f13bc1e34f05169e4e7d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d4bb70fa24d540c309d88a9d6e43fb2d339b1fbf",
+                "reference": "d4bb70fa24d540c309d88a9d6e43fb2d339b1fbf",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1418,36 +1547,36 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-04-03T05:22:50+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/debug",
-            "version": "v4.0.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f"
+                "reference": "9cf7c2271cfb89ef9727db1b740ca77be57bf9d7"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9ae4223a661b56a9abdce144de4886cca37f198f",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/9cf7c2271cfb89ef9727db1b740ca77be57bf9d7",
+                "reference": "9cf7c2271cfb89ef9727db1b740ca77be57bf9d7",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3",
+                "php": "^5.5.9|>=7.0.8",
                 "psr/log": "~1.0"
         ***REMOVED***,
             "conflict": ***REMOVED***
-                "symfony/http-kernel": "<3.4"
+                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
         ***REMOVED***,
             "require-dev": ***REMOVED***
-                "symfony/http-kernel": "~3.4|~4.0"
+                "symfony/http-kernel": "~2.8|~3.0|~4.0"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1474,29 +1603,29 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T17:15:19+00:00"
+            "time": "2018-04-03T05:22:50+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/filesystem",
-            "version": "v4.0.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "760e47a4ee64b4c48f4b30017011e09d4c0f05ed"
+                "reference": "253a4490b528597aa14d2bf5aeded6f5e5e4a541"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/760e47a4ee64b4c48f4b30017011e09d4c0f05ed",
-                "reference": "760e47a4ee64b4c48f4b30017011e09d4c0f05ed",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/253a4490b528597aa14d2bf5aeded6f5e5e4a541",
+                "reference": "253a4490b528597aa14d2bf5aeded6f5e5e4a541",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1523,29 +1652,29 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:38:00+00:00"
+            "time": "2018-02-22T10:48:49+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/options-resolver",
-            "version": "v4.0.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "30d9240b30696a69e893534c9fc4a5c72ab6689b"
+                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/30d9240b30696a69e893534c9fc4a5c72ab6689b",
-                "reference": "30d9240b30696a69e893534c9fc4a5c72ab6689b",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/f3109a6aedd20e35c3a33190e932c2b063b7b50e",
+                "reference": "f3109a6aedd20e35c3a33190e932c2b063b7b50e",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1577,20 +1706,20 @@
                 "configuration",
                 "options"
             ],
-            "time": "2018-01-03T07:38:00+00:00"
+            "time": "2018-01-11T07:56:07+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1602,7 +1731,7 @@
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1636,20 +1765,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11T12:05:26+00:00"
+            "time": "2018-01-30T19:27:44+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/translation",
-            "version": "v3.4.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "17b5962d252b2d6d1d37a2485ebb7ddc5b2bef0a"
+                "reference": "80e19eaf12cbb546ac40384e5c55c36306823e57"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/17b5962d252b2d6d1d37a2485ebb7ddc5b2bef0a",
-                "reference": "17b5962d252b2d6d1d37a2485ebb7ddc5b2bef0a",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/80e19eaf12cbb546ac40384e5c55c36306823e57",
+                "reference": "80e19eaf12cbb546ac40384e5c55c36306823e57",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1704,24 +1833,24 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-02-22T06:28:18+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "symfony/yaml",
-            "version": "v4.0.3",
+            "version": "v3.4.8",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "b84f646b9490d2101e2c25ddeec77ceefbda2eee"
+                "reference": "a42f9da85c7c38d59f5e53f076fe81a091f894d0"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/b84f646b9490d2101e2c25ddeec77ceefbda2eee",
-                "reference": "b84f646b9490d2101e2c25ddeec77ceefbda2eee",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/a42f9da85c7c38d59f5e53f076fe81a091f894d0",
+                "reference": "a42f9da85c7c38d59f5e53f076fe81a091f894d0",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
-                "php": "^7.1.3"
+                "php": "^5.5.9|>=7.0.8"
         ***REMOVED***,
             "conflict": ***REMOVED***
                 "symfony/console": "<3.4"
@@ -1735,7 +1864,7 @@
             "type": "library",
             "extra": ***REMOVED***
                 "branch-alias": ***REMOVED***
-                    "dev-master": "4.0-dev"
+                    "dev-master": "3.4-dev"
             ***REMOVED***
         ***REMOVED***,
             "autoload": ***REMOVED***
@@ -1762,74 +1891,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:38:00+00:00"
-    ***REMOVED***,
-        ***REMOVED***
-            "name": "tuupola/slim-jwt-auth",
-            "version": "2.3.3",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/tuupola/slim-jwt-auth.git",
-                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/tuupola/slim-jwt-auth/zipball/1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
-                "reference": "1f9fb673e4f5bb9ca4104e328aabfc2e4af38c32",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "firebase/php-jwt": "^3.0 || ^4.0 || ^5.0",
-                "php": "^5.5 || ^7.0",
-                "psr/http-message": "^1.0",
-                "psr/log": "^1.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "phpunit/phpunit": "^4.6",
-                "squizlabs/php_codesniffer": "^2.3",
-                "zendframework/zend-diactoros": "^1.3"
-        ***REMOVED***,
-            "type": "library",
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Slim\\Middleware\\": "src"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                ***REMOVED***
-                    "name": "Mika Tuupola",
-                    "email": "tuupola@appelsiini.net",
-                    "homepage": "http://www.appelsiini.net/",
-                    "role": "Developer"
-            ***REMOVED***
-            ],
-            "description": "PSR-7 JWT Authentication Middleware",
-            "homepage": "https://github.com/tuupola/slim-jwt-auth",
-            "keywords": [
-                "auth",
-                "json",
-                "jwt",
-                "middleware",
-                "psr-7"
-            ],
-            "time": "2017-07-12T09:57:35+00:00"
+            "time": "2018-04-03T05:14:20+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "webmozart/assert",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f"
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/2db61e59ff05fe5126d152bd0655c9ea113e550f",
-                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -1866,7 +1941,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2016-11-23T20:04:58+00:00"
+            "time": "2018-01-29T19:49:41+00:00"
     ***REMOVED***
     ],
     "packages-dev": [
@@ -2021,22 +2096,22 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "odan/phinx-migrations-generator",
-            "version": "2.3.1",
+            "version": "2.6.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/odan/phinx-migrations-generator.git",
-                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf"
+                "reference": "16261cc3985c57e287db41f8cec127ffafa3c49b"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/odan/phinx-migrations-generator/zipball/94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
-                "reference": "94849cb9f208d3b8f6045f1da4546dd54ef9b5bf",
+                "url": "https://api.github.com/repos/odan/phinx-migrations-generator/zipball/16261cc3985c57e287db41f8cec127ffafa3c49b",
+                "reference": "16261cc3985c57e287db41f8cec127ffafa3c49b",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
                 "php": "^7.0",
                 "robmorgan/phinx": "^0.9",
-                "symfony/console": "~2.8|~3.0"
+                "symfony/console": "^2.8|^3.0|^4.0"
         ***REMOVED***,
             "require-dev": ***REMOVED***
                 "phpunit/phpunit": "^6.0"
@@ -2047,8 +2122,7 @@
             "type": "library",
             "autoload": ***REMOVED***
                 "psr-4": ***REMOVED***
-                    "Odan\\": "src",
-                    "Odan\\Test\\": "tests"
+                    "Odan\\": "src"
             ***REMOVED***
         ***REMOVED***,
             "notification-url": "https://packagist.org/downloads/",
@@ -2062,7 +2136,7 @@
                 "migration",
                 "phinx"
             ],
-            "time": "2017-10-25T10:57:03+00:00"
+            "time": "2018-03-14T22:37:42+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phar-io/manifest",
@@ -2168,16 +2242,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/curl-client",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/php-http/curl-client.git",
-                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8"
+                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/curl-client/zipball/0972ad0d7d37032a52077a5cbe27cf370f2007d8",
-                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8",
+                "url": "https://api.github.com/repos/php-http/curl-client/zipball/6341a93d00e5d953fc868a3928b5167e6513f2b6",
+                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2194,7 +2268,7 @@
         ***REMOVED***,
             "require-dev": ***REMOVED***
                 "guzzlehttp/psr7": "^1.0",
-                "php-http/client-integration-tests": "^0.5.1",
+                "php-http/client-integration-tests": "^0.6",
                 "phpunit/phpunit": "^4.8.27",
                 "zendframework/zend-diactoros": "^1.0"
         ***REMOVED***,
@@ -2220,7 +2294,7 @@
                 "curl",
                 "http"
             ],
-            "time": "2017-02-09T15:18:33+00:00"
+            "time": "2018-03-26T19:21:48+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpdocumentor/reflection-common",
@@ -2278,16 +2352,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "phpdocumentor/reflection-docblock",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "66465776cfc249844bde6d117abff1d22e06c2da"
+                "reference": "94fd0001232e47129dd3504189fa1c7225010d08"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/66465776cfc249844bde6d117abff1d22e06c2da",
-                "reference": "66465776cfc249844bde6d117abff1d22e06c2da",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/94fd0001232e47129dd3504189fa1c7225010d08",
+                "reference": "94fd0001232e47129dd3504189fa1c7225010d08",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2325,7 +2399,7 @@
             ***REMOVED***
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2017-11-27T17:38:31+00:00"
+            "time": "2017-11-30T07:14:17+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpdocumentor/type-resolver",
@@ -2376,16 +2450,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "phpspec/prophecy",
-            "version": "1.7.3",
+            "version": "1.7.5",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf"
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
-                "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2397,7 +2471,7 @@
         ***REMOVED***,
             "require-dev": ***REMOVED***
                 "phpspec/phpspec": "^2.5|^3.2",
-                "phpunit/phpunit": "^4.8.35 || ^5.7"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5"
         ***REMOVED***,
             "type": "library",
             "extra": ***REMOVED***
@@ -2435,20 +2509,20 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-11-24T13:59:53+00:00"
+            "time": "2018-02-19T10:16:54+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpunit/dbunit",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/dbunit.git",
-                "reference": "403350339b6aca748ee0067d027d85621992e21f"
+                "reference": "0fa4329e490480ab957fe7b1185ea0996ca11f44"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/dbunit/zipball/403350339b6aca748ee0067d027d85621992e21f",
-                "reference": "403350339b6aca748ee0067d027d85621992e21f",
+                "url": "https://api.github.com/repos/sebastianbergmann/dbunit/zipball/0fa4329e490480ab957fe7b1185ea0996ca11f44",
+                "reference": "0fa4329e490480ab957fe7b1185ea0996ca11f44",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2487,20 +2561,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-11-18T17:40:34+00:00"
+            "time": "2018-01-23T13:32:26+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpunit/php-code-coverage",
-            "version": "5.3.0",
+            "version": "5.3.2",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1"
+                "reference": "c89677919c5dd6d3b3852f230a663118762218ac"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/661f34d0bd3f1a7225ef491a70a020ad23a057a1",
-                "reference": "661f34d0bd3f1a7225ef491a70a020ad23a057a1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c89677919c5dd6d3b3852f230a663118762218ac",
+                "reference": "c89677919c5dd6d3b3852f230a663118762218ac",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2550,7 +2624,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-12-06T09:29:45+00:00"
+            "time": "2018-04-06T15:36:58+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpunit/php-file-iterator",
@@ -2740,16 +2814,16 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "phpunit/phpunit",
-            "version": "6.5.5",
+            "version": "6.5.7",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "83d27937a310f2984fd575686138597147bdc7df"
+                "reference": "6bd77b57707c236833d2b57b968e403df060c9d9"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/83d27937a310f2984fd575686138597147bdc7df",
-                "reference": "83d27937a310f2984fd575686138597147bdc7df",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6bd77b57707c236833d2b57b968e403df060c9d9",
+                "reference": "6bd77b57707c236833d2b57b968e403df060c9d9",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
@@ -2820,7 +2894,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-12-17T06:31:19+00:00"
+            "time": "2018-02-26T07:01:09+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpunit/phpunit-mock-objects",
@@ -2928,21 +3002,21 @@
     ***REMOVED***,
         ***REMOVED***
             "name": "sebastian/comparator",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": ***REMOVED***
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "11c07feade1d65453e06df3b3b90171d6d982087"
+                "reference": "34369daee48eafb2651bea869b4b15d75ccc35f9"
         ***REMOVED***,
             "dist": ***REMOVED***
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/11c07feade1d65453e06df3b3b90171d6d982087",
-                "reference": "11c07feade1d65453e06df3b3b90171d6d982087",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/34369daee48eafb2651bea869b4b15d75ccc35f9",
+                "reference": "34369daee48eafb2651bea869b4b15d75ccc35f9",
                 "shasum": ""
         ***REMOVED***,
             "require": ***REMOVED***
                 "php": "^7.0",
-                "sebastian/diff": "^2.0",
+                "sebastian/diff": "^2.0 || ^3.0",
                 "sebastian/exporter": "^3.1"
         ***REMOVED***,
             "require-dev": ***REMOVED***
@@ -2988,7 +3062,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2018-01-12T06:34:42+00:00"
+            "time": "2018-02-01T13:46:46+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "sebastian/diff",
