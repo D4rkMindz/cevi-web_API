@@ -57,13 +57,13 @@
         <!-- Upload deploy.php -->
         <echo message="Uploading deploy.php ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/deploy.php"
-             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.username***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Upload clean-up.php -->
         <echo message="uploading clean-up.php ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/clean-up.php"
-             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.username***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Deleting clean-up.php and deploy.php -->
@@ -74,7 +74,7 @@
         <!-- Upload zip-file -->
         <echo message="Uploading $***REMOVED***filename***REMOVED*** ..."/>
         <scp file="$***REMOVED***build_dir***REMOVED***/$***REMOVED***filename***REMOVED***"
-             todir="$***REMOVED***build.ftp.users***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
+             todir="$***REMOVED***build.ftp.username***REMOVED***:$***REMOVED***build.ftp.password***REMOVED***@$***REMOVED***build.ftp.host***REMOVED***:$***REMOVED***build.ftp.dir***REMOVED***"
              trust="true"/>
 
         <!-- Delete old directories -->
@@ -85,7 +85,7 @@
 
         <!-- Call deploy.php for zip-file -->
         <sshexec host="$***REMOVED***build.ftp.host***REMOVED***"
-                 username="$***REMOVED***build.ftp.users***REMOVED***"
+                 username="$***REMOVED***build.ftp.username***REMOVED***"
                  password="$***REMOVED***build.ftp.password***REMOVED***"
                  command="cd $***REMOVED***build.ftp.dir***REMOVED***;php deploy.php $***REMOVED***filename***REMOVED***"
                  usepty="true"
@@ -102,7 +102,7 @@
 
         <!-- Install project dependencies -->
         <exec executable="php" failonerror="true">
-            <arg line="$***REMOVED***build_dir***REMOVED***/composer.phar install --no-dev --optimize-autoloader -d $***REMOVED***build_dir***REMOVED***/master"/>
+            <arg line="$***REMOVED***build_dir***REMOVED***/composer.phar install --ignore-platform-reqs --no-dev --optimize-autoloader -d $***REMOVED***build_dir***REMOVED***/master"/>
         </exec>
         <move file="$***REMOVED***build_dir***REMOVED***/master/config/deploy.php" todir="$***REMOVED***build_dir***REMOVED***"/>
         <move file="$***REMOVED***build_dir***REMOVED***/master/config/clean-up.php" todir="$***REMOVED***build_dir***REMOVED***"/>
@@ -117,7 +117,7 @@
         <delete dir="$***REMOVED***build_dir***REMOVED***/master"/>
         <mkdir dir="$***REMOVED***build_dir***REMOVED***/master"/>
         <exec executable="git" failonerror="true">
-            <arg line="archive  --format zip --output $***REMOVED***build_dir***REMOVED***/master.zip master"/>
+            <arg line="archive --format zip --output $***REMOVED***build_dir***REMOVED***/master.zip master"/>
         </exec>
         <unzip src="$***REMOVED***build_dir***REMOVED***/master.zip" dest="$***REMOVED***build_dir***REMOVED***/master"/>
     </target>
@@ -150,7 +150,7 @@
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/symfony/translation/Tests"/>
     </target>
 
-    <target name="phpstan" description="DbBlockedUsersTest code for errors">
+    <target name="phpstan" description="Test code for errors">
         <mkdir dir="$***REMOVED***basedir***REMOVED***/build"/>
         <get src="https://github.com/phpstan/phpstan/releases/download/0.9/phpstan.phar"
              dest="$***REMOVED***basedir***REMOVED***/build/phpstan.phar"
