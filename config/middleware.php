@@ -85,6 +85,9 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     return $response;
 ***REMOVED***);
 
+/**
+ * Logging middleware
+ */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
     /**
      * @var \Monolog\Logger $logger
@@ -118,6 +121,9 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     return $response;
 ***REMOVED***);
 
+/**
+ * Options middleware
+ */
 $app->add(function (Request $request, Response $response, $next) ***REMOVED***
     $method = $request->getMethod();
     if (strtoupper($method) == 'OPTIONS') ***REMOVED***

@@ -14,7 +14,7 @@ if (file_exists(__DIR__ . '/../../env.php')) ***REMOVED***
 $defaults = array_replace_recursive($defaults, $env);
 
 if (defined('APP_ENV')) ***REMOVED***
-    $config = require __DIR__ . '/' . APP_ENV . '.php';
+    $config = require __DIR__ . '/environment.' . APP_ENV . '.php';
     $defaults = array_replace_recursive($defaults, $config);
 ***REMOVED***
 

@@ -104,8 +104,8 @@
         <exec executable="php" failonerror="true">
             <arg line="$***REMOVED***build_dir***REMOVED***/composer.phar install --ignore-platform-reqs --no-dev --optimize-autoloader -d $***REMOVED***build_dir***REMOVED***/master"/>
         </exec>
-        <move file="$***REMOVED***build_dir***REMOVED***/master/config/deploy.php" todir="$***REMOVED***build_dir***REMOVED***"/>
-        <move file="$***REMOVED***build_dir***REMOVED***/master/config/clean-up.php" todir="$***REMOVED***build_dir***REMOVED***"/>
+        <move file="$***REMOVED***build_dir***REMOVED***/master/bin/deploy.php" todir="$***REMOVED***build_dir***REMOVED***"/>
+        <move file="$***REMOVED***build_dir***REMOVED***/master/bin/clean-up.php" todir="$***REMOVED***build_dir***REMOVED***"/>
         <!-- Clean up build -->
         <antcall target="clean-build"/>
 
@@ -123,10 +123,11 @@
     </target>
 
     <target name="clean-build">
-        <delete dir="$***REMOVED***build_dir***REMOVED***/master/tests"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/.apidesign.md"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/.gitignore"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/.styleci.yml"/>
-        <delete file="$***REMOVED***build_dir***REMOVED***/master/.scrudinizer.yml"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/.scrutinizer.yml"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/phpunit.xml"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/build.xml"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/phpstan.neon"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/README.md"/>
@@ -134,8 +135,10 @@
         <delete file="$***REMOVED***build_dir***REMOVED***/master/composer.lock"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/config/ant.example.properties"/>
         <delete file="$***REMOVED***build_dir***REMOVED***/master/config/env.example.php"/>
-        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/clean-up.php"/>
-        <delete file="$***REMOVED***build_dir***REMOVED***/master/config/deploy.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/bin/clean-up.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/bin/deploy.php"/>
+        <delete file="$***REMOVED***build_dir***REMOVED***/master/bin/setup.php"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/tests"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/docs"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/phpstan"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/monolog/monolog/doc"/>
