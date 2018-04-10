@@ -93,7 +93,8 @@ if ($jwt['active']) ***REMOVED***
  */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
     $response = $next($request, $response);
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    // TODO remove on prod
+    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     return $response;
 ***REMOVED***);
 
@@ -141,5 +142,6 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
     if (strtoupper($method) == 'OPTIONS') ***REMOVED***
         return $response->withStatus(200);
 ***REMOVED***
+
     return $next($request, $response);
 ***REMOVED***);
