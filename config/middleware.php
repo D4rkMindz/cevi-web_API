@@ -140,8 +140,10 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
  * TODO remove this in prod for security reasons
  */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    /** @var Response $response */
     $response = $next($request, $response);
     // TODO remove on prod
     $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-App-Language, X-Token');
     return $response;
 ***REMOVED***);
