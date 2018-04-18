@@ -87,8 +87,12 @@ class UserRepository extends AppRepository
      */
     public function getIdByusername(string $username): string
     ***REMOVED***
+        $where = ['username' => $username];
+        if (is_email($username)) ***REMOVED***
+            $where = ['email' => $username];
+    ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('id')->where(['username' => $username]);
+        $query->select('id')->where($where);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row['id'] : '';
 ***REMOVED***
