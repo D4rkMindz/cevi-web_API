@@ -108,10 +108,10 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     // TODO find better solution to get $_SERVER data
     $ip = $request->getServerParam('REMOTE_ADDR');
     $userAgent = $request->getServerParam('HTTP_USER_AGENT');
-    $xToken = $request->getHeader('X-Token');
+    $xToken = $request->getHeader('X-Token')[0];
 
     $logger->info(sprintf(
-        '[%s] %sms %s -> %s from %s [%s] using %s',
+        '(%s) %sms %s -> %s from %s (%s) using %s',
         $statusCode,
         $time,
         $method,
