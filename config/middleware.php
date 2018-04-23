@@ -63,23 +63,28 @@ if ($jwt['active']) ***REMOVED***
             $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
             $hasPermission = $container->get(Role::class)->hasPermission($level, $userId);
             if (!$hasPermission) ***REMOVED***
-                /** @var \Monolog\Logger $logger */
-                $logger = $container->get(\Monolog\Logger::class);
-
-                /** @var Request $request */
-                $request = $container->get("request");
-                $method = $request->getMethod();
-                $route = $request->getRequestTarget();
-                $ip = $request->getServerParam("REMOTE_ADDR");
-
-                $message = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
-                $logger->error($message);
-
                 return false;
         ***REMOVED***
+
             return true;
     ***REMOVED***,
-        'error' => function (Request $request, Response $response, $message) ***REMOVED***
+        'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
+            $userId = '[User ID not known]';
+            if ($container->has('jwt_decoded'))***REMOVED***
+                $decoded = $container['jwt_decoded'];
+                $userId = $decoded['data']->user_id;
+        ***REMOVED***
+            /** @var \Monolog\Logger $logger */
+            $logger = $container->get(\Monolog\Logger::class);
+
+            /** @var Request $request */
+            $request = $container->get("request");
+            $method = $request->getMethod();
+            $route = $request->getRequestTarget();
+            $ip = $request->getServerParam("REMOTE_ADDR");
+
+            $message = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
+            $logger->error($message);
             $errorMessage = JsonResponseFactory::error(['message' => $message['message']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
