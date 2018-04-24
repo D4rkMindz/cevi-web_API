@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use App\Repository\UserRepository;
+use Monolog\Logger;
 use Slim\Container;
 
 class Role
@@ -14,6 +15,11 @@ class Role
     private $userRepository;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * Role constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -21,6 +27,7 @@ class Role
     public function __construct(Container $container)
     ***REMOVED***
         $this->userRepository = $container->get(UserRepository::class);
+        $this->logger = $container->get(Logger::class);
 ***REMOVED***
 
     /**
@@ -36,9 +43,11 @@ class Role
     ***REMOVED***
         $usersPermission = $this->userRepository->getPermission($userId);
         if ($requiredLevel <= (int)$usersPermission['level']) ***REMOVED***
+            $this->logger->info(sprintf('Permission granted for %s [req: %s]', $usersPermission['level'], $requiredLevel));
             return true;
     ***REMOVED***
 
+        $this->logger->info(sprintf('Permission not granted for %s [req: %s]', $usersPermission['level'], $requiredLevel));
         return false;
 ***REMOVED***
 ***REMOVED***

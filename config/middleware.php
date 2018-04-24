@@ -58,15 +58,14 @@ if ($jwt['active']) ***REMOVED***
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt_decoded'] = $decoded = (array)$arguments['decoded'];
             $method = $request->getMethod();
+            $path = $request->getRequestTarget();
+            // todo disable useless logging
+            $container->get(\Monolog\Logger::class)->info(sprintf('[%s] %s checking permission ...', $method, $path));
             $permission = new Permissions();
             $userId = $decoded['data']->user_id;
             $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
-            $hasPermission = $container->get(Role::class)->hasPermission($level, $userId);
-            if (!$hasPermission) ***REMOVED***
-                return false;
-        ***REMOVED***
-
-            return true;
+            // return true if the user has the correct permission
+            return $container->get(Role::class)->hasPermission($level, $userId);
     ***REMOVED***,
         'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
             $userId = '[User ID not known]';
