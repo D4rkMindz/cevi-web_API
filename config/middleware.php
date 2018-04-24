@@ -65,7 +65,7 @@ if ($jwt['active']) ***REMOVED***
             $userId = $decoded['data']->user_id;
             $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
             // return true if the user has the correct permission
-            return $container->get(Role::class)->hasPermission($level, $userId);
+            return $container->get(Role::class)->hasPermission($level, $userId, $path, $method);
     ***REMOVED***,
         'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
             $userId = '[User ID not known]';
@@ -82,8 +82,8 @@ if ($jwt['active']) ***REMOVED***
             $route = $request->getRequestTarget();
             $ip = $request->getServerParam("REMOTE_ADDR");
 
-            $message = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
-            $logger->error($message);
+            $error = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
+            $logger->error($error);
             $errorMessage = JsonResponseFactory::error(['message' => $message['message']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
