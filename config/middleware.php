@@ -69,7 +69,7 @@ if ($jwt['active']) ***REMOVED***
     ***REMOVED***,
         'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
             $userId = '[User ID not known]';
-            if ($container->has('jwt_decoded'))***REMOVED***
+            if ($container->has('jwt_decoded')) ***REMOVED***
                 $decoded = $container['jwt_decoded'];
                 $userId = $decoded['data']->user_id;
         ***REMOVED***
