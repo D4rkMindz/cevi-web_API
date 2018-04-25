@@ -31,11 +31,11 @@ $config['jwt'] = [
 
 // used in Role::checkAllowedRoutes
 $config['allowedPaths'] = [
-    ['path' => '/v2/users/***REMOVED***user_id***REMOVED***', 'methods' => ['GET'],],
+    ['path' => '/v2/users/***REMOVED***user_id***REMOVED***', 'methods' => ['GET', 'POST', 'PUT', 'DELETE'],],
     ['path' => '/v2/departmentgroups', 'methods' => ['GET'],],
     ['path' => '/v2/cities', 'methods' => ['GET'],],
     ['path' => '/v2/events', 'methods' => ['GET'],],
-    ['path' => '/v2/user-error', 'methods' => ['GET', 'POST', 'PUT', 'DELETE'],],
+    ['path' => '/v2/user-error', 'methods' => ['GET'],],
 ];
 
 $config['db'] = [
