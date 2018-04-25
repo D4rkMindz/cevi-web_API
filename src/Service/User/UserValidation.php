@@ -144,7 +144,7 @@ class UserValidation extends AppValidation
      * @param string $modifier
      * @param ValidationContext $validationContext
      */
-    private function validateModifier(string $modifier, ValidationContext $validationContext): void
+    private function validateModifier(string $modifier, ValidationContext $validationContext)
     ***REMOVED***
         if (!$this->userRepository->existsUser($modifier)) ***REMOVED***
             $validationContext->setError('modifier', __('Modifier does not exist'));
@@ -221,7 +221,7 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      * @param string $elementName
      */
-    private function validateName(string $name, ValidationContext $validationContext, string $elementName = 'last_name'): void
+    private function validateName(string $name, ValidationContext $validationContext, string $elementName = 'last_name')
     ***REMOVED***
         $this->validateLength($name, $elementName, $validationContext, 2);
 ***REMOVED***

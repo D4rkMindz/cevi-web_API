@@ -111,7 +111,7 @@ class StorageValidation extends AppValidation
      * @param array $storage
      * @param $validationContext
      */
-    private function existsStorage(array $storage, ValidationContext $validationContext): void
+    private function existsStorage(array $storage, ValidationContext $validationContext)
     ***REMOVED***
         if ($this->storageRepository->existsStorage(
             (string)$storage['location_id'],
@@ -149,7 +149,7 @@ class StorageValidation extends AppValidation
      * @param array $storage
      * @param $validationContext
      */
-    private function validateStorageFields(array $storage, ValidationContext $validationContext): void
+    private function validateStorageFields(array $storage, ValidationContext $validationContext)
     ***REMOVED***
         if ((
                 empty($storage['location_id'])
