@@ -14,13 +14,7 @@ class Role
      */
     private $userRepository;
 
-    private $allowedPaths = [
-        ['path' => '/v2/users/***REMOVED***user_id***REMOVED***', 'methods' => ['GET'],],
-        ['path' => '/v2/departmentgroups', 'methods' => ['GET'],],
-        ['path' => '/v2/cities', 'methods' => ['GET'],],
-        ['path' => '/v2/events', 'methods' => ['GET'],],
-        ['path' => '/v2/user-error', 'methods' => ['GET'],],
-    ];
+    private $allowedPaths = [];
 
     /**
      * @var Logger
@@ -36,6 +30,7 @@ class Role
     ***REMOVED***
         $this->userRepository = $container->get(UserRepository::class);
         $this->logger = $container->get(Logger::class);
+        $this->allowedPaths = $container->get('settings')->get('allowedPaths');
 ***REMOVED***
 
     /**
@@ -78,7 +73,7 @@ class Role
         foreach ($this->allowedPaths as $route) ***REMOVED***
             $path = $route['path'];
             $path = preg_replace('/***REMOVED***user_id***REMOVED***/', $userId, $path);
-            $path = preg_replace('/\//','\/', $path);
+            $path = preg_replace('/\//', '\/', $path);
             $regex = sprintf('/%s/', $path);
             if (preg_match($regex, $requestedPath)) ***REMOVED***
                 return in_array($method, $route['methods']);
