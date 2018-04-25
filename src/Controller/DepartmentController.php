@@ -107,7 +107,8 @@ class DepartmentController extends AppController
      */
     public function updateDepartmentAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
         $name = (string)$data['name'];
         $postcode = (string)$data['postcode'];
         $departmentGroupId = (string)$data['department_group_id'];
@@ -162,7 +163,8 @@ class DepartmentController extends AppController
      */
     public function createDepartmentAction(Request $request, Response $response): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
         $name = (string)$data['name'];
         $postcode = (string)$data['postcode'];
         $departmentGroupId = (string)$data['department_group_id'];

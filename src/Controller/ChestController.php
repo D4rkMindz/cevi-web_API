@@ -106,14 +106,15 @@ class ChestController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
-        $validationContext = $this->storageValidation->validateLocation($params, false);
+        $validationContext = $this->storageValidation->validateLocation($data, false);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $created = $this->locationRepository->createStorage($this->slChestTable, $params['name'], $this->jwt['user_id']);
+        $created = $this->locationRepository->createStorage($this->slChestTable, $data['name'], $this->jwt['user_id']);
         if (!$created) ***REMOVED***
             return $this->error($response, __('Creating chest failed'), 422, ['message' => __('Creating chest failed')]);
     ***REMOVED***
@@ -135,8 +136,8 @@ class ChestController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);
         $params['storage_id'] = $args['storage_id'];
 
         $validationContext = $this->storageValidation->validateUpdateStorage($params);
@@ -167,10 +168,11 @@ class ChestController extends AppController
     ***REMOVED***
 
 
-        $params = $request->getParams();
-        $params['storage_id'] = $args['storage_id'];
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
+        $data['storage_id'] = $args['storage_id'];
 
-        $validationContext = $this->storageValidation->validateDelete($params);
+        $validationContext = $this->storageValidation->validateDelete($data);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***

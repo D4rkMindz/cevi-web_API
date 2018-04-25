@@ -111,17 +111,18 @@ class ArticleController extends AppController
      */
     public function createArticleAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $params = $request->getParams();
-        $params['department_id'] = $args['department_id'];
-        $validationContext = $this->articleValidation->validateCreateArticle($params);
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);;
+        $data['department_id'] = $args['department_id'];
+        $validationContext = $this->articleValidation->validateCreateArticle($data);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $articleId = $this->articleRepository->insertArticle($params, $this->jwt['lang'], $this->jwt['user_id']);
+        $articleId = $this->articleRepository->insertArticle($data, $this->jwt['lang'], $this->jwt['user_id']);
         $responseData = [
             'article_id' => $articleId,
-            'url' => baseurl('/v2/departments/' . $params['department_id'] . '/articles/' . $articleId),
+            'url' => baseurl('/v2/departments/' . $data['department_id'] . '/articles/' . $articleId),
             'message' => __('Inserted article successfully'),
         ];
 
@@ -154,16 +155,17 @@ class ArticleController extends AppController
      */
     public function updateArticleAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $params = $request->getParams();
-        $params['department_id'] = $args['department_id'];
-        $params['article_id'] = $args['article_id'];
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
+        $data['department_id'] = $args['department_id'];
+        $data['article_id'] = $args['article_id'];
 
-        $validationContext = $this->articleValidation->validateUpdate($params);
+        $validationContext = $this->articleValidation->validateUpdate($data);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $updated = $this->articleRepository->updateArticle($params, $this->jwt['lang'], $this->jwt['user_id']);
+        $updated = $this->articleRepository->updateArticle($data, $this->jwt['lang'], $this->jwt['user_id']);
 
         if (!$updated) ***REMOVED***
             return $this->error($response, __('Updating article failed'), 422, ['message' => __('Updating article failed')]);

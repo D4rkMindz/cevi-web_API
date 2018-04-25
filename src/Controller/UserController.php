@@ -86,7 +86,8 @@ class UserController extends AppController
      */
     public function signupAction(Request $request, Response $response): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $email = $data['email'];
         $firstName = $data['first_name'];
@@ -119,7 +120,8 @@ class UserController extends AppController
      */
     public function updateUserAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $validationContext = $this->userValidation->validateUpdate($data, $this->jwt['user_id']);
         if ($validationContext->fails()) ***REMOVED***

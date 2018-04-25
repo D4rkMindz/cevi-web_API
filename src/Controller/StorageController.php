@@ -135,7 +135,8 @@ class StorageController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exits')]);
     ***REMOVED***
 
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);
 
         $validationContext = $this->storageValidation->validateStorage($params);
         if ($validationContext->fails()) ***REMOVED***
@@ -179,7 +180,8 @@ class StorageController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage does not exits')]);
     ***REMOVED***
 
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);
         $validationContext = $this->storageValidation->validateUpdateStorage($params);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());

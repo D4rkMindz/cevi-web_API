@@ -61,7 +61,9 @@ class EventController extends AppController
     public function getAllEventsAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $data = $request->getParams();
+
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $until = isset($data['until']) ? $data['until'] : time() + (60 * 60 * 24 * 365 * 2);
         $since = isset($data['since']) ? $data['until'] : time();
@@ -112,7 +114,8 @@ class EventController extends AppController
      */
     public function createEventAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $departmentId = $args['department_id'];
         if (!$this->departmentRepository->existsDepartment($departmentId))***REMOVED***
@@ -154,7 +157,9 @@ class EventController extends AppController
     public function getEventAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $data = $request->getParams();
+
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $until = isset($data['until']) ? $data['until'] : time() + (60 * 60 * 24 * 365 * 2);
         $since = isset($data['since']) ? $data['until'] : time();
@@ -206,7 +211,8 @@ class EventController extends AppController
      */
     public function updateEventAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $data['event_id'] = (string)$args['event_id'];
         $data['department_id'] = (string)$args['department_id'];

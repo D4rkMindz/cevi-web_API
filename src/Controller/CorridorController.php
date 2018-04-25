@@ -106,14 +106,15 @@ class CorridorController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
-        $validationContext = $this->storageValidation->validateLocation($params, false);
+        $validationContext = $this->storageValidation->validateLocation($data, false);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $created = $this->locationRepository->createStorage($this->slCorridorTable, $params['name'], $this->jwt['user_id']);
+        $created = $this->locationRepository->createStorage($this->slCorridorTable, $data['name'], $this->jwt['user_id']);
         if (!$created) ***REMOVED***
             return $this->error($response, __('Creating corridor failed'), 422, ['message' => __('Creating corridor failed')]);
     ***REMOVED***
@@ -135,16 +136,16 @@ class CorridorController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
+        $data['storage_id'] = $args['storage_id'];
 
-        $params = $request->getParams();
-        $params['storage_id'] = $args['storage_id'];
-
-        $validationContext = $this->storageValidation->validateUpdateStorage($params);
+        $validationContext = $this->storageValidation->validateUpdateStorage($data);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $created = $this->locationRepository->updateStorage($this->slCorridorTable, $args['storage_id'], $params['name'], $this->jwt['user_id']);
+        $created = $this->locationRepository->updateStorage($this->slCorridorTable, $args['storage_id'], $data['name'], $this->jwt['user_id']);
         if (!$created) ***REMOVED***
             return $this->error($response, __('Updating corridor failed'), 422, ['message' => __('Updating corridor failed')]);
     ***REMOVED***
@@ -166,11 +167,11 @@ class CorridorController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
+        $data['storage_id'] = $args['storage_id'];
 
-        $params = $request->getParams();
-        $params['storage_id'] = $args['storage_id'];
-
-        $validationContext = $this->storageValidation->validateDelete($params);
+        $validationContext = $this->storageValidation->validateDelete($data);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***

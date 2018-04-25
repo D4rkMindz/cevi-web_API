@@ -112,7 +112,8 @@ class BasicInformationController extends AppController
     public function eventAction(Request $request, Response $response): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $data = $request->getParams();
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
 
         $until = (int)$data['until'];
         $until = !empty($until) ? $until : time() + (60 * 60 * 24 * 365 * 2);

@@ -106,7 +106,8 @@ class TrayController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);
 
         $validationContext = $this->storageValidation->validateLocation($params, false);
         if ($validationContext->fails()) ***REMOVED***
@@ -135,9 +136,8 @@ class TrayController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-
-        $params = $request->getParams();
-        $params['storage_id'] = $args['storage_id'];
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);        $params['storage_id'] = $args['storage_id'];
 
         $validationContext = $this->storageValidation->validateLocation($params);
         if ($validationContext->fails()) ***REMOVED***
@@ -166,8 +166,8 @@ class TrayController extends AppController
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
-
-        $params = $request->getParams();
+        $json = (string)$request->getBody();
+        $params = json_decode($json, true);
         $params['storage_id'] = $args['storage_id'];
 
         $validationContext = $this->storageValidation->validateDelete($params);
