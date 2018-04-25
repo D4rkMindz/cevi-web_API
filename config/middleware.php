@@ -141,13 +141,15 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
 
 /**
  * For CORS
- * TODO remove this in prod for security reasons
  */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
     /** @var Response $response */
     $response = $next($request, $response);
-    // TODO remove on prod
-    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-App-Language, X-Token, Content-Type');
+    $corsEnabled = $container->get('settings')->get('enableCORS');
+    if ($corsEnabled) ***REMOVED***
+        $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
+            ->withHeader('Access-Control-Allow-Headers', 'X-App-Language, X-Token, Content-Type')
+            ->withHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+***REMOVED***
     return $response;
 ***REMOVED***);

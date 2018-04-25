@@ -6,5 +6,7 @@
  * Time: 20:10
  */
 
-$config = [];
+$config = [
+    'enableCORS' => true,
+];
 return $config;
