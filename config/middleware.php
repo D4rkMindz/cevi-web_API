@@ -88,16 +88,6 @@ if ($jwt['active']) ***REMOVED***
 ***REMOVED***
 
 /**
- * For CORS
- * TODO remove this in prod for security reasons
- */
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
-    $response = $next($request, $response);
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
-    return $response;
-***REMOVED***);
-
-/**
  * Logging middleware
  */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
@@ -143,3 +133,15 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
 ***REMOVED***
     return $next($request, $response);
 ***REMOVED***);
+
+/**
+ * For CORS
+ * TODO remove this in prod for security reasons
+ */
+$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    $response = $next($request, $response);
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    return $response;
+***REMOVED***);
+
