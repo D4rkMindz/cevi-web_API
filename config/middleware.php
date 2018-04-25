@@ -58,28 +58,32 @@ if ($jwt['active']) ***REMOVED***
         'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
             $container['jwt_decoded'] = $decoded = (array)$arguments['decoded'];
             $method = $request->getMethod();
+            $path = $request->getRequestTarget();
+            // todo disable useless logging
+            $container->get(\Monolog\Logger::class)->info(sprintf('[%s] %s checking permission ...', $method, $path));
             $permission = new Permissions();
             $userId = $decoded['data']->user_id;
             $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
-            $hasPermission = $container->get(Role::class)->hasPermission($level, $userId);
-            if (!$hasPermission) ***REMOVED***
-                /** @var \Monolog\Logger $logger */
-                $logger = $container->get(\Monolog\Logger::class);
-
-                /** @var Request $request */
-                $request = $container->get("request");
-                $method = $request->getMethod();
-                $route = $request->getRequestTarget();
-                $ip = $request->getServerParam("REMOTE_ADDR");
-
-                $message = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
-                $logger->error($message);
-
-                return false;
-        ***REMOVED***
-            return true;
+            // return true if the user has the correct permission
+            return $container->get(Role::class)->hasPermission($level, $userId, $path, $method);
     ***REMOVED***,
-        'error' => function (Request $request, Response $response, $message) ***REMOVED***
+        'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
+            $userId = '[User ID not known]';
+            if ($container->has('jwt_decoded')) ***REMOVED***
+                $decoded = $container['jwt_decoded'];
+                $userId = $decoded['data']->user_id;
+        ***REMOVED***
+            /** @var \Monolog\Logger $logger */
+            $logger = $container->get(\Monolog\Logger::class);
+
+            /** @var Request $request */
+            $request = $container->get("request");
+            $method = $request->getMethod();
+            $route = $request->getRequestTarget();
+            $ip = $request->getServerParam("REMOTE_ADDR");
+
+            $error = sprintf("User %s tried to get [%s] %s from %s", $userId, $method, $route, $ip);
+            $logger->error($error);
             $errorMessage = JsonResponseFactory::error(['message' => $message['message']]);
             return $response->withStatus(403)->withJson($errorMessage);
     ***REMOVED***,
@@ -108,10 +112,10 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     // TODO find better solution to get $_SERVER data
     $ip = $request->getServerParam('REMOTE_ADDR');
     $userAgent = $request->getServerParam('HTTP_USER_AGENT');
-    $xToken = $request->getHeader('X-Token');
+    $xToken = $request->getHeader('X-Token')[0];
 
     $logger->info(sprintf(
-        '[%s] %sms %s -> %s from %s [%s] using %s',
+        '(%s) %sms %s -> %s from %s (%s) using %s',
         $statusCode,
         $time,
         $method,
@@ -131,6 +135,7 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
     if (strtoupper($method) == 'OPTIONS') ***REMOVED***
         return $response->withStatus(200);
 ***REMOVED***
+
     return $next($request, $response);
 ***REMOVED***);
 
@@ -139,9 +144,10 @@ $app->add(function (Request $request, Response $response, $next) ***REMOVED***
  * TODO remove this in prod for security reasons
  */
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+    /** @var Response $response */
     $response = $next($request, $response);
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    // TODO remove on prod
+    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-App-Language, X-Token, Content-Type');
     return $response;
 ***REMOVED***);
-

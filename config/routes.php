@@ -20,6 +20,7 @@ $app->delete('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\C
 $app->get('/v2/departmentgroups', route(['App\Controller\BasicInformationController', 'departmentGroupAction']))->setName('get.departmentGroups');
 $app->get('/v2/cities', route(['App\Controller\BasicInformationController', 'cityAction']))->setName('get.cities');
 $app->get('/v2/events', route(['App\Controller\BasicInformationController', 'eventAction']))->setName('get.events');
+$app->get('/v2/genders', route(['App\Controller\BasicInformationController', 'genderAction']))->setName('get.genders');
 
 /***********************************************************************************************************************
  * Department routes

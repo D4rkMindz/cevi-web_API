@@ -36,8 +36,28 @@ class GenderRepository extends AppRepository
     public function existsGender(string $genderId): bool
     ***REMOVED***
         $query = $this->genderTable->newSelect();
-        $query->select('id')->where(['id'=> $genderId]);
+        $query->select('id')->where(['id' => $genderId]);
         $row = $query->execute()->fetch();
         return !empty($row);
+***REMOVED***
+
+    /**
+     * Get all available genders
+     *
+     * @param int $limit
+     * @param int $page
+     * @return array
+     */
+    public function getAllGenders(int $limit, int $page): array
+    ***REMOVED***
+        $fields = ['id', 'name_de', 'name_en', 'name_fr', 'name_it'];
+
+        $query = $this->genderTable->newSelect();
+
+        $query->select($fields)
+            ->limit($limit)
+            ->page($page);
+        $rows = $query->execute()->fetchAll('assoc');
+        return !empty($rows) ? $rows : [];
 ***REMOVED***
 ***REMOVED***

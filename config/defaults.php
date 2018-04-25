@@ -18,6 +18,11 @@ $config['jwt'] = [
         '/' => ['GET'],
         '/v2/users/signup' => ['POST'],
         '/v2/auth' => ['POST'],
+        '/v2/genders' => ['GET'],
+        '/v2/events' => ['GET'],
+        '/v2/cities' => ['GET'],
+        '/v2/departmentgroups' => ['GET'],
+        '/v2/departments' => ['GET'],
         '/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***' => ['GET'],
     ]
 ];

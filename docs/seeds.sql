@@ -1,6 +1,6 @@
 /*
-SQLyog Community v12.4.1 (64 bit)
-MySQL - 10.1.21-MariaDB : Database - cevi_web
+SQLyog Community v12.4.3 (64 bit)
+MySQL - 10.1.32-MariaDB : Database - d4rkmindz_cevi-web_api
 *********************************************************************
 */
 
@@ -9,16 +9,11 @@ MySQL - 10.1.21-MariaDB : Database - cevi_web
 /*!40101 SET SQL_MODE=''*/;
 
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`cevi_web` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `cevi_web`;
-
 /*Data for the table `app_language` */
 
-insert  into `app_language`(`id`,`name`,`abbreviation`) values 
+insert  into `app_language`(`id`,`name`,`abbreviation`) values
 (1,'de_CH','de'),
 (2,'en_GB','en'),
 (3,'fr_CH','fr'),
@@ -26,7 +21,7 @@ insert  into `app_language`(`id`,`name`,`abbreviation`) values
 
 /*Data for the table `app_position` */
 
-insert  into `app_position`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values 
+insert  into `app_position`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
 (1,'Admin','Admin','Admin','Admin','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
 (2,'Abteilungsleiter','Head of Department','Chef de Département','Capo Dipartimento','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
 (3,'Lagerleiter','Camp Leader','Chef de Camp','Capo del Campeggio','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
@@ -37,12 +32,23 @@ insert  into `app_position`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`create
 
 /*Data for the table `app_user` */
 
-insert  into `app_user`(`id`,`city_id`,`language_id`,`permission_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values 
-(1,1709,1,1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL);
+insert  into `app_user`(`id`,`city_id`,`language_id`,`permission_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,1709,1,1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
+(2,1709,1,4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
+
+/*Data for the table `article` */
+
+/*Data for the table `article_description` */
+
+/*Data for the table `article_image` */
+
+/*Data for the table `article_quality` */
+
+/*Data for the table `article_title` */
 
 /*Data for the table `city` */
 
-insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_fr`,`title_it`,`title_en`,`created`,`created_by`,`modified`,`modified_by`,`deleted`,`deleted_at`,`deleted_by`) values 
+insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_fr`,`title_it`,`title_en`,`created`,`created_by`,`modified`,`modified_by`,`deleted`,`deleted_at`,`deleted_by`) values
 (1,'CH','VD','1000','01','Lausanne 1 Dépôt','Lausanne 1 Dépôt','Lausanne 1 Dépôt','Lausanne 1 Dépôt','2015-05-30 18:20:13',2,'2015-05-30 18:20:13',NULL,0,NULL,NULL),
 (2,'CH','VD','1000','02','Lausanne 2','Lausanne 2','Lausanne 2','Lausanne 2','2015-05-30 18:20:13',2,'2015-05-30 18:20:13',NULL,0,NULL,NULL),
 (3,'CH','VD','1000','03','Lausanne 3','Lausanne 3','Lausanne 3','Lausanne 3','2015-05-30 18:20:13',2,'2015-05-30 18:20:13',NULL,0,NULL,NULL),
@@ -5037,8 +5043,7 @@ insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_
 (4992,'CH','VS','1934','60','Le Châble VS Dist','Le Châble VS Dist','Le Châble VS Dist','Le Châble VS Dist','2015-05-30 18:20:47',2,'2015-05-30 18:20:47',NULL,0,NULL,NULL),
 (4993,'CH','VD','1071','60','Chexbres Dist','Chexbres Dist','Chexbres Dist','Chexbres Dist','2015-05-30 18:20:47',2,'2015-05-30 18:20:47',NULL,0,NULL,NULL),
 (4994,'CH','VD','1854','60','Leysin Dist','Leysin Dist','Leysin Dist','Leysin Dist','2015-05-30 18:20:47',2,'2015-05-30 18:20:47',NULL,0,NULL,NULL),
-(4995,'CH','ZH','8135','03','Sihlwald','Sihlwald','Sihlwald','Sihlwald','2015-05-30 18:20:47',2,'2015-05-30 18:20:47',NULL,0,NULL,NULL);
-insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_fr`,`title_it`,`title_en`,`created`,`created_by`,`modified`,`modified_by`,`deleted`,`deleted_at`,`deleted_by`) values 
+(4995,'CH','ZH','8135','03','Sihlwald','Sihlwald','Sihlwald','Sihlwald','2015-05-30 18:20:47',2,'2015-05-30 18:20:47',NULL,0,NULL,NULL),
 (4996,'CH','ZH','8152','02','Glattpark(Opfikon)','Glattpark(Opfikon)','Glattpark(Opfikon)','Glattpark(Opfikon)','2015-05-30 18:20:48',2,'2015-05-30 18:20:48',NULL,0,NULL,NULL),
 (4997,'CH','GE','1211','94','Genève 94 UBS','Genève 94 UBS','Genève 94 UBS','Genève 94 UBS','2015-05-30 18:20:48',2,'2015-05-30 18:20:48',NULL,0,NULL,NULL),
 (4998,'CH','VD','1607','60','Palézieux Dist','Palézieux Dist','Palézieux Dist','Palézieux Dist','2015-05-30 18:20:48',2,'2015-05-30 18:20:48',NULL,0,NULL,NULL),
@@ -5340,36 +5345,92 @@ insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_
 
 /*Data for the table `department` */
 
-insert  into `department`(`id`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values 
+insert  into `department`(`id`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
 (1,1,1,1,1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
 
 /*Data for the table `department_event` */
 
 /*Data for the table `department_group` */
 
-insert  into `department_group`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values 
+insert  into `department_group`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
 (1,'Verband','Organization','Organisme','Organismo');
 
 /*Data for the table `department_region` */
 
-insert  into `department_region`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values 
+insert  into `department_region`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
 (1,'AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG');
 
 /*Data for the table `department_type` */
 
-insert  into `department_type`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values 
+insert  into `department_type`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
 (1,'Jungschar','Flock of Young','Troupeau de Jeunes','Branco di Giovani','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL),
 (2,'Ten Sing','Ten Sing','Ten Sing','Ten Sing','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL);
 
+/*Data for the table `educational_course` */
+
+/*Data for the table `educational_course_description` */
+
+/*Data for the table `educational_course_image` */
+
+/*Data for the table `educational_course_organiser` */
+
+/*Data for the table `educational_course_participant` */
+
+/*Data for the table `educational_course_title` */
+
+/*Data for the table `event` */
+
+/*Data for the table `event_article` */
+
+/*Data for the table `event_description` */
+
+/*Data for the table `event_image` */
+
+/*Data for the table `event_participant` */
+
+/*Data for the table `event_participation_status` */
+
+/*Data for the table `event_title` */
+
 /*Data for the table `gender` */
 
-insert  into `gender`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values 
+insert  into `gender`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
 (1,'Männlich','Male','Mâle','Maschio'),
 (2,'Weiblich','Female','Femme','Femmina');
 
+/*Data for the table `image` */
+
 /*Data for the table `permission` */
 
+insert  into `permission`(`id`,`level`,`name`) values
+(1,64,'Super Admin'),
+(2,32,'Admin'),
+(3,16,'Super User'),
+(4,8,'User'),
+(5,4,'Guest'),
+(6,2,'Anonymous');
+
+/*Data for the table `phinxlog` */
+
+insert  into `phinxlog`(`version`,`migration_name`,`start_time`,`end_time`,`breakpoint`) values
+(20180321125316,'Init','2018-04-09 20:21:31','2018-04-09 20:21:38',0),
+(20180321173530,'UpdatedMetaData','2018-04-09 20:21:38','2018-04-09 20:21:42',0),
+(20180409192249,'AddedIoneeightnNames','2018-04-09 21:25:54','2018-04-09 21:25:54',0);
+
+/*Data for the table `sl_chest` */
+
+/*Data for the table `sl_corridor` */
+
+/*Data for the table `sl_location` */
+
+/*Data for the table `sl_room` */
+
+/*Data for the table `sl_shelf` */
+
+/*Data for the table `sl_tray` */
+
+/*Data for the table `storage_place` */
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

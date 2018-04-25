@@ -19,3 +19,7 @@ rename this value to any name you like. I recommend to insert a table named `use
 
 Afterwards you can start your local Apache Server with [XAMPP](https://www.apachefriends.org/index.html).
 To visit your Website you have to open http://localhost/<project_directory>/.
+
+## Todos
+- make email confirmation
+- individualize permission handling

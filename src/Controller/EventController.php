@@ -45,7 +45,7 @@ class EventController extends AppController
     /**
      * Get all events of a department including private and passed events.
      *
-     * @auth none
+     * @auth JWT
      * @get int|string|null limit
      * @get int|string|null offset
      * @get int|string|null page
@@ -138,7 +138,7 @@ class EventController extends AppController
     /**
      * Get single event
      *
-     * @auth none
+     * @auth JWT
      * @get int|string|null limit
      * @get int|string|null offset
      * @get int|string|null page

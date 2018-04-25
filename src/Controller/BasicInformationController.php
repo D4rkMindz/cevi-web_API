@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Repository\CityRepository;
 use App\Repository\DepartmentGroupRepository;
 use App\Repository\EventRepository;
+use App\Repository\GenderRepository;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -31,6 +32,11 @@ class BasicInformationController extends AppController
     private $eventRepository;
 
     /**
+     * @var GenderRepository
+     */
+    private $genderRepository;
+
+    /**
      * BasicInformationController constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -41,6 +47,7 @@ class BasicInformationController extends AppController
         $this->departmentGroupRepository = $container->get(DepartmentGroupRepository::class);
         $this->cityRepository = $container->get(CityRepository::class);
         $this->eventRepository = $container->get(EventRepository::class);
+        $this->genderRepository = $container->get(GenderRepository::class);
 ***REMOVED***
 
     /**
@@ -133,8 +140,8 @@ class BasicInformationController extends AppController
         $descriptionFormat = $descriptionFormat ?: 'both';
 
         $responseData = [
-            'limit'=> $params['limit'],
-            'page'=> $params['page'],
+            'limit' => $params['limit'],
+            'page' => $params['page'],
             'until' => $until,
             'description_format' => $descriptionFormat,
             'department_group' => $departmentGroup,
@@ -144,5 +151,24 @@ class BasicInformationController extends AppController
         ];
 
         return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Get all genders
+     *
+     * @auth none
+     * @get int|string limit
+     * @get int|string page
+     * @get int|string offset
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function genderAction(Request $request, Response $response): Response
+    ***REMOVED***
+        $params = $this->getLimitationParams($request);
+        $genders = $this->genderRepository->getAllGenders($params['limit'], $params['page']);
+        return $this->json($response, ['genders' => $genders]);
 ***REMOVED***
 ***REMOVED***

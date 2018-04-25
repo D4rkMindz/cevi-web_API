@@ -67,7 +67,7 @@ class AuthenticationController extends AppController
         $lang = (string)$request->getParam('lang');
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
             $userId = $this->userRepository->getIdByusername($username);
-            $expireOffset = 60 * 60 * 8;
+            $expireOffset = 60 * 15;
             $token = JWTFactory::generate($username, $userId, $lang, $this->secret, $expireOffset);
             $expiresAt = (time() + $expireOffset) * 1000;
             $this->logger->info(sprintf('%s (ID: %s)issued a token. Expires at: %s', $username, $userId, $expiresAt));

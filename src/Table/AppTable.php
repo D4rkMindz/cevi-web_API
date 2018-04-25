@@ -193,6 +193,7 @@ class AppTable implements TableInterface
         $blacklist = [
             'article_image' => 1,
             'article_quality' => 1,
+            'city' => 1,
             'department_event' => 1,
             'department_group' => 1,
             'department_region' => 1,
