@@ -1,36 +1,730 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-12-01 14:55+0100\n"
-"PO-Revision-Date: 2017-12-01 14:55+0100\n"
+"POT-Creation-Date: 2018-04-26 10:54+0200\n"
+"PO-Revision-Date: 2018-04-26 10:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
-"X-Poedit-Basepath: ../../tmp/cache/twig\n"
+"X-Generator: Poedit 2.0.7\n"
+"X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: 63/63dc5063f52b61056f5c5e0b33d31ddf5046976f8dfe86cee2f414d6d65034f6.php:43
-#: 64/649288c88e4d528f0db21fd4af29df61a444b6d4b36413bcd84848185b912f38.php:43
-msgid "Hello"
-msgstr "Hello"
+#: config/middleware.php:78
+msgid "Authentication failed"
+msgstr ""
 
-#: 63/63dc5063f52b61056f5c5e0b33d31ddf5046976f8dfe86cee2f414d6d65034f6.php:56
-#: 64/649288c88e4d528f0db21fd4af29df61a444b6d4b36413bcd84848185b912f38.php:56
-msgid "Username"
-msgstr "Username"
+#: src/Controller/AppController.php:73
+msgid "No data available"
+msgstr ""
 
-#: 63/63dc5063f52b61056f5c5e0b33d31ddf5046976f8dfe86cee2f414d6d65034f6.php:62
-#: 64/649288c88e4d528f0db21fd4af29df61a444b6d4b36413bcd84848185b912f38.php:62
-msgid "Firstname"
-msgstr "First name"
+#: src/Controller/AppController.php:97 src/Controller/ChestController.php:76
+#: src/Controller/ChestController.php:83 src/Controller/ChestController.php:106
+#: src/Controller/ChestController.php:136
+#: src/Controller/ChestController.php:167
+#: src/Controller/CorridorController.php:76
+#: src/Controller/CorridorController.php:83
+#: src/Controller/CorridorController.php:106
+#: src/Controller/CorridorController.php:136
+#: src/Controller/CorridorController.php:167
+#: src/Controller/EventArticleController.php:61
+#: src/Controller/EventArticleController.php:115
+#: src/Controller/EventController.php:74 src/Controller/EventController.php:82
+#: src/Controller/EventController.php:122
+#: src/Controller/EventController.php:170
+#: src/Controller/EventController.php:183
+#: src/Controller/EventController.php:221
+#: src/Controller/EventController.php:225
+#: src/Controller/LocationController.php:76
+#: src/Controller/LocationController.php:83
+#: src/Controller/LocationController.php:106
+#: src/Controller/LocationController.php:136
+#: src/Controller/LocationController.php:167
+#: src/Controller/RoomController.php:76 src/Controller/RoomController.php:83
+#: src/Controller/RoomController.php:106 src/Controller/RoomController.php:136
+#: src/Controller/RoomController.php:167 src/Controller/ShelfController.php:76
+#: src/Controller/ShelfController.php:83 src/Controller/ShelfController.php:106
+#: src/Controller/ShelfController.php:136
+#: src/Controller/ShelfController.php:167
+#: src/Controller/StorageController.php:90
+#: src/Controller/StorageController.php:94
+#: src/Controller/StorageController.php:103
+#: src/Controller/StorageController.php:135
+#: src/Controller/StorageController.php:180
+#: src/Controller/StorageController.php:213
+#: src/Controller/TrayController.php:76 src/Controller/TrayController.php:83
+#: src/Controller/TrayController.php:106 src/Controller/TrayController.php:136
+#: src/Controller/TrayController.php:166
+#: src/Service/User/UserValidation.php:163
+#: src/Service/User/UserValidation.php:176
+#: src/Service/User/UserValidation.php:189
+#: src/Service/User/UserValidation.php:202
+#: src/Service/User/UserValidation.php:215
+msgid "Not found"
+msgstr ""
 
-#: 63/63dc5063f52b61056f5c5e0b33d31ddf5046976f8dfe86cee2f414d6d65034f6.php:68
-#: 64/649288c88e4d528f0db21fd4af29df61a444b6d4b36413bcd84848185b912f38.php:68
-msgid "Lastname"
-msgstr "Last name"
+#: src/Controller/ArticleController.php:50
+msgid "No article found"
+msgstr ""
+
+#: src/Controller/ArticleController.php:76
+msgid "No articles found"
+msgstr ""
+
+#: src/Controller/ArticleController.php:126
+msgid "Inserted article successfully"
+msgstr ""
+
+#: src/Controller/ArticleController.php:171
+msgid "Updating article failed"
+msgstr ""
+
+#: src/Controller/ArticleController.php:174
+msgid "Updated article successfully"
+msgstr ""
+
+#: src/Controller/ArticleController.php:189
+msgid "Deleting article failed"
+msgstr ""
+
+#: src/Controller/ArticleController.php:191
+msgid "Deleted article successfully"
+msgstr ""
+
+#: src/Controller/AuthenticationController.php:76
+msgid "invalid user data"
+msgstr ""
+
+#: src/Controller/BasicInformationController.php:136
+#: src/Controller/EventController.php:82 src/Controller/EventController.php:183
+msgid "No events found"
+msgstr ""
+
+#: src/Controller/ChestController.php:76 src/Controller/ChestController.php:106
+#: src/Controller/ChestController.php:136
+#: src/Controller/ChestController.php:167
+#: src/Controller/CorridorController.php:76
+#: src/Controller/CorridorController.php:106
+#: src/Controller/CorridorController.php:136
+#: src/Controller/CorridorController.php:167
+#: src/Controller/EventController.php:74 src/Controller/EventController.php:122
+#: src/Controller/EventController.php:170
+#: src/Controller/EventController.php:175
+#: src/Controller/EventController.php:225
+#: src/Controller/LocationController.php:76
+#: src/Controller/LocationController.php:106
+#: src/Controller/LocationController.php:136
+#: src/Controller/LocationController.php:167
+#: src/Controller/RoomController.php:76 src/Controller/RoomController.php:106
+#: src/Controller/RoomController.php:136 src/Controller/RoomController.php:167
+#: src/Controller/ShelfController.php:76 src/Controller/ShelfController.php:106
+#: src/Controller/ShelfController.php:136
+#: src/Controller/ShelfController.php:167 src/Controller/TrayController.php:76
+#: src/Controller/TrayController.php:106 src/Controller/TrayController.php:136
+#: src/Controller/TrayController.php:166
+msgid "Department not found"
+msgstr ""
+
+#: src/Controller/ChestController.php:83
+msgid "No chests found"
+msgstr ""
+
+#: src/Controller/ChestController.php:119
+msgid "Creating chest failed"
+msgstr ""
+
+#: src/Controller/ChestController.php:122
+msgid "Created chest successfully"
+msgstr ""
+
+#: src/Controller/ChestController.php:150
+msgid "Updating chest failed"
+msgstr ""
+
+#: src/Controller/ChestController.php:153
+msgid "Updated chest successfully"
+msgstr ""
+
+#: src/Controller/ChestController.php:182
+msgid "Deleting chest failed"
+msgstr ""
+
+#: src/Controller/ChestController.php:185
+msgid "Deleted chest successfully"
+msgstr ""
+
+#: src/Controller/CorridorController.php:83
+msgid "No corridors found"
+msgstr ""
+
+#: src/Controller/CorridorController.php:119
+msgid "Creating corridor failed"
+msgstr ""
+
+#: src/Controller/CorridorController.php:122
+msgid "Created corridor successfully"
+msgstr ""
+
+#: src/Controller/CorridorController.php:150
+msgid "Updating corridor failed"
+msgstr ""
+
+#: src/Controller/CorridorController.php:153
+msgid "Updated corridor successfully"
+msgstr ""
+
+#: src/Controller/CorridorController.php:181
+msgid "Deleting corridor failed"
+msgstr ""
+
+#: src/Controller/CorridorController.php:184
+msgid "Deleted corridor successfully"
+msgstr ""
+
+#: src/Controller/DepartmentController.php:85
+#: src/Controller/StorageController.php:64
+#: src/Controller/StorageController.php:90
+#: src/Service/Article/ArticleValidation.php:251
+msgid "Department does not exist"
+msgstr ""
+
+#: src/Controller/DepartmentController.php:123
+msgid "Update failed"
+msgstr ""
+
+#: src/Controller/DepartmentController.php:126
+msgid "Updated department successfully"
+msgstr ""
+
+#: src/Controller/DepartmentController.php:145
+#: src/Controller/UserController.php:152
+msgid "Deleting user failed"
+msgstr ""
+
+#: src/Controller/DepartmentController.php:148
+msgid "Deleted user successfully"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:55
+#: src/Controller/EventController.php:175
+#: src/Controller/ParticipationController.php:70
+#: src/Controller/ParticipationController.php:108
+msgid "Not Found"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:61
+msgid "No articles for event found"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:91
+#: src/Controller/EventArticleController.php:120
+#: src/Controller/EventController.php:236
+#: src/Controller/ParticipationController.php:141
+#: src/Controller/ParticipationController.php:173
+#: src/Controller/ParticipationController.php:203
+#: src/Controller/ParticipationController.php:234
+#: src/Controller/ParticipationController.php:270
+#: src/Controller/StorageController.php:192
+msgid "Server Error"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:91
+msgid "Linking article failed"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:96
+msgid "Linked article successfully"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:120
+msgid "Unlinking article and event failed"
+msgstr ""
+
+#: src/Controller/EventArticleController.php:123
+msgid "Unlinked article and event successfully"
+msgstr ""
+
+#: src/Controller/EventController.php:135
+msgid "Inserted event successfully"
+msgstr ""
+
+#: src/Controller/EventController.php:221
+msgid "Event not found"
+msgstr ""
+
+#: src/Controller/EventController.php:236
+msgid "Updating event failed"
+msgstr ""
+
+#: src/Controller/EventController.php:239
+msgid "Updated event successfully"
+msgstr ""
+
+#: src/Controller/EventController.php:258
+msgid "Deleting event failed"
+msgstr ""
+
+#: src/Controller/EventController.php:260
+msgid "Deleted event successfully"
+msgstr ""
+
+#: src/Controller/LocationController.php:83
+msgid "No locations found"
+msgstr ""
+
+#: src/Controller/LocationController.php:119
+msgid "Creating location failed"
+msgstr ""
+
+#: src/Controller/LocationController.php:122
+msgid "Created location successfully"
+msgstr ""
+
+#: src/Controller/LocationController.php:150
+msgid "Updating location failed"
+msgstr ""
+
+#: src/Controller/LocationController.php:153
+msgid "Updated location successfully"
+msgstr ""
+
+#: src/Controller/LocationController.php:181
+msgid "Deleting location failed"
+msgstr ""
+
+#: src/Controller/LocationController.php:184
+msgid "Deleted location successfully"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:70
+msgid "No participations found"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:108
+msgid "No participation found"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:141
+#: src/Controller/ParticipationController.php:234
+msgid "Creating participation failed"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:144
+msgid "Created participation successfully"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:173
+msgid "Updating participation failed"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:176
+msgid "Updated participation successfully"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:203
+msgid "Deleting participation failed"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:206
+msgid "Deleted participation successfully"
+msgstr ""
+
+#: src/Controller/ParticipationController.php:270
+msgid "Cancelling event failed"
+msgstr ""
+
+#: src/Controller/RoomController.php:83
+msgid "No rooms found"
+msgstr ""
+
+#: src/Controller/RoomController.php:119
+msgid "Creating room failed"
+msgstr ""
+
+#: src/Controller/RoomController.php:122
+msgid "Created room successfully"
+msgstr ""
+
+#: src/Controller/RoomController.php:150
+msgid "Updating room failed"
+msgstr ""
+
+#: src/Controller/RoomController.php:153
+msgid "Updated room successfully"
+msgstr ""
+
+#: src/Controller/RoomController.php:181
+msgid "Deleting room failed"
+msgstr ""
+
+#: src/Controller/RoomController.php:184
+msgid "Deleted room successfully"
+msgstr ""
+
+#: src/Controller/ShelfController.php:83
+msgid "No shelfs found"
+msgstr ""
+
+#: src/Controller/ShelfController.php:119
+msgid "Creating shelf failed"
+msgstr ""
+
+#: src/Controller/ShelfController.php:122
+msgid "Created shelf successfully"
+msgstr ""
+
+#: src/Controller/ShelfController.php:150
+msgid "Updating shelf failed"
+msgstr ""
+
+#: src/Controller/ShelfController.php:153
+msgid "Updated shelf successfully"
+msgstr ""
+
+#: src/Controller/ShelfController.php:181
+msgid "Deleting shelf failed"
+msgstr ""
+
+#: src/Controller/ShelfController.php:184
+msgid "Deleted shelf successfully"
+msgstr ""
+
+#: src/Controller/StorageController.php:71
+msgid "No storage places found"
+msgstr ""
+
+#: src/Controller/StorageController.php:94
+#: src/Service/Article/ArticleValidation.php:276
+msgid "Storage place does not exist"
+msgstr ""
+
+#: src/Controller/StorageController.php:103
+msgid "Storage place does not exits"
+msgstr ""
+
+#: src/Controller/StorageController.php:135
+msgid "Department does not exits"
+msgstr ""
+
+#: src/Controller/StorageController.php:150
+msgid "Created storage successfully"
+msgstr ""
+
+#: src/Controller/StorageController.php:180
+#: src/Controller/StorageController.php:213
+msgid "Storage does not exits"
+msgstr ""
+
+#: src/Controller/StorageController.php:192
+msgid "Updating storage failed"
+msgstr ""
+
+#: src/Controller/StorageController.php:194
+msgid "Updated storage successfullly"
+msgstr ""
+
+#: src/Controller/StorageController.php:218
+msgid "Server error"
+msgstr ""
+
+#: src/Controller/StorageController.php:218
+msgid "Deleting storage failed"
+msgstr ""
+
+#: src/Controller/StorageController.php:221
+msgid "Deleted storage successfully"
+msgstr ""
+
+#: src/Controller/TrayController.php:83
+msgid "No trays found"
+msgstr ""
+
+#: src/Controller/TrayController.php:119
+msgid "Creating tray failed"
+msgstr ""
+
+#: src/Controller/TrayController.php:122
+msgid "Created tray successfully"
+msgstr ""
+
+#: src/Controller/TrayController.php:149
+msgid "Updating tray failed"
+msgstr ""
+
+#: src/Controller/TrayController.php:152
+msgid "Updated tray successfully"
+msgstr ""
+
+#: src/Controller/TrayController.php:180
+msgid "Deleting tray failed"
+msgstr ""
+
+#: src/Controller/TrayController.php:183
+msgid "Deleted tray successfully"
+msgstr ""
+
+#: src/Controller/UserController.php:53
+msgid "No users found"
+msgstr ""
+
+#: src/Controller/UserController.php:72
+msgid "Please define user_id correctly"
+msgstr ""
+
+#: src/Controller/UserController.php:76
+msgid "No user found"
+msgstr ""
+
+#: src/Controller/UserController.php:107
+msgid "Signed up user successfully"
+msgstr ""
+
+#: src/Controller/UserController.php:134
+msgid "Updated user successfully"
+msgstr ""
+
+#: src/Controller/UserController.php:154
+msgid "User deleted successfully"
+msgstr ""
+
+#: src/Repository/EventRepository.php:396
+msgid "No images available"
+msgstr ""
+
+#: src/Service/AppValidation.php:48
+msgid "Required"
+msgstr ""
+
+#: src/Service/AppValidation.php:69
+msgid "too short"
+msgstr ""
+
+#: src/Service/AppValidation.php:73
+msgid "too long"
+msgstr ""
+
+#: src/Service/AppValidation.php:87
+msgid "Not a valid email address"
+msgstr ""
+
+#: src/Service/AppValidation.php:100
+msgid "Does not exist"
+msgstr ""
+
+#: src/Service/AppValidation.php:107
+msgid "Date already passed"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:51
+#: src/Service/EventArticle/EventArticleValidation.php:82
+msgid "Article does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:142
+msgid "Location id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:146
+msgid "Room id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:150
+msgid "Corridor id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:154
+msgid "Shelf id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:158
+msgid "Tray id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:162
+msgid "Chest id does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:167
+msgid "Storage does not exist"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:206
+msgid "Dates more than a year in the future are not allowed here"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:221
+msgid "Impossible quantity"
+msgstr ""
+
+#: src/Service/Article/ArticleValidation.php:236
+msgid "Quality id does not exist"
+msgstr ""
+
+#: src/Service/Department/DepartmentValidation.php:104
+msgid "Department name already exists"
+msgstr ""
+
+#: src/Service/Department/DepartmentValidation.php:117
+msgid "Department group does not exist"
+msgstr ""
+
+#: src/Service/Department/DepartmentValidation.php:130
+msgid "Department type does not exist"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:135
+msgid "The start of the event can not be in the past"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:140
+msgid "The start of the event must be within 3 years"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:160
+msgid "The end of the event must be after the start"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:165
+msgid ""
+"If your event really lasts longer than 4 weeeks, please contact the "
+"administrator"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:185
+msgid ""
+"If your leader meeting time really starts two weeks before the event, please "
+"contact the administrator"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:190
+msgid "The leader meeting time must be before the real event"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:210
+msgid "The event end time for the leaders must be after the real event"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:215
+msgid ""
+"If the event end time for your leaders is really later than two weeks, "
+"please contact the administrator"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:231
+msgid "Price can not be negative"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:235
+msgid "If the price is really this high, please contact the administrator"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:255
+msgid "The earliest publication time is now"
+msgstr ""
+
+#: src/Service/Event/EventValidation.php:260
+msgid "The event must be publicized before the start of the event"
+msgstr ""
+
+#: src/Service/EventArticle/EventArticleValidation.php:78
+#: src/Service/Participation/ParticipationValidation.php:110
+msgid "Event does not exist"
+msgstr ""
+
+#: src/Service/EventArticle/EventArticleValidation.php:86
+msgid "Not enough available"
+msgstr ""
+
+#: src/Service/EventArticle/EventArticleValidation.php:90
+#: src/Service/Participation/ParticipationValidation.php:123
+msgid "User does not exist"
+msgstr ""
+
+#: src/Service/Participation/ParticipationValidation.php:136
+msgid "Status does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:83
+#: src/Service/Storage/StorageValidation.php:104
+msgid "Storage not found"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:89
+msgid "Name must be defined"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:124
+#: src/Service/Storage/StorageValidation.php:144
+msgid "Storage place already exists"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:163
+msgid "Nothing defined"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:168
+msgid "Location does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:172
+msgid "Room does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:176
+msgid "Corridor does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:180
+msgid "Shelf does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:184
+msgid "Tray does not exist"
+msgstr ""
+
+#: src/Service/Storage/StorageValidation.php:188
+msgid "Chest does not exist"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:68
+#: src/Service/User/UserValidation.php:339 src/Util/ValidationContext.php:19
+msgid "Please check your data"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:150
+msgid "Modifier does not exist"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:240
+msgid "Already in use"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:255
+msgid "Password must contain a number"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:259
+msgid "Password must contain a lowercase character"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:263
+msgid "Password must contain a uppercase character"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:277
+msgid "Date required"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:281
+msgid "JS Certificate is outdated"
+msgstr ""
+
+#: src/Service/User/UserValidation.php:310
+#, php-format
+msgid "Birthday not valid (minimum age: %s years"
+msgstr ""

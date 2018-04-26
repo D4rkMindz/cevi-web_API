@@ -29,7 +29,7 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $translator = $container->get(Translator::class);
     if (isset($whitelist[$locale])) ***REMOVED***
         $logger->info(sprintf(
-            'Using language: %s(%s) for requesting %s',
+             'Using language: %s(%s) for requesting %s',
             $locale,
             $whitelist[$locale],
             $request->getRequestTarget()
