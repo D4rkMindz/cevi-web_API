@@ -24,8 +24,8 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $translator->setFallbackLocales(['en_GB']);
     $translator->addResource('mo', $fallbackResource, 'en_GB');
 
-    $translator->setLocale($locale);
     $translator->addResource('mo', $resource, $locale);
+    $translator->setLocale($locale);
     return $next($request, $response);
 ***REMOVED***);
 
@@ -33,7 +33,10 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $whitelist = $container->get('settings')->get('language_whitelist');
 
     $language = $request->getParam('lang');
-    $language = !empty($language) ? $language : $request->getHeader('X-App-Language')[0];
+    $language = !empty($language) ? $language : $request->getHeader('X-App-Language');
+    if (!empty($language) && is_array($language)) ***REMOVED***
+        $language = $language[0];
+***REMOVED***
 
     if (empty($language)) ***REMOVED***
         // Browser language
