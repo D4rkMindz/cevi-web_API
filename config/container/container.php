@@ -115,12 +115,17 @@ $container[Translator::class] = function (Container $container): Translator ***R
     if (empty($locale)) ***REMOVED***
         $locale = 'de_CH';
 ***REMOVED***
-    $resource = __DIR__ . "/../resources/locale/" . $locale . "_messages.mo";
+
+    $resourceDe = __DIR__ . "/../../resources/locale/de_CH_messages.mo";
+    $resourceEn = __DIR__ . "/../../resources/locale/en_GB_messages.mo";
+    // TODO add other translation resources when they are created
+    $resourceFr = __DIR__ . "/../../resources/locale/fr_CH_messages.mo";
+    $resourceIt = __DIR__ . "/../../resources/locale/it_CH_messages.mo";
+
     $translator = new Translator($locale, new MessageSelector());
-    $translator->setFallbackLocales(['en_GB']);
     $translator->addLoader('mo', new MoFileLoader());
-    $translator->addResource('mo', $resource, $locale);
-    $translator->setLocale($locale);
+    $translator->addResource('mo', $resourceDe, 'de_CH');
+    $translator->addResource('mo', $resourceEn, 'en_GB');
     return $translator;
 ***REMOVED***;
 
