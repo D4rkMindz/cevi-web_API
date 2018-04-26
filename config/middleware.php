@@ -4,6 +4,7 @@ use App\Factory\JsonResponseFactory;
 use App\JwtAuthRules\PassthroughRule;
 use App\Service\Permissions;
 use App\Service\Role;
+use Monolog\Logger;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication;
@@ -13,10 +14,30 @@ $container = $app->getContainer();
 
 //
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
-    $locale = $request->getAttribute('lang');
+    /**
+     * @var Logger $logger
+     */
+    $logger = $container->get(Logger::class);
+    $locale = (string)substr($request->getHeader('X-App-Language'), 0, 2);
+    $whitelist = [
+        'de' => 'de_CH',
+        'en' => 'en_GB',
+        'fr' => 'fr_CH',
+        'it' => 'it_CH',
+    ];
+
     $translator = $container->get(Translator::class);
-    $resource = __DIR__ . '/../resources/locale/' . $locale . '_messages.mo';
-    $translator->setLocale($locale);
+    if (isset($whitelist[$locale])) ***REMOVED***
+        $logger->info(sprintf(
+            'Using language: %s(%s) for requesting %s',
+            $locale,
+            $whitelist[$locale],
+            $request->getRequestTarget()
+        ));
+        $resource = __DIR__ . '/../resources/locale/' . $whitelist[$locale] . '_messages.mo';
+        $translator->setLocale($locale);
+***REMOVED***
+
     $translator->setFallbackLocales(['en_US']);
     $translator->addResource('mo', $resource, $locale);
     return $next($request, $response);
