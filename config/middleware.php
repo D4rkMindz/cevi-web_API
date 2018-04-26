@@ -44,8 +44,8 @@ $app->add(function (Request $request, Response $response, $next) use ($container
             'Using language: default locale for requesting %s',
             $request->getRequestTarget()
         ));
-
 ***REMOVED***
+
     $translator->setFallbackLocales(['en_GB']);
     $translator->addResource('mo', $resource, $locale);
     return $next($request, $response);
