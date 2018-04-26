@@ -14,39 +14,13 @@ $container = $app->getContainer();
 
 //
 $app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
-    /**
-     * @var Logger $logger
-     */
-    $logger = $container->get(Logger::class);
-    $locale = (string)substr($request->getHeader('X-App-Language'), 0, 2);
-    $whitelist = [
-        'de' => 'de_CH',
-        'en' => 'en_GB',
-        'fr' => 'fr_CH',
-        'it' => 'it_CH',
-    ];
+    $locale = $request->getAttribute('lang');
 
-    /**
-     * @var Translator $translator
-     */
     $translator = $container->get(Translator::class);
-    if (isset($whitelist[$locale])) ***REMOVED***
-        $logger->info(sprintf(
-             'Using language: %s(%s) for requesting %s',
-            $locale,
-            $whitelist[$locale],
-            $request->getRequestTarget()
-        ));
-        $resource = __DIR__ . '/../resources/locale/' . $whitelist[$locale] . '_messages.mo';
-        $translator->setLocale($locale);
-***REMOVED*** else ***REMOVED***
-        $logger->info(sprintf(
-            'Using language: default locale for requesting %s',
-            $request->getRequestTarget()
-        ));
-***REMOVED***
+    $resource = __DIR__ . '/../resources/locale/' . $locale . '_messages.mo';
+    $translator->setLocale($locale);
 
-    $translator->setFallbackLocales(['en_GB']);
+    $translator->setFallbackLocales(['en_US']);
     $translator->addResource('mo', $resource, $locale);
     return $next($request, $response);
 ***REMOVED***);
@@ -65,6 +39,14 @@ $app->add(function (Request $request, Response $response, $next) use ($container
 ***REMOVED***
 
     $language = !empty($language) ? $language : 'de';
+
+    $container->get(Logger::class)->info(sprintf(
+        'Using language: %s(%s) for requesting %s',
+        $language,
+        $whitelist[$language],
+        $request->getRequestTarget()
+    ));
+
     $language = $whitelist[$language];
 
     if (empty($language)) ***REMOVED***
