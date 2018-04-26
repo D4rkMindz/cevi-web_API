@@ -17,10 +17,14 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $locale = $request->getAttribute('lang');
 
     $translator = $container->get(Translator::class);
-    $resource = __DIR__ . '/../resources/locale/' . $locale . '_messages.mo';
-    $translator->setLocale($locale);
 
-    $translator->setFallbackLocales(['en_US']);
+    $resource = __DIR__ . '/../resources/locale/' . $locale . '_messages.mo';
+    $fallbackResource = __DIR__ . '/../resources/locale/en_GB_messages.mo';
+
+    $translator->setFallbackLocales(['en_GB']);
+    $translator->addResource('mo', $fallbackResource, 'en_GB');
+
+    $translator->setLocale($locale);
     $translator->addResource('mo', $resource, $locale);
     return $next($request, $response);
 ***REMOVED***);
