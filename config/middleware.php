@@ -29,7 +29,7 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     $whitelist = $container->get('settings')->get('language_whitelist');
 
     $language = $request->getParam('lang');
-    $language = !empty($language) ? $language : $request->getHeader('X-App-Language');
+    $language = !empty($language) ? $language : $request->getHeader('X-App-Language')[0];
 
     if (empty($language)) ***REMOVED***
         // Browser language
