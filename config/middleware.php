@@ -26,6 +26,9 @@ $app->add(function (Request $request, Response $response, $next) use ($container
         'it' => 'it_CH',
     ];
 
+    /**
+     * @var Translator $translator
+     */
     $translator = $container->get(Translator::class);
     if (isset($whitelist[$locale])) ***REMOVED***
         $logger->info(sprintf(
@@ -36,9 +39,14 @@ $app->add(function (Request $request, Response $response, $next) use ($container
         ));
         $resource = __DIR__ . '/../resources/locale/' . $whitelist[$locale] . '_messages.mo';
         $translator->setLocale($locale);
-***REMOVED***
+***REMOVED*** else ***REMOVED***
+        $logger->info(sprintf(
+            'Using language: default locale for requesting %s',
+            $request->getRequestTarget()
+        ));
 
-    $translator->setFallbackLocales(['en_US']);
+***REMOVED***
+    $translator->setFallbackLocales(['en_GB']);
     $translator->addResource('mo', $resource, $locale);
     return $next($request, $response);
 ***REMOVED***);
