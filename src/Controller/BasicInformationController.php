@@ -94,7 +94,7 @@ class BasicInformationController extends AppController
             'it' => 1,
         ];
 
-        if (!empty($reduced) && array_key_exists($lang, $allowedLangs)) ***REMOVED***
+        if (!empty($reduced) && (bool)$reduced && array_key_exists($lang, $allowedLangs)) ***REMOVED***
             $cities = $this->cityRepository->getReduced($lang, $params['limit'], $params['page']);
     ***REMOVED*** else ***REMOVED***
             $cities = $this->cityRepository->getAll($params['limit'], $params['page']);
