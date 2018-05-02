@@ -85,8 +85,22 @@ class BasicInformationController extends AppController
     public function cityAction(Request $request, Response $response): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
+        $reduced = $request->getParam('reduced');
+        $lang = $request->getParam('lang');
+        $allowedLangs = [
+            'de' => 1,
+            'en' => 1,
+            'fr' => 1,
+            'it' => 1,
+        ];
 
-        $responseData = ['cities' => $this->cityRepository->getAll($params['limit'], $params['page'])];
+        if (!empty($reduced) && array_key_exists($lang, $allowedLangs)) ***REMOVED***
+            $cities = $this->cityRepository->getReduced($lang, $params['limit'], $params['page']);
+    ***REMOVED*** else ***REMOVED***
+            $cities = $this->cityRepository->getAll($params['limit'], $params['page']);
+    ***REMOVED***
+
+        $responseData = ['cities' => $cities];
         return $this->json($response, $responseData);
 ***REMOVED***
 

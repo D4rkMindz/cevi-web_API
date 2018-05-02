@@ -32,7 +32,7 @@ class CityRepository extends AppRepository
      * @param int $page
      * @return array
      */
-    public function getAll(int $limit=10000, int $page = 0): array
+    public function getAll(int $limit = 10000, int $page = 0): array
     ***REMOVED***
         $query = $this->cityTable->newSelect();
         $fields = [
@@ -48,6 +48,30 @@ class CityRepository extends AppRepository
             ->page($page);
         $row = $query->execute()->fetchAll('assoc');
         return !empty($row) ? $row : [];
+***REMOVED***
+
+    /**
+     * Get reduced city data for registration autocomplete
+     *
+     * @param string $lang
+     * @param $limit
+     * @param $page
+     * @return array
+     */
+    public function getReduced(string $lang = 'de', $limit, $page): array
+    ***REMOVED***
+        $query = $this->cityTable->newSelect();
+        $name = 'title_' . $lang;
+        $fields = [
+            'id',
+            'postcode' => 'number',
+            'name' => $name,
+        ];
+        $query->select($fields)
+            ->limit($limit)
+            ->page($page);
+        $rows = $query->execute()->fetchAll('assoc');
+        return !empty($rows) ? $rows : [];
 ***REMOVED***
 
     /**
