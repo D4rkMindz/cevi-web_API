@@ -328,21 +328,29 @@ class UserValidation extends AppValidation
      *
      * @param string $email
      * @param string $firstName
+     * @param string $lastName
      * @param string $postcode
      * @param string $username
      * @param string $password
+     * @param string $ceviName
      * @param string $languageId
      * @return ValidationContext
      */
-    public function validateSignup(string $email, string $firstName, string $postcode, string $username, string $password, string $languageId): ValidationContext
+    public function validateSignup(string $email, string $firstName, string $lastName, string $postcode, string $username, string $password, string $ceviName, string $languageId): ValidationContext
     ***REMOVED***
         $validationContext = new ValidationContext(__('Please check your data'));
 
         $this->validateEmail($email, $validationContext);
         $this->validateName($firstName, $validationContext, 'first_name');
+        if (!empty($lastName)) ***REMOVED***
+            $this->validateName($lastName, $validationContext, 'last_name');
+    ***REMOVED***
         $this->validateUsername($username, $validationContext);
         $this->validatePostcode($postcode, $validationContext);
         $this->validatePassword($password, $validationContext);
+        if (!empty($ceviName)) ***REMOVED***
+            $this->validateName($ceviName, $validationContext, 'cevi_name');
+    ***REMOVED***
         $this->validateLanguage($languageId, $validationContext);
 
         return $validationContext;

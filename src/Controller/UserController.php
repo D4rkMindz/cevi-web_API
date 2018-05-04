@@ -91,17 +91,19 @@ class UserController extends AppController
 
         $email = $data['email'];
         $firstName = $data['first_name'];
+        $lastName = $data['last_name'] ? $data['last_name'] : null;
+        $ceviName = $data['cevi_name'] ? $data['cevi_name'] : null;
         $postcode = $data['postcode'];
         $username = $data['username'];
         $password = $data['password'];
         $lang = $data['language_id'];
 
-        $validationContext = $this->userValidation->validateSignup($email, $firstName, $postcode, $username, $password, $lang);
+        $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username, $password, $ceviName, $lang);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $this->userRepository->signupUser($email, $firstName, $postcode, $username, $password, $lang);
+        $this->userRepository->signupUser($email, $firstName, $lastName, $postcode, $username, $password, $ceviName, $lang);
         $responseData = [
             'code' => 200,
             'message' => __('Signed up user successfully')
