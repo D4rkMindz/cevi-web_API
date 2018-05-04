@@ -5410,13 +5410,6 @@ insert  into `permission`(`id`,`level`,`name`) values
 (5,4,'Guest'),
 (6,2,'Anonymous');
 
-/*Data for the table `phinxlog` */
-
-insert  into `phinxlog`(`version`,`migration_name`,`start_time`,`end_time`,`breakpoint`) values
-(20180321125316,'Init','2018-04-09 20:21:31','2018-04-09 20:21:38',0),
-(20180321173530,'UpdatedMetaData','2018-04-09 20:21:38','2018-04-09 20:21:42',0),
-(20180409192249,'AddedIoneeightnNames','2018-04-09 21:25:54','2018-04-09 21:25:54',0);
-
 /*Data for the table `sl_chest` */
 
 /*Data for the table `sl_corridor` */

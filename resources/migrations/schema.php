@@ -8,111 +8,6 @@ return array (
   ),
   'tables' => 
   array (
-    'app_language' => 
-    array (
-      'table' => 
-      array (
-        'table_name' => 'app_language',
-        'engine' => 'InnoDB',
-        'table_comment' => '',
-        'table_collation' => 'utf8_general_ci',
-        'character_set_name' => 'utf8',
-      ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'app_language',
-          'COLUMN_NAME' => 'id',
-          'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '10',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(11)',
-          'COLUMN_KEY' => 'PRI',
-          'EXTRA' => 'auto_increment',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'name' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'app_language',
-          'COLUMN_NAME' => 'name',
-          'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '5',
-          'CHARACTER_OCTET_LENGTH' => '15',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_general_ci',
-          'COLUMN_TYPE' => 'varchar(5)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'abbreviation' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'app_language',
-          'COLUMN_NAME' => 'abbreviation',
-          'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '2',
-          'CHARACTER_OCTET_LENGTH' => '6',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_general_ci',
-          'COLUMN_TYPE' => 'varchar(2)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-      ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'app_language',
-            'Non_unique' => '0',
-            'Key_name' => 'PRIMARY',
-            'Seq_in_index' => '1',
-            'Column_name' => 'id',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-      ),
-      'foreign_keys' => NULL,
-    ),
     'app_position' => 
     array (
       'table' => 
@@ -147,6 +42,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -170,6 +66,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -193,6 +90,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -216,6 +114,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -239,6 +138,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -262,6 +162,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -285,6 +186,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -308,6 +210,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -331,6 +234,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -354,6 +258,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -377,6 +282,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -436,6 +342,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'city_id' => 
         array (
@@ -459,6 +366,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'language_id' => 
         array (
@@ -482,6 +390,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'permission_id' => 
         array (
@@ -490,7 +399,7 @@ return array (
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'permission_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => '4',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
           'CHARACTER_MAXIMUM_LENGTH' => NULL,
@@ -504,7 +413,8 @@ return array (
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
+          'COLUMN_COMMENT' => 'See permission table',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_id' => 
         array (
@@ -528,6 +438,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'position_id' => 
         array (
@@ -551,6 +462,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'gender_id' => 
         array (
@@ -574,6 +486,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'first_name' => 
         array (
@@ -597,6 +510,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'email' => 
         array (
@@ -620,6 +534,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'username' => 
         array (
@@ -643,6 +558,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'password' => 
         array (
@@ -666,6 +582,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'signup_completed' => 
         array (
@@ -689,6 +606,31 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'email_verified' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'app_user',
+          'COLUMN_NAME' => 'email_verified',
+          'ORDINAL_POSITION' => '13',
+          'COLUMN_DEFAULT' => '0',
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'tinyint',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '3',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'tinyint(1)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'js_certificate' => 
         array (
@@ -696,7 +638,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'js_certificate',
-          'ORDINAL_POSITION' => '13',
+          'ORDINAL_POSITION' => '14',
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
@@ -712,6 +654,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'last_name' => 
         array (
@@ -719,29 +662,6 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'last_name',
-          'ORDINAL_POSITION' => '14',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '255',
-          'CHARACTER_OCTET_LENGTH' => '765',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_general_ci',
-          'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'address' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'app_user',
-          'COLUMN_NAME' => 'address',
           'ORDINAL_POSITION' => '15',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
@@ -758,13 +678,14 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
-        'cevi_name' => 
+        'address' => 
         array (
           'TABLE_CATALOG' => 'def',
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
-          'COLUMN_NAME' => 'cevi_name',
+          'COLUMN_NAME' => 'address',
           'ORDINAL_POSITION' => '16',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
@@ -781,6 +702,31 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'cevi_name' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'app_user',
+          'COLUMN_NAME' => 'cevi_name',
+          'ORDINAL_POSITION' => '17',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '255',
+          'CHARACTER_OCTET_LENGTH' => '765',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_general_ci',
+          'COLUMN_TYPE' => 'varchar(255)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'birthdate' => 
         array (
@@ -788,7 +734,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'birthdate',
-          'ORDINAL_POSITION' => '17',
+          'ORDINAL_POSITION' => '18',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'date',
@@ -804,6 +750,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'phone' => 
         array (
@@ -811,29 +758,6 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'phone',
-          'ORDINAL_POSITION' => '18',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '45',
-          'CHARACTER_OCTET_LENGTH' => '135',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_general_ci',
-          'COLUMN_TYPE' => 'varchar(45)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'mobile' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'app_user',
-          'COLUMN_NAME' => 'mobile',
           'ORDINAL_POSITION' => '19',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
@@ -850,6 +774,31 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'mobile' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'app_user',
+          'COLUMN_NAME' => 'mobile',
+          'ORDINAL_POSITION' => '20',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '45',
+          'CHARACTER_OCTET_LENGTH' => '135',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_general_ci',
+          'COLUMN_TYPE' => 'varchar(45)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'js_certificate_until' => 
         array (
@@ -857,7 +806,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'js_certificate_until',
-          'ORDINAL_POSITION' => '20',
+          'ORDINAL_POSITION' => '21',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'year',
@@ -873,6 +822,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -880,7 +830,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'created_at',
-          'ORDINAL_POSITION' => '21',
+          'ORDINAL_POSITION' => '22',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
@@ -896,6 +846,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -903,7 +854,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'created_by',
-          'ORDINAL_POSITION' => '22',
+          'ORDINAL_POSITION' => '23',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
@@ -919,6 +870,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -926,7 +878,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'modified_at',
-          'ORDINAL_POSITION' => '23',
+          'ORDINAL_POSITION' => '24',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
@@ -942,6 +894,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -949,7 +902,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'modified_by',
-          'ORDINAL_POSITION' => '24',
+          'ORDINAL_POSITION' => '25',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
@@ -965,6 +918,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -972,7 +926,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'archived_at',
-          'ORDINAL_POSITION' => '25',
+          'ORDINAL_POSITION' => '26',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
@@ -988,6 +942,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -995,7 +950,7 @@ return array (
           'TABLE_SCHEMA' => 'cevi_web',
           'TABLE_NAME' => 'app_user',
           'COLUMN_NAME' => 'archived_by',
-          'ORDINAL_POSITION' => '26',
+          'ORDINAL_POSITION' => '27',
           'COLUMN_DEFAULT' => NULL,
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
@@ -1011,6 +966,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -1178,6 +1134,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'article_title_id' => 
         array (
@@ -1201,6 +1158,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'article_description_id' => 
         array (
@@ -1224,6 +1182,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'article_quality_id' => 
         array (
@@ -1247,6 +1206,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'storage_place_id' => 
         array (
@@ -1270,6 +1230,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_id' => 
         array (
@@ -1293,6 +1254,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'date' => 
         array (
@@ -1316,6 +1278,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'quantity' => 
         array (
@@ -1339,6 +1302,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'replace' => 
         array (
@@ -1362,6 +1326,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'barcode' => 
         array (
@@ -1385,6 +1350,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -1408,6 +1374,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -1431,6 +1398,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -1454,6 +1422,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -1477,6 +1446,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -1500,6 +1470,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -1523,6 +1494,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -1672,6 +1644,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -1695,6 +1668,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -1718,6 +1692,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -1741,6 +1716,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -1764,6 +1740,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -1787,6 +1764,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -1810,6 +1788,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -1833,6 +1812,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -1856,6 +1836,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'deleted_at' => 
         array (
@@ -1879,6 +1860,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'deleted_by' => 
         array (
@@ -1902,6 +1884,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -1961,6 +1944,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'article_id' => 
         array (
@@ -1984,6 +1968,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'image_id' => 
         array (
@@ -2007,6 +1992,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -2102,6 +2088,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'level' => 
         array (
@@ -2125,6 +2112,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -2148,6 +2136,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -2171,6 +2160,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -2194,6 +2184,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -2217,6 +2208,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -2276,6 +2268,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -2299,6 +2292,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -2322,6 +2316,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -2345,6 +2340,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -2368,6 +2364,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -2391,6 +2388,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -2414,6 +2412,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -2437,6 +2436,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -2460,6 +2460,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -2483,6 +2484,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -2506,6 +2508,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -2519,6 +2522,459 @@ return array (
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+      ),
+      'foreign_keys' => NULL,
+    ),
+    'city' => 
+    array (
+      'table' => 
+      array (
+        'table_name' => 'city',
+        'engine' => 'InnoDB',
+        'table_comment' => '',
+        'table_collation' => 'utf8_general_ci',
+        'character_set_name' => 'utf8',
+      ),
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'id',
+          'ORDINAL_POSITION' => '1',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => 'PRI',
+          'EXTRA' => 'auto_increment',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'country' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'country',
+          'ORDINAL_POSITION' => '2',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '2',
+          'CHARACTER_OCTET_LENGTH' => '6',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(2)',
+          'COLUMN_KEY' => 'MUL',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => 'Land',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'state' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'state',
+          'ORDINAL_POSITION' => '3',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '10',
+          'CHARACTER_OCTET_LENGTH' => '30',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(10)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => 'Kanton / Bundesland / Region',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'number' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'number',
+          'ORDINAL_POSITION' => '4',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '10',
+          'CHARACTER_OCTET_LENGTH' => '30',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(10)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'number2' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'number2',
+          'ORDINAL_POSITION' => '5',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '10',
+          'CHARACTER_OCTET_LENGTH' => '30',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(10)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'title_de' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'title_de',
+          'ORDINAL_POSITION' => '6',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '255',
+          'CHARACTER_OCTET_LENGTH' => '765',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(255)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'title_fr' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'title_fr',
+          'ORDINAL_POSITION' => '7',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '255',
+          'CHARACTER_OCTET_LENGTH' => '765',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(255)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'title_it' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'title_it',
+          'ORDINAL_POSITION' => '8',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '255',
+          'CHARACTER_OCTET_LENGTH' => '765',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(255)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'title_en' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'title_en',
+          'ORDINAL_POSITION' => '9',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '255',
+          'CHARACTER_OCTET_LENGTH' => '765',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_unicode_ci',
+          'COLUMN_TYPE' => 'varchar(255)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'created' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'created',
+          'ORDINAL_POSITION' => '10',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'datetime',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => '0',
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'datetime',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'created_by' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'created_by',
+          'ORDINAL_POSITION' => '11',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'modified' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'modified',
+          'ORDINAL_POSITION' => '12',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'datetime',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => '0',
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'datetime',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'modified_by' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'modified_by',
+          'ORDINAL_POSITION' => '13',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'deleted' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'deleted',
+          'ORDINAL_POSITION' => '14',
+          'COLUMN_DEFAULT' => '0',
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'tinyint',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '3',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'tinyint(1)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'deleted_at' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'deleted_at',
+          'ORDINAL_POSITION' => '15',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'datetime',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => '0',
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'datetime',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'deleted_by' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'city',
+          'COLUMN_NAME' => 'deleted_by',
+          'ORDINAL_POSITION' => '16',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'YES',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+      ),
+      'indexes' => 
+      array (
+        'PRIMARY' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'city',
+            'Non_unique' => '0',
+            'Key_name' => 'PRIMARY',
+            'Seq_in_index' => '1',
+            'Column_name' => 'id',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+        'idx_country_number' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'city',
+            'Non_unique' => '1',
+            'Key_name' => 'idx_country_number',
+            'Seq_in_index' => '1',
+            'Column_name' => 'country',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+          2 => 
+          array (
+            'Table' => 'city',
+            'Non_unique' => '1',
+            'Key_name' => 'idx_country_number',
+            'Seq_in_index' => '2',
+            'Column_name' => 'number',
             'Collation' => 'A',
             'Sub_part' => NULL,
             'Packed' => NULL,
@@ -2565,6 +3021,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_group_id' => 
         array (
@@ -2588,6 +3045,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_region_id' => 
         array (
@@ -2611,6 +3069,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_type_id' => 
         array (
@@ -2634,6 +3093,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'city_id' => 
         array (
@@ -2657,6 +3117,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -2680,6 +3141,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -2703,6 +3165,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -2726,6 +3189,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -2749,6 +3213,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -2772,6 +3237,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -2795,6 +3261,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -2818,6 +3285,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -2949,6 +3417,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_id' => 
         array (
@@ -2972,6 +3441,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_id' => 
         array (
@@ -2995,6 +3465,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_group_id' => 
         array (
@@ -3018,6 +3489,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -3131,6 +3603,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -3154,6 +3627,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -3177,6 +3651,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -3200,6 +3675,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -3223,6 +3699,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -3282,6 +3759,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -3305,6 +3783,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -3328,6 +3807,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -3351,6 +3831,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -3374,6 +3855,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -3433,6 +3915,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -3456,6 +3939,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -3479,6 +3963,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -3502,6 +3987,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -3525,6 +4011,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -3548,6 +4035,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -3571,6 +4059,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -3594,6 +4083,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -3617,6 +4107,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -3640,6 +4131,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -3663,6 +4155,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -3722,6 +4215,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'educational_course_title_id' => 
         array (
@@ -3745,6 +4239,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'educational_course_description_id' => 
         array (
@@ -3768,6 +4263,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'educational_course_organiser_id' => 
         array (
@@ -3791,6 +4287,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'department_id' => 
         array (
@@ -3814,6 +4311,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => 'The organizer',
+          'GENERATION_EXPRESSION' => '',
         ),
         'city_id' => 
         array (
@@ -3837,6 +4335,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => 'Where the edu_course is taking place',
+          'GENERATION_EXPRESSION' => '',
         ),
         'position_id' => 
         array (
@@ -3860,6 +4359,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => 'The minimum required position to participate',
+          'GENERATION_EXPRESSION' => '',
         ),
         'number' => 
         array (
@@ -3883,6 +4383,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'start_date' => 
         array (
@@ -3906,6 +4407,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'end_date' => 
         array (
@@ -3929,6 +4431,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'minimum_age' => 
         array (
@@ -3952,6 +4455,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -3975,6 +4479,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -3998,6 +4503,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -4021,6 +4527,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -4044,6 +4551,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -4067,6 +4575,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -4090,6 +4599,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -4257,6 +4767,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -4280,6 +4791,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -4303,6 +4815,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -4326,6 +4839,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -4349,6 +4863,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -4372,6 +4887,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -4395,6 +4911,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -4418,6 +4935,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -4441,6 +4959,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -4464,6 +4983,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -4487,6 +5007,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -4546,6 +5067,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'educational_course_id' => 
         array (
@@ -4569,6 +5091,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'image_id' => 
         array (
@@ -4592,6 +5115,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -4687,6 +5211,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'user_id' => 
         array (
@@ -4710,6 +5235,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -4733,6 +5259,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'phone' => 
         array (
@@ -4756,6 +5283,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'email' => 
         array (
@@ -4779,6 +5307,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'notes' => 
         array (
@@ -4802,6 +5331,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'mobile' => 
         array (
@@ -4825,6 +5355,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -4902,6 +5433,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'educational_course_id' => 
         array (
@@ -4925,6 +5457,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'user_id' => 
         array (
@@ -4948,6 +5481,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -5043,6 +5577,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -5066,6 +5601,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => 'Force the user to have a title of maximum 45 chars length!',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -5089,6 +5625,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -5112,6 +5649,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -5135,6 +5673,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -5158,6 +5697,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -5181,6 +5721,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -5204,6 +5745,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -5227,6 +5769,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -5250,6 +5793,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -5273,6 +5817,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -5282,6 +5827,138 @@ return array (
           1 => 
           array (
             'Table' => 'educational_course_title',
+            'Non_unique' => '0',
+            'Key_name' => 'PRIMARY',
+            'Seq_in_index' => '1',
+            'Column_name' => 'id',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+      ),
+      'foreign_keys' => NULL,
+    ),
+    'email_token' => 
+    array (
+      'table' => 
+      array (
+        'table_name' => 'email_token',
+        'engine' => 'InnoDB',
+        'table_comment' => '',
+        'table_collation' => 'utf8_general_ci',
+        'character_set_name' => 'utf8',
+      ),
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'email_token',
+          'COLUMN_NAME' => 'id',
+          'ORDINAL_POSITION' => '1',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => 'PRI',
+          'EXTRA' => 'auto_increment',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'user_id' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'email_token',
+          'COLUMN_NAME' => 'user_id',
+          'ORDINAL_POSITION' => '2',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'token' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'email_token',
+          'COLUMN_NAME' => 'token',
+          'ORDINAL_POSITION' => '3',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '80',
+          'CHARACTER_OCTET_LENGTH' => '240',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_general_ci',
+          'COLUMN_TYPE' => 'varchar(80)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'issued_at' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'email_token',
+          'COLUMN_NAME' => 'issued_at',
+          'ORDINAL_POSITION' => '4',
+          'COLUMN_DEFAULT' => 'CURRENT_TIMESTAMP',
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'datetime',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => '0',
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'datetime',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+      ),
+      'indexes' => 
+      array (
+        'PRIMARY' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'email_token',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
@@ -5332,6 +6009,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_title_id' => 
         array (
@@ -5355,6 +6033,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_description_id' => 
         array (
@@ -5378,6 +6057,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'price' => 
         array (
@@ -5401,6 +6081,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'start' => 
         array (
@@ -5424,6 +6105,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'end' => 
         array (
@@ -5447,6 +6129,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'start_leader' => 
         array (
@@ -5470,6 +6153,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'end_leader' => 
         array (
@@ -5493,6 +6177,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'public' => 
         array (
@@ -5516,6 +6201,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'publicize_at' => 
         array (
@@ -5539,6 +6225,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -5562,6 +6249,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -5585,6 +6273,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -5608,6 +6297,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -5631,6 +6321,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -5654,6 +6345,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -5677,6 +6369,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -5772,6 +6465,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'article_id' => 
         array (
@@ -5795,6 +6489,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_id' => 
         array (
@@ -5818,6 +6513,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'accountable_user_id' => 
         array (
@@ -5841,6 +6537,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'quantity' => 
         array (
@@ -5864,6 +6561,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -5887,6 +6585,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -5910,6 +6609,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -5933,6 +6633,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -5956,6 +6657,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -5979,6 +6681,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archieved_by' => 
         array (
@@ -6002,6 +6705,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -6115,6 +6819,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -6138,6 +6843,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -6161,6 +6867,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -6184,6 +6891,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -6207,6 +6915,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -6230,6 +6939,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -6253,6 +6963,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -6276,6 +6987,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -6299,6 +7011,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -6322,6 +7035,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -6345,6 +7059,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -6404,6 +7119,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'image_id' => 
         array (
@@ -6427,6 +7143,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_id' => 
         array (
@@ -6450,6 +7167,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -6544,7 +7262,8 @@ return array (
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\'s participation is registered, bc the children is registered in a department.',
+          'GENERATION_EXPRESSION' => '',
         ),
         'user_id' => 
         array (
@@ -6567,7 +7286,8 @@ return array (
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\'s participation is registered, bc the children is registered in a department.',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_id' => 
         array (
@@ -6590,7 +7310,8 @@ return array (
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\'s participation is registered, bc the children is registered in a department.',
+          'GENERATION_EXPRESSION' => '',
         ),
         'event_participation_status_id' => 
         array (
@@ -6614,6 +7335,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'message' => 
         array (
@@ -6637,6 +7359,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -6660,6 +7383,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -6683,6 +7407,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -6706,6 +7431,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -6729,6 +7455,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -6752,6 +7479,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -6775,6 +7503,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -6888,6 +7617,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -6911,6 +7641,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -6934,6 +7665,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -6957,6 +7689,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -6980,6 +7713,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7039,6 +7773,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -7062,6 +7797,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => 'Force the user to have a title of maximum 45 chars length!',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -7085,6 +7821,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -7108,6 +7845,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -7131,6 +7869,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -7154,6 +7893,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -7177,6 +7917,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -7200,6 +7941,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -7223,6 +7965,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -7246,6 +7989,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -7269,6 +8013,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7328,6 +8073,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_de' => 
         array (
@@ -7351,6 +8097,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_en' => 
         array (
@@ -7374,6 +8121,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_fr' => 
         array (
@@ -7397,6 +8145,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name_it' => 
         array (
@@ -7420,6 +8169,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7479,6 +8229,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'url' => 
         array (
@@ -7502,6 +8253,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'type' => 
         array (
@@ -7525,6 +8277,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -7548,6 +8301,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -7571,6 +8325,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -7594,6 +8349,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -7617,6 +8373,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -7640,6 +8397,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -7663,6 +8421,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7672,6 +8431,114 @@ return array (
           1 => 
           array (
             'Table' => 'image',
+            'Non_unique' => '0',
+            'Key_name' => 'PRIMARY',
+            'Seq_in_index' => '1',
+            'Column_name' => 'id',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+      ),
+      'foreign_keys' => NULL,
+    ),
+    'language' => 
+    array (
+      'table' => 
+      array (
+        'table_name' => 'language',
+        'engine' => 'InnoDB',
+        'table_comment' => '',
+        'table_collation' => 'utf8_general_ci',
+        'character_set_name' => 'utf8',
+      ),
+      'columns' => 
+      array (
+        'id' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'language',
+          'COLUMN_NAME' => 'id',
+          'ORDINAL_POSITION' => '1',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'int',
+          'CHARACTER_MAXIMUM_LENGTH' => NULL,
+          'CHARACTER_OCTET_LENGTH' => NULL,
+          'NUMERIC_PRECISION' => '10',
+          'NUMERIC_SCALE' => '0',
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => NULL,
+          'COLLATION_NAME' => NULL,
+          'COLUMN_TYPE' => 'int(11)',
+          'COLUMN_KEY' => 'PRI',
+          'EXTRA' => 'auto_increment',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'name' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'language',
+          'COLUMN_NAME' => 'name',
+          'ORDINAL_POSITION' => '2',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '5',
+          'CHARACTER_OCTET_LENGTH' => '15',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_general_ci',
+          'COLUMN_TYPE' => 'varchar(5)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+        'abbreviation' => 
+        array (
+          'TABLE_CATALOG' => 'def',
+          'TABLE_SCHEMA' => 'cevi_web',
+          'TABLE_NAME' => 'language',
+          'COLUMN_NAME' => 'abbreviation',
+          'ORDINAL_POSITION' => '3',
+          'COLUMN_DEFAULT' => NULL,
+          'IS_NULLABLE' => 'NO',
+          'DATA_TYPE' => 'varchar',
+          'CHARACTER_MAXIMUM_LENGTH' => '2',
+          'CHARACTER_OCTET_LENGTH' => '6',
+          'NUMERIC_PRECISION' => NULL,
+          'NUMERIC_SCALE' => NULL,
+          'DATETIME_PRECISION' => NULL,
+          'CHARACTER_SET_NAME' => 'utf8',
+          'COLLATION_NAME' => 'utf8_general_ci',
+          'COLUMN_TYPE' => 'varchar(2)',
+          'COLUMN_KEY' => '',
+          'EXTRA' => '',
+          'PRIVILEGES' => 'select,insert,update,references',
+          'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
+        ),
+      ),
+      'indexes' => 
+      array (
+        'PRIMARY' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'language',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
@@ -7722,6 +8589,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'level' => 
         array (
@@ -7745,6 +8613,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -7768,6 +8637,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7827,6 +8697,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'migration_name' => 
         array (
@@ -7850,6 +8721,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'start_time' => 
         array (
@@ -7873,6 +8745,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'end_time' => 
         array (
@@ -7896,6 +8769,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'breakpoint' => 
         array (
@@ -7919,6 +8793,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -7978,6 +8853,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -8001,6 +8877,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -8024,6 +8901,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -8047,6 +8925,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -8070,6 +8949,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -8093,6 +8973,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -8116,6 +8997,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -8139,6 +9021,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -8198,6 +9081,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -8221,6 +9105,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -8244,6 +9129,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -8267,6 +9153,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -8290,6 +9177,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -8313,6 +9201,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -8336,6 +9225,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -8359,6 +9249,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -8418,6 +9309,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -8441,6 +9333,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -8464,6 +9357,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -8487,6 +9381,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -8510,6 +9405,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -8533,6 +9429,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -8556,6 +9453,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -8579,6 +9477,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -8638,6 +9537,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -8661,6 +9561,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -8684,6 +9585,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -8707,6 +9609,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -8730,6 +9633,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -8753,6 +9657,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -8776,6 +9681,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -8799,6 +9705,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -8858,6 +9765,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -8881,6 +9789,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -8904,6 +9813,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -8927,6 +9837,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -8950,6 +9861,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -8973,6 +9885,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -8996,6 +9909,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -9019,6 +9933,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -9078,6 +9993,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -9101,6 +10017,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -9124,6 +10041,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -9147,6 +10065,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -9170,6 +10089,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -9193,6 +10113,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -9216,6 +10137,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -9239,6 +10161,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -9298,6 +10221,7 @@ return array (
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_location_id' => 
         array (
@@ -9321,6 +10245,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_room_id' => 
         array (
@@ -9344,6 +10269,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_corridor_id' => 
         array (
@@ -9367,6 +10293,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_shelf_id' => 
         array (
@@ -9390,6 +10317,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_tray_id' => 
         array (
@@ -9413,6 +10341,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'sl_chest_id' => 
         array (
@@ -9436,6 +10365,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'name' => 
         array (
@@ -9459,6 +10389,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_at' => 
         array (
@@ -9482,6 +10413,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'created_by' => 
         array (
@@ -9505,6 +10437,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_at' => 
         array (
@@ -9528,6 +10461,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'modified_by' => 
         array (
@@ -9551,6 +10485,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_at' => 
         array (
@@ -9574,6 +10509,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
         'archived_by' => 
         array (
@@ -9597,6 +10533,7 @@ return array (
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
+          'GENERATION_EXPRESSION' => '',
         ),
       ),
       'indexes' => 
@@ -9722,443 +10659,6 @@ return array (
             'Sub_part' => NULL,
             'Packed' => NULL,
             'Null' => 'YES',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-      ),
-      'foreign_keys' => NULL,
-    ),
-    'city' => 
-    array (
-      'table' => 
-      array (
-        'table_name' => 'city',
-        'engine' => 'InnoDB',
-        'table_comment' => 'Postal codes, ZIP (Postleitzahlen)',
-        'table_collation' => 'utf8_unicode_ci',
-        'character_set_name' => 'utf8',
-      ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'id',
-          'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '10',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(11)',
-          'COLUMN_KEY' => 'PRI',
-          'EXTRA' => 'auto_increment',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'country' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'country',
-          'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '2',
-          'CHARACTER_OCTET_LENGTH' => '6',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(2)',
-          'COLUMN_KEY' => 'MUL',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'Land',
-        ),
-        'state' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'state',
-          'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '10',
-          'CHARACTER_OCTET_LENGTH' => '30',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(10)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'Kanton / Bundesland / Region',
-        ),
-        'number' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'number',
-          'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '10',
-          'CHARACTER_OCTET_LENGTH' => '30',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(10)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'number2' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'number2',
-          'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '10',
-          'CHARACTER_OCTET_LENGTH' => '30',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(10)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'title_de' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'title_de',
-          'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '255',
-          'CHARACTER_OCTET_LENGTH' => '765',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'title_fr' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'title_fr',
-          'ORDINAL_POSITION' => '7',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '255',
-          'CHARACTER_OCTET_LENGTH' => '765',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'title_it' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'title_it',
-          'ORDINAL_POSITION' => '8',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '255',
-          'CHARACTER_OCTET_LENGTH' => '765',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'title_en' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'title_en',
-          'ORDINAL_POSITION' => '9',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'varchar',
-          'CHARACTER_MAXIMUM_LENGTH' => '255',
-          'CHARACTER_OCTET_LENGTH' => '765',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_unicode_ci',
-          'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'created' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'created',
-          'ORDINAL_POSITION' => '10',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'datetime',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'created_by' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'created_by',
-          'ORDINAL_POSITION' => '11',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '10',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(11)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'modified' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'modified',
-          'ORDINAL_POSITION' => '12',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'datetime',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'modified_by' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'modified_by',
-          'ORDINAL_POSITION' => '13',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '10',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(11)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'deleted' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'deleted',
-          'ORDINAL_POSITION' => '14',
-          'COLUMN_DEFAULT' => '0',
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '3',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'tinyint(1)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'deleted_at' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'deleted_at',
-          'ORDINAL_POSITION' => '15',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'datetime',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-        'deleted_by' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_SCHEMA' => 'cevi_web',
-          'TABLE_NAME' => 'city',
-          'COLUMN_NAME' => 'deleted_by',
-          'ORDINAL_POSITION' => '16',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'YES',
-          'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => '10',
-          'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(11)',
-          'COLUMN_KEY' => '',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-        ),
-      ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'city',
-            'Non_unique' => '0',
-            'Key_name' => 'PRIMARY',
-            'Seq_in_index' => '1',
-            'Column_name' => 'id',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-        'idx_country_number' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'city',
-            'Non_unique' => '1',
-            'Key_name' => 'idx_country_number',
-            'Seq_in_index' => '1',
-            'Column_name' => 'country',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-          2 => 
-          array (
-            'Table' => 'city',
-            'Non_unique' => '1',
-            'Key_name' => 'idx_country_number',
-            'Seq_in_index' => '2',
-            'Column_name' => 'number',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',

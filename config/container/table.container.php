@@ -9,6 +9,7 @@ use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
 use App\Table\DepartmentTypeTable;
+use App\Table\EmailTokenTable;
 use App\Table\EventArticleTable;
 use App\Table\EventDescriptionTable;
 use App\Table\EventImageTable;
@@ -77,6 +78,10 @@ $container[DepartmentEventTable::class] = function (Container $container)  ***RE
 
 $container[EventTable::class] = function (Container $container) ***REMOVED***
     return new EventTable($container->get(Connection::class));
+***REMOVED***;
+
+$container[EmailTokenTable::class] = function (Container $container) ***REMOVED***
+    return new EmailTokenTable($container->get(Connection::class));
 ***REMOVED***;
 
 $container[EventImageTable::class] = function (Container $container) ***REMOVED***

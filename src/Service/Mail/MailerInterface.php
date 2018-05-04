@@ -26,7 +26,7 @@ interface MailerInterface
      * @param string $html Email content as HTML
      * @return void
      */
-    public function sendHtml(string $to, string $from, string $subject, string $html);
+    public function sendHtml(string $to, string $subject, string $html, string $from = null);
 
     /**
      * Send Text email.
@@ -37,5 +37,5 @@ interface MailerInterface
      * @param string $text Email as String
      * @return void
      */
-    public function sendText(string $to, string $from, string $subject, string $text);
+    public function sendText(string $to, string $subject, string $text, string $from = null);
 ***REMOVED***

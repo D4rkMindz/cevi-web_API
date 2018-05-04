@@ -336,7 +336,7 @@ class UserValidation extends AppValidation
      * @param string $languageId
      * @return ValidationContext
      */
-    public function validateSignup(string $email, string $firstName, string $lastName, string $postcode, string $username, string $password, string $ceviName, string $languageId): ValidationContext
+    public function validateSignup(string $email, string $firstName, $lastName, string $postcode, string $username, string $password, $ceviName, string $languageId): ValidationContext
     ***REMOVED***
         $validationContext = new ValidationContext(__('Please check your data'));
 

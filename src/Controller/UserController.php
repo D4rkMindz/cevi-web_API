@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use App\Service\Mail\MailerInterface;
 use App\Service\User\UserValidation;
+use Psr\Http\Message\RequestInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -21,7 +23,13 @@ class UserController extends AppController
     private $userValidation;
 
     /**
+     * @var MailerInterface
+     */
+    private $mailer;
+
+    /**
      * UserController constructor.
+     *
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
      */
@@ -30,6 +38,7 @@ class UserController extends AppController
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
         $this->userValidation = $container->get(UserValidation::class);
+        $this->mailer = $container->get(MailerInterface::class);
 ***REMOVED***
 
     /**
@@ -69,7 +78,8 @@ class UserController extends AppController
     ***REMOVED***
         $userId = (int)$request->getAttribute('route')->getArgument('user_id');
         if (!is_numeric($userId)) ***REMOVED***
-            return $this->error($response, 'Unprocessable Entity', 422, ['message' => __('Please define user_id correctly')]);
+            return $this->error($response, 'Unprocessable Entity', 422,
+                ['message' => __('Please define user_id correctly')]);
     ***REMOVED***
         $user = $this->userRepository->getUser($userId);
         if (empty($user)) ***REMOVED***
@@ -80,6 +90,18 @@ class UserController extends AppController
 ***REMOVED***
 
     /**
+     * Signup user
+     *
+     * @auth none
+     * @post string first_name
+     * @post string email
+     * @post string|int postcode
+     * @post string username
+     * @post string password
+     * @post string|int language_id
+     * @post string|null last_name
+     * @post string|null cevi_name
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
@@ -98,18 +120,49 @@ class UserController extends AppController
         $password = $data['password'];
         $lang = $data['language_id'];
 
-        $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username, $password, $ceviName, $lang);
+        $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username,
+            $password, $ceviName, $lang);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $this->userRepository->signupUser($email, $firstName, $lastName, $postcode, $username, $password, $ceviName, $lang);
+        $userdata = $this->userRepository->signupUser($email, $firstName, $lastName, $postcode, $username, $password,
+            $ceviName, $lang);
+
+        $url = 'https://cevi-web.com/verify/' . $userdata['token'];
+        $this->mailer->sendHtml('bjoern.pfoster@gmail.com', __('CEVI Web sign up'),
+            '<h1>Hello</h1><p>Please verify your email: <a href="' . $url .'">HERE</a></a></p>');
+
         $responseData = [
             'code' => 200,
-            'message' => __('Signed up user successfully')
+            'message' => __('Signed up user successfully'),
+            'user_id' => $userdata['user_id'],
         ];
 
         return $this->json($response, $responseData);
+***REMOVED***
+
+    /**
+     * Verify email action
+     *
+     * @auth JWT
+     * @post string email_token The token received in the email
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function verifyEmailAction(Request $request, Response $response): Response
+    ***REMOVED***
+        $json = (string)$request->getBody();
+        $data = json_decode($json, true);
+        $token = (string)$data['email_token'];
+        $emailToken = $this->userRepository->getEmailTokenById($this->jwt['user_id']);
+        if ($emailToken !== $token) ***REMOVED***
+            return $this->json($response, ['verified'=> false]);
+    ***REMOVED***
+        $this->userRepository->confirmEmail($this->jwt['user_id']);
+        return $this->json($response, ['verified' => $json]);
 ***REMOVED***
 
     /**
@@ -153,6 +206,7 @@ class UserController extends AppController
         if (!$this->userRepository->deleteUser($args['user_id'], $this->jwt['user_id'])) ***REMOVED***
             $this->error($response, 'Forbidden', 403, ['message' => __('Deleting user failed')]);
     ***REMOVED***
+
         return $this->json($response, ['message' => __('User deleted successfully')]);
 ***REMOVED***
 ***REMOVED***

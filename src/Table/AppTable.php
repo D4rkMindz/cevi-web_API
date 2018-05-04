@@ -44,7 +44,10 @@ class AppTable implements TableInterface
     public function getAll(): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['archived_at' => date('Y-m-d H:i:s')]);
+        $query->select('*');
+        if ($this->hasMetadata()) ***REMOVED***
+            $query->where(['archived_at' => date('Y-m-d H:i:s')]);
+    ***REMOVED***
         $rows = $query->execute()->fetchAll('assoc');
 
         return $rows;
@@ -74,7 +77,14 @@ class AppTable implements TableInterface
     public function getById($id): array
     ***REMOVED***
         $query = $this->newSelect();
-        $query->select('*')->where(['id' => $id, 'OR' => [[$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')], [$this->table . '.archived_at IS NULL']]]);
+        $where = ['id' => $id];
+        if ($this->hasMetadata()) ***REMOVED***
+            $where['OR'] = [
+                [$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')],
+                [$this->table . '.archived_at IS NULL']
+            ];
+    ***REMOVED***
+        $query->select('*')->where($where);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row : [];
 ***REMOVED***
@@ -201,6 +211,7 @@ class AppTable implements TableInterface
             'educational_course_organiser' => 1,
             'educational_course_participant' => 1,
             'event_image' => 1,
+            'email_token' => 1,
             'event_participant' => 1,
             'event_participation_status' => 1,
             'gender' => 1,
