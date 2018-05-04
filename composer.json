@@ -7,7 +7,9 @@
     "symfony/translation": "^3.4",
     "robmorgan/phinx": "^0.9.1",
     "erusev/parsedown": "^1.6",
-    "d4rkmindz/slim-jwt-auth": "^2.3.4"
+    "d4rkmindz/slim-jwt-auth": "^2.3.4",
+    "twig/twig": "^2.4",
+    "odan/twig-translation": "^1.1"
   ***REMOVED***,
   "require-dev": ***REMOVED***
     "php-http/curl-client": "^1.7",

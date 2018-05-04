@@ -9,10 +9,13 @@ use App\Service\Role;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
+use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
+use Slim\Exception\ContainerException;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Views\Twig;
 use Symfony\Component\Translation\Loader\MoFileLoader;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator;
@@ -89,6 +92,22 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
 ***REMOVED***
 
     return $mail;
+***REMOVED***;
+
+/**
+ * Twig container.
+ *
+ * @param Container $container
+ * @return Twig_Environment
+ * @throws ContainerException
+ */
+$container[Twig_Environment::class] = function (Container $container): Twig_Environment ***REMOVED***
+    $twigSettings = $container->get('settings')->get('twig');
+    $loader = new Twig_Loader_Filesystem($twigSettings['viewPath']);
+    $twig = new Twig_Environment($loader, ['cache'=> $twigSettings['cachePath']]);
+    $twig->addExtension(new TwigTranslationExtension());
+
+    return $twig;
 ***REMOVED***;
 
 /**

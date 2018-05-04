@@ -1,10 +1,10 @@
 ***REMOVED***
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdb17b10736424f5f5a9afe51494d0fa",
+    "content-hash": "9595829a7da7ec5a19f94ff11052e625",
     "packages": [
         ***REMOVED***
             "name": "D4rkMindz/slim-jwt-auth",
@@ -654,6 +654,58 @@
                 "routing"
             ],
             "time": "2018-02-13T20:26:39+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "odan/twig-translation",
+            "version": "1.1.0",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/odan/twig-translation.git",
+                "reference": "88b3b969eebf74488c819823c0161ab1d5131771"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/odan/twig-translation/zipball/88b3b969eebf74488c819823c0161ab1d5131771",
+                "reference": "88b3b969eebf74488c819823c0161ab1d5131771",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^7.0",
+                "twig/extensions": "^1.5"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^6.0"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Odan\\": "src",
+                    "Odan\\Test\\": "tests"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "odan",
+                    "homepage": "https://github.com/odan"
+            ***REMOVED***
+            ],
+            "description": "A Twig Translation Extension",
+            "homepage": "http://github.com/odan/twig-translation",
+            "keywords": [
+                "gettext",
+                "i18n",
+                "poEdit",
+                "text",
+                "translation",
+                "translations",
+                "twig"
+            ],
+            "time": "2018-03-04T19:44:56+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/client-common",
@@ -1876,6 +1928,128 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2018-04-03T05:14:20+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "twig/extensions",
+            "version": "v1.5.1",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "d188c76168b853481cc75879ea045bf93d718e9c"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/d188c76168b853481cc75879ea045bf93d718e9c",
+                "reference": "d188c76168b853481cc75879ea045bf93d718e9c",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "twig/twig": "~1.27|~2.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "symfony/phpunit-bridge": "~3.3@dev",
+                "symfony/translation": "~2.3|~3.0"
+        ***REMOVED***,
+            "suggest": ***REMOVED***
+                "symfony/translation": "Allow the time_diff output to be translated"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "1.5-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-0": ***REMOVED***
+                    "Twig_Extensions_": "lib/"
+            ***REMOVED***,
+                "psr-4": ***REMOVED***
+                    "Twig\\Extensions\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+            ***REMOVED***
+            ],
+            "description": "Common additional features for Twig that do not directly belong in core",
+            "homepage": "http://twig.sensiolabs.org/doc/extensions/index.html",
+            "keywords": [
+                "i18n",
+                "text"
+            ],
+            "time": "2017-06-08T18:19:53+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "twig/twig",
+            "version": "v2.4.8",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7b604c89da162034bdf4bb66310f358d313dd16d",
+                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "php": "^7.0",
+                "symfony/polyfill-mbstring": "~1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "psr/container": "^1.0",
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.3"
+        ***REMOVED***,
+            "type": "library",
+            "extra": ***REMOVED***
+                "branch-alias": ***REMOVED***
+                    "dev-master": "2.4-dev"
+            ***REMOVED***
+        ***REMOVED***,
+            "autoload": ***REMOVED***
+                "psr-0": ***REMOVED***
+                    "Twig_": "lib/"
+            ***REMOVED***,
+                "psr-4": ***REMOVED***
+                    "Twig\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+            ***REMOVED***,
+                ***REMOVED***
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
+            ***REMOVED***,
+                ***REMOVED***
+                    "name": "Twig Team",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "role": "Contributors"
+            ***REMOVED***
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ],
+            "time": "2018-04-02T09:24:19+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "webmozart/assert",

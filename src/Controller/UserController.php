@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Service\Mail\MailerInterface;
 use App\Service\User\UserValidation;
-use Psr\Http\Message\RequestInterface;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Twig_Environment;
 
+/**
+ * UserController
+ */
 class UserController extends AppController
 ***REMOVED***
     /**
@@ -28,6 +31,11 @@ class UserController extends AppController
     private $mailer;
 
     /**
+     * @var Twig_Environment
+     */
+    private $twig;
+
+    /**
      * UserController constructor.
      *
      * @param Container $container
@@ -39,6 +47,7 @@ class UserController extends AppController
         $this->userRepository = $container->get(UserRepository::class);
         $this->userValidation = $container->get(UserValidation::class);
         $this->mailer = $container->get(MailerInterface::class);
+        $this->twig = $container->get(Twig_Environment::class);
 ***REMOVED***
 
     /**
@@ -130,8 +139,14 @@ class UserController extends AppController
             $ceviName, $lang);
 
         $url = 'https://cevi-web.com/verify/' . $userdata['token'];
-        $this->mailer->sendHtml('bjoern.pfoster@gmail.com', __('CEVI Web sign up'),
-            '<h1>Hello</h1><p>Please verify your email: <a href="' . $url .'">HERE</a></a></p>');
+        $templateData = [
+            'url' => $url,
+            'firstName' => $firstName,
+            'email' => $email,
+            'username' => $username,
+        ];
+        $template = $this->twig->render('signup.twig', $templateData);
+        $this->mailer->sendHtml('bjoern.pfoster@gmail.com', __('CEVI Web sign up'), $template);
 
         $responseData = [
             'code' => 200,
