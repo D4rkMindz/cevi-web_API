@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\LanguageRepository;
 use App\Repository\UserRepository;
 use App\Service\Mail\MailerInterface;
 use App\Service\User\UserValidation;
@@ -36,6 +37,11 @@ class UserController extends AppController
     private $twig;
 
     /**
+     * @var LanguageRepository
+     */
+    private $languageRepository;
+
+    /**
      * @var boolean
      */
     private $isProduction;
@@ -50,6 +56,7 @@ class UserController extends AppController
     ***REMOVED***
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
+        $this->languageRepository = $container->get(LanguageRepository::class);
         $this->userValidation = $container->get(UserValidation::class);
         $this->mailer = $container->get(MailerInterface::class);
         $this->twig = $container->get(Twig_Environment::class);
@@ -113,13 +120,16 @@ class UserController extends AppController
      * @post string|int postcode
      * @post string username
      * @post string password
-     * @post string|int language_id
+     * @post string language abbreviation like de en fr it
      * @post string|null last_name
      * @post string|null cevi_name
      *
      * @param Request $request
      * @param Response $response
      * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function signupAction(Request $request, Response $response): Response
     ***REMOVED***
@@ -133,11 +143,13 @@ class UserController extends AppController
         $postcode = $data['postcode'];
         $username = $data['username'];
         $password = $data['password'];
-        $lang = $data['language_id'];
+        $lang = $data['language'];
         // todo implement validation if fields are correct
 
+        $languageId = $this->languageRepository->getLanguageByAbbreviation($lang);
+
         $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username,
-            $password, $ceviName, $lang);
+            $password, $ceviName, $languageId);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***

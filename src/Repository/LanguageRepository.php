@@ -37,4 +37,18 @@ class LanguageRepository extends AppRepository
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
+
+    /**
+     * Get language by abbreviation.
+     *
+     * @param string $abbreviation
+     * @return int
+     */
+    public function getLanguageByAbbreviation(string $abbreviation)
+    ***REMOVED***
+        $query = $this->languageTable->newSelect();
+        $query->select('id')->where(['abbreviation' => $abbreviation]);
+        $row = $query->execute()->fetch('assoc');
+        return !empty($row)? $row['id'] : 1;
+***REMOVED***
 ***REMOVED***
