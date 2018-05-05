@@ -10,6 +10,7 @@ $app->post('/v2/auth', route(['App\Controller\AuthenticationController', 'authen
  */
 $app->get('/v2/users', route(['App\Controller\UserController', 'getAllUsersAction']))->setName('get.getAllUsers');
 $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAction']))->setName('post.signup');
+$app->post('/v2/users/verify', route(['App\Controller\UserController', 'verifyEmailAction']))->setName('post.verify');
 $app->get('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'getUserAction']))->setName('get.getUser');
 $app->put('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'updateUserAction']))->setName('put.updateUser');
 $app->delete('/v2/users/***REMOVED***user_id:[0-9]+***REMOVED***', route(['App\Controller\UserController', 'deleteUserAction']))->setName('archive.deleteUser');

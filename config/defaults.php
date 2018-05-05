@@ -19,6 +19,7 @@ $config['jwt'] = [
     'passthrough' => [
         '/' => ['GET'],
         '/v2/users/signup' => ['POST'],
+        '/v2/users/verify' => ['POST'],
         '/v2/auth' => ['POST'],
         '/v2/genders' => ['GET'],
         '/v2/events' => ['GET'],
