@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9595829a7da7ec5a19f94ff11052e625",
+    "content-hash": "b7fab64de7798ab32f1f1345e71e3232",
     "packages": [
         ***REMOVED***
             "name": "D4rkMindz/slim-jwt-auth",
@@ -771,6 +771,62 @@
                 "httplug"
             ],
             "time": "2017-11-30T11:06:59+00:00"
+    ***REMOVED***,
+        ***REMOVED***
+            "name": "php-http/curl-client",
+            "version": "v1.7.1",
+            "source": ***REMOVED***
+                "type": "git",
+                "url": "https://github.com/php-http/curl-client.git",
+                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6"
+        ***REMOVED***,
+            "dist": ***REMOVED***
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/curl-client/zipball/6341a93d00e5d953fc868a3928b5167e6513f2b6",
+                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6",
+                "shasum": ""
+        ***REMOVED***,
+            "require": ***REMOVED***
+                "ext-curl": "*",
+                "php": "^5.5 || ^7.0",
+                "php-http/discovery": "^1.0",
+                "php-http/httplug": "^1.0",
+                "php-http/message": "^1.2",
+                "php-http/message-factory": "^1.0.2"
+        ***REMOVED***,
+            "provide": ***REMOVED***
+                "php-http/async-client-implementation": "1.0",
+                "php-http/client-implementation": "1.0"
+        ***REMOVED***,
+            "require-dev": ***REMOVED***
+                "guzzlehttp/psr7": "^1.0",
+                "php-http/client-integration-tests": "^0.6",
+                "phpunit/phpunit": "^4.8.27",
+                "zendframework/zend-diactoros": "^1.0"
+        ***REMOVED***,
+            "type": "library",
+            "autoload": ***REMOVED***
+                "psr-4": ***REMOVED***
+                    "Http\\Client\\Curl\\": "src/"
+            ***REMOVED***
+        ***REMOVED***,
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                ***REMOVED***
+                    "name": "Михаил Красильников",
+                    "email": "m.krasilnikov@yandex.ru"
+            ***REMOVED***
+            ],
+            "description": "cURL client for PHP-HTTP",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "curl",
+                "http"
+            ],
+            "time": "2018-03-26T19:21:48+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "php-http/discovery",
@@ -2346,62 +2402,6 @@
             ],
             "description": "Library for handling version information and constraints",
             "time": "2017-03-05T17:38:23+00:00"
-    ***REMOVED***,
-        ***REMOVED***
-            "name": "php-http/curl-client",
-            "version": "v1.7.1",
-            "source": ***REMOVED***
-                "type": "git",
-                "url": "https://github.com/php-http/curl-client.git",
-                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6"
-        ***REMOVED***,
-            "dist": ***REMOVED***
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/curl-client/zipball/6341a93d00e5d953fc868a3928b5167e6513f2b6",
-                "reference": "6341a93d00e5d953fc868a3928b5167e6513f2b6",
-                "shasum": ""
-        ***REMOVED***,
-            "require": ***REMOVED***
-                "ext-curl": "*",
-                "php": "^5.5 || ^7.0",
-                "php-http/discovery": "^1.0",
-                "php-http/httplug": "^1.0",
-                "php-http/message": "^1.2",
-                "php-http/message-factory": "^1.0.2"
-        ***REMOVED***,
-            "provide": ***REMOVED***
-                "php-http/async-client-implementation": "1.0",
-                "php-http/client-implementation": "1.0"
-        ***REMOVED***,
-            "require-dev": ***REMOVED***
-                "guzzlehttp/psr7": "^1.0",
-                "php-http/client-integration-tests": "^0.6",
-                "phpunit/phpunit": "^4.8.27",
-                "zendframework/zend-diactoros": "^1.0"
-        ***REMOVED***,
-            "type": "library",
-            "autoload": ***REMOVED***
-                "psr-4": ***REMOVED***
-                    "Http\\Client\\Curl\\": "src/"
-            ***REMOVED***
-        ***REMOVED***,
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                ***REMOVED***
-                    "name": "Михаил Красильников",
-                    "email": "m.krasilnikov@yandex.ru"
-            ***REMOVED***
-            ],
-            "description": "cURL client for PHP-HTTP",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "curl",
-                "http"
-            ],
-            "time": "2018-03-26T19:21:48+00:00"
     ***REMOVED***,
         ***REMOVED***
             "name": "phpdocumentor/reflection-common",
