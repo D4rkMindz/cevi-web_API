@@ -134,6 +134,7 @@ class UserController extends AppController
         $username = $data['username'];
         $password = $data['password'];
         $lang = $data['language_id'];
+        // todo implement validation if fields are correct
 
         $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username,
             $password, $ceviName, $lang);
