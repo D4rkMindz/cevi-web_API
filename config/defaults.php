@@ -74,7 +74,7 @@ $config['mailgun'] = [
 
 // used to render email templates
 $config['twig'] = [
-    'viewPath' => __DIR__ . '/../templates',
+    'viewPath' => __DIR__ . '/../template',
     'cachePath' => __DIR__ . '/../tmp/cache/twig',
     'autoReload' => false,
 ];

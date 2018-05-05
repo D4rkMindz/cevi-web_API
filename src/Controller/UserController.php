@@ -138,7 +138,7 @@ class UserController extends AppController
         $userdata = $this->userRepository->signupUser($email, $firstName, $lastName, $postcode, $username, $password,
             $ceviName, $lang);
 
-        $url = 'https://cevi-web.com/verify/' . $userdata['token'];
+        $url = 'https://cevi-web.com/registration/verify/' . $userdata['token'];
         $templateData = [
             'url' => $url,
             'firstName' => $firstName,
@@ -174,7 +174,7 @@ class UserController extends AppController
         $token = (string)$data['email_token'];
         $emailToken = $this->userRepository->getEmailTokenById($this->jwt['user_id']);
         if ($emailToken !== $token) ***REMOVED***
-            return $this->json($response, ['verified'=> false]);
+            return $this->json($response, ['verified' => false]);
     ***REMOVED***
         $this->userRepository->confirmEmail($this->jwt['user_id']);
         return $this->json($response, ['verified' => $json]);

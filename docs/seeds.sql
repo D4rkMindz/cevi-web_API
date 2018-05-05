@@ -13,7 +13,7 @@ MySQL - 10.1.32-MariaDB : Database - d4rkmindz_cevi-web_api
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Data for the table `app_language` */
 
-insert  into `app_language`(`id`,`name`,`abbreviation`) values
+insert  into `language`(`id`,`name`,`abbreviation`) values
 (1,'de_CH','de'),
 (2,'en_GB','en'),
 (3,'fr_CH','fr'),
