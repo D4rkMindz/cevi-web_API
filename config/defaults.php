@@ -9,6 +9,7 @@ $config = [
     'determineRouteBeforeAppMiddleware' => true,
     'addContentLengthHeader' => false,
     'enableCORS' => false,
+    'isProduction' => true,
 ];
 
 $config['migrations'] = __DIR__ . '/../resources/migrations';

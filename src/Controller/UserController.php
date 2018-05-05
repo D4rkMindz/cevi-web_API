@@ -36,6 +36,11 @@ class UserController extends AppController
     private $twig;
 
     /**
+     * @var boolean
+     */
+    private $isProduction;
+
+    /**
      * UserController constructor.
      *
      * @param Container $container
@@ -48,6 +53,7 @@ class UserController extends AppController
         $this->userValidation = $container->get(UserValidation::class);
         $this->mailer = $container->get(MailerInterface::class);
         $this->twig = $container->get(Twig_Environment::class);
+        $this->isProduction = $container->get('settings')->get('isProduction');
 ***REMOVED***
 
     /**
@@ -139,6 +145,10 @@ class UserController extends AppController
             $ceviName, $lang);
 
         $url = 'https://cevi-web.com/registration/verify/' . $userdata['token'];
+        if (!$this->isProduction) ***REMOVED***
+            $url = 'http://localhost:4200/registration/verify' . $userdata['token'];
+    ***REMOVED***
+
         $templateData = [
             'url' => $url,
             'firstName' => $firstName,
