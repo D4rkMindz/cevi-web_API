@@ -83,11 +83,14 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
         $mailSettings = $container->get('settings')->get('mailgun');
         $mail = new MailgunAdapter($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
 ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        /**
+         * @var Logger $logger
+         */
         $logger = $container->get(Logger::class);
         $message = $exception->getMessage();
         $message .= "\n" . $exception->getTraceAsString();
         $context = $container->get('settings')->get('logger')['context'][MailerInterface::class];
-        $logger->addDebug($message, $context);
+        $logger->addDebug($message, [$context]);
         throw new Exception('Mailer instantiation failed');
 ***REMOVED***
 

@@ -9,10 +9,10 @@
     "erusev/parsedown": "^1.6",
     "d4rkmindz/slim-jwt-auth": "^2.3.4",
     "twig/twig": "^2.4",
-    "odan/twig-translation": "^1.1"
+    "odan/twig-translation": "^1.1",
+    "php-http/curl-client": "^1.7"
   ***REMOVED***,
   "require-dev": ***REMOVED***
-    "php-http/curl-client": "^1.7",
     "odan/phinx-migrations-generator": "^2.3",
     "phpunit/phpunit": "^6.4",
     "fzaninotto/faker": "^1.7",
