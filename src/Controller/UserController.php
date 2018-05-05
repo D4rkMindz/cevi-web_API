@@ -159,7 +159,7 @@ class UserController extends AppController
 
         $url = 'https://cevi-web.com/registration/verify/' . $userdata['token'];
         if (!$this->isProduction) ***REMOVED***
-            $url = 'http://localhost:4200/registration/verify' . $userdata['token'];
+            $url = 'http://localhost:4200/registration/verify/' . $userdata['token'];
     ***REMOVED***
 
         $templateData = [
