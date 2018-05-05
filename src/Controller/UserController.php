@@ -169,6 +169,7 @@ class UserController extends AppController
             'username' => $username,
         ];
         $template = $this->twig->render('signup.twig', $templateData);
+        // Todo replace email after setting up mailgun account
         $this->mailer->sendHtml('bjoern.pfoster@gmail.com', __('CEVI Web sign up'), $template);
 
         $responseData = [
