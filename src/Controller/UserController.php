@@ -184,7 +184,7 @@ class UserController extends AppController
     /**
      * Verify email action
      *
-     * @auth JWT
+     * @auth none
      * @post string email_token The token received in the email
      *
      * @param Request $request
