@@ -196,12 +196,12 @@ class UserController extends AppController
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
         $token = (string)$data['email_token'];
-        $emailToken = $this->userRepository->getEmailTokenById($this->jwt['user_id']);
-        if ($emailToken !== $token) ***REMOVED***
+        $userId = $this->userRepository->getUserIdByEmailToken($token);
+        if (!$this->userRepository->existsUser($userId)) ***REMOVED***
             return $this->json($response, ['verified' => false]);
     ***REMOVED***
-        $this->userRepository->confirmEmail($this->jwt['user_id']);
-        return $this->json($response, ['verified' => $json]);
+        $this->userRepository->confirmEmail($userId);
+        return $this->json($response, ['verified' => true]);
 ***REMOVED***
 
     /**

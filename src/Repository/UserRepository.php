@@ -280,16 +280,16 @@ class UserRepository extends AppRepository
     /**
      * Get email token by id
      *
-     * @param string $userId
+     * @param string $emailToken
      * @return string
      */
-    public function getEmailTokenById(string $userId): string
+    public function getUserIdByEmailToken(string $emailToken): string
     ***REMOVED***
         $query = $this->emailTokenTable->newSelect();
-        $query->select(['token'])
-            ->where(['user_id' => $userId, 'issued_at <= ' => date('Y-m-d H:i:s')]);
+        $query->select(['user_id'])
+            ->where(['token' => $emailToken, 'issued_at <= ' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch('assoc');
-        return !empty($row)? $row['token']: '';
+        return !empty($row)? $row['user_id']: '';
 ***REMOVED***
 
     /**
