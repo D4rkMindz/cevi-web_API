@@ -99,7 +99,7 @@ class DbStorageControllerTest extends DbTestCase
                 ],
                 'expectedResponseInfo' => [
                     'url' => baseurl('/v2/departments/1/storages/4'),
-                    'message' => 'Created storage successfully',
+                    'message' => 'Created storage place successfully',
                 ],
                 200,
             ],

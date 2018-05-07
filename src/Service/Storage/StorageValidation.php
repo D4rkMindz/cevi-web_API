@@ -80,7 +80,7 @@ class StorageValidation extends AppValidation
     ***REMOVED***
         $validationContext = new ValidationContext();
         if ($isUpdate && !$this->storageRepository->existsLocation($location['storage_id'])) ***REMOVED***
-            $validationContext->setError('storage_id', __('Storage not found'));
+            $validationContext->setError('storage_id', __('Storage place not found'));
     ***REMOVED***
 
         if (array_key_exists('name', $location)) ***REMOVED***
@@ -101,7 +101,7 @@ class StorageValidation extends AppValidation
     ***REMOVED***
         $validationContext = new ValidationContext();
         if (!$this->storageRepository->existsLocation($location['storage_id'])) ***REMOVED***
-            $validationContext->setError('storage_id', __('Storage not found'));
+            $validationContext->setError('storage_id', __('Storage place not found'));
     ***REMOVED***
 
         return $validationContext;

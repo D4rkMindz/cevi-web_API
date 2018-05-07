@@ -1,21 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-04-26 10:42+0200\n"
-"PO-Revision-Date: 2018-04-26 10:53+0200\n"
+"POT-Creation-Date: 2018-05-07 08:57+0200\n"
+"PO-Revision-Date: 2018-05-07 08:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.0.5\n"
 "X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: config/middleware.php:78
+#: config/middleware.php:67
 msgid "Authentication failed"
 msgstr "Authentifizierung fehlgeschlagen"
 
@@ -100,7 +100,7 @@ msgstr "Artikel gelöscht"
 msgid "invalid user data"
 msgstr "Ungültige Benutzerdaten"
 
-#: src/Controller/BasicInformationController.php:136
+#: src/Controller/BasicInformationController.php:150
 #: src/Controller/EventController.php:82 src/Controller/EventController.php:183
 msgid "No events found"
 msgstr "Keine Events gefunden"
@@ -160,49 +160,49 @@ msgstr "Kiste gelöscht"
 
 #: src/Controller/CorridorController.php:83
 msgid "No corridors found"
-msgstr ""
+msgstr "Keine Korridore gefunden"
 
 #: src/Controller/CorridorController.php:119
 msgid "Creating corridor failed"
-msgstr ""
+msgstr "Erstellen des Korridors fehlgeschlagen"
 
 #: src/Controller/CorridorController.php:122
 msgid "Created corridor successfully"
-msgstr ""
+msgstr "Korridor erfolgreich hinzugefügt"
 
 #: src/Controller/CorridorController.php:150
 msgid "Updating corridor failed"
-msgstr ""
+msgstr "Aktualisierung des Korridors fehlgeschlagen"
 
 #: src/Controller/CorridorController.php:153
 msgid "Updated corridor successfully"
-msgstr ""
+msgstr "Korridor aktualisiert"
 
 #: src/Controller/CorridorController.php:181
 msgid "Deleting corridor failed"
-msgstr ""
+msgstr "Löschung des Korridors fehlgeschlagen"
 
 #: src/Controller/CorridorController.php:184
 msgid "Deleted corridor successfully"
-msgstr ""
+msgstr "Korridor gelöscht"
 
 #: src/Controller/DepartmentController.php:85
 #: src/Controller/StorageController.php:64
 #: src/Controller/StorageController.php:90
 #: src/Service/Article/ArticleValidation.php:251
 msgid "Department does not exist"
-msgstr ""
+msgstr "Abteilung existiert nicht"
 
 #: src/Controller/DepartmentController.php:123
 msgid "Update failed"
-msgstr ""
+msgstr "Aktualisierung fehlgeschlagen"
 
 #: src/Controller/DepartmentController.php:126
 msgid "Updated department successfully"
-msgstr ""
+msgstr "Abteilung aktualisiert"
 
 #: src/Controller/DepartmentController.php:145
-#: src/Controller/UserController.php:152
+#: src/Controller/UserController.php:246
 msgid "Deleting user failed"
 msgstr "Löschung des Benutzers fehlgeschlagen"
 
@@ -235,266 +235,268 @@ msgstr "Serverfehler"
 
 #: src/Controller/EventArticleController.php:91
 msgid "Linking article failed"
-msgstr ""
+msgstr "Hinzufügen des Artikels fehlgeschlagen"
 
 #: src/Controller/EventArticleController.php:96
 msgid "Linked article successfully"
-msgstr ""
+msgstr "Artikel hinzugefügt"
 
 #: src/Controller/EventArticleController.php:120
 msgid "Unlinking article and event failed"
-msgstr ""
+msgstr "Entfernen des Artikels fehlgeschlagen"
 
 #: src/Controller/EventArticleController.php:123
 msgid "Unlinked article and event successfully"
-msgstr ""
+msgstr "Artikel entfernt"
 
 #: src/Controller/EventController.php:135
 msgid "Inserted event successfully"
-msgstr ""
+msgstr "Event hinzugefügt"
 
 #: src/Controller/EventController.php:221
 msgid "Event not found"
-msgstr ""
+msgstr "Event wurde nicht gefunden"
 
 #: src/Controller/EventController.php:236
 msgid "Updating event failed"
-msgstr ""
+msgstr "Aktualisierung des Events fehlgeschlagen"
 
 #: src/Controller/EventController.php:239
 msgid "Updated event successfully"
-msgstr ""
+msgstr "Event aktualisiert"
 
 #: src/Controller/EventController.php:258
 msgid "Deleting event failed"
-msgstr ""
+msgstr "Löschung des Events fehlgeschlagen"
 
 #: src/Controller/EventController.php:260
 msgid "Deleted event successfully"
-msgstr ""
+msgstr "Event gelöscht"
 
 #: src/Controller/LocationController.php:83
 msgid "No locations found"
-msgstr ""
+msgstr "Keine Lagerorte gefunden"
 
 #: src/Controller/LocationController.php:119
 msgid "Creating location failed"
-msgstr ""
+msgstr "Erstellen des Lagerortes fehlgeschlagen"
 
 #: src/Controller/LocationController.php:122
 msgid "Created location successfully"
-msgstr ""
+msgstr "Lagerort erfolgreich hinzugefügt"
 
 #: src/Controller/LocationController.php:150
 msgid "Updating location failed"
-msgstr ""
+msgstr "Aktualisierung des Lagerortes fehlgeschlagen"
 
 #: src/Controller/LocationController.php:153
 msgid "Updated location successfully"
-msgstr ""
+msgstr "Lagerort aktualisiert"
 
 #: src/Controller/LocationController.php:181
 msgid "Deleting location failed"
-msgstr ""
+msgstr "Löschung des Lagerortes fehlgeschlagen"
 
 #: src/Controller/LocationController.php:184
 msgid "Deleted location successfully"
-msgstr ""
+msgstr "Lagerort gelöscht"
 
 #: src/Controller/ParticipationController.php:70
 msgid "No participations found"
-msgstr ""
+msgstr "Keine Teilnehmer gefunden"
 
 #: src/Controller/ParticipationController.php:108
 msgid "No participation found"
-msgstr ""
+msgstr "Keinen Teilnehmer gefunden"
 
 #: src/Controller/ParticipationController.php:141
 #: src/Controller/ParticipationController.php:234
 msgid "Creating participation failed"
-msgstr ""
+msgstr "Teilnahme fehlgeschlagen"
 
 #: src/Controller/ParticipationController.php:144
 msgid "Created participation successfully"
-msgstr ""
+msgstr "Teilnahme bestätigt"
 
 #: src/Controller/ParticipationController.php:173
 msgid "Updating participation failed"
-msgstr ""
+msgstr "Aktualisierung der Teilnahme fehlgeschlagen"
 
 #: src/Controller/ParticipationController.php:176
 msgid "Updated participation successfully"
-msgstr ""
+msgstr "Teilnahme aktualisiert"
 
 #: src/Controller/ParticipationController.php:203
 msgid "Deleting participation failed"
-msgstr ""
+msgstr "Löschung der Teilnahme fehlgeschlagen"
 
 #: src/Controller/ParticipationController.php:206
 msgid "Deleted participation successfully"
-msgstr ""
+msgstr "Teilnahme gelöscht"
 
 #: src/Controller/ParticipationController.php:270
 msgid "Cancelling event failed"
-msgstr ""
+msgstr "Abbruch des Events fehlgeschlagen"
 
 #: src/Controller/RoomController.php:83
 msgid "No rooms found"
-msgstr ""
+msgstr "Keine Räume gefunden"
 
 #: src/Controller/RoomController.php:119
 msgid "Creating room failed"
-msgstr ""
+msgstr "Erstellung des Raumes fehlgeschlagen"
 
 #: src/Controller/RoomController.php:122
 msgid "Created room successfully"
-msgstr ""
+msgstr "Raum erfolgreich hinzugefügt"
 
 #: src/Controller/RoomController.php:150
 msgid "Updating room failed"
-msgstr ""
+msgstr "Aktualisierung des Raums fehlgeschlagen"
 
 #: src/Controller/RoomController.php:153
 msgid "Updated room successfully"
-msgstr ""
+msgstr "Raum aktualisiert"
 
 #: src/Controller/RoomController.php:181
 msgid "Deleting room failed"
-msgstr ""
+msgstr "Löschung des Raumes fehlgeschlagen"
 
 #: src/Controller/RoomController.php:184
 msgid "Deleted room successfully"
-msgstr ""
+msgstr "Raum gelöscht"
 
 #: src/Controller/ShelfController.php:83
 msgid "No shelfs found"
-msgstr ""
+msgstr "Keine Regale gefunden"
 
 #: src/Controller/ShelfController.php:119
 msgid "Creating shelf failed"
-msgstr ""
+msgstr "Erstellung des Regals fehlgeschlagen"
 
 #: src/Controller/ShelfController.php:122
 msgid "Created shelf successfully"
-msgstr ""
+msgstr "Regal erfolgreich hinzugefügt"
 
 #: src/Controller/ShelfController.php:150
 msgid "Updating shelf failed"
-msgstr ""
+msgstr "Aktualiserung des Regals fehlgeschlagen"
 
 #: src/Controller/ShelfController.php:153
 msgid "Updated shelf successfully"
-msgstr ""
+msgstr "Regal aktualisiert"
 
 #: src/Controller/ShelfController.php:181
 msgid "Deleting shelf failed"
-msgstr ""
+msgstr "Löschung des Regals fehlgeschlagen"
 
 #: src/Controller/ShelfController.php:184
 msgid "Deleted shelf successfully"
-msgstr ""
+msgstr "Regal gelöscht"
 
 #: src/Controller/StorageController.php:71
 msgid "No storage places found"
-msgstr ""
+msgstr "Keine Lagerplätze gefunden"
 
 #: src/Controller/StorageController.php:94
+#: src/Controller/StorageController.php:103
+#: src/Service/Article/ArticleValidation.php:167
 #: src/Service/Article/ArticleValidation.php:276
 msgid "Storage place does not exist"
-msgstr ""
-
-#: src/Controller/StorageController.php:103
-msgid "Storage place does not exits"
-msgstr ""
+msgstr "Lagerplatz existiert nicht"
 
 #: src/Controller/StorageController.php:135
 msgid "Department does not exits"
-msgstr ""
+msgstr "Abteilung existiert nicht"
 
 #: src/Controller/StorageController.php:150
-msgid "Created storage successfully"
-msgstr ""
+msgid "Created storage place successfully"
+msgstr "Lagerplatz erfolgreich erstellt"
 
 #: src/Controller/StorageController.php:180
 #: src/Controller/StorageController.php:213
-msgid "Storage does not exits"
-msgstr ""
+msgid "Storage place does not exits"
+msgstr "Lagerplatz existiert nicht"
 
 #: src/Controller/StorageController.php:192
-msgid "Updating storage failed"
-msgstr ""
+msgid "Updating storage place failed"
+msgstr "Aktualiserung des Lagerplatzes fehlgeschlagen"
 
 #: src/Controller/StorageController.php:194
-msgid "Updated storage successfullly"
-msgstr ""
+msgid "Updated storage place successfullly"
+msgstr "Lagerplatz aktualisiert"
 
 #: src/Controller/StorageController.php:218
 msgid "Server error"
-msgstr ""
+msgstr "Serverfehler"
 
 #: src/Controller/StorageController.php:218
-msgid "Deleting storage failed"
-msgstr ""
+msgid "Deleting storage place failed"
+msgstr "Löschung des Lagerplatzes fehlgeschlagen"
 
 #: src/Controller/StorageController.php:221
-msgid "Deleted storage successfully"
-msgstr ""
+msgid "Deleted storage place successfully"
+msgstr "Lagerplatz gelöscht"
 
 #: src/Controller/TrayController.php:83
 msgid "No trays found"
-msgstr ""
+msgstr "Keine Tablare gefunden"
 
 #: src/Controller/TrayController.php:119
 msgid "Creating tray failed"
-msgstr ""
+msgstr "Erstellung des Tablars fehlgeschlagen"
 
 #: src/Controller/TrayController.php:122
 msgid "Created tray successfully"
-msgstr ""
+msgstr "Tablar erfolgreich erstellt"
 
 #: src/Controller/TrayController.php:149
 msgid "Updating tray failed"
-msgstr ""
+msgstr "Aktualisierung des Tablars fehlgeschlagen"
 
 #: src/Controller/TrayController.php:152
 msgid "Updated tray successfully"
-msgstr ""
+msgstr "Tablar aktualisiert"
 
 #: src/Controller/TrayController.php:180
 msgid "Deleting tray failed"
-msgstr ""
+msgstr "Löschung des Tablars fehlgeschlagen"
 
 #: src/Controller/TrayController.php:183
 msgid "Deleted tray successfully"
-msgstr ""
+msgstr "Tablar gelöscht"
 
-#: src/Controller/UserController.php:53
+#: src/Controller/UserController.php:84
 msgid "No users found"
-msgstr ""
+msgstr "Keine Benutzer gefunden"
 
-#: src/Controller/UserController.php:72
+#: src/Controller/UserController.php:104
 msgid "Please define user_id correctly"
-msgstr ""
+msgstr "Bitte definiere user_id korrekt"
 
-#: src/Controller/UserController.php:76
+#: src/Controller/UserController.php:108
 msgid "No user found"
-msgstr ""
+msgstr "Keinen Benutzer gefunden"
 
-#: src/Controller/UserController.php:107
+#: src/Controller/UserController.php:173
+msgid "CEVI Web sign up"
+msgstr "CEVI Web Registration"
+
+#: src/Controller/UserController.php:177
 msgid "Signed up user successfully"
 msgstr "Benutzer erfolgreich registriert"
 
-#: src/Controller/UserController.php:134
+#: src/Controller/UserController.php:228
 msgid "Updated user successfully"
 msgstr "Benutzer erfolgreich aktualisiert"
 
-#: src/Controller/UserController.php:154
+#: src/Controller/UserController.php:249
 msgid "User deleted successfully"
-msgstr ""
+msgstr "Benutzer gelöscht"
 
 #: src/Repository/EventRepository.php:396
 msgid "No images available"
-msgstr ""
+msgstr "Keine Bilder verfügbar"
 
 #: src/Service/AppValidation.php:48
 msgid "Required"
@@ -527,178 +529,182 @@ msgstr "Artikel existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:142
 msgid "Location id does not exist"
-msgstr ""
+msgstr "Lagerort existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:146
 msgid "Room id does not exist"
-msgstr ""
+msgstr "Raum existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:150
 msgid "Corridor id does not exist"
-msgstr ""
+msgstr "Korridor existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:154
 msgid "Shelf id does not exist"
-msgstr ""
+msgstr "Regal existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:158
 msgid "Tray id does not exist"
-msgstr ""
+msgstr "Tablar existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:162
 msgid "Chest id does not exist"
-msgstr ""
-
-#: src/Service/Article/ArticleValidation.php:167
-msgid "Storage does not exist"
-msgstr ""
+msgstr "Kiste existiert nicht"
 
 #: src/Service/Article/ArticleValidation.php:206
 msgid "Dates more than a year in the future are not allowed here"
 msgstr ""
+"Ein Datum, welches mehr als ein Jahr in der Zukunft liegt, ist nicht erlaubt"
 
 #: src/Service/Article/ArticleValidation.php:221
 msgid "Impossible quantity"
-msgstr ""
+msgstr "Unmögliche Anzahl"
 
 #: src/Service/Article/ArticleValidation.php:236
 msgid "Quality id does not exist"
-msgstr ""
+msgstr "Qualitätsoption existiert nicht"
 
 #: src/Service/Department/DepartmentValidation.php:104
 msgid "Department name already exists"
-msgstr ""
+msgstr "Abteilungsname existiert bereits"
 
 #: src/Service/Department/DepartmentValidation.php:117
 msgid "Department group does not exist"
-msgstr ""
+msgstr "Reginalverband existiert nicht"
 
 #: src/Service/Department/DepartmentValidation.php:130
 msgid "Department type does not exist"
-msgstr ""
+msgstr "Abteilungstyp existiert nicht"
 
 #: src/Service/Event/EventValidation.php:135
 msgid "The start of the event can not be in the past"
-msgstr ""
+msgstr "Der Event kann nicht in der Vergangenheit beginnen"
 
 #: src/Service/Event/EventValidation.php:140
 msgid "The start of the event must be within 3 years"
-msgstr ""
+msgstr "Der Start des Events muss innerhalb der nächsten 3 Jahre sein"
 
 #: src/Service/Event/EventValidation.php:160
 msgid "The end of the event must be after the start"
-msgstr ""
+msgstr "Der Event muss nach dem Beginn enden"
 
 #: src/Service/Event/EventValidation.php:165
 msgid ""
 "If your event really lasts longer than 4 weeeks, please contact the "
 "administrator"
 msgstr ""
+"Wenn dein Event wirklich länger als vier Wochen dauert, kontaktiere bitte "
+"den Adminsitrator"
 
 #: src/Service/Event/EventValidation.php:185
 msgid ""
 "If your leader meeting time really starts two weeks before the event, please "
 "contact the administrator"
 msgstr ""
+"Wenn der Beginn des Events für die Leiter wirklich zwei Wochen vor dem Event "
+"ist, kontaktiere bitte den Adminstrator"
 
 #: src/Service/Event/EventValidation.php:190
 msgid "The leader meeting time must be before the real event"
-msgstr ""
+msgstr "Der Beginn für die Leiter muss vor dem Event sein"
 
 #: src/Service/Event/EventValidation.php:210
 msgid "The event end time for the leaders must be after the real event"
-msgstr ""
+msgstr "Das Ende für die Leiter muss nach dem Event sein"
 
 #: src/Service/Event/EventValidation.php:215
 msgid ""
 "If the event end time for your leaders is really later than two weeks, "
 "please contact the administrator"
 msgstr ""
+"Wenn das Ende für die Leiter wirklich zwei Wochen nach dem Event ist, "
+"kontaktiere bitte den Administrator"
 
 #: src/Service/Event/EventValidation.php:231
 msgid "Price can not be negative"
-msgstr ""
+msgstr "Der Preis kann nicht negativ sein"
 
 #: src/Service/Event/EventValidation.php:235
 msgid "If the price is really this high, please contact the administrator"
 msgstr ""
+"Wenn der Preis wirklich so hoch ist, kontaktiere bitte den Administrator"
 
 #: src/Service/Event/EventValidation.php:255
 msgid "The earliest publication time is now"
-msgstr ""
+msgstr "Die früheste Veröffentlichungszeit ist jetzt"
 
 #: src/Service/Event/EventValidation.php:260
 msgid "The event must be publicized before the start of the event"
-msgstr ""
+msgstr "Der Event muss vor dem Start veröffentlicht werden"
 
 #: src/Service/EventArticle/EventArticleValidation.php:78
 #: src/Service/Participation/ParticipationValidation.php:110
 msgid "Event does not exist"
-msgstr ""
+msgstr "Event existiert nicht"
 
 #: src/Service/EventArticle/EventArticleValidation.php:86
 msgid "Not enough available"
-msgstr ""
+msgstr "Nicht genug verfügbar"
 
 #: src/Service/EventArticle/EventArticleValidation.php:90
 #: src/Service/Participation/ParticipationValidation.php:123
 msgid "User does not exist"
-msgstr ""
+msgstr "Benutzer existiert nicht"
 
 #: src/Service/Participation/ParticipationValidation.php:136
 msgid "Status does not exist"
-msgstr ""
+msgstr "Status existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:83
 #: src/Service/Storage/StorageValidation.php:104
-msgid "Storage not found"
-msgstr ""
+msgid "Storage place not found"
+msgstr "Lagerplatz nicht gefunden"
 
 #: src/Service/Storage/StorageValidation.php:89
 msgid "Name must be defined"
-msgstr ""
+msgstr "Name muss definiert werden"
 
 #: src/Service/Storage/StorageValidation.php:124
 #: src/Service/Storage/StorageValidation.php:144
 msgid "Storage place already exists"
-msgstr ""
+msgstr "Lagerplatz existiert bereits"
 
 #: src/Service/Storage/StorageValidation.php:163
 msgid "Nothing defined"
-msgstr ""
+msgstr "Nichts definiert"
 
 #: src/Service/Storage/StorageValidation.php:168
 msgid "Location does not exist"
-msgstr ""
+msgstr "Lagerort existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:172
 msgid "Room does not exist"
-msgstr ""
+msgstr "Raum existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:176
 msgid "Corridor does not exist"
-msgstr ""
+msgstr "Korridor existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:180
 msgid "Shelf does not exist"
-msgstr ""
+msgstr "Regal existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:184
 msgid "Tray does not exist"
-msgstr ""
+msgstr "Tablar existiert nicht"
 
 #: src/Service/Storage/StorageValidation.php:188
 msgid "Chest does not exist"
-msgstr ""
+msgstr "Kiste existiert nicht"
 
 #: src/Service/User/UserValidation.php:68
-#: src/Service/User/UserValidation.php:339 src/Util/ValidationContext.php:19
+#: src/Service/User/UserValidation.php:341 src/Util/ValidationContext.php:19
 msgid "Please check your data"
-msgstr ""
+msgstr "Bitte überprüfe die Eingabe"
 
 #: src/Service/User/UserValidation.php:150
 msgid "Modifier does not exist"
-msgstr ""
+msgstr "Bearbeiter existiert nicht"
 
 #: src/Service/User/UserValidation.php:240
 msgid "Already in use"
@@ -727,4 +733,7 @@ msgstr "JS Zertifikat abgelaufen"
 #: src/Service/User/UserValidation.php:310
 #, php-format
 msgid "Birthday not valid (minimum age: %s years"
-msgstr ""
+msgstr "Geburtsdatum ungültig (Mindestalter: %s Jahre)"
+
+#~ msgid "Storage does not exist"
+#~ msgstr "Lagerplatz"
