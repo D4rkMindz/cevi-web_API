@@ -164,7 +164,7 @@ class ArticleValidation extends AppValidation
 
         // TODO check if maybe useless to check if storage exists.
         if (!$this->storageRepository->existsStorage($locationId, $roomId, $corridorId, $shelfId, $trayId, $chestId)) ***REMOVED***
-            $validationContext->setError('storage', __('Storage does not exist'));
+            $validationContext->setError('storage', __('Storage place does not exist'));
     ***REMOVED***
 ***REMOVED***
 

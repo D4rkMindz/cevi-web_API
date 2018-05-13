@@ -100,7 +100,7 @@ class StorageController extends AppController
         $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $descriptionFormat);
 
         if (empty($storagePlace)) ***REMOVED***
-            return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exits')]);
+            return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exist')]);
     ***REMOVED***
 
         $responseData = [
@@ -147,7 +147,7 @@ class StorageController extends AppController
         $responseData = [
             'info' => [
                 'url' => baseurl('/v2/departments/' . $args['department_id'] . '/storages/' . $storageId),
-                'message' => __('Created storage successfully'),
+                'message' => __('Created storage place successfully'),
             ],
         ];
 
@@ -177,7 +177,7 @@ class StorageController extends AppController
             !$this->departmentRepository->existsDepartment($args['department_id'])
             || !$this->storageRepository->existsStorageById($args['storage_id'])
         ) ***REMOVED***
-            return $this->error($response, __('Not found'), 404, ['message' => __('Storage does not exits')]);
+            return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exits')]);
     ***REMOVED***
 
         $json = (string)$request->getBody();
@@ -189,9 +189,9 @@ class StorageController extends AppController
 
         $updated = $this->storageRepository->updateStorage($args['department_id'], $args['storage_id'], $params, $this->jwt['user_id']);
         if (!$updated) ***REMOVED***
-            return $this->error($response, __('Server Error'), 500, ['message' => __('Updating storage failed')]);
+            return $this->error($response, __('Server Error'), 500, ['message' => __('Updating storage place failed')]);
     ***REMOVED***
-        return $this->json($response, ['message' => __('Updated storage successfullly')]);
+        return $this->json($response, ['message' => __('Updated storage place successfullly')]);
 ***REMOVED***
 
     /**
@@ -210,14 +210,14 @@ class StorageController extends AppController
             !$this->departmentRepository->existsDepartment($args['department_id'])
             || !$this->storageRepository->existsStorageById($args['storage_id'])
         ) ***REMOVED***
-            return $this->error($response, __('Not found'), 404, ['message' => __('Storage does not exits')]);
+            return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exits')]);
     ***REMOVED***
 
         $deleted = $this->storageRepository->deleteStorage($args['department_id'], $args['storage_id'], $this->jwt['user_id']);
         if (!$deleted) ***REMOVED***
-            return $this->error($response, __('Server error'), 500, ['message' => __('Deleting storage failed')]);
+            return $this->error($response, __('Server error'), 500, ['message' => __('Deleting storage place failed')]);
     ***REMOVED***
 
-        return $this->json($response, ['message' => __('Deleted storage successfully')]);
+        return $this->json($response, ['message' => __('Deleted storage place successfully')]);
 ***REMOVED***
 ***REMOVED***
