@@ -56,6 +56,7 @@ class Formatter
         $tmp['js_certificate'] = (bool)$user['js_certificate'];
         $tmp['js_certificate_until'] = $user['js_certificate_until'];
         $tmp['signup_completed'] = (bool)$user['signup_completed'];
+        $tmp['email_confirmed'] = (bool)$user['email_confirmed'];
         $tmp['url'] = baseurl('/v2/users/' . $user['id']);
         $tmp['created_at'] = $user['created_at'];
         $tmp['created_by'] = $user['created_by'];
