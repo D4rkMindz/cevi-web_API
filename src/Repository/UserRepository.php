@@ -532,27 +532,27 @@ class UserRepository extends AppRepository
             ->join([
                 [
                     'table' => $cityTableName,
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => $userTableName . '.city_id=' . $cityTableName . '.id',
                 ],
                 [
                     'table' => $departmentTableName,
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => $userTableName . '.department_id=' . $departmentTableName . '.id',
                 ],
                 [
                     'table' => $genderTableName,
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => $userTableName . '.gender_id=' . $genderTableName . '.id',
                 ],
                 [
                     'table' => $positionTableName,
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => $userTableName . '.position_id=' . $positionTableName . '.id',
                 ],
                 [
                     'table' => $languageTableName,
-                    'type' => 'INNER',
+                    'type' => 'LEFT',
                     'conditions' => $userTableName . '.language_id=' . $languageTableName . '.id',
                 ],
             ]);
