@@ -123,7 +123,7 @@ class ArticleRepository extends AppRepository
             return [];
     ***REMOVED***
 
-        $article = $this->formatter->formatArticle($row);
+        $article = $this->formatter->formatArticle($row, $departmentId);
         return $article;
 ***REMOVED***
 
@@ -134,7 +134,7 @@ class ArticleRepository extends AppRepository
      * @param string $descriptionFormat 'both'||'plain'||'parsed'
      * @return array
      */
-    public function getArticleForStorageplace(string $storagePlaceId, string $descriptionFormat = 'both')
+    public function getArticleForStorageplace(string $storagePlaceId, string $departmentId, string $descriptionFormat = 'both')
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $articleTitleTableName = $this->articleTitleTable->getTablename();
@@ -193,7 +193,7 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $descriptionFormat, false);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentId , $descriptionFormat, false);
     ***REMOVED***
 
         return $articles;
@@ -224,7 +224,7 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $descriptionFormat);
+            $articles[$key] = $this->formatter->formatArticle($article,$departmentId, $descriptionFormat);
     ***REMOVED***
 
         return $articles;

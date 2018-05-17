@@ -278,11 +278,12 @@ class Formatter
      * Format article
      *
      * @param array $article
+     * @param string $departemntId
      * @param string|null $descriptionFormat
      * @param bool $withStorageplaces
      * @return array
      */
-    public function formatArticle(array $article, string $descriptionFormat = null, bool $withStorageplaces = true): array
+    public function formatArticle(array $article, string $departemntId, string $descriptionFormat = null, bool $withStorageplaces = true): array
     ***REMOVED***
         $tmp = [];
         $tmp['id'] = $article['id'];
@@ -358,32 +359,32 @@ class Formatter
             $tmp['storage'] = [
                 'id' => $article['location_id'],
                 'name' => $article['location_name'],
-                'url' => baseurl('/v2/articles/' . $article['location_id']),
+                'url' => baseurl('/v2/departments/' . $departemntId . '/articles/' . $article['location_id']),
             ];
             $tmp['room'] = [
                 'id' => $article['room_id'],
                 'name' => $article['room_name'],
-                'url' => baseurl('/v2/articles/' . $article['room_id']),
+                'url' => baseurl('/v2/articles/' . $departemntId . '/articles/' . $article['room_id']),
             ];
             $tmp['corridor'] = [
                 'id' => $article['corridor_id'],
                 'name' => $article['corridor_name'],
-                'url' => baseurl('/v2/articles/' . $article['corridor_id']),
+                'url' => baseurl('/v2/articles/' . $departemntId . '/articles/' . $article['corridor_id']),
             ];
             $tmp['shelf'] = [
                 'id' => $article['shelf_id'],
                 'name' => $article['shelf_name'],
-                'url' => baseurl('/v2/articles/' . $article['shelf_id']),
+                'url' => baseurl('/v2/articles/' . $departemntId . '/articles/' . $article['shelf_id']),
             ];
             $tmp['tray'] = [
                 'id' => $article['tray_id'],
                 'name' => $article['tray_name'],
-                'url' => baseurl('/v2/articles/' . $article['tray_id']),
+                'url' => baseurl('/v2/articles/' . $departemntId . '/articles/' . $article['tray_id']),
             ];
             $tmp['chest'] = [
                 'id' => $article['chest_id'],
                 'name' => $article['chest_name'],
-                'url' => baseurl('/v2/articles/' . $article['chest_id']),
+                'url' => baseurl('/v2/articles/' . $departemntId . '/articles/' . $article['chest_id']),
             ];
     ***REMOVED***
         $tmp['replacement'] = [

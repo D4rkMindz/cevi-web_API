@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+
 use App\Repository\EventArticleRepository;
 use App\Service\EventArticle\EventArticleValidation;
 use Interop\Container\Exception\ContainerException;
@@ -55,7 +56,7 @@ class EventArticleController extends AppController
             return $this->error($response, __('Not Found'));
     ***REMOVED***
 
-        $event = $this->eventArticleRepository->getAllArticles($eventId, $descriptionFormat, $articleDescriptionFormat);
+        $event = $this->eventArticleRepository->getAllArticles($eventId, $departmentId, $descriptionFormat, $articleDescriptionFormat);
 
         if (empty($event)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('No articles for event found')]);

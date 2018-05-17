@@ -94,11 +94,12 @@ class EventArticleRepository extends AppRepository
      * Get all articles.
      *
      * @param string $eventId
+     * @param string $departmentId
      * @param string $descriptionFormat
      * @param string $articleDescriptionFormat
      * @return array
      */
-    public function getAllArticles(string $eventId, string $descriptionFormat, string $articleDescriptionFormat): array
+    public function getAllArticles(string $eventId, string $departmentId, string $descriptionFormat, string $articleDescriptionFormat): array
     ***REMOVED***
         $eventTablename = $this->eventTable->getTablename();
         $eventDescriptionTablename = $this->eventDescriptionTable->getTablename();
@@ -144,7 +145,7 @@ class EventArticleRepository extends AppRepository
     ***REMOVED***
 
         $event = $this->formatter->formatEventSimple($event, $descriptionFormat);
-        $event['articles'] = $this->getArticles($event['id'], $articleDescriptionFormat);
+        $event['articles'] = $this->getArticles($event['id'], $departmentId,  $articleDescriptionFormat);
 
         return $event;
 ***REMOVED***
@@ -199,10 +200,11 @@ class EventArticleRepository extends AppRepository
      * Get articles for event
      *
      * @param string $eventId
+     * @param string $departmentId
      * @param string $articleDescriptionFormat
      * @return array
      */
-    private function getArticles(string $eventId, string $articleDescriptionFormat): array
+    private function getArticles(string $eventId, string $departmentId, string $articleDescriptionFormat): array
     ***REMOVED***
         $eventArticleTablename = $this->eventArticleTable->getTablename();
         $articleTablename = $this->articleTable->getTablename();
@@ -270,7 +272,7 @@ class EventArticleRepository extends AppRepository
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $articleDescriptionFormat, false);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentId,$articleDescriptionFormat, false);
             $articles[$key]['accountable_user'] = $this->getAccountableUser($article['id']);
             $articles[$key]['required_quantity'] = $article['required_article_quantity'];
     ***REMOVED***

@@ -97,7 +97,7 @@ class StorageController extends AppController
         $descriptionFormat = $request->getParam('description_format') ?: 'both';
 
         $storagePlace = $this->storageRepository->getStorage((string)$args['department_id'], (string)$args['storage_id']);
-        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $descriptionFormat);
+        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $args['department_id'],  $descriptionFormat);
 
         if (empty($storagePlace)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exist')]);
