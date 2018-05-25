@@ -194,6 +194,8 @@ class ArticleController extends AppController
     /**
      * Get all qualities.
      *
+     * @auth none
+     *
      * @param Request $request
      * @param Response $response
      * @return Response
