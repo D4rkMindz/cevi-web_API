@@ -388,7 +388,8 @@ class Formatter
             ];
     ***REMOVED***
         $tmp['replacement'] = [
-            'needed' => strtotime($article['replace']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
+            'needed' => !empty($article['replace']),
+            'urgent' => strtotime($article['replace']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
             'date' => $article['replace'],
         ];
         $tmp['created_at'] = $article['created_at'];

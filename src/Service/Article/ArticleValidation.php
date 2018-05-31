@@ -260,7 +260,6 @@ class ArticleValidation extends AppValidation
      */
     private function validateReplacement(string $replacemnentDate, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateNotEmpty($replacemnentDate, 'replacement_date', $validationContext);
         $this->validateDate($replacemnentDate, 'replacement_date', $validationContext, true);
 ***REMOVED***
 

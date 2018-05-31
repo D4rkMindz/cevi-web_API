@@ -212,7 +212,7 @@ return array (
           'COLUMN_NAME' => 'replace',
           'ORDINAL_POSITION' => '9',
           'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
+          'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
           'CHARACTER_MAXIMUM_LENGTH' => NULL,
           'CHARACTER_OCTET_LENGTH' => NULL,
