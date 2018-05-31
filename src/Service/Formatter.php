@@ -347,6 +347,7 @@ class Formatter
         $tmp['purchase_date'] = $article['purchase_date'];
         $tmp['quantity'] = (int)$article['quantity'];
         $tmp['quality'] = [
+            'id' => (int)$article['quality_id'],
             'level' => (int)$article['quality_level'],
             'name' => [
                 'name_de' => $article['quality_name_de'],

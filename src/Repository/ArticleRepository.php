@@ -429,6 +429,7 @@ class ArticleRepository extends AppRepository
             'description_name_it' => $articleDescriptionTableName . '.name_it',
             'purchase_date' => $articleTableName . '.date',
             'quantity' => $articleTableName . '.quantity',
+            'quality_id' => $articleQualityTableName . '.id',
             'quality_level' => $articleQualityTableName . '.level',
             'quality_name_de' => $articleQualityTableName . '.name_de',
             'quality_name_en' => $articleQualityTableName . '.name_en',
