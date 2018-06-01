@@ -230,7 +230,7 @@ class ArticleValidation extends AppValidation
      */
     private function validateQuality(int $qualityId, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateNotEmpty($qualityId, 'quality_id', $validationContext);
+        $this->validateNotEmpty($qualityId, 'quality', $validationContext);
 
         if (!$this->articleRepository->existsQuality((string)$qualityId)) ***REMOVED***
             $validationContext->setError('quality', __('Quality id does not exist'));
