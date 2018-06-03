@@ -57,8 +57,8 @@ $config['db_test'] = [
 
 $config['language_whitelist'] = [
     'de' => 'de_CH',
-    'fr' => 'en_GB',
-    'en' => 'fr_CH',
+    'en' => 'en_GB',
+    'fr' => 'fr_CH',
     'it' => 'it_CH',
 ];
 
