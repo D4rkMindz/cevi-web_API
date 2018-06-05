@@ -115,18 +115,6 @@ $container[Twig_Environment::class] = function (Container $container): Twig_Envi
 ***REMOVED***;
 
 /**
- * Logger container.
- *
- * @param Container $container
- * @return Logger
- * @throws \Interop\Container\Exception\ContainerException
- */
-$container[Monolog\Logger::class . '_error'] = function (Container $container) ***REMOVED***
-    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_error.log', date('y-m-d')));
-    return new Logger('error', [$rotatingFileHandler]);
-***REMOVED***;
-
-/**
  * Translator container.
  *
  * @param Container $container
@@ -163,16 +151,51 @@ $container[Role::class] = function (Container $container) ***REMOVED***
     return new Role($container);
 ***REMOVED***;
 
+/**
+ * Default App logger
+ *
+ * @param Container $container
+ * @return Logger
+ */
+$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_app.log', date('y-m-d')));
+    $logger = new Logger('app',[$rotatingFileHandler]);
+    return $logger;
+***REMOVED***;
+
+/**
+ * Access logger
+ *
+ * @param Container $container
+ * @return Logger
+ */
 $container[Monolog\Logger::class . '_request'] = function (Container $container) ***REMOVED***
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_access.log', date('y-m-d')));
     $logger = new Logger('request',[$rotatingFileHandler]);
     return $logger;
 ***REMOVED***;
 
-$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
-    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_app.log', date('y-m-d')));
-    $logger = new Logger('app',[$rotatingFileHandler]);
-    return $logger;
+/**
+ * Error Logger.
+ *
+ * @param Container $container
+ * @return Logger
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[Monolog\Logger::class . '_error'] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_error.log', date('y-m-d')));
+    return new Logger('error', [$rotatingFileHandler]);
+***REMOVED***;
+
+/**
+ * Debug logger
+ *
+ * @param Container $container
+ * @return Logger
+ */
+$container[Monolog\Logger::class . '_debug'] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_debug.log', date('y-m-d')));
+    return new Logger('debug', [$rotatingFileHandler]);
 ***REMOVED***;
 
 /**

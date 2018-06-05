@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use App\Service\Article\ArticleValidation;
+use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -22,6 +23,8 @@ class ArticleController extends AppController
      */
     private $articleValidation;
 
+    private $logger;
+
     /**
      * ArticleController constructor.
      * @param Container $container
@@ -32,6 +35,7 @@ class ArticleController extends AppController
         parent::__construct($container);
         $this->articleRepository = $container->get(ArticleRepository::class);
         $this->articleValidation = $container->get(ArticleValidation::class);
+        $this->logger = $container->get(Logger::class . '_debug');
 ***REMOVED***
 
     /**
@@ -69,8 +73,13 @@ class ArticleController extends AppController
     public function getAllArticlesAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $params = $this->getLimitationParams($request);
-        $params['description_format'] = (string) $request->getParam('description_format');
+        $params['description_format'] = (string)$request->getParam('description_format');
+
+        $this->logger->addDebug('Getting Articles: ' . json_encode($params));
+
         $articles = $this->articleRepository->getAllArticles((int)$args['department_id'], $params['limit'], $params['page'], $params['description_format']);
+
+        $this->logger->addDebug('Received Articles: ' . json_encode($articles));
 
         if (empty($articles)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('No articles found')]);

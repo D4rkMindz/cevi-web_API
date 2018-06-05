@@ -20,6 +20,7 @@ use App\Table\SlTrayTable;
 use App\Table\StoragePlaceTable;
 use Cake\Database\Query;
 use Exception;
+use Monolog\Logger;
 use Slim\Container;
 
 class ArticleRepository extends AppRepository
@@ -85,6 +86,11 @@ class ArticleRepository extends AppRepository
     private $formatter;
 
     /**
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * ArticleRepository constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -102,6 +108,9 @@ class ArticleRepository extends AppRepository
         $this->slShelfTable = $container->get(SlShelfTable::class);
         $this->slTrayTable = $container->get(SlTrayTable::class);
         $this->slChestTable = $container->get(SlChestTable::class);
+
+        // TODO remove logger
+        $this->logger = $container->get(Logger::class . '_debug');
 
         $this->formatter = new Formatter();
 ***REMOVED***
@@ -186,14 +195,14 @@ class ArticleRepository extends AppRepository
             ],
         ];
         $query = $this->articleTable->newSelect();
-        $query->select($fields)->join($join)->where([$this->articleTable->getTablename(). '.storage_place_id' => $storagePlaceId]);
+        $query->select($fields)->join($join)->where([$this->articleTable->getTablename() . '.storage_place_id' => $storagePlaceId]);
         $articles = $query->execute()->fetchAll('assoc');
         if (empty($articles)) ***REMOVED***
             return [];
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $departmentId , $descriptionFormat, false);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentId, $descriptionFormat, false);
     ***REMOVED***
 
         return $articles;
@@ -217,14 +226,17 @@ class ArticleRepository extends AppRepository
             ->where([
                 $articleTableName . '.department_id' => $departmentId,
             ]);
+
+        $this->logger->addDebug('Reading articles with ' . $query->sql());
         $articles = $query->execute()->fetchAll('assoc');
+        $this->logger->addDebug('REceived articles: ' . json_encode($articles));
 
         if (empty($articles)) ***REMOVED***
             return [];
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article,$departmentId, $descriptionFormat);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentId, $descriptionFormat);
     ***REMOVED***
 
         return $articles;
