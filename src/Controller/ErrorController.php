@@ -21,6 +21,18 @@ class ErrorController extends AppController
      */
     public function notFoundAction(Request $request, Response $response): Response
     ***REMOVED***
-        return $this->error($response, 'Not Found', 404, ['message' => 'The requested route is not available on this Server']);
+        return $this->error($response, 'Not Found', 404, ['message' => __('The requested route is not available on this Server')]);
+***REMOVED***
+
+    /**
+     * Server error action.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function serverErrorAction(Request $request, Response $response): Response
+    ***REMOVED***
+        return $this->error($response, 'Server Error', 500, ['message' => __('An error occured.')]);
 ***REMOVED***
 ***REMOVED***

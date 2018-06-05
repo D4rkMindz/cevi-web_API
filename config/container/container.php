@@ -3,6 +3,7 @@
  * Basic containers
  */
 
+use App\Controller\ErrorController;
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
 use App\Service\Role;
@@ -120,8 +121,9 @@ $container[Twig_Environment::class] = function (Container $container): Twig_Envi
  * @return Logger
  * @throws \Interop\Container\Exception\ContainerException
  */
-$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
-    return new Logger($container->get('settings')->get('logger')['main']);
+$container[Monolog\Logger::class . '_error'] = function (Container $container) ***REMOVED***
+    $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_error.log', date('y-m-d')));
+    return new Logger('error', [$rotatingFileHandler]);
 ***REMOVED***;
 
 /**
@@ -181,15 +183,35 @@ $container[Monolog\Logger::class] = function (Container $container) ***REMOVED**
  */
 $container['notFoundHandler'] = function (Container $container) ***REMOVED***
     return function (Request $request, Response $response) use ($container) ***REMOVED***
-        $response = $response->withRedirect($container->get('router')->pathFor('get.notFound'));
+        $errorController = new ErrorController($container);
+        $response = $errorController->notFoundAction($request, $response);
+        $container->get(Logger::class)->info(sprintf('ROUTE NOT FOUND: %s', $request->getRequestTarget()));
         return $response;
 ***REMOVED***;
 ***REMOVED***;
 
-// TODO disable this in prod
-$container['jwt'] = function () ***REMOVED***
-    return [
-        'lang' => 'de_CH',
-        'position_id' => 1,
-    ];
+$container['errorHandler'] = function (Container $container) ***REMOVED***
+    return function (Request $request, Response $response, Exception $exception) use ($container) ***REMOVED***
+        /**
+         * @var $logger Logger
+         */
+        $logger = $container->get(Logger::class . '_error');
+        $message = sprintf("EXCEPTION: %s\n", $exception->getMessage());
+        foreach ($exception->getTrace() as $row) ***REMOVED***
+            $message .= sprintf("\e[Method %s in %s:%s", $row['function'], $row['file'], $row['line']);
+    ***REMOVED***
+        $logger->addError($message);
+        $errorController = new ErrorController($container);
+        return $errorController->serverErrorAction($request, $response);
 ***REMOVED***;
+***REMOVED***;
+
+// TODO disable this in prod
+if (!$container->get('settings')->get('isProduction')) ***REMOVED***
+    $container['jwt'] = function () ***REMOVED***
+        return [
+            'lang' => 'de_CH',
+            'position_id' => 1,
+        ];
+***REMOVED***;
+***REMOVED***

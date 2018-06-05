@@ -10,6 +10,7 @@ $config = [
     'addContentLengthHeader' => false,
     'enableCORS' => false,
     'isProduction' => true,
+    'debug' => true,
 ];
 
 $config['migrations'] = __DIR__ . '/../resources/migrations';
