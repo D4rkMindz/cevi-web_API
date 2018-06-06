@@ -5,7 +5,7 @@ use Slim\App;
 $app = require __DIR__ . '/bootstrap.php';
 
 $container = $app->getContainer();
-$pdo = $container->get(Connection::class)->getDriver()->connection();
+$pdo = $container->get(Connection::class)->getDriver()->getConnection();
 
 return [
     'paths' => [

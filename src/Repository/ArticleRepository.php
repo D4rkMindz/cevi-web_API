@@ -20,7 +20,6 @@ use App\Table\SlTrayTable;
 use App\Table\StoragePlaceTable;
 use Cake\Database\Query;
 use Exception;
-use Monolog\Logger;
 use Slim\Container;
 
 class ArticleRepository extends AppRepository
@@ -110,32 +109,33 @@ class ArticleRepository extends AppRepository
     /**
      * Get single article
      *
-     * @param string $departmentId
-     * @param string $articleId
+     * @param string $departmentHash
+     * @param string $articleHash
      * @return array
      */
-    public function getArticle(string $departmentId, string $articleId)
+    public function getArticle(string $departmentHash, string $articleHash)
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery();
-        $query->where([$articleTableName . '.department_id' => $departmentId, $articleTableName . '.id' => $articleId]);
+        $query->where([$articleTableName . '.department_hash' => $departmentHash, $articleTableName . '.hash' => $articleHash]);
         $row = $query->execute()->fetch('assoc');
         if (empty($row)) ***REMOVED***
             return [];
     ***REMOVED***
 
-        $article = $this->formatter->formatArticle($row, $departmentId);
+        $article = $this->formatter->formatArticle($row, $departmentHash);
         return $article;
 ***REMOVED***
 
     /**
      * Get all articles for storage place
      *
-     * @param string $storagePlaceId
+     * @param string $storagePlaceHash
+     * @param string $departmentHash
      * @param string $descriptionFormat 'both'||'plain'||'parsed'
      * @return array
      */
-    public function getArticleForStorageplace(string $storagePlaceId, string $departmentId, string $descriptionFormat = 'both')
+    public function getArticleForStorageplace(string $storagePlaceHash, string $departmentHash, string $descriptionFormat = 'both')
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $articleTitleTableName = $this->articleTitleTable->getTablename();
@@ -143,7 +143,7 @@ class ArticleRepository extends AppRepository
         $articleQualityTableName = $this->articleQualtityTable->getTablename();
 
         $fields = [
-            'id' => $articleTableName . '.id',
+            'hash' => $articleTableName . '.hash',
             'title_name_de' => $articleTitleTableName . '.name_de',
             'title_name_en' => $articleTitleTableName . '.name_en',
             'title_name_fr' => $articleTitleTableName . '.name_fr',
@@ -154,6 +154,7 @@ class ArticleRepository extends AppRepository
             'description_name_it' => $articleDescriptionTableName . '.name_it',
             'purchase_date' => $articleTableName . '.date',
             'quantity' => $articleTableName . '.quantity',
+            'quality_hash' => $articleQualityTableName . '.hash',
             'quality_level' => $articleQualityTableName . '.level',
             'quality_name_de' => $articleQualityTableName . '.name_de',
             'quality_name_en' => $articleQualityTableName . '.name_en',
@@ -183,18 +184,18 @@ class ArticleRepository extends AppRepository
             [
                 'table' => $articleQualityTableName,
                 'type' => 'INNER',
-                'conditions' => $articleTableName . '.article_quality_id = ' . $articleQualityTableName . '.id',
+                'conditions' => $articleTableName . '.article_quality_hash = ' . $articleQualityTableName . '.hash',
             ],
         ];
         $query = $this->articleTable->newSelect();
-        $query->select($fields)->join($join)->where([$this->articleTable->getTablename() . '.storage_place_id' => $storagePlaceId]);
+        $query->select($fields)->join($join)->where([$this->articleTable->getTablename() . '.storage_place_hash' => $storagePlaceHash]);
         $articles = $query->execute()->fetchAll('assoc');
         if (empty($articles)) ***REMOVED***
             return [];
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $departmentId, $descriptionFormat, false);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentHash, $descriptionFormat, false);
     ***REMOVED***
 
         return $articles;
@@ -203,20 +204,20 @@ class ArticleRepository extends AppRepository
     /**
      * Get all articles.
      *
-     * @param int $departmentId
+     * @param string $departmentHash
      * @param int $limit
      * @param int $page
      * @param string $descriptionFormat
      * @return array
      */
-    public function getAllArticles(int $departmentId, int $limit, int $page, string $descriptionFormat)
+    public function getAllArticles(string $departmentHash, int $limit, int $page, string $descriptionFormat)
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery()
             ->limit($limit)
             ->page($page)
             ->where([
-                $articleTableName . '.department_id' => $departmentId,
+                $articleTableName . '.department_hash' => $departmentHash,
             ]);
 
         $articles = $query->execute()->fetchAll('assoc');
@@ -226,7 +227,7 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
 
         foreach ($articles as $key => $article) ***REMOVED***
-            $articles[$key] = $this->formatter->formatArticle($article, $departmentId, $descriptionFormat);
+            $articles[$key] = $this->formatter->formatArticle($article, $departmentHash, $descriptionFormat);
     ***REMOVED***
 
         return $articles;
@@ -260,21 +261,22 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
         $articleTitleId = $this->insertArticleTitle($article['title'], $lang, $userId);
         $articleDescriptionId = $this->insertArticleDescription($article['description'], $lang, $userId);
-        $storagePlaceId = $this->getStoragePlaceId($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
+        $storagePlaceHash = $this->getStoragePlaceHash($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
         $row = [
+            'hash' => uniqid(),
             'article_title_id' => $articleTitleId,
             'article_description_id' => $articleDescriptionId,
             'article_quality_id' => $article['quality_id'],
-            'storage_place_id' => $storagePlaceId,
-            'department_id' => $article['department_id'],
+            'storage_place_hash' => $storagePlaceHash,
+            'department_hash' => $article['department_hash'],
             'date' => $article['purchase_date'],
             'quantity' => $article['quantity'],
             'replace' => $article['replacement_date'],
         ];
 
         $articleId = $this->articleTable->insert($row, $userId);
-        $barcode = Barcode::generate($articleId, $storagePlaceId, $article['department_id']);
-        $this->articleTable->modify(['barcode' => $barcode], $articleId, $userId);
+        $barcode = Barcode::generate($articleId, $storagePlaceHash, $article['department_hash']);
+        $this->articleTable->modify(['barcode' => $barcode], ['id' => $articleId], $userId);
 
         return $articleId;
 ***REMOVED***
@@ -324,7 +326,7 @@ class ArticleRepository extends AppRepository
         if ($storagePlaceId) ***REMOVED***
             $row['storage_place_id'] = (string)$article['storage_place_id'];
     ***REMOVED*** else if ($locationId || $roomId || $corridorId || $shelfId || $trayId || $chestId) ***REMOVED***
-            $row['storage_place_id'] = (string)$this->getStoragePlaceId($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
+            $row['storage_place_id'] = (string)$this->getStoragePlaceHash($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
     ***REMOVED***
 
         return $this->articleTable->modify($row, ['id' => $article['article_id']], $userId);
@@ -333,14 +335,14 @@ class ArticleRepository extends AppRepository
     /**
      * Delete article
      *
-     * @param int $articleId
+     * @param int $articleHash
      * @param string $executorId
      * @return bool
      */
-    public function deleteArticle(string $articleId, string $executorId)
+    public function deleteArticle(string $articleHash, string $executorId)
     ***REMOVED***
         try ***REMOVED***
-            $this->articleTable->archive($executorId, ['id' => $articleId]);
+            $this->articleTable->archive($executorId, ['hash' => $articleHash]);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
@@ -420,7 +422,7 @@ class ArticleRepository extends AppRepository
         $slChestTableName = $this->slChestTable->getTablename();
 
         $fields = [
-            'id' => $articleTableName . '.id',
+            'hash' => $articleTableName . '.hash',
             'title_name_de' => $articleTitleTableName . '.name_de',
             'title_name_en' => $articleTitleTableName . '.name_en',
             'title_name_fr' => $articleTitleTableName . '.name_fr',
@@ -431,23 +433,23 @@ class ArticleRepository extends AppRepository
             'description_name_it' => $articleDescriptionTableName . '.name_it',
             'purchase_date' => $articleTableName . '.date',
             'quantity' => $articleTableName . '.quantity',
-            'quality_id' => $articleQualityTableName . '.id',
+            'quality_hash' => $articleQualityTableName . '.hash',
             'quality_level' => $articleQualityTableName . '.level',
             'quality_name_de' => $articleQualityTableName . '.name_de',
             'quality_name_en' => $articleQualityTableName . '.name_en',
             'quality_name_fr' => $articleQualityTableName . '.name_fr',
             'quality_name_it' => $articleQualityTableName . '.name_it',
-            'location_id' => $storagePlaceTableName . '.sl_location_id',
+            'location_hash' => $storagePlaceTableName . '.sl_location_hash',
             'location_name' => $slLocationTableName . '.name',
-            'room_id' => $storagePlaceTableName . '.sl_location_id',
+            'room_hash' => $storagePlaceTableName . '.sl_location_hash',
             'room_name' => $slRoomTableName . '.name',
-            'corridor_id' => $storagePlaceTableName . '.sl_location_id',
+            'corridor_hash' => $storagePlaceTableName . '.sl_location_hash',
             'corridor_name' => $slCorridorTableName . '.name',
-            'shelf_id' => $storagePlaceTableName . '.sl_location_id',
+            'shelf_hash' => $storagePlaceTableName . '.sl_location_hash',
             'shelf_name' => $slShelfTableName . '.name',
-            'tray_id' => $storagePlaceTableName . '.sl_location_id',
+            'tray_hash' => $storagePlaceTableName . '.sl_location_hash',
             'tray_name' => $slTrayTableName . '.name',
-            'chest_id' => $storagePlaceTableName . '.sl_location_id',
+            'chest_hash' => $storagePlaceTableName . '.sl_location_hash',
             'chest_name' => $slChestTableName . '.name',
             'replace' => $articleTableName . '.replace',
             'barcode' => $articleTableName . '.barcode',
@@ -473,42 +475,42 @@ class ArticleRepository extends AppRepository
             [
                 'table' => $articleQualityTableName,
                 'type' => 'INNER',
-                'conditions' => $articleTableName . '.article_quality_id = ' . $articleQualityTableName . '.id',
+                'conditions' => $articleTableName . '.article_quality_hash = ' . $articleQualityTableName . '.hash',
             ],
             [
                 'table' => $storagePlaceTableName,
                 'type' => 'INNER',
-                'conditions' => $articleTableName . '.storage_place_id = ' . $storagePlaceTableName . '.id',
+                'conditions' => $articleTableName . '.storage_place_hash = ' . $storagePlaceTableName . '.hash',
             ],
             [
                 'table' => $slLocationTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_location_id = ' . $slLocationTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_location_hash = ' . $slLocationTableName . '.hash',
             ],
             [
                 'table' => $slRoomTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_room_id = ' . $slRoomTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_room_hash = ' . $slRoomTableName . '.hash',
             ],
             [
                 'table' => $slCorridorTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_corridor_id = ' . $slCorridorTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_corridor_hash = ' . $slCorridorTableName . '.hash',
             ],
             [
                 'table' => $slShelfTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_shelf_id = ' . $slShelfTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_shelf_hash = ' . $slShelfTableName . '.hash',
             ],
             [
                 'table' => $slTrayTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_tray_id = ' . $slTrayTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_tray_hash = ' . $slTrayTableName . '.hash',
             ],
             [
                 'table' => $slChestTableName,
                 'type' => 'LEFT',
-                'conditions' => $storagePlaceTableName . '.sl_chest_id = ' . $slChestTableName . '.id',
+                'conditions' => $storagePlaceTableName . '.sl_chest_hash = ' . $slChestTableName . '.hash',
             ],
         ];
 
@@ -562,37 +564,39 @@ class ArticleRepository extends AppRepository
      * Get storage place id.
      *
      * @param string $locationId
-     * @param string $roomId
-     * @param string $corridorId
-     * @param string $shelfId
-     * @param string $trayId
-     * @param string $chestId
+     * @param string $roomHash
+     * @param string $corridorHash
+     * @param string $shelfHash
+     * @param string $trayHash
+     * @param string $chestHash
      * @param string $name
+     * @param string $userId
      * @return string
      */
-    private function getStoragePlaceId(string $locationId, string $roomId, string $corridorId, string $shelfId, string $trayId, string $chestId, string $name, string $userId)
+    private function getStoragePlaceHash(string $locationId, string $roomHash, string $corridorHash, string $shelfHash, string $trayHash, string $chestHash, string $name, string $userHash)
     ***REMOVED***
         $row = [
-            'sl_location_id' => $locationId,
-            'sl_room_id' => $roomId,
-            'sl_corridor_id' => $corridorId,
-            'sl_shelf_id' => $shelfId,
-            'sl_tray_id' => $trayId,
-            'sl_chest_id' => $chestId,
+            'sl_location_hash' => $locationId,
+            'sl_room_hash' => $roomHash,
+            'sl_corridor_hash' => $corridorHash,
+            'sl_shelf_hash' => $shelfHash,
+            'sl_tray_hash' => $trayHash,
+            'sl_chest_hash' => $chestHash,
         ];
         $query = $this->storagePlaceTable->newSelect();
-        $query->select('id')->where($row);
+        $query->select('hash')->where($row);
         $row = $query->execute()->fetch();
 
         if (!empty($row)) ***REMOVED***
-            return $row['id'];
+            return $row['hash'];
     ***REMOVED***
 
+        $row['hash'] = uniqid();
         $row['name'] = $name;
         $row['created_at'] = date('Y-m-d H:i:s');
-        $row['created_by'] = $userId;
+        $row['created_by'] = $userHash;
 
-        return $this->storagePlaceTable->insert($row, $userId);
-
+        $this->storagePlaceTable->insert($row, $userHash);
+        return $row['hash'];
 ***REMOVED***
 ***REMOVED***

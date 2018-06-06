@@ -8,46 +8,30 @@ use PDO;
 use Phinx\Console\PhinxApplication;
 use Phinx\Wrapper\TextWrapper;
 use PHPUnit\DbUnit\Database\DefaultConnection;
+use PHPUnit\DbUnit\DataSet\ArrayDataSet;
+use PHPUnit\DbUnit\DataSet\IDataSet;
 use PHPUnit\DbUnit\Operation\Factory;
-use PHPUnit\DbUnit\TestCaseTrait;
 use Slim\Container;
+use Slim\Http\Response;
 
 /**
  * Class DbTestCase
  */
 abstract class DbTestCase extends ApiTestCase
 ***REMOVED***
-    use TestCaseTrait;
+    //use TestCaseTrait;
 
     /**
      * @var PDO
      */
     private static $pdo = null;
-
-    // only instantiate PHPUnit_Extensions_Database_DB_IDatabaseConnection once per test
     private $conn = null;
 
+    // only instantiate PHPUnit_Extensions_Database_DB_IDatabaseConnection once per test
     /**
      * @var Container
      */
     private $container;
-
-    /**
-     * Get PDO object.
-     *
-     * @return PDO
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    protected function getPdo(): PDO
-    ***REMOVED***
-        if (!self::$pdo) ***REMOVED***
-            $pdo = $this->app->getContainer()->get(Connection::class)->getDriver()->connection();
-            self::$pdo = $pdo;
-    ***REMOVED***
-
-        return self::$pdo;
-***REMOVED***
 
     /**
      * Setup.
@@ -62,9 +46,10 @@ abstract class DbTestCase extends ApiTestCase
     ***REMOVED***
         parent::setUp();
         $this->container = $this->app->getContainer();
+        $config = $this->container->get('settings')->get('db');
 
         // Check if phinxlog table exists in database.
-        $tableSchema = $this->container->get('settings')->get('db')['database'];
+        $tableSchema = $config['database'];
         $pdo = $this->getPdo();
         $stmt = $pdo->prepare("SELECT 1 FROM information_schema.TABLES WHERE TABLE_SCHEMA = :tableschema AND TABLE_NAME = :phinxlog");
         $stmt->execute([':tableschema' => $tableSchema, ':phinxlog' => 'phinxlog']);
@@ -88,7 +73,160 @@ abstract class DbTestCase extends ApiTestCase
     ***REMOVED***
 
         $this->truncateTables();
-        Factory::INSERT()->execute($this->getConnection(), $this->getDataSet());
+        $dumpPath = __DIR__ . '/../resources/dumps/';
+        $dump = $dumpPath . 'currentdump.sql';
+
+        $user = $config['username'];
+        $password = $config['password'];
+
+        // Regenerate schema by setting DBUNIT_REGENERATE_NOW
+        if ($shouldMigrate || getenv('DBUNIT_REGENERATE_NOW') || !file_exists($dump)) ***REMOVED***
+            putenv('DBUNIT_REGENERATE_NOW');
+            $dataSet = $this->getDataSet();
+
+            echo "Inserting data into test datbase...\t";
+            $startInsert = microtime(true);
+            Factory::INSERT()->execute($this->getConnection(), $dataSet);
+            $endInsert = microtime(true);
+            $timeUsedInserting = $startInsert - $endInsert;
+            echo "Done ***REMOVED***$timeUsedInserting***REMOVED***s\n";
+
+            echo "Dumping data into dumpfile...\t\t";
+            $startDump = microtime(true);
+            $mysqldumpExecutable = $config['mysqldump_executable'];
+            if (empty($mysqldumpExecutable)) ***REMOVED***
+                throw new Exception('Mysqldump Executable must be defined in the db_test.mysqldump_executable in the configuration (env.php)');
+        ***REMOVED***
+            if (file_exists($dump)) ***REMOVED***
+                rename($dump, $dumpPath . date('Y-m-d_h-i-s_backup.sql'));
+        ***REMOVED***
+            exec("***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***");
+            $endDump = microtime(true);
+            $timeUsedDumping = $endDump - $startDump;
+            echo "Done ***REMOVED***$timeUsedDumping***REMOVED***s\n";
+    ***REMOVED***
+        $mysqlExecutable = $config['mysql_executable'];
+        if (empty($mysqlExecutable)) ***REMOVED***
+            throw new Exception('Mysql Executable must be defined in the db_test.mysql_executable in the configuration (env.php)');
+    ***REMOVED***
+        echo "Importing mysql dump...\t\t\t";
+        $sql = file_get_contents($dump);
+        $startImport = microtime(true);
+        exec("***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$sql***REMOVED***");
+        $endImport = microtime(true);
+        $timeUsedImporting = $endImport - $startImport;
+        echo "Done ***REMOVED***$timeUsedImporting***REMOVED***s\n";
+***REMOVED***
+
+    /**
+     * Get Connection.
+     *
+     * @return DefaultConnection
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public function getConnection(): DefaultConnection
+    ***REMOVED***
+        if ($this->conn === null) ***REMOVED***
+            $this->conn = new DefaultConnection($this->getPdo());
+    ***REMOVED***
+
+        return $this->conn;
+***REMOVED***
+
+    /**
+     * Generate Update row.
+     *
+     * @param array $row
+     * @return array
+     */
+    public function generateUpdateRow(array $row): array
+    ***REMOVED***
+        foreach ($row as $key => $value) ***REMOVED***
+            if (preg_match('/\w*(id)\w*/', $key)) ***REMOVED***
+                continue;
+        ***REMOVED***
+            $converted = preg_replace('/[ÄÖÜäöüÉÈÀéèà]/', "", $row[$key]);
+            $parts = str_split(html_entity_decode($converted));
+            sort($parts);
+            $row[$key] = implode($parts);
+    ***REMOVED***
+
+        return $row;
+***REMOVED***
+
+    protected function getDataSet(): IDataSet
+    ***REMOVED***
+        echo "Regenerating mock database...\t\t";
+        $testDatabase = new TestDatabase();
+        $startGenerate = microtime(true);
+        $json = file_get_contents(__DIR__ . '/dataset.json');
+        if (empty($json)) ***REMOVED***
+            $data = $testDatabase->all();
+            $json = json_encode($data);
+            file_put_contents(__DIR__ . '/dataset.json', $json);
+    ***REMOVED*** else ***REMOVED***
+            $dataJson = json_decode($json, true);
+            return new ArrayDataSet($dataJson);
+    ***REMOVED***
+        $endGenerate = microtime(true);
+        $timeUsedGenerating = $endGenerate - $startGenerate;
+        echo "Done ***REMOVED***$timeUsedGenerating***REMOVED***s\n";
+        return new ArrayDataSet($data);
+***REMOVED***
+
+    /**
+     * Get PDO object.
+     *
+     * @return PDO
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    protected function getPdo(): PDO
+    ***REMOVED***
+        if (!self::$pdo) ***REMOVED***
+            /**
+             * @var $connection Connection
+             */
+            $connection = $this->app->getContainer()->get(Connection::class);
+            $pdo = $connection->getDriver()->getConnection();
+            self::$pdo = $pdo;
+    ***REMOVED***
+
+        return self::$pdo;
+***REMOVED***
+
+    /**
+     * Truncate all Tables.
+     *
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    protected function truncateTables()
+    ***REMOVED***
+        $pdo = $this->getPdo();
+        $stmt = $pdo->query('SHOW TABLES');
+        while ($row = $stmt->fetch()) ***REMOVED***
+            $table = array_values($row)[0];
+            if ($table !== 'phinxlog') ***REMOVED***
+                $pdo->prepare(sprintf('TRUNCATE TABLE `%s`', $table))->execute();
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***
+
+    protected function assertResponseHasKeys(Response $response, array $keys)
+    ***REMOVED***
+        $json = $response->getBody()->__toString();
+        $this->assertJson($json);
+        $data = json_decode($json, true);
+        foreach ($keys as $key) ***REMOVED***
+            $subKeys = explode('.', $key);
+            $array = $data;
+            foreach ($subKeys as $subKey) ***REMOVED***
+                $this->assertArrayHasKey($subKey, $array);
+                $array = $array[$subKey];
+        ***REMOVED***
+    ***REMOVED***
 ***REMOVED***
 
     /**
@@ -125,61 +263,6 @@ abstract class DbTestCase extends ApiTestCase
     ***REMOVED***
 
         return $shouldMigrate;
-***REMOVED***
-
-    /**
-     * Truncate all Tables.
-     *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    protected function truncateTables()
-    ***REMOVED***
-        $pdo = $this->getPdo();
-        $stmt = $pdo->query('SHOW TABLES');
-        while ($row = $stmt->fetch()) ***REMOVED***
-            $table = array_values($row)[0];
-            if ($table !== 'phinxlog') ***REMOVED***
-                $pdo->prepare(sprintf('TRUNCATE TABLE `%s`', $table))->execute();
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-
-    /**
-     * Get Connection.
-     *
-     * @return DefaultConnection
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    public function getConnection(): DefaultConnection
-    ***REMOVED***
-        if ($this->conn === null) ***REMOVED***
-            $this->conn = $this->createDefaultDBConnection($this->getPdo());
-    ***REMOVED***
-
-        return $this->conn;
-***REMOVED***
-
-    /**
-     * Generate Update row.
-     *
-     * @param array $row
-     * @return array
-     */
-    public function generateUpdateRow(array $row): array
-    ***REMOVED***
-        foreach ($row as $key => $value) ***REMOVED***
-            if (preg_match('/\w*(id)\w*/', $key)) ***REMOVED***
-                continue;
-        ***REMOVED***
-            $converted = preg_replace('/[ÄÖÜäöüÉÈÀéèà]/', "", $row[$key]);
-            $parts = str_split(html_entity_decode($converted));
-            sort($parts);
-            $row[$key] = implode($parts);
-    ***REMOVED***
-
-        return $row;
 ***REMOVED***
 ***REMOVED***
 

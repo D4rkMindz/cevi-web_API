@@ -46,7 +46,7 @@ class ArticleController extends AppController
     ***REMOVED***
         $article = $this->articleRepository->getArticle($args['department_id'], $args['article_id']);
 
-        if (empty($articles)) ***REMOVED***
+        if (empty($article)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('No article found')]);
     ***REMOVED***
 
@@ -71,7 +71,7 @@ class ArticleController extends AppController
         $params = $this->getLimitationParams($request);
         $params['description_format'] = (string)$request->getParam('description_format');
 
-        $articles = $this->articleRepository->getAllArticles((int)$args['department_id'], $params['limit'], $params['page'], $params['description_format']);
+        $articles = $this->articleRepository->getAllArticles($args['department_id'], $params['limit'], $params['page'], $params['description_format']);
 
         if (empty($articles)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('No articles found')]);
@@ -158,8 +158,8 @@ class ArticleController extends AppController
     ***REMOVED***
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
-        $data['department_id'] = $args['department_id'];
-        $data['article_id'] = $args['article_id'];
+        $data['department_hash'] = $args['department_id'];
+        $data['article_hash'] = $args['article_id'];
 
         $validationContext = $this->articleValidation->validateUpdate($data);
         if ($validationContext->fails()) ***REMOVED***

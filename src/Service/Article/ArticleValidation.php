@@ -47,8 +47,8 @@ class ArticleValidation extends AppValidation
     ***REMOVED***
         $validationContext = new ValidationContext();
 
-        if (!$this->articleRepository->existsArticle($article['article_id'], $article['department_id'])) ***REMOVED***
-            $validationContext->setError('article_id', __('Article does not exist'));
+        if (!$this->articleRepository->existsArticle($article['article_hash'], $article['department_hash'])) ***REMOVED***
+            $validationContext->setError('article_hash', __('Article does not exist'));
             return $validationContext;
     ***REMOVED***
 
