@@ -12,6 +12,7 @@ use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
 use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
+use Slim\Exception\ContainerException;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -97,6 +98,23 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
 ***REMOVED***;
 
 /**
+ * Twig container.
+ *
+ * USED IN EMAIL RENDERING IN USERCONTROLLER!
+ *
+ * @param Container $container
+ * @return Twig_Environment
+ * @throws ContainerException
+ */
+$container[Twig_Environment::class] = function (Container $container): Twig_Environment ***REMOVED***
+    $twigSettings = $container->get('settings')->get('twig');
+    $loader = new Twig_Loader_Filesystem($twigSettings['viewPath']);
+    $twig = new Twig_Environment($loader, ['cache' => $twigSettings['cachePath']]);
+    $twig->addExtension(new TwigTranslationExtension());
+
+    return $twig;
+***REMOVED***;
+/**
  * Translator container.
  *
  * @param Container $container
@@ -141,7 +159,7 @@ $container[Role::class] = function (Container $container) ***REMOVED***
  */
 $container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_app.log', date('y-m-d')));
-    $logger = new Logger('app',[$rotatingFileHandler]);
+    $logger = new Logger('app', [$rotatingFileHandler]);
     return $logger;
 ***REMOVED***;
 
@@ -153,7 +171,7 @@ $container[Monolog\Logger::class] = function (Container $container) ***REMOVED**
  */
 $container[Monolog\Logger::class . '_request'] = function (Container $container) ***REMOVED***
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_access.log', date('y-m-d')));
-    $logger = new Logger('request',[$rotatingFileHandler]);
+    $logger = new Logger('request', [$rotatingFileHandler]);
     return $logger;
 ***REMOVED***;
 
