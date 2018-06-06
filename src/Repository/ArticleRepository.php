@@ -86,11 +86,6 @@ class ArticleRepository extends AppRepository
     private $formatter;
 
     /**
-     * @var Logger
-     */
-    private $logger;
-
-    /**
      * ArticleRepository constructor.
      * @param Container $container
      * @throws \Interop\Container\Exception\ContainerException
@@ -108,9 +103,6 @@ class ArticleRepository extends AppRepository
         $this->slShelfTable = $container->get(SlShelfTable::class);
         $this->slTrayTable = $container->get(SlTrayTable::class);
         $this->slChestTable = $container->get(SlChestTable::class);
-
-        // TODO remove logger
-        $this->logger = $container->get(Logger::class . '_debug');
 
         $this->formatter = new Formatter();
 ***REMOVED***
@@ -227,9 +219,7 @@ class ArticleRepository extends AppRepository
                 $articleTableName . '.department_id' => $departmentId,
             ]);
 
-        $this->logger->addDebug('Reading articles with ' . $query->sql());
         $articles = $query->execute()->fetchAll('assoc');
-        $this->logger->addDebug('REceived articles: ' . json_encode($articles));
 
         if (empty($articles)) ***REMOVED***
             return [];
