@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use App\Service\Article\ArticleValidation;
-use Monolog\Logger;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
