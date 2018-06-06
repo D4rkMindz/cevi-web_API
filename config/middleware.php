@@ -122,7 +122,8 @@ $app->add(function (Request $request, Response $response, $next) use ($container
     // TODO find better solution to get $_SERVER data
     $ip = $request->getServerParam('REMOTE_ADDR');
     $userAgent = $request->getServerParam('HTTP_USER_AGENT');
-    $xToken = $request->getHeader('X-Token')[0];
+    $xTokenHeader = $request->getHeader('X-Token');
+    $xToken = is_array($xTokenHeader) && array_key_exists(0, $xTokenHeader) ? $xTokenHeader[0] : '';
 
     $logger->info(sprintf(
         '(%s) %sms %s -> %s from %s (%s) using %s',

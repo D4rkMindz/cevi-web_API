@@ -23,7 +23,7 @@ class ArticleController extends AppController
      */
     private $articleValidation;
 
-    private $logger;
+    protected $logger;
 
     /**
      * ArticleController constructor.
