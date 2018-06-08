@@ -13,7 +13,6 @@ use App\Test\DbTestCase;
 
 class ArticlesTest extends DbTestCase
 ***REMOVED***
-    private $data;
     private $departmentHash;
     private $articleHash;
 
@@ -107,5 +106,16 @@ class ArticlesTest extends DbTestCase
     ***REMOVED***
         $request = $this->createRequest('GET', '/v2/departments/' . $this->departmentHash . '/articles');
         $response = $this->request($request);
+***REMOVED***
+
+    /**
+     * Hook to get all data
+     *
+     * @param array $data
+     */
+    protected function getDataHook(array $data): void
+    ***REMOVED***
+        $this->departmentHash = $data['department'][0]['hash'];
+        $this->articleHash = $data['article'][0]['hash'];
 ***REMOVED***
 ***REMOVED***

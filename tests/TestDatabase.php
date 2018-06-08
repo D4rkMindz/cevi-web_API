@@ -27,8 +27,8 @@ class TestDatabase
             'department_type' => $this->department_type(),
             'educational_course' => $this->educational_course(),
             'educational_course_description' => $this->educational_course_description(),
-            'educational_course_image' => $this->educational_course(),
-            'educational_course_organiser' => $this->educational_course(),
+            'educational_course_image' => $this->educational_course_image(),
+            'educational_course_organiser' => $this->educational_course_organiser(),
             'educational_course_participant' => $this->educational_course_participant(),
             'educational_course_title' => $this->educational_course_title(),
             'email_token' => $this->email_token(),
@@ -53,137 +53,27 @@ class TestDatabase
         ];
 ***REMOVED***
 
-    public function events()
+    public function educational_course_image()
     ***REMOVED***
         return [
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-            'event' => $this->event(),
-            'event_description' => $this->event_description(),
-            'event_title' => $this->event_title(),
-            'event_participant' => $this->event_participant(),
-            'event_image' => $this->event_image(),
-            'image' => $this->image(),
-        ];
-***REMOVED***
-
-    /**
-     * Get User data
-     *
-     * @return array
-     */
-    public function users()
-    ***REMOVED***
-        return [
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-        ];
-***REMOVED***
-
-    public function storage()
-    ***REMOVED***
-        return [
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-            'storage_place' => $this->storage_place(),
-            'sl_room' => $this->sl_room(),
-            'sl_corridor' => $this->sl_corridor(),
-            'sl_shelf' => $this->sl_shelf(),
-            'sl_tray' => $this->sl_tray(),
-            'sl_chest' => $this->sl_chest(),
-            'sl_location' => $this->sl_location(),
-        ];
-***REMOVED***
-
-    public function location()
-    ***REMOVED***
-        return [
-            'storage_place' => $this->storage_place(),
-            'sl_location' => $this->sl_location(),
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-        ];
-***REMOVED***
-
-    public function sl_locations()
-    ***REMOVED***
-        return [
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-            'storage_place' => $this->storage_place(),
-            'sl_location' => $this->sl_location(),
-            'sl_room' => $this->sl_room(),
-            'sl_corridor' => $this->sl_corridor(),
-            'sl_shelf' => $this->sl_shelf(),
-            'sl_tray' => $this->sl_tray(),
-            'sl_chest' => $this->sl_chest(),
-        ];
-***REMOVED***
-
-    public function articles()
-    ***REMOVED***
-        return [
-            'article' => $this->article(),
-            'article_description' => $this->article_description(),
-            'article_quality' => $this->article_quality(),
-            'article_title' => $this->article_title(),
-            'department' => $this->department(),
-            'department_group' => $this->department_group(),
-            'department_region' => $this->department_region(),
-            'department_type' => $this->department_type(),
-            'language' => $this->language(),
-            'user' => $this->user(),
-            'position' => $this->position(),
-            'city' => $this->city(3),
-            'permission' => $this->permission(),
-            'gender' => $this->gender(),
-            'storage_place' => $this->storage_place(),
-            'sl_room' => $this->sl_room(),
-            'sl_corridor' => $this->sl_corridor(),
-            'sl_shelf' => $this->sl_shelf(),
-            'sl_tray' => $this->sl_tray(),
-            'sl_chest' => $this->sl_chest(),
-            'sl_location' => $this->sl_location(),
+            [
+                'id' => '1',
+                'hash' => 'hash_test_1',
+                'educational_course_hash' => $this->educational_course()[0]['hash'],
+                'image_hash' => $this->image()[0]['hash'],
+            ],
+            [
+                'id' => '2',
+                'hash' => 'hash_test_2',
+                'educational_course_hash' => $this->educational_course()[1]['hash'],
+                'image_hash' => $this->image()[0]['hash'],
+            ],
+            [
+                'id' => '3',
+                'hash' => 'hash_test_3',
+                'educational_course_hash' => $this->educational_course()[2]['hash'],
+                'image_hash' => $this->image()[0]['hash'],
+            ],
         ];
 ***REMOVED***
 
@@ -196,25 +86,25 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'de_CH',
                 'abbreviation' => 'de',
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'en_GB',
                 'abbreviation' => 'en',
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'fr_CH',
                 'abbreviation' => 'fr',
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'name' => 'it_CH',
                 'abbreviation' => 'it',
             ],
@@ -226,7 +116,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'Abteilungsleiter',
                 'name_en' => 'Head of department',
                 'name_fr' => 'Capo dipartimento',
@@ -234,7 +124,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Lagerleiter',
                 'name_en' => 'Camp leader',
                 'name_fr' => 'Chef de camp',
@@ -242,7 +132,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name_de' => 'Gruppenleiter',
                 'name_en' => 'Team leader',
                 'name_fr' => 'Chef d\'équipe',
@@ -250,7 +140,7 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'name_de' => 'Hilfsleiter',
                 'name_en' => 'Auxiliary conductors',
                 'name_fr' => 'Conducteurs auxiliaires',
@@ -258,7 +148,7 @@ class TestDatabase
             ],
             [
                 'id' => '5',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_5',
                 'name_de' => 'Teilnehmer',
                 'name_en' => 'Participants',
                 'name_fr' => 'Participants',
@@ -266,7 +156,7 @@ class TestDatabase
             ],
             [
                 'id' => '6',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_6',
                 'name_de' => 'Eltern',
                 'name_en' => 'Parent',
                 'name_fr' => 'Parent',
@@ -280,7 +170,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'city_id' => '1',
                 'language_hash' => $this->language()[0]['hash'],
                 'permission_hash' => $this->language()[0]['hash'],
@@ -305,7 +195,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'city_id' => '2',
                 'language_hash' => $this->language()[1]['hash'],
                 'permission_hash' => $this->language()[1]['hash'],
@@ -330,7 +220,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'city_id' => '3',
                 'language_hash' => $this->language()[0]['hash'],
                 'permission_hash' => $this->language()[2]['hash'],
@@ -361,7 +251,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'article_title_id' => '1',
                 'article_description_id' => '1',
                 'article_quality_hash' => $this->article_quality()[0]['hash'],
@@ -376,7 +266,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'article_title_id' => '2',
                 'article_description_id' => '2',
                 'article_quality_hash' => $this->article_quality()[1]['hash'],
@@ -391,7 +281,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'article_title_id' => '3',
                 'article_description_id' => '3',
                 'article_quality_hash' => $this->article_quality()[2]['hash'],
@@ -478,7 +368,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'level' => '1',
                 'name_de' => 'Sehr gut',
                 'name_en' => 'Sehr gut',
@@ -487,7 +377,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'level' => '2',
                 'name_de' => 'Gut',
                 'name_en' => 'Gut',
@@ -496,7 +386,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'level' => '3',
                 'name_de' => 'Mittel',
                 'name_en' => 'Mittel',
@@ -505,7 +395,7 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'level' => '4',
                 'name_de' => 'Bald ersetzen',
                 'name_en' => 'Bald ersetzen',
@@ -514,7 +404,7 @@ class TestDatabase
             ],
             [
                 'id' => '5',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_5',
                 'level' => '5',
                 'name_de' => 'Ersetzen',
                 'name_en' => 'Ersetzen',
@@ -523,7 +413,7 @@ class TestDatabase
             ],
             [
                 'id' => '6',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_6',
                 'level' => '6',
                 'name_de' => 'Kaputt',
                 'name_en' => 'Kaputt',
@@ -538,7 +428,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'Zugesagt',
                 'name_en' => 'Participated',
                 'name_fr' => 'Participaté',
@@ -546,7 +436,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Abgesagt',
                 'name_en' => 'Departicipated',
                 'name_fr' => 'Departicipaté',
@@ -554,7 +444,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name_de' => 'Vielleicht',
                 'name_en' => 'Probably',
                 'name_fr' => 'Peutetre',
@@ -568,21 +458,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'department_hash' => $this->department()[0]['hash'],
                 'event_hash' => $this->event()[0]['hash'],
                 'department_group_hash' => $this->department_group()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'department_hash' => $this->department()[1]['hash'],
                 'event_hash' => $this->event()[1]['hash'],
                 'department_group_hash' => $this->department_group()[1]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'department_hash' => $this->department()[2]['hash'],
                 'event_hash' => $this->event()[2]['hash'],
                 'department_group_hash' => $this->department_group()[1]['hash'],
@@ -595,7 +485,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'educational_course_title_id' => '1',
                 'educational_course_description_id' => '1',
                 'educational_course_organiser_hash' => $this->educational_course_organiser()[0]['hash'],
@@ -615,7 +505,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'educational_course_title_id' => '2',
                 'educational_course_description_id' => '2',
                 'educational_course_organiser_hash' => $this->educational_course_organiser()[1]['hash'],
@@ -635,7 +525,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'educational_course_title_id' => '3',
                 'educational_course_description_id' => '3',
                 'educational_course_organiser_hash' => $this->educational_course_organiser()[2]['hash'],
@@ -661,7 +551,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'user_hash' => $this->user()[0]['hash'],
                 'phone' => '061 456 12 78',
                 'email' => 'contact@llm.ch',
@@ -670,7 +560,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'user_hash' => $this->user()[1]['hash'],
                 'phone' => '061 457 12 78',
                 'email' => 'contact@glk.ch',
@@ -679,7 +569,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'user_hash' => $this->user()[2]['hash'],
                 'phone' => '061 357 12 78',
                 'email' => 'contact@heku.ch',
@@ -694,20 +584,20 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
-                'educational_course_hash' =>$this->educational_course()[0]['hash'],
+                'hash' => 'hash_test_1',
+                'educational_course_hash' => $this->educational_course()[0]['hash'],
                 'user_hash' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
-                'educational_course_hash' =>$this->educational_course()[0]['hash'],
+                'hash' => 'hash_test_2',
+                'educational_course_hash' => $this->educational_course()[0]['hash'],
                 'user_hash' => $this->user()[1]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
-                'educational_course_hash' =>$this->educational_course()[1]['hash'],
+                'hash' => 'hash_test_3',
+                'educational_course_hash' => $this->educational_course()[1]['hash'],
                 'user_hash' => $this->user()[2]['hash'],
             ],
         ];
@@ -808,21 +698,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
                 'user_hash' => $this->user()[0]['hash'],
                 'token' => MailToken::generate(),
+                'issued_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
                 'user_hash' => $this->user()[1]['hash'],
                 'token' => MailToken::generate(),
+                'issued_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
                 'user_hash' => $this->user()[2]['hash'],
                 'token' => MailToken::generate(),
+                'issued_at' => date('Y-m-d H:i:s', (time() - (60*16))), // invalid token, older than 15 minutes
             ],
         ];
 ***REMOVED***
@@ -832,7 +722,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'event_title_id' => '1',
                 'event_description_id' => '1',
                 'price' => '123,00',
@@ -851,7 +741,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'event_title_id' => '2',
                 'event_description_id' => '2',
                 'price' => '150,50',
@@ -870,7 +760,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'event_title_id' => '3',
                 'event_description_id' => '3',
                 'price' => '300,00',
@@ -922,11 +812,10 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'user_hash' => $this->user()[0]['hash'],
                 'event_hash' => $this->event()[0]['hash'],
-                'participation_status_hash' => $this->participation_status()[0]['hash'],
-                'publicize_at' => '2018-02-01 10:00:00',
+                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -936,11 +825,10 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'user_hash' => $this->user()[1]['hash'],
                 'event_hash' => $this->event()[1]['hash'],
-                'participation_status_hash' => $this->participation_status()[0]['hash'],
-                'publicize_at' => '2018-02-01 10:00:00',
+                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -949,12 +837,11 @@ class TestDatabase
                 'archived_by' => null,
             ],
             [
-                'id' => '2',
-                'hash' => uniqid('test_'),
+                'id' => '3',
+                'hash' => 'hash_test_3',
                 'user_hash' => $this->user()[2]['hash'],
                 'event_hash' => $this->event()[2]['hash'],
-                'participation_status_hash' => $this->participation_status()[0]['hash'],
-                'publicize_at' => '2018-02-01 10:00:00',
+                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -970,7 +857,6 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
                 'name_de' => 'GLK',
                 'name_en' => 'GLK',
                 'name_fr' => 'GLK',
@@ -984,7 +870,6 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
                 'name_de' => 'LLM',
                 'name_en' => 'LLM',
                 'name_fr' => 'LLM',
@@ -998,7 +883,6 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
                 'name_de' => 'HEKU',
                 'name_en' => 'HEKU',
                 'name_fr' => 'HEKU',
@@ -1012,11 +896,10 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
-                'name_de' => 'HEKU',
-                'name_en' => 'HEKU',
-                'name_fr' => 'HEKU',
-                'name_it' => 'HEKU',
+                'name_de' => 'ZM1',
+                'name_en' => 'ZM1',
+                'name_fr' => 'ZM1',
+                'name_it' => 'ZM1',
                 'created_at' => '2017-01-01 00:00:10',
                 'created_by' => $this->user()[1]['hash'],
                 'modified_at' => null,
@@ -1032,19 +915,16 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
                 'image_hash' => $this->image()[0]['hash'],
                 'event_hash' => $this->event()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
                 'image_hash' => $this->image()[1]['hash'],
                 'event_hash' => $this->event()[1]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
                 'image_hash' => $this->image()[2]['hash'],
                 'event_hash' => $this->event()[2]['hash'],
             ],
@@ -1090,7 +970,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'department_group_hash' => $this->department_group()[0]['hash'],
                 'department_type_hash' => $this->department_type()[0]['hash'],
                 'city_id' => '1',
@@ -1100,7 +980,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'department_group_hash' => $this->department_group()[1]['hash'],
                 'department_type_hash' => $this->department_type()[1]['hash'],
                 'city_id' => '2',
@@ -1110,7 +990,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'department_group_hash' => $this->department_group()[1]['hash'],
                 'department_type_hash' => $this->department_type()[0]['hash'],
                 'city_id' => '3',
@@ -1120,7 +1000,7 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'department_group_hash' => $this->department_group()[1]['hash'],
                 'department_type_hash' => $this->department_type()[0]['hash'],
                 'city_id' => '3',
@@ -1136,7 +1016,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'AG-SO-LU-ZG',
                 'name_en' => 'AG-SO-LU-ZG',
                 'name_fr' => 'AG-SO-LU-ZG',
@@ -1144,7 +1024,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Basel',
                 'name_en' => 'Basel',
                 'name_fr' => 'Basel',
@@ -1158,7 +1038,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'Nord',
                 'name_en' => 'Nord',
                 'name_fr' => 'Nord',
@@ -1166,7 +1046,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Süd',
                 'name_en' => 'Süd',
                 'name_fr' => 'Süd',
@@ -1174,7 +1054,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name_de' => 'Ost',
                 'name_en' => 'Ost',
                 'name_fr' => 'Ost',
@@ -1182,7 +1062,7 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'name_de' => 'West',
                 'name_en' => 'West',
                 'name_fr' => 'West',
@@ -1196,7 +1076,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'Verband',
                 'name_en' => 'Verband',
                 'name_fr' => 'Verband',
@@ -1204,7 +1084,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Tensing',
                 'name_en' => 'Tensing',
                 'name_fr' => 'Tensing',
@@ -1218,7 +1098,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name_de' => 'Mann',
                 'name_en' => 'Men',
                 'name_fr' => 'Homme',
@@ -1226,7 +1106,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name_de' => 'Frau',
                 'name_en' => 'Miss',
                 'name_fr' => 'Madame',
@@ -1240,7 +1120,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'url' => baseurl('/img/events/image-url-1.jpg'),
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
@@ -1252,7 +1132,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'url' => baseurl('/img/events/image-url-2.jpg'),
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
@@ -1264,7 +1144,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'url' => baseurl('/img/events/image-url-3.jpg'),
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
@@ -1282,25 +1162,25 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'level' => '64',
                 'name' => 'archive',
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'level' => '32',
                 'name' => 'modify',
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'level' => '16',
                 'name' => 'insert',
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'level' => '8',
                 'name' => 'read',
             ],
@@ -1312,21 +1192,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Kiste 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Kiste 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Kiste 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1339,21 +1219,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Korridor 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Korridor 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Korridor 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1366,21 +1246,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Ort 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Ort 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Ort 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1393,21 +1273,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Raum 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Raum 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Raum 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1420,21 +1300,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Regal 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Regal 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Regal 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1447,21 +1327,21 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'name' => 'Tablar 1',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'name' => 'Tablar 2',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'name' => 'Tablar 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1474,7 +1354,7 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_1',
                 'sl_location_hash' => $this->sl_location()[0]['hash'],
                 'sl_room_hash' => $this->sl_room()[0]['hash'],
                 'sl_corridor_hash' => $this->sl_corridor()[0]['hash'],
@@ -1490,7 +1370,7 @@ class TestDatabase
             ],
             [
                 'id' => '2',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_2',
                 'sl_location_hash' => $this->sl_location()[1]['hash'],
                 'sl_room_hash' => $this->sl_room()[1]['hash'],
                 'sl_corridor_hash' => $this->sl_corridor()[1]['hash'],
@@ -1506,7 +1386,7 @@ class TestDatabase
             ],
             [
                 'id' => '3',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_3',
                 'sl_location_hash' => $this->sl_location()[0]['hash'],
                 'sl_room_hash' => $this->sl_room()[0]['hash'],
                 'sl_corridor_hash' => $this->sl_corridor()[0]['hash'],
@@ -1522,7 +1402,7 @@ class TestDatabase
             ],
             [
                 'id' => '4',
-                'hash' => uniqid('test_'),
+                'hash' => 'hash_test_4',
                 'sl_location_hash' => $this->sl_location()[0]['hash'],
                 'sl_room_hash' => $this->sl_room()[1]['hash'],
                 'sl_corridor_hash' => $this->sl_corridor()[1]['hash'],

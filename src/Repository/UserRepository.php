@@ -206,7 +206,7 @@ class UserRepository extends AppRepository
             [
                 'table' => $permissionTablename,
                 'type' => 'INNER',
-                'conditions' => $userTableName . '.permission_id = ' . $permissionTablename . '.id',
+                'conditions' => $userTableName . '.permission_hash = ' . $permissionTablename . '.hash',
             ],
         ]);
         $row = $query->execute()->fetch('assoc');

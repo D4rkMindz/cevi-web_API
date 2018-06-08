@@ -79,16 +79,16 @@ abstract class DbTestCase extends ApiTestCase
         $user = $config['username'];
         $password = $config['password'];
 
+        $dataSet = $this->getDataSet();
         // Regenerate schema by setting DBUNIT_REGENERATE_NOW
-        if ($shouldMigrate || getenv('DBUNIT_REGENERATE_NOW') || !file_exists($dump)) ***REMOVED***
+        if ($shouldMigrate || !empty(getenv('DBUNIT_REGENERATE_NOW')) || !file_exists($dump)) ***REMOVED***
             putenv('DBUNIT_REGENERATE_NOW');
-            $dataSet = $this->getDataSet();
 
             echo "Inserting data into test datbase...\t";
             $startInsert = microtime(true);
             Factory::INSERT()->execute($this->getConnection(), $dataSet);
             $endInsert = microtime(true);
-            $timeUsedInserting = $startInsert - $endInsert;
+            $timeUsedInserting = $endInsert - $startInsert;
             echo "Done ***REMOVED***$timeUsedInserting***REMOVED***s\n";
 
             echo "Dumping data into dumpfile...\t\t";
@@ -98,9 +98,13 @@ abstract class DbTestCase extends ApiTestCase
                 throw new Exception('Mysqldump Executable must be defined in the db_test.mysqldump_executable in the configuration (env.php)');
         ***REMOVED***
             if (file_exists($dump)) ***REMOVED***
-                rename($dump, $dumpPath . date('Y-m-d_h-i-s_backup.sql'));
+                rename($dump, $dumpPath . date('Y-m-d_h-i-s') . '_backup.sql');
         ***REMOVED***
-            exec("***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***");
+            $command = "***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***";
+            if (empty($password)) ***REMOVED***
+                $command = "***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***";
+        ***REMOVED***
+            exec($command);
             $endDump = microtime(true);
             $timeUsedDumping = $endDump - $startDump;
             echo "Done ***REMOVED***$timeUsedDumping***REMOVED***s\n";
@@ -110,9 +114,12 @@ abstract class DbTestCase extends ApiTestCase
             throw new Exception('Mysql Executable must be defined in the db_test.mysql_executable in the configuration (env.php)');
     ***REMOVED***
         echo "Importing mysql dump...\t\t\t";
-        $sql = file_get_contents($dump);
         $startImport = microtime(true);
-        exec("***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$sql***REMOVED***");
+        $migrateCommand = "***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$dump***REMOVED***";
+        if (empty($password)) ***REMOVED***
+            $migrateCommand = "***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$dump***REMOVED***";
+    ***REMOVED***
+        exec($migrateCommand);
         $endImport = microtime(true);
         $timeUsedImporting = $endImport - $startImport;
         echo "Done ***REMOVED***$timeUsedImporting***REMOVED***s\n";
@@ -155,6 +162,13 @@ abstract class DbTestCase extends ApiTestCase
         return $row;
 ***REMOVED***
 
+    /**
+     * Hook to get all data
+     *
+     * @param array $data
+     */
+    abstract protected function getDataHook(array $data): void;
+
     protected function getDataSet(): IDataSet
     ***REMOVED***
         echo "Regenerating mock database...\t\t";
@@ -163,10 +177,12 @@ abstract class DbTestCase extends ApiTestCase
         $json = file_get_contents(__DIR__ . '/dataset.json');
         if (empty($json)) ***REMOVED***
             $data = $testDatabase->all();
+            $this->getDataHook($data);
             $json = json_encode($data);
             file_put_contents(__DIR__ . '/dataset.json', $json);
     ***REMOVED*** else ***REMOVED***
             $dataJson = json_decode($json, true);
+            $this->getDataHook($dataJson);
             return new ArrayDataSet($dataJson);
     ***REMOVED***
         $endGenerate = microtime(true);
