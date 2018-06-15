@@ -24,8 +24,8 @@ class Init extends AbstractMigration
         $table->addColumn('department_hash', 'string', ['null' => false, 'limit' => 255, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'storage_place_hash'])->update();
         $table->addColumn('date', 'datetime', ['null' => false, 'after' => 'department_hash'])->update();
         $table->addColumn('quantity', 'integer', ['null' => false, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'date'])->update();
-        $table->addColumn('replace', 'datetime', ['null' => true, 'after' => 'quantity'])->update();
-        $table->addColumn('barcode', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'replace'])->update();
+        $table->addColumn('replacement', 'datetime', ['null' => true, 'after' => 'quantity'])->update();
+        $table->addColumn('barcode', 'string', ['null' => true, 'limit' => 45, 'collation' => "utf8_general_ci", 'encoding' => "utf8", 'after' => 'replacement'])->update();
         $table->addColumn('created_at', 'datetime', ['null' => true, 'after' => 'barcode'])->update();
         $table->addColumn('created_by', 'integer', ['null' => true, 'limit' => MysqlAdapter::INT_REGULAR, 'precision' => 10, 'after' => 'created_at'])->update();
         $table->addColumn('modified_at', 'datetime', ['null' => true, 'after' => 'created_by'])->update();

@@ -22,6 +22,7 @@ class TestDatabase
             'article_title' => $this->article_title(),
             'city' => $this->city(3),
             'department' => $this->department(),
+            'department_event' => $this->department_event(),
             'department_group' => $this->department_group(),
             'department_region' => $this->department_region(),
             'department_type' => $this->department_type(),
@@ -36,6 +37,7 @@ class TestDatabase
             'event_description' => $this->event_description(),
             'event_title' => $this->event_title(),
             'event_participant' => $this->event_participant(),
+            'event_participation_status' => $this->event_participation_status(),
             'event_image' => $this->event_image(),
             'gender' => $this->gender(),
             'image' => $this->image(),
@@ -259,8 +261,9 @@ class TestDatabase
                 'department_hash' => $this->department()[0]['hash'],
                 'date' => '2019-01-01 0:00:00',
                 'quantity' => '10',
-                'replace' => '2018-03-01 00:00:00',
+                'replacement' => '2018-03-01 00:00:00',
                 'barcode' => 'CEVIWEB-A1_L1_D1',
+                'available_for_rent' => false,
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
@@ -271,11 +274,12 @@ class TestDatabase
                 'article_description_id' => '2',
                 'article_quality_hash' => $this->article_quality()[1]['hash'],
                 'storage_place_hash' => $this->storage_place()[1]['hash'],
-                'department_hash' => $this->department()[1]['hash'],
+                'department_hash' => $this->department()[0]['hash'],
                 'date' => '2017-01-01 0:00:00',
                 'quantity' => '10',
-                'replace' => '2018-12-01 00:00:00',
+                'replacement' => '2018-12-01 00:00:00',
                 'barcode' => 'CEVIWEB-A2_L2_D2',
+                'available_for_rent' => true,
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
@@ -289,8 +293,9 @@ class TestDatabase
                 'department_hash' => $this->department()[2]['hash'],
                 'date' => '2017-01-01 0:00:00',
                 'quantity' => '10',
-                'replace' => '2018-12-01 00:00:00',
+                'replacement' => '2018-12-01 00:00:00',
                 'barcode' => 'CEVIWEB-A3_L3_D3',
+                'available_for_rent' => true,
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],
             ],
@@ -423,7 +428,7 @@ class TestDatabase
         ];
 ***REMOVED***
 
-    private function participation_status()
+    private function event_participation_status()
     ***REMOVED***
         return [
             [
@@ -458,21 +463,18 @@ class TestDatabase
         return [
             [
                 'id' => '1',
-                'hash' => 'hash_test_1',
                 'department_hash' => $this->department()[0]['hash'],
                 'event_hash' => $this->event()[0]['hash'],
                 'department_group_hash' => $this->department_group()[0]['hash'],
             ],
             [
                 'id' => '2',
-                'hash' => 'hash_test_2',
                 'department_hash' => $this->department()[1]['hash'],
                 'event_hash' => $this->event()[1]['hash'],
                 'department_group_hash' => $this->department_group()[1]['hash'],
             ],
             [
                 'id' => '3',
-                'hash' => 'hash_test_3',
                 'department_hash' => $this->department()[2]['hash'],
                 'event_hash' => $this->event()[2]['hash'],
                 'department_group_hash' => $this->department_group()[1]['hash'],
@@ -712,7 +714,7 @@ class TestDatabase
                 'id' => '3',
                 'user_hash' => $this->user()[2]['hash'],
                 'token' => MailToken::generate(),
-                'issued_at' => date('Y-m-d H:i:s', (time() - (60*16))), // invalid token, older than 15 minutes
+                'issued_at' => date('Y-m-d H:i:s', (time() - (60 * 16))), // invalid token, older than 15 minutes
             ],
         ];
 ***REMOVED***
@@ -815,7 +817,7 @@ class TestDatabase
                 'hash' => 'hash_test_1',
                 'user_hash' => $this->user()[0]['hash'],
                 'event_hash' => $this->event()[0]['hash'],
-                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
+                'event_participation_status_hash' => $this->event_participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -828,7 +830,7 @@ class TestDatabase
                 'hash' => 'hash_test_2',
                 'user_hash' => $this->user()[1]['hash'],
                 'event_hash' => $this->event()[1]['hash'],
-                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
+                'event_participation_status_hash' => $this->event_participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -841,7 +843,7 @@ class TestDatabase
                 'hash' => 'hash_test_3',
                 'user_hash' => $this->user()[2]['hash'],
                 'event_hash' => $this->event()[2]['hash'],
-                'event_participation_status_hash' => $this->participation_status()[0]['hash'],
+                'event_participation_status_hash' => $this->event_participation_status()[0]['hash'],
                 'created_at' => '2017-05-10 16:32:15',
                 'created_by' => $this->user()[0]['hash'],
                 'modified_at' => null,
@@ -949,7 +951,7 @@ class TestDatabase
             ['name' => 'Kaiserstuhl', 'number' => '5466', 'state' => 'AG'],
         ];
         for ($i = 0; $i < $count; $i++) ***REMOVED***
-            $city = $cities[rand(0, 11)];
+            $city = $cities[$i % 11];
             $result[] = [
                 'id' => $i + 1,
                 'country' => 'CH',
@@ -1164,25 +1166,37 @@ class TestDatabase
                 'id' => '1',
                 'hash' => 'hash_test_1',
                 'level' => '64',
-                'name' => 'archive',
+                'name' => 'Super Admin',
             ],
             [
                 'id' => '2',
                 'hash' => 'hash_test_2',
                 'level' => '32',
-                'name' => 'modify',
+                'name' => 'Admin',
             ],
             [
                 'id' => '3',
                 'hash' => 'hash_test_3',
                 'level' => '16',
-                'name' => 'insert',
+                'name' => 'Super User',
             ],
             [
                 'id' => '4',
                 'hash' => 'hash_test_4',
                 'level' => '8',
-                'name' => 'read',
+                'name' => 'User',
+            ],
+            [
+                'id' => '5',
+                'hash' => 'hash_test_5',
+                'level' => '4',
+                'name' => 'Guest',
+            ],
+            [
+                'id' => '6',
+                'hash' => 'hash_test_6',
+                'level' => '2',
+                'name' => 'Anonymous',
             ],
         ];
 ***REMOVED***

@@ -7,9 +7,9 @@ $env['jwt'] = [
 ];
 
 $env['db'] = [
-    'database' => '',
-    'host' => '',
-    'port' => '',
+    'database' => 'cevi_web_test',
+    'host' => 'localhost',
+    'port' => 3306,
     'username' => '',
     'password' => '',
 ];

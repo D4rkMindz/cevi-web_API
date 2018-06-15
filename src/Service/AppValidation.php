@@ -46,7 +46,9 @@ class AppValidation
     ***REMOVED***
         if (empty($value)) ***REMOVED***
             $validationContext->setError($elementName, __('Required'));
+            return true;
     ***REMOVED***
+        return false;
 ***REMOVED***
 
     /**
@@ -60,8 +62,8 @@ class AppValidation
      */
     protected function validateLength(string $text, string $elementName, ValidationContext $validationContext, int $min = 3, int $max = 255)
     ***REMOVED***
-        $this->validateNotEmpty($text, $elementName, $validationContext);
-        if ($validationContext->fails()) ***REMOVED***
+        $fails = $this->validateNotEmpty($text, $elementName, $validationContext);
+        if ($fails) ***REMOVED***
             return;
     ***REMOVED***
         $length = strlen(trim($text));
@@ -101,7 +103,7 @@ class AppValidation
     ***REMOVED***
 ***REMOVED***
 
-    protected function validateDate(int $time, string $elementName, ValidationContext $validationContext, bool $acceptPassed = false)
+    protected function validateDate($time, string $elementName, ValidationContext $validationContext, bool $acceptPassed = false)
     ***REMOVED***
         if (!$acceptPassed && $time < time()) ***REMOVED***
             $validationContext->setError($elementName, __('Date already passed'));

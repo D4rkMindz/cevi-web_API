@@ -35,7 +35,7 @@ CREATE TABLE `article` (
   `replacement` datetime DEFAULT NULL,
   `barcode` varchar(45) DEFAULT NULL,
   `available_for_rent` tinyint(1) NOT NULL DEFAULT '0',
-  `rent_price` decimal(11,2) DEFAULT NULL,
+  `rent_price` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_at` datetime DEFAULT NULL,
@@ -102,11 +102,11 @@ DROP TABLE IF EXISTS `article_image`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article_image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `article_hash` varchar(255) NOT NULL,
-  `image_hash` varchar(255) NOT NULL,
+  `article_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_article_has_image_image1_idx` (`image_hash`),
-  KEY `fk_article_has_image_article1_idx` (`article_hash`)
+  KEY `fk_article_has_image_image1_idx` (`image_id`),
+  KEY `fk_article_has_image_article1_idx` (`article_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -216,7 +216,7 @@ CREATE TABLE `city` (
 
 LOCK TABLES `city` WRITE;
 /*!40000 ALTER TABLE `city` DISABLE KEYS */;
-INSERT INTO `city` VALUES (1,'CH','AG','4313','01','Möhlin','Möhlin','Möhlin','Möhlin',NULL,NULL,NULL,NULL,0,NULL,NULL),(2,'CH','AG','4310','01','Rheinfelden','Rheinfelden','Rheinfelden','Rheinfelden',NULL,NULL,NULL,NULL,0,NULL,NULL),(3,'CH','BS','4050','01','Basel','Basel','Basel','Basel',NULL,NULL,NULL,NULL,0,NULL,NULL);
+INSERT INTO `city` VALUES (1,'CH','ZH','8909','01','Affoltern','Affoltern','Affoltern','Affoltern',NULL,NULL,NULL,NULL,0,NULL,NULL),(2,'CH','DE','8000','01','Zürich','Zürich','Zürich','Zürich',NULL,NULL,NULL,NULL,0,NULL,NULL),(3,'CH','AG','5200','01','Brugg','Brugg','Brugg','Brugg',NULL,NULL,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +275,7 @@ CREATE TABLE `department_event` (
   KEY `fk_department_has_event_event1_idx` (`event_hash`),
   KEY `fk_department_has_event_department1_idx` (`department_hash`),
   KEY `fk_department_event_department_group1_idx` (`department_group_hash`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +284,6 @@ CREATE TABLE `department_event` (
 
 LOCK TABLES `department_event` WRITE;
 /*!40000 ALTER TABLE `department_event` DISABLE KEYS */;
-INSERT INTO `department_event` VALUES (1,'hash_test_1','hash_test_1','hash_test_1'),(2,'hash_test_2','hash_test_2','hash_test_2'),(3,'hash_test_3','hash_test_3','hash_test_2');
 /*!40000 ALTER TABLE `department_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,7 +598,7 @@ CREATE TABLE `email_token` (
 
 LOCK TABLES `email_token` WRITE;
 /*!40000 ALTER TABLE `email_token` DISABLE KEYS */;
-INSERT INTO `email_token` VALUES (1,'hash_test_1','7b074e4ffce2ccb8f0d502c8b16ffd3c','2018-06-15 08:05:07'),(2,'hash_test_2','be9ebbeb2f1ac5aa6f8070cf360c1558','2018-06-15 08:05:08'),(3,'hash_test_3','e69a5aa397bc8a3f2d173535e50ad197','2018-06-15 07:49:08');
+INSERT INTO `email_token` VALUES (1,'hash_test_1','596b77b15973f2497297911689a0d45b','2018-06-12 19:44:16'),(2,'hash_test_2','78a5944be1629edb2034a9a24445b9b6','2018-06-12 19:44:17'),(3,'hash_test_3','415f0dd976dcbf0f39f6f728f71d9801','2018-06-12 19:28:17');
 /*!40000 ALTER TABLE `email_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +790,7 @@ CREATE TABLE `event_participation_status` (
   `name_fr` varchar(45) NOT NULL,
   `name_it` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +799,6 @@ CREATE TABLE `event_participation_status` (
 
 LOCK TABLES `event_participation_status` WRITE;
 /*!40000 ALTER TABLE `event_participation_status` DISABLE KEYS */;
-INSERT INTO `event_participation_status` VALUES (1,'hash_test_1','Zugesagt','Participated','Participaté','Participatés'),(2,'hash_test_2','Abgesagt','Departicipated','Departicipaté','Departicipatés'),(3,'hash_test_3','Vielleicht','Probably','Peutetre','Peutetros');
 /*!40000 ALTER TABLE `event_participation_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -936,7 +934,7 @@ CREATE TABLE `permission` (
   `level` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -945,7 +943,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (1,'hash_test_1',64,'Super Admin'),(2,'hash_test_2',32,'Admin'),(3,'hash_test_3',16,'Super User'),(4,'hash_test_4',8,'User'),(5,'hash_test_5',4,'Guest'),(6,'hash_test_6',2,'Anonymous');
+INSERT INTO `permission` VALUES (1,'hash_test_1',64,'archive'),(2,'hash_test_2',32,'modify'),(3,'hash_test_3',16,'insert'),(4,'hash_test_4',8,'read');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +970,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-12 09:32:30','2018-06-12 15:33:14',0),(20180612173429,'AddedRentForArticles','2018-06-12 17:34:30','2018-06-12 17:34:32',0),(20180615194505,'Fix','2018-06-15 19:45:36','2018-06-15 19:45:39',0);
+INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-12 09:32:30','2018-06-12 15:33:14',0),(20180612173429,'AddedRentForArticles','2018-06-12 17:34:30','2018-06-12 17:34:32',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1292,7 +1290,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$SxbSShl9NwGODUbWT7oW/e64P/3DAex7znof25j/hZidHOcp56U6G',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$S8mEu6qTZKoOBfWaPbLE3.kSQu21owinvYWLlAc8/V/lbYwQ1GLMi',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$UsvUaT6daR05glBrDUL2d.1Cz3fYNs7NJ81RUO1otc2nFuMGybA0q',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$iaE1IkeGt69O5l9G5aN7K.dvM/LJ6I2Ww1GqmgylspT0qwLAXonOe',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$naj7qeXHp0cYKyEkGp.bT.ZEMGhokG2Uc7uT78mCTkhlxA3hSHY4m',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$2BlHYcdQbYnoYMdKJKfNY.CNTNRyFps/h7fPB5kB3hmLBgfyJ9EzW',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1305,4 +1303,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-15 21:46:10
+-- Dump completed on 2018-06-12 19:45:18

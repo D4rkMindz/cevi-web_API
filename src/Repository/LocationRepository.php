@@ -4,7 +4,7 @@
 namespace App\Repository;
 
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Table\StoragePlaceTable;
 use App\Table\TableInterface;
 use Slim\Container;
@@ -61,12 +61,12 @@ class LocationRepository extends AppRepository
                 [
                     'table' => $slLocationTablename,
                     'type' => 'INNER',
-                    'conditions' => $storagePlaceTablename . '.sl_location_id = ' . $slLocationTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_location_hash = ' . $slLocationTablename . '.hash',
                 ],
             ])
             ->limit($limit)
             ->page($page)
-            ->where([$storagePlaceTablename . '.department_id' => $departmentId]);
+            ->where([$storagePlaceTablename . '.department_hash' => $departmentId]);
         $locations = $query->execute()->fetchAll('assoc');
         if (empty($locations)) ***REMOVED***
             return [];

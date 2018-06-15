@@ -98,12 +98,8 @@ class UserController extends AppController
      */
     public function getUserAction(Request $request, Response $response): Response
     ***REMOVED***
-        $userId = (int)$request->getAttribute('route')->getArgument('user_id');
-        if (!is_numeric($userId)) ***REMOVED***
-            return $this->error($response, 'Unprocessable Entity', 422,
-                ['message' => __('Please define user_id correctly')]);
-    ***REMOVED***
-        $user = $this->userRepository->getUser($userId);
+        $userHash = (string)$request->getAttribute('route')->getArgument('user_hash');
+        $user = $this->userRepository->getUser($userHash);
         if (empty($user)) ***REMOVED***
             return $this->error($response, __('No user found'), 404);
     ***REMOVED***
@@ -136,30 +132,48 @@ class UserController extends AppController
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
-        $email = $data['email'];
-        $firstName = $data['first_name'];
-        $lastName = $data['last_name'] ? $data['last_name'] : null;
-        $ceviName = $data['cevi_name'] ? $data['cevi_name'] : null;
-        $postcode = $data['postcode'];
-        $username = $data['username'];
-        $password = $data['password'];
-        $lang = $data['language'];
-        // todo implement validation if fields are correct
+        $email = array_value('email', $data);
+        $firstName = array_value('first_name', $data);
+        $lastName = array_value('last_name', $data);
+        $ceviName = array_value('cevi_name', $data);
+        $postcode = array_value('postcode', $data);
+        $username = array_value('username', $data);
+        $password = array_value('password', $data);
+        $lang = array_value('language', $data);
+        $departmentHash = array_value('department_hash', $data);
 
-        $languageId = $this->languageRepository->getLanguageByAbbreviation($lang);
+        $languageHash = $this->languageRepository->getLanguageByAbbreviation((string)$lang);
 
-        $validationContext = $this->userValidation->validateSignup($email, $firstName, $lastName, $postcode, $username,
-            $password, $ceviName, $languageId);
+        $validationContext = $this->userValidation->validateSignup(
+            (string)$email,
+            (string)$firstName,
+            (string)$lastName,
+            (string)$postcode,
+            (string)$username,
+            (string)$password,
+            (string)$ceviName,
+            (string)$languageHash,
+            (string)$departmentHash
+        );
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $userdata = $this->userRepository->signupUser($email, $firstName, $lastName, $postcode, $username, $password,
-            $ceviName, $lang);
+        $signupData = $this->userRepository->signupUser(
+            (string)$email,
+            (string)$firstName,
+            (string)$lastName,
+            (string)$postcode,
+            (string)$username,
+            (string)$password,
+            (string)$ceviName,
+            (string)$languageHash,
+            (string)$departmentHash
+        );
 
-        $url = 'https://cevi-web.com/registration/verify/' . $userdata['token'];
+        $url = 'https://cevi-web.com/registration/verify/' . $signupData['token'];
         if (!$this->isProduction) ***REMOVED***
-            $url = 'http://localhost:4200/registration/verify/' . $userdata['token'];
+            $url = 'http://localhost:4200/registration/verify/' . $signupData['token'];
     ***REMOVED***
 
         $templateData = [
@@ -175,7 +189,7 @@ class UserController extends AppController
         $responseData = [
             'code' => 200,
             'message' => __('Signed up user successfully'),
-            'user_id' => $userdata['user_id'],
+            'user_hash' => $signupData['hash'],
         ];
 
         return $this->json($response, $responseData);
@@ -195,17 +209,35 @@ class UserController extends AppController
     ***REMOVED***
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
-        $token = (string)$data['email_token'];
-        $userId = $this->userRepository->getUserIdByEmailToken($token);
-        if (!$this->userRepository->existsUser($userId)) ***REMOVED***
-            return $this->json($response, ['verified' => false]);
+        $token = (string)array_value('token', $data);
+        $userHash = $this->userRepository->getUserIdByEmailToken($token);
+        if (!$this->userRepository->existsUser($userHash)) ***REMOVED***
+            return $this->error($response, __('Please check your data'), 422, ['message' => __('User does not exist'), 'verified' => false]);
     ***REMOVED***
-        $this->userRepository->confirmEmail($userId);
+        $this->userRepository->confirmEmail($userHash);
         return $this->json($response, ['verified' => true]);
 ***REMOVED***
 
     /**
      * Update user action.
+     *
+     * @put null|string|int postcode
+     * @put null|string language Abbreviation like de en fr it
+     * @put null|string department_hash
+     * @put null|string position_hash
+     * @put null|string gender_hash
+     * @put null|string first_name
+     * @put null|string email
+     * @put null|string username
+     * @put null|string password
+     * @put null|bool js_certificate
+     * @put null|bool js_certificate_until Required if js_certificate is true. As Time
+     * @put null|string last_name
+     * @put null|string address
+     * @put null|string cevi_name
+     * @put null|string|int birthdate As Time
+     * @put null|string phone
+     * @put null|string mobile
      *
      * @param Request $request
      * @param Response $response
@@ -217,16 +249,22 @@ class UserController extends AppController
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
+        if (array_key_exists('language', $data)) ***REMOVED***
+            $data['language_hash'] = $this->languageRepository->getLanguageByAbbreviation($data['language']);
+    ***REMOVED***
+
         $validationContext = $this->userValidation->validateUpdate($data, $this->jwt['user_id']);
         if ($validationContext->fails()) ***REMOVED***
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $singupCompleted = $this->userRepository->updateUser($data, $args['user_id'], $this->jwt['user_id']);
+        $singupCompleted = $this->userRepository->updateUser($data, $args['user_hash'], $this->jwt['user_id']);
 
         $responseData = [
-            'message' => __('Updated user successfully'),
-            'signup_completed' => (bool)$singupCompleted,
+            'info' => [
+                'message' => __('Updated user successfully'),
+                'signup_completed' => (bool)$singupCompleted,
+            ],
         ];
 
         return $this->json($response, $responseData);
@@ -242,10 +280,10 @@ class UserController extends AppController
      */
     public function deleteUserAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->userRepository->deleteUser($args['user_id'], $this->jwt['user_id'])) ***REMOVED***
+        if (!$this->userRepository->deleteUser($args['user_hash'], $this->jwt['user_id'])) ***REMOVED***
             $this->error($response, 'Forbidden', 403, ['message' => __('Deleting user failed')]);
     ***REMOVED***
 
-        return $this->json($response, ['message' => __('User deleted successfully')]);
+        return $this->json($response, ['message' => __('Deleted user successfully')]);
 ***REMOVED***
 ***REMOVED***

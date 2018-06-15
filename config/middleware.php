@@ -2,8 +2,8 @@
 
 use App\Factory\JsonResponseFactory;
 use App\JwtAuthRules\PassthroughRule;
-use App\Service\Permissions;
-use App\Service\Role;
+use App\Util\Permissions;
+use App\Util\Role;
 use Monolog\Logger;
 use Slim\Http\Request;
 use Slim\Http\Response;

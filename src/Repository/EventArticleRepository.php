@@ -3,7 +3,7 @@
 
 namespace App\Repository;
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Table\ArticleDescriptionTable;
 use App\Table\ArticleQualityTable;
 use App\Table\ArticleTable;
@@ -229,7 +229,7 @@ class EventArticleRepository extends AppRepository
             'quality_name_en' => $articleQualityTablename . '.name_en',
             'quality_name_fr' => $articleQualityTablename . '.name_fr',
             'quality_name_it' => $articleQualityTablename . '.name_it',
-            'replace' => $articleTablename . '.replace',
+            'replacement' => $articleTablename . '.replacement',
             'barcode' => $articleTablename . '.barcode',
             'created_at' => $articleTablename . '.created_at',
             'created_by' => $articleTablename . '.created_by',
@@ -295,7 +295,7 @@ class EventArticleRepository extends AppRepository
         $query
             ->select([
                 'id' => $eventArticleTablename . '.accountable_user_id',
-                'department_id' => $userTablename . '.department_id',
+                'department_hash' => $userTablename . '.department_hash',
                 'first_name' => $userTablename . '.first_name',
                 'last_name' => $userTablename . '.last_name',
             ])

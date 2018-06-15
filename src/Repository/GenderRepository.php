@@ -36,7 +36,7 @@ class GenderRepository extends AppRepository
     public function existsGender(string $genderId): bool
     ***REMOVED***
         $query = $this->genderTable->newSelect();
-        $query->select('id')->where(['id' => $genderId]);
+        $query->select(1)->where(['hash' => $genderId]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***

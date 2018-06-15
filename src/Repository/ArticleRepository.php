@@ -4,9 +4,6 @@
 namespace App\Repository;
 
 
-use App\Service\Barcode;
-use App\Service\Formatter;
-use App\Service\TranslateService;
 use App\Table\ArticleDescriptionTable;
 use App\Table\ArticleQualityTable;
 use App\Table\ArticleTable;
@@ -18,6 +15,9 @@ use App\Table\SlRoomTable;
 use App\Table\SlShelfTable;
 use App\Table\SlTrayTable;
 use App\Table\StoragePlaceTable;
+use App\Util\Barcode;
+use App\Util\Formatter;
+use App\Util\TranslateService;
 use Cake\Database\Query;
 use Exception;
 use Slim\Container;
@@ -113,7 +113,7 @@ class ArticleRepository extends AppRepository
      * @param string $articleHash
      * @return array
      */
-    public function getArticle(string $departmentHash, string $articleHash)
+    public function getArticle(string $departmentHash, string $articleHash): array
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery();
@@ -135,7 +135,7 @@ class ArticleRepository extends AppRepository
      * @param string $descriptionFormat 'both'||'plain'||'parsed'
      * @return array
      */
-    public function getArticleForStorageplace(string $storagePlaceHash, string $departmentHash, string $descriptionFormat = 'both')
+    public function getArticleForStorageplace(string $storagePlaceHash, string $departmentHash, string $descriptionFormat = 'both'): array
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $articleTitleTableName = $this->articleTitleTable->getTablename();
@@ -160,7 +160,7 @@ class ArticleRepository extends AppRepository
             'quality_name_en' => $articleQualityTableName . '.name_en',
             'quality_name_fr' => $articleQualityTableName . '.name_fr',
             'quality_name_it' => $articleQualityTableName . '.name_it',
-            'replace' => $articleTableName . '.replace',
+            'replacement' => $articleTableName . '.replace',
             'barcode' => $articleTableName . '.barcode',
             'created_at' => $articleTableName . '.created_at',
             'created_by' => $articleTableName . '.created_by',
@@ -210,7 +210,7 @@ class ArticleRepository extends AppRepository
      * @param string $descriptionFormat
      * @return array
      */
-    public function getAllArticles(string $departmentHash, int $limit, int $page, string $descriptionFormat)
+    public function getAllArticles(string $departmentHash, int $limit, int $page, string $descriptionFormat): array
     ***REMOVED***
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery()
@@ -261,24 +261,24 @@ class ArticleRepository extends AppRepository
     ***REMOVED***
         $articleTitleId = $this->insertArticleTitle($article['title'], $lang, $userId);
         $articleDescriptionId = $this->insertArticleDescription($article['description'], $lang, $userId);
-        $storagePlaceHash = $this->getStoragePlaceHash($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
+        $availableForRent = array_key_exists('available_for_rent', $article) ? $article['available_for_rent'] : false;
         $row = [
             'hash' => uniqid(),
             'article_title_id' => $articleTitleId,
             'article_description_id' => $articleDescriptionId,
-            'article_quality_id' => $article['quality_id'],
-            'storage_place_hash' => $storagePlaceHash,
+            'article_quality_hash' => $article['quality_hash'],
+            'storage_place_hash' => $article['storage_place_hash'],
             'department_hash' => $article['department_hash'],
-            'date' => $article['purchase_date'],
-            'quantity' => $article['quantity'],
-            'replace' => $article['replacement_date'],
+            'date' => date('Y-m-d H:i:s', $article['purchase_date']),
+            'quantity' => (int)$article['quantity'],
+            'replacement' => date('Y-m-d H:i:s', $article['replacement']),
+            'available_for_rent' => $availableForRent,
         ];
 
-        $articleId = $this->articleTable->insert($row, $userId);
-        $barcode = Barcode::generate($articleId, $storagePlaceHash, $article['department_hash']);
-        $this->articleTable->modify(['barcode' => $barcode], ['id' => $articleId], $userId);
-
-        return $articleId;
+        $articleHash = $this->articleTable->insert($row, $userId);
+        $barcode = Barcode::generate($articleHash, $article['storage_place_hash'], $article['department_hash']);
+        $this->articleTable->modify(['barcode' => $barcode], ['id' => $articleHash], $userId);
+        return $articleHash;
 ***REMOVED***
 
     /**
@@ -303,33 +303,35 @@ class ArticleRepository extends AppRepository
             $row['article_description_id'] = $this->insertArticleDescription($article['description'], $lang, $userId);
     ***REMOVED***
 
+        if (array_key_exists('quality_hash', $article)) ***REMOVED***
+            $row['article_quality_hash'] = $article['quality_hash'];
+    ***REMOVED***
+
+        if (array_key_exists('storage_place_hash', $article)) ***REMOVED***
+            $row['storage_place_hash'] = $article['storage_place_hash'];
+    ***REMOVED***
+
         if (array_key_exists('purchase_date', $article)) ***REMOVED***
-            $row['date'] = $article['purchase_date'];
+            $row['date'] = date('Y-m-d H:i:s', $article['purchase_date']);
     ***REMOVED***
 
         if (array_key_exists('quantity', $article)) ***REMOVED***
             $row['quantity'] = $article['quantity'];
     ***REMOVED***
 
-        if (array_key_exists('quality', $article)) ***REMOVED***
-            $row['article_quality_id'] = $article['quality'];
+        if (array_key_exists('replacement', $article)) ***REMOVED***
+            $row['replacement'] = date('Y-m-d H:i:s', $article['replacement']);
     ***REMOVED***
 
-        $storagePlaceId = array_key_exists('storage_place_id', $article);
-        $locationId = array_key_exists('location_id', $article);
-        $roomId = array_key_exists('room_id', $article);
-        $corridorId = array_key_exists('corridor_id', $article);
-        $shelfId = array_key_exists('shelf_id', $article);
-        $trayId = array_key_exists('tray_id', $article);
-        $chestId = array_key_exists('chest_id', $article);
-
-        if ($storagePlaceId) ***REMOVED***
-            $row['storage_place_id'] = (string)$article['storage_place_id'];
-    ***REMOVED*** else if ($locationId || $roomId || $corridorId || $shelfId || $trayId || $chestId) ***REMOVED***
-            $row['storage_place_id'] = (string)$this->getStoragePlaceHash($article['location_id'], $article['room_id'], $article['corridor_id'], $article['shelf_id'], $article['tray_id'], $article['chest_id'], $article['storage_place_name'], $userId);
+        if (array_key_exists('available_for_rent', $article)) ***REMOVED***
+            $row['available_for_rent'] = $article['available_for_rent'];
     ***REMOVED***
 
-        return $this->articleTable->modify($row, ['id' => $article['article_id']], $userId);
+        if (array_key_exists('rent_price', $article)) ***REMOVED***
+            $row['rent_price'] = $article['rent_price'];
+    ***REMOVED***
+
+        return $this->articleTable->modify($row, ['hash' => $article['hash']], $userId);
 ***REMOVED***
 
     /**
@@ -358,19 +360,19 @@ class ArticleRepository extends AppRepository
      */
     public function existsArticle(string $articleId, string $departmentId)
     ***REMOVED***
-        return $this->exists($this->articleTable, ['id' => $articleId, 'department_id' => $departmentId]);
+        return $this->exists($this->articleTable, ['hash' => $articleId, 'department_hash' => $departmentId]);
 ***REMOVED***
 
     /**
      * Check if storage place exists
      *
-     * @param string $storagePlaceId
+     * @param string $storagePlaceHash
      * @return bool
      */
-    public function existsStoragePlace(string $storagePlaceId): bool
+    public function existsStoragePlace(string $storagePlaceHash): bool
     ***REMOVED***
         $query = $this->storagePlaceTable->newSelect();
-        $query->select(1)->where(['id' => $storagePlaceId]);
+        $query->select(1)->where(['hash' => $storagePlaceHash]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -378,13 +380,13 @@ class ArticleRepository extends AppRepository
     /**
      * Check if quality exists.
      *
-     * @param string $qualityId
+     * @param string $qualityHash
      * @return bool
      */
-    public function existsQuality(string $qualityId): bool
+    public function existsQuality(string $qualityHash): bool
     ***REMOVED***
         $query = $this->articleQualtityTable->newSelect();
-        $query->select(1)->where(['id' => $qualityId]);
+        $query->select(1)->where(['hash' => $qualityHash]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -451,8 +453,10 @@ class ArticleRepository extends AppRepository
             'tray_name' => $slTrayTableName . '.name',
             'chest_hash' => $storagePlaceTableName . '.sl_location_hash',
             'chest_name' => $slChestTableName . '.name',
-            'replace' => $articleTableName . '.replace',
+            'replacement' => $articleTableName . '.replacement',
             'barcode' => $articleTableName . '.barcode',
+            'available_for_rent' => $articleTableName . '.available_for_rent',
+            'rent_price' => $articleTableName . '.rent_price',
             'created_at' => $articleTableName . '.created_at',
             'created_by' => $articleTableName . '.created_by',
             'modified_at' => $articleTableName . '.modified_at',

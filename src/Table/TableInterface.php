@@ -55,10 +55,10 @@ interface TableInterface
      * Insert into database.
      *
      * @param array $row with data to insertUser into database
-     * @param string $userId
+     * @param string $id
      * @return string last inserted ID
      */
-    public function insert(array $row, string $userId): string;
+    public function insert(array $row, string $id): string;
 
     /**
      * Update database

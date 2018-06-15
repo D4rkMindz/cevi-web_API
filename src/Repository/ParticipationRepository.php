@@ -4,7 +4,7 @@
 namespace App\Repository;
 
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Table\CityTable;
 use App\Table\DepartmentEventTable;
 use App\Table\DepartmentTable;
@@ -218,7 +218,7 @@ class ParticipationRepository extends AppRepository
         $query
             ->select([
                 'user_id' => $userTablename . '.id',
-                'department_id' => $departmentTableName . '.id',
+                'department_hash' => $departmentTableName . '.id',
                 'department_name' => $departmentTableName . '.name',
                 'last_name' => $userTablename . '.last_name',
                 'first_name' => $userTablename . '.first_name',
@@ -247,7 +247,7 @@ class ParticipationRepository extends AppRepository
                 [
                     'table' => $departmentTableName,
                     'type' => 'INNER',
-                    'conditions' => $departmentTableName . '.id=' . $departmentEventTablename . '.department_id',
+                    'conditions' => $departmentTableName . '.id=' . $departmentEventTablename . '.department_hash',
                 ],
                 [
                     'table' => $languageTablename,
@@ -337,7 +337,7 @@ class ParticipationRepository extends AppRepository
 
         $fields = [
             'user_id' => $userTablename . '.id',
-            'department_id' => $departmentTableName . '.id',
+            'department_hash' => $departmentTableName . '.id',
             'department_name' => $departmentTableName . '.name',
             'last_name' => $userTablename . '.last_name',
             'first_name' => $userTablename . '.first_name',
@@ -377,7 +377,7 @@ class ParticipationRepository extends AppRepository
                 [
                     'table' => $departmentTableName,
                     'type' => 'INNER',
-                    'conditions' => $departmentTableName . '.id=' . $departmentEventTablename . '.department_id',
+                    'conditions' => $departmentTableName . '.id=' . $departmentEventTablename . '.department_hash',
                 ],
                 [
                     'table' => $languageTablename,

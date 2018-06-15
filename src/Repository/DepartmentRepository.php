@@ -4,7 +4,7 @@
 namespace App\Repository;
 
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Table\CityTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
@@ -61,12 +61,12 @@ class DepartmentRepository extends AppRepository
     /**
      * Check if department exists.
      *
-     * @param string $departmentId
+     * @param string $departmentHash
      * @return bool true if found.
      */
-    public function existsDepartment(string $departmentId): bool
+    public function existsDepartment(string $departmentHash): bool
     ***REMOVED***
-        return $this->exists($this->departmentTable, ['id' => $departmentId]);
+        return $this->exists($this->departmentTable, ['hash' => $departmentHash]);
 ***REMOVED***
 
     /**

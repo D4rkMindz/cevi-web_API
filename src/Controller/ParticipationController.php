@@ -55,7 +55,7 @@ class ParticipationController extends AppController
     ***REMOVED***
         $params = $this->getLimitationParams($request);
         $params['description_format'] = (string)$request->getParam('description_format') ?: 'both';
-        $departmentId = (string)$args['department_id'];
+        $departmentId = (string)$args['department_hash'];
         $eventId = (string)$args['event_id'];
 
         $validationContext = $this->participationValidation->validateGetAll($eventId, $departmentId);
@@ -95,7 +95,7 @@ class ParticipationController extends AppController
         $descriptionFormat = (string)$request->getParam('description_format') ?: 'both';
         $userId = (string)$args['user_id'];
         $eventId = (string)$args['event_id'];
-        $departmentId = (string)$args['department_id'];
+        $departmentId = (string)$args['department_hash'];
 
         $validationContext = $this->participationValidation->validateEventAndUser($eventId, $departmentId, $userId);
 
@@ -128,7 +128,7 @@ class ParticipationController extends AppController
         $statusId = $request->getParam('status_id');
         $userId = $request->getParam('user_id');
         $eventId = $args['event_id'];
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
 
         $validationContext = $this->participationValidation->validateAll($eventId, $departmentId, $userId, $statusId);
         if ($validationContext->fails()) ***REMOVED***
@@ -160,7 +160,7 @@ class ParticipationController extends AppController
         $statusId = $request->getParam('status_id');
         $userId = $args['user_id'];
         $eventId = $args['event_id'];
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
 
         $validationContext = $this->participationValidation->validateAll($eventId, $departmentId, $userId, $statusId);
         if ($validationContext->fails()) ***REMOVED***
@@ -190,7 +190,7 @@ class ParticipationController extends AppController
     ***REMOVED***
         $userId = $args['user_id'];
         $eventId = $args['event_id'];
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
 
         $validationContext = $this->participationValidation->validateEventAndUser($eventId, $departmentId, $userId);
         if ($validationContext->fails()) ***REMOVED***
@@ -220,7 +220,7 @@ class ParticipationController extends AppController
     public function getParticipatingUsersAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $eventId = $args['event_id'];
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
         $params = $this->getLimitationParams($request);
 
         $validationContext = $this->participationValidation->validateGetAll($eventId, $departmentId);
@@ -257,7 +257,7 @@ class ParticipationController extends AppController
     ***REMOVED***
         $message = $request->getParam('message');
         $eventId = $args['event_id'];
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
 
         $validationContext = $this->participationValidation->validateGetAll($eventId, $departmentId);
         if ($validationContext->fails()) ***REMOVED***

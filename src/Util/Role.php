@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Util;
 
 
 use App\Repository\UserRepository;
@@ -9,6 +9,13 @@ use Slim\Container;
 
 class Role
 ***REMOVED***
+    const SUPER_ADMIN = 64;
+    const ADMIN = 32;
+    const SUPER_USER = 16;
+    const USER = 8;
+    const GUEST = 4;
+    const ANONYMOUS = 2;
+
     /**
      * @var UserRepository
      */

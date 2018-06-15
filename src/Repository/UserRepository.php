@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Service\Mail\MailToken;
+use App\Util\PhonenumberConverter;
+use App\Util\Role;
 use App\Table\CityTable;
 use App\Table\DepartmentTable;
 use App\Table\EmailTokenTable;
@@ -169,14 +171,14 @@ class UserRepository extends AppRepository
     /**
      * Get single user.
      *
-     * @param int $id
+     * @param string $hash
      * @return array with single user
      */
-    public function getUser(int $id): array
+    public function getUser(string $hash): array
     ***REMOVED***
         $userTableName = $this->userTable->getTablename();
         $query = $this->getUserQuery();
-        $query->where([$userTableName . '.id' => $id]);
+        $query->where([$userTableName . '.hash' => $hash]);
         $user = $query->execute()->fetch('assoc');
         if (empty($user)) ***REMOVED***
             return [];
@@ -224,36 +226,42 @@ class UserRepository extends AppRepository
      * @param string $username
      * @param string $password
      * @param string $ceviName
-     * @param string $langId
-     * @return string last inserted user id
+     * @param string $languageHash
+     * @param string $departmentHash
+     * @return array last inserted user id
      */
     public function signupUser(
         string $email,
         string $firstName,
-        $lastName,
+        string $lastName,
         string $postcode,
         string $username,
         string $password,
-        $ceviName,
-        string $langId
-    ): array ***REMOVED***
-        $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $langId]);
-        $row = $query->execute()->fetch('assoc');
-        $languageId = !empty($row) ? $row['id'] : '';
-
+        string $ceviName,
+        string $languageHash,
+        string $departmentHash
+    ): array
+    ***REMOVED***
         $query = $this->cityTable->newSelect();
         $query->select('id')->where(['number' => $postcode]);
         $row = $query->execute()->fetch('assoc');
         $cityId = !empty($row) ? (string)$row['id'] : '';
 
+        $query = $this->permissionTable->newSelect();
+        $query->select('hash')->where(['level' => Role::ANONYMOUS]);
+        $row = $query->execute()->fetch('assoc');
+        $permissionHash = !empty($row) ? $row['hash'] : '';
+
         $row = [
+            'hash' => uniqid(),
             'city_id' => (int)$cityId,
-            'language_id' => (int)$languageId,
+            'language_hash' => (string)$languageHash,
+            'department_hash' => (string)$departmentHash,
             'email' => $email,
             'first_name' => $firstName,
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
+            'permission_hash' => $permissionHash,
             'created_at' => date('Y-m-d H:i:s'),
             'created_by' => 0,
         ];
@@ -266,15 +274,16 @@ class UserRepository extends AppRepository
             $row['cevi_name'] = $ceviName;
     ***REMOVED***
 
-        $userId = $this->userTable->insert($row, 0);
+        $userHash = $this->userTable->insert($row, 'NOT REQUIRED');
         $emailToken = MailToken::generate();
         $emailTokenRow = [
-            'user_id' => $userId,
+            'user_hash' => $userHash,
             'token' => $emailToken,
         ];
         $this->emailTokenTable->insert($emailTokenRow, 0);
 
-        return $emailTokenRow;
+        $data = ['hash' => $row['hash'], 'token' => $emailTokenRow['token']];
+        return $data;
 ***REMOVED***
 
     /**
@@ -286,21 +295,21 @@ class UserRepository extends AppRepository
     public function getUserIdByEmailToken(string $emailToken): string
     ***REMOVED***
         $query = $this->emailTokenTable->newSelect();
-        $query->select(['user_id'])
+        $query->select(['user_hash'])
             ->where(['token' => $emailToken, 'issued_at <= ' => date('Y-m-d H:i:s')]);
         $row = $query->execute()->fetch('assoc');
-        return !empty($row)? $row['user_id']: '';
+        return !empty($row) ? $row['user_hash'] : '';
 ***REMOVED***
 
     /**
      * Confirm email as verified
      *
-     * @param string $userId
+     * @param string $userHash
      * @return bool
      */
-    public function confirmEmail(string $userId): bool
+    public function confirmEmail(string $userHash): bool
     ***REMOVED***
-        return $this->userTable->modify(['email_verified' => true], ['id' => $userId], 0);
+        return $this->userTable->modify(['email_verified' => true], ['hash' => $userHash], 0);
 ***REMOVED***
 
     /**
@@ -321,47 +330,60 @@ class UserRepository extends AppRepository
     /**
      * Check if user exists.
      *
+     * @param string $userHash
+     * @return bool
+     */
+    public function existsUser(string $userHash): bool
+    ***REMOVED***
+        return $this->exists($this->userTable, ['hash' => $userHash]);
+***REMOVED***
+
+    /**
+     * Check if user exists by user ID.
+     *
      * @param string $userId
      * @return bool
      */
-    public function existsUser(string $userId): bool
+    public function existsUserById(string $userId)
     ***REMOVED***
-        $query = $this->userTable->newSelect();
-        $query->select(1)->where(['id' => $userId]);
-        $row = $query->execute()->fetch();
-
-        return !empty($row);
+        return $this->exists($this->userTable, ['id' => $userId]);
 ***REMOVED***
 
     /**
      * Update user.
      *
      * @param array $data
-     * @param string $where
+     * @param string $whereHash
      * @param string $userId
      * @return bool true if users signup is completed
      */
-    public function updateUser(array $data, string $where, string $userId): bool
+    public function updateUser(array $data, string $whereHash, string $userId): bool
     ***REMOVED***
         $update = [];
-        if (array_key_exists('city_id', $data)) ***REMOVED***
-            $update['city_id'] = $data['city_id'];
+        if (array_key_exists('postcode', $data)) ***REMOVED***
+            $query = $this->cityTable->newSelect();
+            $query->select('id')->where(['number' => $data['postcode']]);
+            $row = $query->execute()->fetch('assoc');
+            $cityId = !empty($row) ? $row['id'] : null;
+            if (!empty($cityId)) ***REMOVED***
+                $update['city_id'] = $cityId;
+        ***REMOVED***
     ***REMOVED***
 
-        if (array_key_exists('language_id', $data)) ***REMOVED***
-            $update['language_id'] = $data['language_id'];
+        if (array_key_exists('language_hash', $data)) ***REMOVED***
+            $update['language_hash'] = $data['language_hash'];
     ***REMOVED***
 
-        if (array_key_exists('department_id', $data)) ***REMOVED***
-            $update['department_id'] = $data['department_id'];
+        if (array_key_exists('department_hash', $data)) ***REMOVED***
+            $update['department_hash'] = $data['department_hash'];
     ***REMOVED***
 
-        if (array_key_exists('posititon_id', $data)) ***REMOVED***
-            $update['position_id'] = $data['position_id'];
+        if (array_key_exists('position_hash', $data)) ***REMOVED***
+            $update['position_hash'] = $data['position_hash'];
     ***REMOVED***
 
-        if (array_key_exists('gender_id', $data)) ***REMOVED***
-            $update['gender_id'] = $data['gender_id'];
+        if (array_key_exists('gender_hash', $data)) ***REMOVED***
+            $update['gender_hash'] = $data['gender_hash'];
     ***REMOVED***
 
         if (array_key_exists('first_name', $data)) ***REMOVED***
@@ -377,7 +399,7 @@ class UserRepository extends AppRepository
     ***REMOVED***
 
         if (array_key_exists('password', $data)) ***REMOVED***
-            $update['password'] = $data['password'];
+            $update['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
     ***REMOVED***
 
         if (array_key_exists('js_certificate', $data)) ***REMOVED***
@@ -401,31 +423,33 @@ class UserRepository extends AppRepository
     ***REMOVED***
 
         if (array_key_exists('birthdate', $data)) ***REMOVED***
-            $update['birthdate'] = date('Y-m-d H:i:s', $data['birthdate']);
+            $update['birthdate'] = date('Y-m-d', $data['birthdate']);
     ***REMOVED***
 
+        $phonenumberConverter = new PhonenumberConverter();
+
         if (array_key_exists('phone', $data)) ***REMOVED***
-            $update['phone'] = $data['phone'];
+            $update['phone'] = $phonenumberConverter->convert($data['phone']);
     ***REMOVED***
 
         if (array_key_exists('mobile', $data)) ***REMOVED***
-            $update['mobile'] = $data['mobile'];
+            $update['mobile'] = $phonenumberConverter->convert($data['mobile']);
     ***REMOVED***
 
         $update['modified_at'] = date('Y-m-d H:i:s');
         $update['modified_by'] = $userId;
 
-        $this->userTable->modify($update, ['id' => $where], $userId);
+        $this->userTable->modify($update, ['hash' => $whereHash], $userId);
         $query = $this->userTable->newSelect();
-        $query->select('signup_completed')->where(['id' => $where]);
-        $row = $query->execute()->fetch();
-        if (!(bool)$row['signup_completed']) ***REMOVED***
+        $query->select(['signup_completed'])->where(['hash' => $whereHash]);
+        $row1 = $query->execute()->fetch('assoc');
+        if (!(bool)$row1['signup_completed']) ***REMOVED***
             $fields = [
                 'city_id',
-                'language_id',
-                'department_id',
-                'position_id',
-                'gender_id',
+                'language_hash',
+                'department_hash',
+                'position_hash',
+                'gender_hash',
                 'first_name',
                 'email',
                 'username',
@@ -437,11 +461,10 @@ class UserRepository extends AppRepository
                 'phone',
                 'mobile',
             ];
-            $query->select($fields)->where(['id' => $where]);
-            $row = $query->execute()->fetch('assoc');
-            if (!array_search(null, $row) && !array_search('', $row)) ***REMOVED***
-                $this->userTable->modify(['signup_completed' => true], ['id' => $where], $userId);
-
+            $query->select($fields)->where(['hash' => $whereHash]);
+            $row2 = $query->execute()->fetch('assoc');
+            if (!array_search(null, $row2) && !array_search('', $row2)) ***REMOVED***
+                $this->userTable->modify(['signup_completed' => true], ['hash' => $whereHash], $userId);
                 return true;
         ***REMOVED***
 
@@ -454,14 +477,14 @@ class UserRepository extends AppRepository
     /**
      * Delete user.
      *
-     * @param string $userId
+     * @param string $userHash
      * @param string $executorId
      * @return bool
      */
-    public function deleteUser(string $userId, string $executorId): bool
+    public function deleteUser(string $userHash, string $executorId): bool
     ***REMOVED***
         try ***REMOVED***
-            $this->userTable->archive($executorId, ['id' => $userId]);
+            $this->userTable->archive($executorId, ['hash' => $userHash]);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
@@ -486,15 +509,15 @@ class UserRepository extends AppRepository
         $languageTableName = $this->languageTable->getTablename();
 
         $fields = [
-            'id' => $userTableName . '.id',
-            'department_id' => $userTableName . '.department_id',
+            'hash' => $userTableName . '.hash',
+            'department_hash' => $userTableName . '.department_hash',
             'department_name' => $departmentTableName . '.name',
-            'gender_id' => $userTableName . '.gender_id',
+            'gender_hash' => $userTableName . '.gender_hash',
             'gender_name_de' => $genderTableName . '.name_de',
             'gender_name_en' => $genderTableName . '.name_en',
             'gender_name_fr' => $genderTableName . '.name_fr',
             'gender_name_it' => $genderTableName . '.name_it',
-            'position_id' => $userTableName . '.position_id',
+            'position_hash' => $userTableName . '.position_hash',
             'position_name_de' => $positionTableName . '.name_de',
             'position_name_en' => $positionTableName . '.name_en',
             'position_name_fr' => $positionTableName . '.name_fr',
@@ -538,22 +561,22 @@ class UserRepository extends AppRepository
                 [
                     'table' => $departmentTableName,
                     'type' => 'LEFT',
-                    'conditions' => $userTableName . '.department_id=' . $departmentTableName . '.id',
+                    'conditions' => $userTableName . '.department_hash=' . $departmentTableName . '.hash',
                 ],
                 [
                     'table' => $genderTableName,
                     'type' => 'LEFT',
-                    'conditions' => $userTableName . '.gender_id=' . $genderTableName . '.id',
+                    'conditions' => $userTableName . '.gender_hash=' . $genderTableName . '.hash',
                 ],
                 [
                     'table' => $positionTableName,
                     'type' => 'LEFT',
-                    'conditions' => $userTableName . '.position_id=' . $positionTableName . '.id',
+                    'conditions' => $userTableName . '.position_hash=' . $positionTableName . '.hash',
                 ],
                 [
                     'table' => $languageTableName,
                     'type' => 'LEFT',
-                    'conditions' => $userTableName . '.language_id=' . $languageTableName . '.id',
+                    'conditions' => $userTableName . '.language_hash=' . $languageTableName . '.hash',
                 ],
             ]);
 

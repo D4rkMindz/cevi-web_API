@@ -48,9 +48,7 @@ class UserValidation extends AppValidation
     public function __construct(Container $container)
     ***REMOVED***
         parent::__construct($container);
-        $this->cityRepository = $container->get(CityRepository::class);
         $this->userRepository = $container->get(UserRepository::class);
-        $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->languageRepository = $container->get(LanguageRepository::class);
         $this->positionRepository = $container->get(PositionRepository::class);
         $this->genderRepository = $container->get(GenderRepository::class);
@@ -69,24 +67,24 @@ class UserValidation extends AppValidation
 
         $this->validateModifier($modifier, $validationContext);
 
-        if (array_key_exists('city_id', $data)) ***REMOVED***
-            $this->validateCity((string)$data['city_id'], $validationContext);
+        if (array_key_exists('postcode', $data)) ***REMOVED***
+            $this->validatePostcode((string)$data['postcode'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('language_id', $data)) ***REMOVED***
-            $this->validateLanguage((string)$data['language_id'], $validationContext);
+        if (array_key_exists('language_hash', $data)) ***REMOVED***
+            $this-> validateLanguage((string)$data['language_hash'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('department_id', $data)) ***REMOVED***
-            $this->validateDepartment($data['department_id'], $validationContext);
+        if (array_key_exists('department_hash', $data)) ***REMOVED***
+            $this->validateDepartment($data['department_hash'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('posititon_id', $data)) ***REMOVED***
-            $this->validatePosition($data['posititon_id'], $validationContext);
+        if (array_key_exists('posititon_hash', $data)) ***REMOVED***
+            $this->validatePosition($data['posititon_hash'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('gender_id', $data)) ***REMOVED***
-            $this->validateGender($data['gender_id'], $validationContext);
+        if (array_key_exists('gender_hash', $data)) ***REMOVED***
+            $this->validateGender($data['gender_hash'], $validationContext);
     ***REMOVED***
 
         if (array_key_exists('first_name', $data)) ***REMOVED***
@@ -146,7 +144,7 @@ class UserValidation extends AppValidation
      */
     private function validateModifier(string $modifier, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->userRepository->existsUser($modifier)) ***REMOVED***
+        if (!$this->userRepository->existsUserById($modifier)) ***REMOVED***
             $validationContext->setError('modifier', __('Modifier does not exist'));
     ***REMOVED***
 ***REMOVED***
@@ -154,65 +152,65 @@ class UserValidation extends AppValidation
     /**
      * Validate city ID.
      *
-     * @param string $cityId
+     * @param string $postcode
      * @param ValidationContext $validationContext
      */
-    private function validateCity(string $cityId, ValidationContext $validationContext)
+    private function validateCity(string $postcode, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->cityRepository->existsCity($cityId)) ***REMOVED***
-            $validationContext->setError('city_id', __('Not found'));
+        if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
+            $validationContext->setError('postcode', __('Not found'));
     ***REMOVED***
 ***REMOVED***
 
     /**
      * Validate language ID.
      *
-     * @param string $languageId
+     * @param string $languageHash
      * @param ValidationContext $validationContext
      */
-    private function validateLanguage(string $languageId, ValidationContext $validationContext)
+    private function validateLanguage(string $languageHash, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->languageRepository->existsLanguage($languageId)) ***REMOVED***
-            $validationContext->setError('language_id', __('Not found'));
+        if (!$this->languageRepository->existsLanguage($languageHash)) ***REMOVED***
+            $validationContext->setError('language', __('Not found'));
     ***REMOVED***
 ***REMOVED***
 
     /**
      * Validate department ID.
      *
-     * @param string $departmentId
+     * @param string $departmentHash
      * @param $validationContext
      */
-    private function validateDepartment(string $departmentId, ValidationContext $validationContext)
+    private function validateDepartment(string $departmentHash, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($departmentId)) ***REMOVED***
-            $validationContext->setError('department_id', __('Not found'));
+        if (!$this->departmentRepository->existsDepartment($departmentHash)) ***REMOVED***
+            $validationContext->setError('department_hash', __('Not found'));
     ***REMOVED***
 ***REMOVED***
 
     /**
      * Validate position ID.
      *
-     * @param string $positionId
+     * @param string $positionHash
      * @param ValidationContext $validationContext
      */
-    private function validatePosition(string $positionId, ValidationContext $validationContext)
+    private function validatePosition(string $positionHash, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->positionRepository->existsPosition($positionId)) ***REMOVED***
-            $validationContext->setError('position_id', __('Not found'));
+        if (!$this->positionRepository->existsPosition($positionHash)) ***REMOVED***
+            $validationContext->setError('position', __('Not found'));
     ***REMOVED***
 ***REMOVED***
 
     /**
      * Validate gender ID.
      *
-     * @param string $genderId
+     * @param string $genderHash
      * @param ValidationContext $validationContext
      */
-    private function validateGender(string $genderId, ValidationContext $validationContext)
+    private function validateGender(string $genderHash, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->genderRepository->existsGender($genderId)) ***REMOVED***
-            $validationContext->setError('gender_id', __('Not found'));
+        if (!$this->genderRepository->existsGender($genderHash)) ***REMOVED***
+            $validationContext->setError('gender_hash', __('Not found'));
     ***REMOVED***
 ***REMOVED***
 
@@ -333,10 +331,11 @@ class UserValidation extends AppValidation
      * @param string $username
      * @param string $password
      * @param string $ceviName
-     * @param string $languageId
+     * @param string $languageHash
+     * @param string $departmentHash
      * @return ValidationContext
      */
-    public function validateSignup(string $email, string $firstName, $lastName, string $postcode, string $username, string $password, $ceviName, string $languageId): ValidationContext
+    public function validateSignup(string $email, string $firstName, $lastName, string $postcode, string $username, string $password, $ceviName, string $languageHash, string $departmentHash): ValidationContext
     ***REMOVED***
         $validationContext = new ValidationContext(__('Please check your data'));
 
@@ -351,7 +350,8 @@ class UserValidation extends AppValidation
         if (!empty($ceviName)) ***REMOVED***
             $this->validateName($ceviName, $validationContext, 'cevi_name');
     ***REMOVED***
-        $this->validateLanguage($languageId, $validationContext);
+        $this->validateLanguage($languageHash, $validationContext);
+        $this->validateDepartment($departmentHash, $validationContext);
 
         return $validationContext;
 ***REMOVED***

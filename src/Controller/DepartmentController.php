@@ -80,7 +80,7 @@ class DepartmentController extends AppController
      */
     public function getDepartmentAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $department = $this->departmentRepository->getDepartment($args['department_id']);
+        $department = $this->departmentRepository->getDepartment($args['department_hash']);
         if (empty($department)) ***REMOVED***
             return $this->error($response, 'Not found', 404, ['message' => __('Department does not exist')]);
     ***REMOVED***
@@ -118,7 +118,7 @@ class DepartmentController extends AppController
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $success = $this->departmentRepository->updateDepartment($args['department_id'], $name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['user_id']);
+        $success = $this->departmentRepository->updateDepartment($args['department_hash'], $name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['user_id']);
         if (!$success) ***REMOVED***
             return $this->error($response, 'Unprocessable Entity', 404, ['message' => __('Update failed')]);
     ***REMOVED***
@@ -140,7 +140,7 @@ class DepartmentController extends AppController
      */
     public function deleteDepartmentAction(Request $request, Response $response, array $args)
     ***REMOVED***
-        $deleted = $this->departmentRepository->deleteDepartment($args['department_id'], $this->jwt['user_id']);
+        $deleted = $this->departmentRepository->deleteDepartment($args['department_hash'], $this->jwt['user_id']);
         if (!$deleted) ***REMOVED***
             return $this->error($response, 'Internal Server Error', 500, ['message' => __('Deleting user failed')]);
     ***REMOVED***
@@ -179,7 +179,7 @@ class DepartmentController extends AppController
         $lastInsertedId = $this->departmentRepository->insertDepartment($name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['userid']);
         $url = baseurl('/v2/departments/' . $lastInsertedId);
         $responseData = [
-            'department_id' => $lastInsertedId,
+            'department_hash' => $lastInsertedId,
             'url' => $url,
         ];
 

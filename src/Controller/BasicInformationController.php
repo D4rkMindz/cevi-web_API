@@ -112,7 +112,7 @@ class BasicInformationController extends AppController
      * @get int|string page
      * @get int|string offset
      * @get int|string department_group_id
-     * @get int|string department_id (is ignored if department_group_id is set.)
+     * @get int|string department_hash (is ignored if department_group_id is set.)
      * @get int|string until (as time())
      * @get int|string since (as time())
      * @get nulll|string description_format (null, 'plain' or 'parsed' Markdown description)
@@ -137,7 +137,7 @@ class BasicInformationController extends AppController
 
         $departmentGroup = (string)$data['department_group_id'];
         if (empty($departmentGroup)) ***REMOVED***
-            $department = (string)$data['department_id'];
+            $department = (string)$data['department_hash'];
     ***REMOVED*** else ***REMOVED***
             $department = '';
     ***REMOVED***

@@ -140,6 +140,7 @@
         <delete file="$***REMOVED***build_dir***REMOVED***/master/bin/setup.php"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/tests"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/docs"/>
+        <delete dir="$***REMOVED***build_dir***REMOVED***/master/resources/dumps"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/phpstan"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/monolog/monolog/doc"/>
         <delete dir="$***REMOVED***build_dir***REMOVED***/master/vendor/monolog/monolog/tests"/>

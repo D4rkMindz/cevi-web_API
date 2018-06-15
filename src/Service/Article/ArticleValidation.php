@@ -47,8 +47,8 @@ class ArticleValidation extends AppValidation
     ***REMOVED***
         $validationContext = new ValidationContext();
 
-        if (!$this->articleRepository->existsArticle($article['article_hash'], $article['department_hash'])) ***REMOVED***
-            $validationContext->setError('article_hash', __('Article does not exist'));
+        if (!$this->articleRepository->existsArticle($article['hash'], $article['department_hash'])) ***REMOVED***
+            $validationContext->setError('hash', __('Article does not exist'));
             return $validationContext;
     ***REMOVED***
 
@@ -68,31 +68,27 @@ class ArticleValidation extends AppValidation
             $this->validateQuantity($article['quantity'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('quality', $article)) ***REMOVED***
-            $this->validateQuality($article['quality'], $validationContext);
+        if (array_key_exists('quality_hash', $article)) ***REMOVED***
+            $this->validateQuality($article['quality_hash'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('department_id', $article)) ***REMOVED***
-            $this->validateDepartment($article['department'], $validationContext);
+        if (array_key_exists('department_hash', $article)) ***REMOVED***
+            $this->validateDepartment($article['department_hash'], $validationContext);
     ***REMOVED***
 
-        $storagePlaceId = array_key_exists('storage_place_id', $article);
-        $locationId = array_key_exists('location_id', $article);
-        $roomId = array_key_exists('room_id', $article);
-        $corridorId = array_key_exists('corridor_id', $article);
-        $shelfId = array_key_exists('shelf_id', $article);
-        $trayId = array_key_exists('tray_id', $article);
-        $chestId = array_key_exists('chest_id', $article);
-
-        // Check if either the storage place exists or the location matrix, but prioritize storage place id
-        if ($storagePlaceId) ***REMOVED***
-            $this->validateStoragePlace($article['storage_place_id'], $validationContext);
-    ***REMOVED*** else if ($locationId || $roomId || $corridorId || $shelfId || $trayId || $chestId) ***REMOVED***
-            $this->validateStorage((int)$article['location_id'], (int)$article['room_id'], (int)$article['corridor_id'], (int)$article['shelf_id'], (int)$article['tray_id'], (int)$article['chest_id'], $validationContext);
+        if (array_key_exists('storage_place_hash', $article)) ***REMOVED***
+            $this->validateStoragePlace($article['storage_place_hash'], $validationContext);
     ***REMOVED***
 
-        if (array_key_exists('replacement_date', $article)) ***REMOVED***
-            $this->validateReplacement($article['replacement_date'], $validationContext);
+        if (array_key_exists('replacement', $article)) ***REMOVED***
+            $this->validateReplacement($article['replacement'], $validationContext);
+    ***REMOVED***
+
+        if (array_key_exists('available_for_rent', $article)) ***REMOVED***
+            $this->validateAvailableForRent((bool)$article['available_for_rent'], $validationContext);
+    ***REMOVED***
+        if (array_key_exists('rent_price', $article)) ***REMOVED***
+            $this->validateRentPrice((bool)$article['available_for_rent'], $article['rent_price'], $validationContext);
     ***REMOVED***
 
         return $validationContext;
@@ -108,64 +104,19 @@ class ArticleValidation extends AppValidation
     ***REMOVED***
         $validationContext = new ValidationContext();
 
-        $this->validateTitle((string)$article['title'], $validationContext);
-        $this->validateDescription((string)$article['description'], $validationContext);
-        $this->validatePurchaseDate((int)$article['purchase_date'], $validationContext);
-        $this->validateQuantity((int)$article['quantity'], $validationContext);
-        $this->validateQuality((int)$article['quality'], $validationContext);
-
-        if (!empty($article['storage_place_id'])) ***REMOVED***
-            $this->validateStoragePlace($article['storage_place_id'], $validationContext);
-    ***REMOVED*** else ***REMOVED***
-            $this->validateStorage((int)$article['location_id'], (int)$article['room_id'], (int)$article['corridor_id'], (int)$article['shelf_id'], (int)$article['tray_id'], (int)$article['chest_id'], $validationContext);
+        $this->validateTitle((string)array_value('title', $article), $validationContext);
+        $this->validateDescription((string)array_value('description', $article), $validationContext);
+        $this->validatePurchaseDate((int)array_value('purchase_date', $article), $validationContext);
+        $this->validateQuantity((int)array_value('quantity', $article), $validationContext);
+        $this->validateQuality((string)array_value('quality_hash', $article), $validationContext);
+        $this->validateStoragePlace((string)array_value('storage_place_hash', $article), $validationContext);
+        $this->validateReplacement((string)array_value('replacement', $article), $validationContext);
+        $this->validateAvailableForRent((bool)array_value('available_for_rent', $article), $validationContext);
+        if (array_key_exists('rent_price', $article)) ***REMOVED***
+            $this->validateRentPrice((bool)$article['available_for_rent'], $article['rent_price'], $validationContext);
     ***REMOVED***
-
-        $this->validateReplacement((int)$article['replacement_date'], $validationContext);
 
         return $validationContext;
-***REMOVED***
-
-    /**
-     * Validate storage.
-     *
-     * @param string $locationId
-     * @param string $roomId
-     * @param string $corridorId
-     * @param string $shelfId
-     * @param string $trayId
-     * @param string $chestId
-     * @param ValidationContext $validationContext
-     */
-    public function validateStorage(string $locationId, string $roomId, string $corridorId, string $shelfId, string $trayId, string $chestId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->storageRepository->existsLocation($locationId)) ***REMOVED***
-            $validationContext->setError('location_id', __('Location id does not exist'));
-    ***REMOVED***
-
-        if (!empty($roomId) && !$this->storageRepository->existsRoom($roomId)) ***REMOVED***
-            $validationContext->setError('room_id', __('Room id does not exist'));
-    ***REMOVED***
-
-        if (!empty($corridorId) && !$this->storageRepository->existsCorridor($corridorId)) ***REMOVED***
-            $validationContext->setError('corridor_id', __('Corridor id does not exist'));
-    ***REMOVED***
-
-        if (!empty($shelfId) && !$this->storageRepository->existsShelf($shelfId)) ***REMOVED***
-            $validationContext->setError('shelf_id', __('Shelf id does not exist'));
-    ***REMOVED***
-
-        if (!empty($trayId) && !$this->storageRepository->existsTray($trayId)) ***REMOVED***
-            $validationContext->setError('tray_id', __('Tray id does not exist'));
-    ***REMOVED***
-
-        if (!empty($chestId) && !$this->storageRepository->existsChest($chestId)) ***REMOVED***
-            $validationContext->setError('chest_id', __('Chest id does not exist'));
-    ***REMOVED***
-
-        // TODO check if maybe useless to check if storage exists.
-        if (!$this->storageRepository->existsStorage($locationId, $roomId, $corridorId, $shelfId, $trayId, $chestId)) ***REMOVED***
-            $validationContext->setError('storage', __('Storage place does not exist'));
-    ***REMOVED***
 ***REMOVED***
 
     /**
@@ -176,7 +127,7 @@ class ArticleValidation extends AppValidation
      */
     private function validateTitle(string $title, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateLength($title, 'title', $validationContext);
+        $this->validateLength($title, 'title', $validationContext, 3, 60);
 ***REMOVED***
 
     /**
@@ -196,9 +147,9 @@ class ArticleValidation extends AppValidation
      * @param int $purchaseTime
      * @param ValidationContext $validationContext
      */
-    private function validatePurchaseDate(int $purchaseTime, ValidationContext $validationContext)
+    private function validatePurchaseDate($purchaseTime, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateNotEmpty($purchaseTime, 'purchase_time', $validationContext);
+        $this->validateNotEmpty($purchaseTime, 'purchase_date', $validationContext);
 
         $this->validateDate($purchaseTime, 'purchase_date', $validationContext, true);
 
@@ -225,30 +176,34 @@ class ArticleValidation extends AppValidation
     /**
      * Validate quality.
      *
-     * @param int $qualityId
+     * @param int $qualityHash
      * @param ValidationContext $validationContext
      */
-    private function validateQuality(int $qualityId, ValidationContext $validationContext)
+    private function validateQuality(string $qualityHash, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateNotEmpty($qualityId, 'quality', $validationContext);
+        $fails = $this->validateNotEmpty($qualityHash, 'quality_hash', $validationContext);
 
-        if (!$this->articleRepository->existsQuality((string)$qualityId)) ***REMOVED***
-            $validationContext->setError('quality', __('Quality id does not exist'));
+        if ($fails) ***REMOVED***
+            return;
+    ***REMOVED***
+
+        if (!$this->articleRepository->existsQuality((string)$qualityHash)) ***REMOVED***
+            $validationContext->setError('quality_hash', __('Quality does not exist'));
     ***REMOVED***
 ***REMOVED***
 
     /**
      * Validate if department exists.
      *
-     * @param int $departmentId
+     * @param int $departmentHash
      * @param ValidationContext $validationContext
      */
-    private function validateDepartment(int $departmentId, ValidationContext $validationContext)
+    private function validateDepartment(string $departmentHash, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateNotEmpty($departmentId, 'department_id', $validationContext);
+        $this->validateNotEmpty($departmentHash, 'department_hash', $validationContext);
 
-        if (!$this->departmentRepository->existsDepartment($departmentId)) ***REMOVED***
-            $validationContext->setError('department_id', __('Department does not exist'));
+        if (!$this->departmentRepository->existsDepartment($departmentHash)) ***REMOVED***
+            $validationContext->setError('department_hash', __('Department does not exist'));
     ***REMOVED***
 ***REMOVED***
 
@@ -260,19 +215,50 @@ class ArticleValidation extends AppValidation
      */
     private function validateReplacement(string $replacemnentDate, ValidationContext $validationContext)
     ***REMOVED***
-        $this->validateDate($replacemnentDate, 'replacement_date', $validationContext, true);
+        $this->validateDate($replacemnentDate, 'replacement', $validationContext, true);
 ***REMOVED***
 
     /**
      * Validate storage place id.
      *
-     * @param string $storagePlaceId
+     * @param string $storagePlaceHash
      * @param ValidationContext $validationContext
      */
-    private function validateStoragePlace(string $storagePlaceId, ValidationContext $validationContext)
+    private function validateStoragePlace(string $storagePlaceHash, ValidationContext $validationContext)
     ***REMOVED***
-        if (!$this->articleRepository->existsStoragePlace($storagePlaceId)) ***REMOVED***
-            $validationContext->setError('storage_place_id', __('Storage place does not exist'));
+        if (!$this->articleRepository->existsStoragePlace($storagePlaceHash)) ***REMOVED***
+            $validationContext->setError('storage_place_hash', __('Storage place does not exist'));
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Validate available for rent.
+     * pretty useless atm...
+     *
+     * @param bool $availableForRent
+     * @param ValidationContext $validationContext
+     */
+    private function validateAvailableForRent(bool $availableForRent, ValidationContext $validationContext)
+    ***REMOVED***
+        if (!is_bool($availableForRent)) ***REMOVED***
+            $validationContext->setError('available_for_rent', __('Please define it correctly'));
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Validate the rent price
+     *
+     * @param bool $availableForRent
+     * @param $price
+     * @param ValidationContext $validationContext
+     */
+    private function validateRentPrice(bool $availableForRent, $price, ValidationContext $validationContext)
+    ***REMOVED***
+        if ($price > 0 && !$availableForRent) ***REMOVED***
+            $validationContext->setError('rent_price', __('The article must be available to rent to define a rent price.'));
+    ***REMOVED***
+        if ($price < 0) ***REMOVED***
+            $validationContext->setError('rent_price', __('The rent price can not be less than zero'));
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

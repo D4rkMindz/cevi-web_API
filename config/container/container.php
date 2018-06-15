@@ -6,7 +6,7 @@
 use App\Controller\ErrorController;
 use App\Service\Mail\MailerInterface;
 use App\Service\Mail\MailgunAdapter;
-use App\Service\Role;
+use App\Util\Role;
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;
 use Monolog\Logger;
@@ -220,7 +220,10 @@ $container['errorHandler'] = function (Container $container) ***REMOVED***
         $logger = $container->get(Logger::class . '_error');
         $message = sprintf("EXCEPTION: %s\n", $exception->getMessage());
         foreach ($exception->getTrace() as $row) ***REMOVED***
-            $message .= sprintf("\e[Method %s in %s:%s", $row['function'], $row['file'], $row['line']);
+            $message .= sprintf("\e[Method %s in %s:%s",
+                array_key_exists('function', $row) ? $row['function'] : '',
+                array_key_exists('file', $row) ? $row['file'] : '',
+                array_key_exists('line', $row) ? $row['line'] : '');
     ***REMOVED***
         $logger->addError($message);
         $errorController = new ErrorController($container);

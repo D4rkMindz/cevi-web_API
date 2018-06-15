@@ -27,13 +27,13 @@ class LanguageRepository extends AppRepository
     /**
      * Check if language exists.
      *
-     * @param string $languageId
+     * @param string $languageHash
      * @return bool
      */
-    public function existsLanguage(string $languageId)
+    public function existsLanguage(string $languageHash)
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['id' => $languageId]);
+        $query->select('hash')->where(['hash' => $languageHash]);
         $row = $query->execute()->fetch();
         return !empty($row);
 ***REMOVED***
@@ -47,8 +47,8 @@ class LanguageRepository extends AppRepository
     public function getLanguageByAbbreviation(string $abbreviation)
     ***REMOVED***
         $query = $this->languageTable->newSelect();
-        $query->select('id')->where(['abbreviation' => $abbreviation]);
+        $query->select('hash')->where(['abbreviation' => $abbreviation]);
         $row = $query->execute()->fetch('assoc');
-        return !empty($row)? $row['id'] : 1;
+        return !empty($row)? $row['hash'] : 1;
 ***REMOVED***
 ***REMOVED***

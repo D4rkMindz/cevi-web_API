@@ -28,10 +28,10 @@ function app(App $inst = null): App
 /**
  * Route function.
  *
- * @param callable $callback
+ * @param callable|array $callback
  * @return string
  */
-function route(callable $callback): string
+function route($callback): string
 ***REMOVED***
     return implode(':', (array)$callback);
 ***REMOVED***

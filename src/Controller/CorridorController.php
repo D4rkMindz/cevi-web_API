@@ -72,12 +72,12 @@ class CorridorController extends AppController
      */
     public function getAllLocationsAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
         $params = $this->getLimitationParams($request);
-        $corridors = $this->locationRepository->getAllStorages($this->slCorridorTable, $args['department_id'], $params['limit'], $params['page']);
+        $corridors = $this->locationRepository->getAllStorages($this->slCorridorTable, $args['department_hash'], $params['limit'], $params['page']);
 
         if (empty($corridors)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('No corridors found')]);
@@ -102,7 +102,7 @@ class CorridorController extends AppController
      */
     public function createLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -132,7 +132,7 @@ class CorridorController extends AppController
      */
     public function updateLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -163,7 +163,7 @@ class CorridorController extends AppController
      */
     public function deleteLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 

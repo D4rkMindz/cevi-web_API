@@ -72,12 +72,12 @@ class TrayController extends AppController
      */
     public function getAllLocationsAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
         $params = $this->getLimitationParams($request);
-        $trays = $this->locationRepository->getAllStorages($this->slTrayTable, $args['department_id'], $params['limit'], $params['page']);
+        $trays = $this->locationRepository->getAllStorages($this->slTrayTable, $args['department_hash'], $params['limit'], $params['page']);
 
         if (empty($trays)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('No trays found')]);
@@ -102,7 +102,7 @@ class TrayController extends AppController
      */
     public function createLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -132,7 +132,7 @@ class TrayController extends AppController
      */
     public function updateLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -162,7 +162,7 @@ class TrayController extends AppController
      */
     public function deleteLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 

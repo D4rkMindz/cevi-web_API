@@ -25,3 +25,21 @@ function baseurl($path = '')
     $result = str_replace('//', '/', $result);
     return $result;
 ***REMOVED***
+
+function preg_replace_array($pattern, $replacement, $subject, $limit = -1)
+***REMOVED***
+    if (is_array($subject)) ***REMOVED***
+        foreach ($subject as &$value) $value = preg_replace_array($pattern, $replacement, $value, $limit);
+        return $subject;
+***REMOVED*** else ***REMOVED***
+        return preg_replace($pattern, $replacement, $subject, $limit);
+***REMOVED***
+***REMOVED***
+
+function array_value(string $key, array $array)
+***REMOVED***
+    if (array_key_exists($key, $array)) ***REMOVED***
+        return $array[$key];
+***REMOVED***
+    return null;
+***REMOVED***

@@ -93,16 +93,27 @@ class AppTable implements TableInterface
      * Insert into database.
      *
      * @param array $row with data to insertUser into database
-     * @param string $userId
+     * @param string $id
      * @return string last inserted ID
      */
-    public function insert(array $row, string $userId): string
+    public function insert(array $row, string $id): string
     ***REMOVED***
         if ($this->hasMetadata()) ***REMOVED***
             $row['created_at'] = date('Y-m-d H:i:s');
-            $row['created_by'] = $userId;
+            $row['created_by'] = $id;
     ***REMOVED***
-        return $this->connection->insert($this->table, $row)->lastInsertId($this->table);
+        $id = $this->connection->insert($this->table, $row)->lastInsertId($this->table);
+        if (!$this->hasHash()) ***REMOVED***
+            return $id;
+    ***REMOVED***
+
+        $row = $this->connection->newQuery()
+            ->select(['hash'])
+            ->from($this->table)
+            ->where(['id' => $id])
+            ->execute()
+            ->fetch('assoc');
+        return !empty($row)?$row['hash']:'';
 ***REMOVED***
 
     /**
@@ -225,5 +236,43 @@ class AppTable implements TableInterface
     ***REMOVED***
 
         return true;
+***REMOVED***
+
+    /**
+     * Check if table has hashes
+     *
+     * @return bool
+     */
+    public function hasHash(): bool
+    ***REMOVED***
+        $whitelist = [
+            'article' => 1,
+            'article_quality' => 1,
+            'department' => 1,
+            'department_group' => 1,
+            'department_region' => 1,
+            'department_type' => 1,
+            'educational_course' => 1,
+            'educational_course_image' => 1,
+            'educational_course_organiser' => 1,
+            'educational_course_participant' => 1,
+            'event' => 1,
+            'event_participant' => 1,
+            'event_participation_status' => 1,
+            'gender' => 1,
+            'iamge' => 1,
+            'language' => 1,
+            'permission' => 1,
+            'position' => 1,
+            'sl_chest' => 1,
+            'sl_corridor' => 1,
+            'sl_location' => 1,
+            'sl_room' => 1,
+            'sl_shelf' => 1,
+            'sl_tray' => 1,
+            'storage_place' => 1,
+            'user' => 1,
+        ];
+        return isset($whitelist[$this->table]);
 ***REMOVED***
 ***REMOVED***

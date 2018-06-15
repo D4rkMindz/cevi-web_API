@@ -2,7 +2,9 @@
 
 namespace App\Factory;
 
-
+/**
+ * Class JsonResponseFactory
+ */
 class JsonResponseFactory
 ***REMOVED***
     /**
@@ -32,7 +34,7 @@ class JsonResponseFactory
      * @param string $message
      * @return array
      */
-    public static function error(array $body = null, int $status = 403, string $message = 'Forbidden')
+    public static function  error(array $body = null, int $status = 403, string $message = 'Forbidden')
     ***REMOVED***
         $responseData = [
             'code' => $status,

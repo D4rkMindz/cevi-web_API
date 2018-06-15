@@ -69,7 +69,7 @@ class EventController extends AppController
         $since = isset($data['since']) ? $data['until'] : time();
         $descriptionFormat = isset($data['description_format']) ? $data['description_format'] : 'both';
 
-        $department = $args['department_id'];
+        $department = $args['department_hash'];
         if (!$this->departmentRepository->existsDepartment($department)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
@@ -117,7 +117,7 @@ class EventController extends AppController
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
-        $departmentId = $args['department_id'];
+        $departmentId = $args['department_hash'];
         if (!$this->departmentRepository->existsDepartment($departmentId))***REMOVED***
             return $this->error($response, __('Not found'), ['message'=> __('Department not found')]);
     ***REMOVED***
@@ -165,7 +165,7 @@ class EventController extends AppController
         $since = isset($data['since']) ? $data['until'] : time();
         $descriptionFormat = isset($data['description_format']) ? $data['description_format'] : 'both';
 
-        $department = (string)$args['department_id'];
+        $department = (string)$args['department_hash'];
         if (!$this->departmentRepository->existsDepartment($department)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
@@ -215,13 +215,13 @@ class EventController extends AppController
         $data = json_decode($json, true);
 
         $data['event_id'] = (string)$args['event_id'];
-        $data['department_id'] = (string)$args['department_id'];
+        $data['department_hash'] = (string)$args['department_hash'];
 
-        if (!$this->eventRepository->existsEvent($data['eventId'], $data['department_id'])) ***REMOVED***
+        if (!$this->eventRepository->existsEvent($data['eventId'], $data['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Event not found')]);
     ***REMOVED***
 
-        if (!$this->departmentRepository->existsDepartment($data['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($data['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -252,7 +252,7 @@ class EventController extends AppController
     public function deleteEventAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         $eventId = (string)$args['event_id'];
-        $departmentId =(string)$args['department_id'];
+        $departmentId =(string)$args['department_hash'];
         $eventExists = $this->eventRepository->existsEvent($eventId, $departmentId);
         if (!$eventExists || !$this->eventRepository->deleteEvent($eventId, $this->jwt['user_id'])) ***REMOVED***
             $this->error($response, 'Not Found', 404, ['message' => __('Deleting event failed')]);

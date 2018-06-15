@@ -4,8 +4,8 @@
 namespace App\Repository;
 
 
-use App\Service\Formatter;
-use App\Service\TranslateService;
+use App\Util\Formatter;
+use App\Util\TranslateService;
 use App\Table\DepartmentEventTable;
 use App\Table\DepartmentGroupTable;
 use App\Table\DepartmentTable;
@@ -214,7 +214,7 @@ class EventRepository extends AppRepository
      */
     public function existsEvent(string $eventId, string $departmentId): bool
     ***REMOVED***
-        return $this->exists($this->departmentEventTable, ['event_id' => $eventId, 'department_id'=> $departmentId]);
+        return $this->exists($this->departmentEventTable, ['event_id' => $eventId, 'department_hash'=> $departmentId]);
 ***REMOVED***
 
     /**
@@ -326,7 +326,7 @@ class EventRepository extends AppRepository
         $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
 
         if (!empty($departmentId)) ***REMOVED***
-            $where[$departmentEventTableName . '.department_id'] = $departmentId;
+            $where[$departmentEventTableName . '.department_hash'] = $departmentId;
     ***REMOVED***
 
         if (!empty($departmentGroupId)) ***REMOVED***

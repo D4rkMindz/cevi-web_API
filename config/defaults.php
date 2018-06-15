@@ -29,7 +29,7 @@ $config['jwt'] = [
         '/v2/cities' => ['GET'],
         '/v2/departmentgroups' => ['GET'],
         '/v2/departments' => ['GET'],
-        '/v2/departments/***REMOVED***department_id:[0-9]+***REMOVED***' => ['GET'],
+        '/v2/departments/***REMOVED***department_hash:[0-9]+***REMOVED***' => ['GET'],
     ]
 ];
 

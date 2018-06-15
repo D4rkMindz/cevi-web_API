@@ -47,7 +47,7 @@ class EventArticleController extends AppController
      */
     public function getAllAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $departmentId = (string)$args['department_id'];
+        $departmentId = (string)$args['department_hash'];
         $eventId = (string)$args['event_id'];
         $descriptionFormat = $request->getParam('description_format');
         $articleDescriptionFormat = $request->getParam('article_description_format');
@@ -75,7 +75,7 @@ class EventArticleController extends AppController
      */
     public function linkArticleAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        $departmentId = (string)$args['department_id'];
+        $departmentId = (string)$args['department_hash'];
         $eventId = (string)$args['event_id'];
         $articleId = (string)$request->getParam('article_id');
         $accountableUser = (string)$request->getParam('accountable_user_id');

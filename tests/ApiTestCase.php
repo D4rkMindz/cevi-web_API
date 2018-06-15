@@ -3,8 +3,11 @@
 namespace App\Test;
 
 use App\Factory\JWTFactory;
-use Aura\Session\Session;
+use App\Service\Mail\MailerInterface;
+use App\Test\Mock\MockMailer;
 use Exception;
+use App\Test\Mock\MockLogger;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Slim\App;
@@ -95,8 +98,24 @@ abstract class ApiTestCase extends TestCase
     protected function request(Request $request): Response
     ***REMOVED***
         $container = $this->getContainer();
-        $this->setContainer($container, 'request', $request);
-        $this->setContainer($container, 'response', new Response());
+        $this->setFrozenValueInContainer($container, 'request', $request);
+        $this->setFrozenValueInContainer($container, 'response', new Response());
+        $container[MailerInterface::class] = function () ***REMOVED***
+            return new MockMailer();
+    ***REMOVED***;
+        $container[Logger::class] = function () ***REMOVED***
+            return new MockLogger();
+    ***REMOVED***;
+        $container[Logger::class . '_request'] = function() ***REMOVED***
+            return new MockLogger();
+    ***REMOVED***;
+        $container[Logger::class . '_error'] = function () ***REMOVED***
+            return new MockLogger();
+    ***REMOVED***;
+        $container[Logger::class . '_debug'] = function () ***REMOVED***
+            return new MockLogger();
+    ***REMOVED***;
+
         $response = $this->app->run(true);
 
         return $response;
@@ -110,7 +129,7 @@ abstract class ApiTestCase extends TestCase
      * @param $value
      * @return void
      */
-    protected function setContainer(Container $container, string $key, $value)
+    protected function setFrozenValueInContainer(Container $container, string $key, $value)
     ***REMOVED***
         $class = new ReflectionClass(\Pimple\Container::class);
         $property = $class->getProperty('frozen');

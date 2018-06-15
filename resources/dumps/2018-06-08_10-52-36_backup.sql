@@ -32,10 +32,8 @@ CREATE TABLE `article` (
   `department_hash` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
   `quantity` int(11) NOT NULL,
-  `replacement` datetime DEFAULT NULL,
+  `replace` datetime DEFAULT NULL,
   `barcode` varchar(45) DEFAULT NULL,
-  `available_for_rent` tinyint(1) NOT NULL DEFAULT '0',
-  `rent_price` decimal(11,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
   `modified_at` datetime DEFAULT NULL,
@@ -56,7 +54,7 @@ CREATE TABLE `article` (
 
 LOCK TABLES `article` WRITE;
 /*!40000 ALTER TABLE `article` DISABLE KEYS */;
-INSERT INTO `article` VALUES (1,'hash_test_1',1,1,'hash_test_1','hash_test_1','hash_test_1','2019-01-01 00:00:00',10,'2018-03-01 00:00:00','CEVIWEB-A1_L1_D1',0,NULL,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,2,'hash_test_2','hash_test_2','hash_test_1','2017-01-01 00:00:00',10,'2018-12-01 00:00:00','CEVIWEB-A2_L2_D2',1,NULL,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,3,'hash_test_3','hash_test_3','hash_test_3','2017-01-01 00:00:00',10,'2018-12-01 00:00:00','CEVIWEB-A3_L3_D3',1,NULL,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `article` VALUES (1,'test_5b1a22e57b852',1,1,'test_5b1a22e57b85b','test_5b1a22e57b873','test_5b1a22f6952cf','2019-01-01 00:00:00',10,'2018-03-01 00:00:00','CEVIWEB-A1_L1_D1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a22f6cb2ea',2,2,'test_5b1a22f6cb2f8','test_5b1a22fb06902','test_5b1a2307d1392','2017-01-01 00:00:00',10,'2018-12-01 00:00:00','CEVIWEB-A2_L2_D2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a2308133df',3,3,'test_5b1a2308133f6','test_5b1a2310732f8','test_5b1a231919ae4','2017-01-01 00:00:00',10,'2018-12-01 00:00:00','CEVIWEB-A3_L3_D3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,11 +100,11 @@ DROP TABLE IF EXISTS `article_image`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article_image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `article_hash` varchar(255) NOT NULL,
-  `image_hash` varchar(255) NOT NULL,
+  `article_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_article_has_image_image1_idx` (`image_hash`),
-  KEY `fk_article_has_image_article1_idx` (`article_hash`)
+  KEY `fk_article_has_image_image1_idx` (`image_id`),
+  KEY `fk_article_has_image_article1_idx` (`article_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -144,7 +142,7 @@ CREATE TABLE `article_quality` (
 
 LOCK TABLES `article_quality` WRITE;
 /*!40000 ALTER TABLE `article_quality` DISABLE KEYS */;
-INSERT INTO `article_quality` VALUES (1,'hash_test_1',1,'Sehr gut','Sehr gut','Sehr gut','Sehr gut'),(2,'hash_test_2',2,'Gut','Gut','Gut','Gut'),(3,'hash_test_3',3,'Mittel','Mittel','Mittel','Mittel'),(4,'hash_test_4',4,'Bald ersetzen','Bald ersetzen','Bald ersetzen','Bald ersetzen'),(5,'hash_test_5',5,'Ersetzen','Ersetzen','Ersetzen','Ersetzen'),(6,'hash_test_6',6,'Kaputt','Kaputt','Kaputt','Kaputt');
+INSERT INTO `article_quality` VALUES (1,'test_5b1a2319f2004',1,'Sehr gut','Sehr gut','Sehr gut','Sehr gut'),(2,'test_5b1a2319f2009',2,'Gut','Gut','Gut','Gut'),(3,'test_5b1a2319f200b',3,'Mittel','Mittel','Mittel','Mittel'),(4,'test_5b1a2319f200e',4,'Bald ersetzen','Bald ersetzen','Bald ersetzen','Bald ersetzen'),(5,'test_5b1a2319f2010',5,'Ersetzen','Ersetzen','Ersetzen','Ersetzen'),(6,'test_5b1a2319f2013',6,'Kaputt','Kaputt','Kaputt','Kaputt');
 /*!40000 ALTER TABLE `article_quality` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +214,7 @@ CREATE TABLE `city` (
 
 LOCK TABLES `city` WRITE;
 /*!40000 ALTER TABLE `city` DISABLE KEYS */;
-INSERT INTO `city` VALUES (1,'CH','AG','4313','01','Möhlin','Möhlin','Möhlin','Möhlin',NULL,NULL,NULL,NULL,0,NULL,NULL),(2,'CH','AG','4310','01','Rheinfelden','Rheinfelden','Rheinfelden','Rheinfelden',NULL,NULL,NULL,NULL,0,NULL,NULL),(3,'CH','BS','4050','01','Basel','Basel','Basel','Basel',NULL,NULL,NULL,NULL,0,NULL,NULL);
+INSERT INTO `city` VALUES (1,'CH','DE','8000','01','Zürich','Zürich','Zürich','Zürich',NULL,NULL,NULL,NULL,0,NULL,NULL),(2,'CH','ZH','8909','01','Affoltern','Affoltern','Affoltern','Affoltern',NULL,NULL,NULL,NULL,0,NULL,NULL),(3,'CH','AG','4310','01','Rheinfelden','Rheinfelden','Rheinfelden','Rheinfelden',NULL,NULL,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `city` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +253,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES (1,'hash_test_1','hash_test_1','','hash_test_1',1,'Department 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_2','','hash_test_2',2,'Department 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_2','','hash_test_1',3,'Department 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'hash_test_4','hash_test_2','','hash_test_1',3,'Department 4','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `department` VALUES (1,'test_5b1a231a9fadd','test_5b1a231a9fae4','','test_5b1a231a9faee',1,'Department 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a231a9faf5','test_5b1a231a9fafc','','test_5b1a231a9fb05',2,'Department 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a231a9fb09','test_5b1a231a9fb0f','','test_5b1a231a9fb14',3,'Department 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'test_5b1a231a9fb1b','test_5b1a231a9fb21','','test_5b1a231a9fb27',3,'Department 4','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +273,7 @@ CREATE TABLE `department_event` (
   KEY `fk_department_has_event_event1_idx` (`event_hash`),
   KEY `fk_department_has_event_department1_idx` (`department_hash`),
   KEY `fk_department_event_department_group1_idx` (`department_group_hash`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,7 +282,6 @@ CREATE TABLE `department_event` (
 
 LOCK TABLES `department_event` WRITE;
 /*!40000 ALTER TABLE `department_event` DISABLE KEYS */;
-INSERT INTO `department_event` VALUES (1,'hash_test_1','hash_test_1','hash_test_1'),(2,'hash_test_2','hash_test_2','hash_test_2'),(3,'hash_test_3','hash_test_3','hash_test_2');
 /*!40000 ALTER TABLE `department_event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +309,7 @@ CREATE TABLE `department_group` (
 
 LOCK TABLES `department_group` WRITE;
 /*!40000 ALTER TABLE `department_group` DISABLE KEYS */;
-INSERT INTO `department_group` VALUES (1,'hash_test_1','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG'),(2,'hash_test_2','Basel','Basel','Basel','Basel');
+INSERT INTO `department_group` VALUES (1,'test_5b1a231a9fb30','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG'),(2,'test_5b1a231a9fb32','Basel','Basel','Basel','Basel');
 /*!40000 ALTER TABLE `department_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,7 +337,7 @@ CREATE TABLE `department_region` (
 
 LOCK TABLES `department_region` WRITE;
 /*!40000 ALTER TABLE `department_region` DISABLE KEYS */;
-INSERT INTO `department_region` VALUES (1,'hash_test_1','Nord','Nord','Nord','Nord'),(2,'hash_test_2','Süd','Süd','Süd','Süd'),(3,'hash_test_3','Ost','Ost','Ost','Ost'),(4,'hash_test_4','West','West','West','West');
+INSERT INTO `department_region` VALUES (1,'test_5b1a231a9fb39','Nord','Nord','Nord','Nord'),(2,'test_5b1a231a9fb3b','Süd','Süd','Süd','Süd'),(3,'test_5b1a231a9fb3d','Ost','Ost','Ost','Ost'),(4,'test_5b1a231a9fb40','West','West','West','West');
 /*!40000 ALTER TABLE `department_region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +371,7 @@ CREATE TABLE `department_type` (
 
 LOCK TABLES `department_type` WRITE;
 /*!40000 ALTER TABLE `department_type` DISABLE KEYS */;
-INSERT INTO `department_type` VALUES (1,'hash_test_1','Verband','Verband','Verband','Verband',NULL,NULL,NULL,NULL,NULL,NULL),(2,'hash_test_2','Tensing','Tensing','Tensing','Tensing',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `department_type` VALUES (1,'test_5b1a231a9fb45','Verband','Verband','Verband','Verband',NULL,NULL,NULL,NULL,NULL,NULL),(2,'test_5b1a231a9fb48','Tensing','Tensing','Tensing','Tensing',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `department_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,7 +417,7 @@ CREATE TABLE `educational_course` (
 
 LOCK TABLES `educational_course` WRITE;
 /*!40000 ALTER TABLE `educational_course` DISABLE KEYS */;
-INSERT INTO `educational_course` VALUES (1,'hash_test_1',1,1,'hash_test_1','hash_test_1',1,'hash_test_1',100,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,2,'hash_test_2','hash_test_2',2,'hash_test_2',120,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,3,'hash_test_3','hash_test_3',3,'hash_test_2',350,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,'2018-04-07 09:00:00',1);
+INSERT INTO `educational_course` VALUES (1,'test_5b1a231a9fb4f',1,1,'test_5b1a231a9fb56','test_5b1a231b4dc59',1,'test_5b1a231b4dca7',100,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'test_5b1a231b8395c',2,2,'test_5b1a231bb9ddc','test_5b1a231c3210c',2,'test_5b1a231c32148',120,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'test_5b1a231c684d8',3,3,'test_5b1a231cd4c15','test_5b1a231d16f3a',3,'test_5b1a231d16f65',350,'2018-04-07 10:00:00','2018-04-14 16:00:00',2016,'2017-05-10 16:32:15',0,NULL,NULL,'2018-04-07 09:00:00',1);
 /*!40000 ALTER TABLE `educational_course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +478,7 @@ CREATE TABLE `educational_course_image` (
 
 LOCK TABLES `educational_course_image` WRITE;
 /*!40000 ALTER TABLE `educational_course_image` DISABLE KEYS */;
-INSERT INTO `educational_course_image` VALUES (1,'hash_test_1','hash_test_1','hash_test_1'),(2,'hash_test_2','hash_test_2','hash_test_1'),(3,'hash_test_3','hash_test_3','hash_test_1');
+INSERT INTO `educational_course_image` VALUES (1,'test_5b1a231def070','test_5b1a231def079','test_5b1a23209e295'),(2,'test_5b1a23214d950','test_5b1a23223376c','test_5b1a2323effe8'),(3,'test_5b1a23249ed17','test_5b1a2326684cf','test_5b1a23274d335');
 /*!40000 ALTER TABLE `educational_course_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +509,7 @@ CREATE TABLE `educational_course_organiser` (
 
 LOCK TABLES `educational_course_organiser` WRITE;
 /*!40000 ALTER TABLE `educational_course_organiser` DISABLE KEYS */;
-INSERT INTO `educational_course_organiser` VALUES (1,'hash_test_1','hash_test_1',NULL,'061 456 12 78','contact@llm.ch','Ist auf Milch allergisch','079 456 12 79'),(2,'hash_test_2','hash_test_2',NULL,'061 457 12 78','contact@glk.ch','Ist auf Kühe allergisch','079 456 12 78'),(3,'hash_test_3','hash_test_3',NULL,'061 357 12 78','contact@heku.ch','Ist auf Dummheit allergisch','079 456 12 99');
+INSERT INTO `educational_course_organiser` VALUES (1,'test_5b1a2327f0fbd','test_5b1a2327f0fc5',NULL,'061 456 12 78','contact@llm.ch','Ist auf Milch allergisch','079 456 12 79'),(2,'test_5b1a23283305e','test_5b1a232844ea8',NULL,'061 457 12 78','contact@glk.ch','Ist auf Kühe allergisch','079 456 12 78'),(3,'test_5b1a232869357','test_5b1a23288d7d4',NULL,'061 357 12 78','contact@heku.ch','Ist auf Dummheit allergisch','079 456 12 99');
 /*!40000 ALTER TABLE `educational_course_organiser` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,7 +537,7 @@ CREATE TABLE `educational_course_participant` (
 
 LOCK TABLES `educational_course_participant` WRITE;
 /*!40000 ALTER TABLE `educational_course_participant` DISABLE KEYS */;
-INSERT INTO `educational_course_participant` VALUES (1,'hash_test_1','hash_test_1','hash_test_1'),(2,'hash_test_2','hash_test_1','hash_test_2'),(3,'hash_test_3','hash_test_2','hash_test_3');
+INSERT INTO `educational_course_participant` VALUES (1,'test_5b1a23289f998','test_5b1a23289f9a0','test_5b1a232b45ce7'),(2,'test_5b1a232b7b647','test_5b1a232b7b653','test_5b1a232e334b9'),(3,'test_5b1a232e56fe1','test_5b1a232f38b20','test_5b1a2331205a6');
 /*!40000 ALTER TABLE `educational_course_participant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -599,7 +596,7 @@ CREATE TABLE `email_token` (
 
 LOCK TABLES `email_token` WRITE;
 /*!40000 ALTER TABLE `email_token` DISABLE KEYS */;
-INSERT INTO `email_token` VALUES (1,'hash_test_1','7b074e4ffce2ccb8f0d502c8b16ffd3c','2018-06-15 08:05:07'),(2,'hash_test_2','be9ebbeb2f1ac5aa6f8070cf360c1558','2018-06-15 08:05:08'),(3,'hash_test_3','e69a5aa397bc8a3f2d173535e50ad197','2018-06-15 07:49:08');
+INSERT INTO `email_token` VALUES (1,'test_5b1a2331d2ccf','e1bceb7823310d94a98fa958239c5c6d','2018-06-08 08:33:22'),(2,'test_5b1a233226134','2149b3f79ea48ba2cd32420c6a4bf9a1','2018-06-08 08:33:22'),(3,'test_5b1a23326d68f','8a8d47e91ed26832d466305cef4f3528','2018-06-08 08:17:22');
 /*!40000 ALTER TABLE `email_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,7 +637,7 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'hash_test_1',1,1,123,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',1,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,2,150,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',1,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,3,300,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',0,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL);
+INSERT INTO `event` VALUES (1,'test_5b1a23327f2b8',1,1,123,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',1,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'test_5b1a2332b4d0b',2,2,150,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',1,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'test_5b1a2332ea91e',3,3,300,'2018-07-05 10:00:00','2018-07-12 16:00:00','2018-07-05 08:00:00','2018-07-12 18:00:00',0,'2018-02-01 10:00:00','2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -735,7 +732,7 @@ CREATE TABLE `event_image` (
 
 LOCK TABLES `event_image` WRITE;
 /*!40000 ALTER TABLE `event_image` DISABLE KEYS */;
-INSERT INTO `event_image` VALUES (1,'hash_test_1','hash_test_1'),(2,'hash_test_2','hash_test_2'),(3,'hash_test_3','hash_test_3');
+INSERT INTO `event_image` VALUES (1,'test_5b1a233755339','test_5b1a233801780'),(2,'test_5b1a2338d79a4','test_5b1a233984aef'),(3,'test_5b1a233a67b4b','test_5b1a233b14d26');
 /*!40000 ALTER TABLE `event_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -772,7 +769,7 @@ CREATE TABLE `event_participant` (
 
 LOCK TABLES `event_participant` WRITE;
 /*!40000 ALTER TABLE `event_participant` DISABLE KEYS */;
-INSERT INTO `event_participant` VALUES (1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_2','hash_test_2','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_3','hash_test_3','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,'2018-02-01 10:00:00',2);
+INSERT INTO `event_participant` VALUES (1,'test_5b1a23340e2e5','test_5b1a23340e2ec','test_5b1a233443bdf','test_5b1a2334e478e',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233525cc1','test_5b1a233537e71','test_5b1a233591351','test_5b1a2336088b2',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'test_5b1a23363e1df','test_5b1a233661c75','test_5b1a2336de8c5','test_5b1a23371fc02',NULL,'2017-05-10 16:32:15',0,NULL,NULL,'2018-02-01 10:00:00',2);
 /*!40000 ALTER TABLE `event_participant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -791,7 +788,7 @@ CREATE TABLE `event_participation_status` (
   `name_fr` varchar(45) NOT NULL,
   `name_it` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -800,7 +797,6 @@ CREATE TABLE `event_participation_status` (
 
 LOCK TABLES `event_participation_status` WRITE;
 /*!40000 ALTER TABLE `event_participation_status` DISABLE KEYS */;
-INSERT INTO `event_participation_status` VALUES (1,'hash_test_1','Zugesagt','Participated','Participaté','Participatés'),(2,'hash_test_2','Abgesagt','Departicipated','Departicipaté','Departicipatés'),(3,'hash_test_3','Vielleicht','Probably','Peutetre','Peutetros');
 /*!40000 ALTER TABLE `event_participation_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -833,7 +829,7 @@ CREATE TABLE `event_title` (
 
 LOCK TABLES `event_title` WRITE;
 /*!40000 ALTER TABLE `event_title` DISABLE KEYS */;
-INSERT INTO `event_title` VALUES (1,'GLK','GLK','GLK','GLK','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(2,'LLM','LLM','LLM','LLM','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(3,'HEKU','HEKU','HEKU','HEKU','2017-01-01 00:00:10',0,'2017-12-01 00:00:00',2,NULL,NULL),(4,'ZM1','ZM1','ZM1','ZM1','2017-01-01 00:00:10',0,NULL,NULL,'2018-01-01 00:00:12',1);
+INSERT INTO `event_title` VALUES (1,'GLK','GLK','GLK','GLK','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(2,'LLM','LLM','LLM','LLM','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(3,'HEKU','HEKU','HEKU','HEKU','2017-01-01 00:00:10',0,'2017-12-01 00:00:00',2,NULL,NULL),(4,'HEKU','HEKU','HEKU','HEKU','2017-01-01 00:00:10',0,NULL,NULL,'2018-01-01 00:00:12',1);
 /*!40000 ALTER TABLE `event_title` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -861,7 +857,7 @@ CREATE TABLE `gender` (
 
 LOCK TABLES `gender` WRITE;
 /*!40000 ALTER TABLE `gender` DISABLE KEYS */;
-INSERT INTO `gender` VALUES (1,'hash_test_1','Mann','Men','Homme','Uomo'),(2,'hash_test_2','Frau','Miss','Madame','Signora');
+INSERT INTO `gender` VALUES (1,'test_5b1a233b4a5be','Mann','Men','Homme','Uomo'),(2,'test_5b1a233b4a5c2','Frau','Miss','Madame','Signora');
 /*!40000 ALTER TABLE `gender` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -893,7 +889,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'hash_test_1','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-2.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-3.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,'2017-01-01 11:00:00',1);
+INSERT INTO `image` VALUES (1,'test_5b1a233b4a5c9','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233b7fdf6','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-2.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233bb62c5','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-3.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,'2017-01-01 11:00:00',1);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -919,7 +915,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
-INSERT INTO `language` VALUES (1,'hash_test_1','de_CH','de'),(2,'hash_test_2','en_GB','en'),(3,'hash_test_3','fr_CH','fr'),(4,'hash_test_4','it_CH','it');
+INSERT INTO `language` VALUES (1,'test_5b1a233beb7ed','de_CH','de'),(2,'test_5b1a233beb7f3','en_GB','en'),(3,'test_5b1a233beb7f5','fr_CH','fr'),(4,'test_5b1a233beb7f8','it_CH','it');
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -936,7 +932,7 @@ CREATE TABLE `permission` (
   `level` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -945,7 +941,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (1,'hash_test_1',64,'Super Admin'),(2,'hash_test_2',32,'Admin'),(3,'hash_test_3',16,'Super User'),(4,'hash_test_4',8,'User'),(5,'hash_test_5',4,'Guest'),(6,'hash_test_6',2,'Anonymous');
+INSERT INTO `permission` VALUES (1,'test_5b1a233beb800',64,'archive'),(2,'test_5b1a233beb803',32,'modify'),(3,'test_5b1a233beb805',16,'insert'),(4,'test_5b1a233beb808',8,'read');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +968,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-12 09:32:30','2018-06-12 15:33:14',0),(20180612173429,'AddedRentForArticles','2018-06-12 17:34:30','2018-06-12 17:34:32',0),(20180615194505,'Fix','2018-06-15 19:45:36','2018-06-15 19:45:39',0);
+INSERT INTO `phinxlog` VALUES (20180608072255,'Init','2018-06-08 07:27:33','2018-06-08 07:31:10',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1006,7 +1002,7 @@ CREATE TABLE `position` (
 
 LOCK TABLES `position` WRITE;
 /*!40000 ALTER TABLE `position` DISABLE KEYS */;
-INSERT INTO `position` VALUES (1,'hash_test_1','Abteilungsleiter','Head of department','Capo dipartimento','Chef de département',NULL,NULL,NULL,NULL,NULL,NULL),(2,'hash_test_2','Lagerleiter','Camp leader','Chef de camp','Capo  del campeggio',NULL,NULL,NULL,NULL,NULL,NULL),(3,'hash_test_3','Gruppenleiter','Team leader','Chef d\'équipe','Capogruppo',NULL,NULL,NULL,NULL,NULL,NULL),(4,'hash_test_4','Hilfsleiter','Auxiliary conductors','Conducteurs auxiliaires','Conduttori ausiliari',NULL,NULL,NULL,NULL,NULL,NULL),(5,'hash_test_5','Teilnehmer','Participants','Participants','Partecipanti',NULL,NULL,NULL,NULL,NULL,NULL),(6,'hash_test_6','Eltern','Parent','Parent','Ragazzo',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `position` VALUES (1,'test_5b1a233beb80e','Abteilungsleiter','Head of department','Capo dipartimento','Chef de département',NULL,NULL,NULL,NULL,NULL,NULL),(2,'test_5b1a233beb811','Lagerleiter','Camp leader','Chef de camp','Capo  del campeggio',NULL,NULL,NULL,NULL,NULL,NULL),(3,'test_5b1a233beb813','Gruppenleiter','Team leader','Chef d\'équipe','Capogruppo',NULL,NULL,NULL,NULL,NULL,NULL),(4,'test_5b1a233beb816','Hilfsleiter','Auxiliary conductors','Conducteurs auxiliaires','Conduttori ausiliari',NULL,NULL,NULL,NULL,NULL,NULL),(5,'test_5b1a233beb818','Teilnehmer','Participants','Participants','Partecipanti',NULL,NULL,NULL,NULL,NULL,NULL),(6,'test_5b1a233beb81a','Eltern','Parent','Parent','Ragazzo',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `position` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1037,7 +1033,7 @@ CREATE TABLE `sl_chest` (
 
 LOCK TABLES `sl_chest` WRITE;
 /*!40000 ALTER TABLE `sl_chest` DISABLE KEYS */;
-INSERT INTO `sl_chest` VALUES (1,'hash_test_1','Kiste 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Kiste 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Kiste 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_chest` VALUES (1,'test_5b1a233beb820','Kiste 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233c2cbdd','Kiste 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233c62ae5','Kiste 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_chest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1068,7 +1064,7 @@ CREATE TABLE `sl_corridor` (
 
 LOCK TABLES `sl_corridor` WRITE;
 /*!40000 ALTER TABLE `sl_corridor` DISABLE KEYS */;
-INSERT INTO `sl_corridor` VALUES (1,'hash_test_1','Korridor 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Korridor 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Korridor 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_corridor` VALUES (1,'test_5b1a233c9885d','Korridor 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233cce18c','Korridor 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233d0f9d9','Korridor 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_corridor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1099,7 +1095,7 @@ CREATE TABLE `sl_location` (
 
 LOCK TABLES `sl_location` WRITE;
 /*!40000 ALTER TABLE `sl_location` DISABLE KEYS */;
-INSERT INTO `sl_location` VALUES (1,'hash_test_1','Ort 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Ort 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Ort 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_location` VALUES (1,'test_5b1a233d45287','Ort 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233d7a93e','Ort 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233db080f','Ort 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1130,7 +1126,7 @@ CREATE TABLE `sl_room` (
 
 LOCK TABLES `sl_room` WRITE;
 /*!40000 ALTER TABLE `sl_room` DISABLE KEYS */;
-INSERT INTO `sl_room` VALUES (1,'hash_test_1','Raum 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Raum 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Raum 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_room` VALUES (1,'test_5b1a233de5ccb','Raum 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233e28020','Raum 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233e5dda0','Raum 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1161,7 +1157,7 @@ CREATE TABLE `sl_shelf` (
 
 LOCK TABLES `sl_shelf` WRITE;
 /*!40000 ALTER TABLE `sl_shelf` DISABLE KEYS */;
-INSERT INTO `sl_shelf` VALUES (1,'hash_test_1','Regal 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Regal 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Regal 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_shelf` VALUES (1,'test_5b1a233e9382c','Regal 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233ec9a3e','Regal 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233f0b166','Regal 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_shelf` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1192,7 +1188,7 @@ CREATE TABLE `sl_tray` (
 
 LOCK TABLES `sl_tray` WRITE;
 /*!40000 ALTER TABLE `sl_tray` DISABLE KEYS */;
-INSERT INTO `sl_tray` VALUES (1,'hash_test_1','Tablar 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','Tablar 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','Tablar 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `sl_tray` VALUES (1,'test_5b1a233f40ff6','Tablar 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a233f76a98','Tablar 2','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a233fac40a','Tablar 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `sl_tray` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1236,7 +1232,7 @@ CREATE TABLE `storage_place` (
 
 LOCK TABLES `storage_place` WRITE;
 /*!40000 ALTER TABLE `storage_place` DISABLE KEYS */;
-INSERT INTO `storage_place` VALUES (1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','Platz 2','2027-02-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'hash_test_4','hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,'2017-12-30 00:00:00',0);
+INSERT INTO `storage_place` VALUES (1,'test_5b1a233fe16e9','test_5b1a2343d5cce','test_5b1a233fe16f0','test_5b1a23408e36f','test_5b1a23413ab13','test_5b1a2341dc4c0','test_5b1a2342886ca','test_5b1a234334d63','Platz 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a234417657','test_5b1a23480b40e','test_5b1a23444d283','test_5b1a2344edc3f','test_5b1a23459a692','test_5b1a234646e4b','test_5b1a2346e7d53','test_5b1a23479433a','Platz 2','2027-02-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a234840743','test_5b1a234c3584e','test_5b1a234840750','test_5b1a2348e1aa1','test_5b1a23498e34e','test_5b1a234a3b639','test_5b1a234adc33e','test_5b1a234b887d0','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'test_5b1a234c6b28c','test_5b1a2350602fb','test_5b1a234c6b299','test_5b1a234d4d1c5','test_5b1a234dee255','test_5b1a234e9aa61','test_5b1a234f12585','test_5b1a234fb3bde','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,'2017-12-30 00:00:00',0);
 /*!40000 ALTER TABLE `storage_place` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1292,7 +1288,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$SxbSShl9NwGODUbWT7oW/e64P/3DAex7znof25j/hZidHOcp56U6G',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$S8mEu6qTZKoOBfWaPbLE3.kSQu21owinvYWLlAc8/V/lbYwQ1GLMi',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$UsvUaT6daR05glBrDUL2d.1Cz3fYNs7NJ81RUO1otc2nFuMGybA0q',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'test_5b1a2350cb586',1,'test_5b1a2350cb58d','test_5b1a2350cb59c','test_5b1a2350cb5c5','test_5b1a2350cb5a8','test_5b1a2350cb5bc','Max','max.mustermann@example.com','max','$2y$10$cMKQrlBQhtdA620OxapnQuaEcTaOLvNMumCmOWGLBprhqfURYK3Oy',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'test_5b1a2350dd284',2,'test_5b1a2350dd28f','test_5b1a2350dd29e','test_5b1a2350dd2c0','test_5b1a2350dd2a7','test_5b1a2350dd2bb','Maxine','maxine.mustermann@example.com','maxine','$2y$10$s1s/yBKINz7OBaPpQADU6uH88QFIqTK0tsUSiWH7IYxsxSkOHdDE2',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'test_5b1a2350ef053',3,'test_5b1a2350ef060','test_5b1a2350ef075','test_5b1a2350ef097','test_5b1a2350ef081','test_5b1a2350ef091','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$rww2z3mjBCDFl2ajFrbEgO1vUauGoJ4S0fZRWsi2ZGu6syyNaLvAm',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1305,4 +1301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-15 21:46:10
+-- Dump completed on 2018-06-08  9:31:56

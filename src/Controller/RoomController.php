@@ -72,12 +72,12 @@ class RoomController extends AppController
      */
     public function getAllLocationsAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
         $params = $this->getLimitationParams($request);
-        $rooms = $this->locationRepository->getAllStorages($this->slRoomTable, $args['department_id'], $params['limit'], $params['page']);
+        $rooms = $this->locationRepository->getAllStorages($this->slRoomTable, $args['department_hash'], $params['limit'], $params['page']);
 
         if (empty($rooms)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('No rooms found')]);
@@ -102,7 +102,7 @@ class RoomController extends AppController
      */
     public function createLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -132,7 +132,7 @@ class RoomController extends AppController
      */
     public function updateLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 
@@ -163,7 +163,7 @@ class RoomController extends AppController
      */
     public function deleteLocation(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
     ***REMOVED***
 

@@ -60,12 +60,12 @@ class StorageController extends AppController
      */
     public function getAllStoragePlacesAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Department does not exist'), 404, ['message' => __('Department does not exist')]);
     ***REMOVED***
 
         $reqArgs = $this->getLimitationParams($request);
-        $storagePlaces = $this->storageRepository->getAllStorages($args['department_id'], $reqArgs['limit'], $reqArgs['page']);
+        $storagePlaces = $this->storageRepository->getAllStorages($args['department_hash'], $reqArgs['limit'], $reqArgs['page']);
 
         if (empty($storagePlaces)) ***REMOVED***
             return $this->error($response, __('No storage places found'), 404, ['message' => __('No storage places found')]);
@@ -86,7 +86,7 @@ class StorageController extends AppController
      */
     public function getStoragPlaceAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exist')]);
     ***REMOVED***
 
@@ -96,8 +96,8 @@ class StorageController extends AppController
 
         $descriptionFormat = $request->getParam('description_format') ?: 'both';
 
-        $storagePlace = $this->storageRepository->getStorage((string)$args['department_id'], (string)$args['storage_id']);
-        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $args['department_id'],  $descriptionFormat);
+        $storagePlace = $this->storageRepository->getStorage((string)$args['department_hash'], (string)$args['storage_id']);
+        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $args['department_hash'],  $descriptionFormat);
 
         if (empty($storagePlace)) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exist')]);
@@ -131,7 +131,7 @@ class StorageController extends AppController
      */
     public function createStoragePlaceAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_id'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Department does not exits')]);
     ***REMOVED***
 
@@ -143,10 +143,10 @@ class StorageController extends AppController
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $storageId = $this->storageRepository->createStorage($args['department_id'], $params, $this->jwt['user_id']);
+        $storageId = $this->storageRepository->createStorage($args['department_hash'], $params, $this->jwt['user_id']);
         $responseData = [
             'info' => [
-                'url' => baseurl('/v2/departments/' . $args['department_id'] . '/storages/' . $storageId),
+                'url' => baseurl('/v2/departments/' . $args['department_hash'] . '/storages/' . $storageId),
                 'message' => __('Created storage place successfully'),
             ],
         ];
@@ -174,7 +174,7 @@ class StorageController extends AppController
     public function updateStoragePlaceAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         if (
-            !$this->departmentRepository->existsDepartment($args['department_id'])
+            !$this->departmentRepository->existsDepartment($args['department_hash'])
             || !$this->storageRepository->existsStorageById($args['storage_id'])
         ) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exits')]);
@@ -187,7 +187,7 @@ class StorageController extends AppController
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
     ***REMOVED***
 
-        $updated = $this->storageRepository->updateStorage($args['department_id'], $args['storage_id'], $params, $this->jwt['user_id']);
+        $updated = $this->storageRepository->updateStorage($args['department_hash'], $args['storage_id'], $params, $this->jwt['user_id']);
         if (!$updated) ***REMOVED***
             return $this->error($response, __('Server Error'), 500, ['message' => __('Updating storage place failed')]);
     ***REMOVED***
@@ -207,13 +207,13 @@ class StorageController extends AppController
     public function deleteStoragePlaceAction(Request $request, Response $response, array $args): Response
     ***REMOVED***
         if (
-            !$this->departmentRepository->existsDepartment($args['department_id'])
+            !$this->departmentRepository->existsDepartment($args['department_hash'])
             || !$this->storageRepository->existsStorageById($args['storage_id'])
         ) ***REMOVED***
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exits')]);
     ***REMOVED***
 
-        $deleted = $this->storageRepository->deleteStorage($args['department_id'], $args['storage_id'], $this->jwt['user_id']);
+        $deleted = $this->storageRepository->deleteStorage($args['department_hash'], $args['storage_id'], $this->jwt['user_id']);
         if (!$deleted) ***REMOVED***
             return $this->error($response, __('Server error'), 500, ['message' => __('Deleting storage place failed')]);
     ***REMOVED***

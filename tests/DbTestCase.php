@@ -19,7 +19,30 @@ use Slim\Http\Response;
  */
 abstract class DbTestCase extends ApiTestCase
 ***REMOVED***
-    //use TestCaseTrait;
+    protected $articleHash;
+    protected $departmentHash;
+    protected $departmentGroupHash;
+    protected $departmentRegionHash;
+    protected $departmentTypeHash;
+    protected $educationalCourseHash;
+    protected $educationalCourseOrganiserHash;
+    protected $educationalCourseParticipantHash;
+    protected $eventHash;
+    protected $eventParticipantHash;
+    protected $eventParticipationStatusHash;
+    protected $genderHash;
+    protected $imageHash;
+    protected $languageHash;
+    protected $permissionHash;
+    protected $positionHash;
+    protected $slChestHash;
+    protected $slCorridorHash;
+    protected $slLocationHash;
+    protected $slRoomHash;
+    protected $slShelfHash;
+    protected $slTrayHash;
+    protected $storagePlaceHash;
+    protected $userHash;
 
     /**
      * @var PDO
@@ -32,6 +55,7 @@ abstract class DbTestCase extends ApiTestCase
      * @var Container
      */
     private $container;
+
 
     /**
      * Setup.
@@ -169,20 +193,34 @@ abstract class DbTestCase extends ApiTestCase
      */
     abstract protected function getDataHook(array $data): void;
 
+    /**
+     * Get array data set and create test data base object.
+     *
+     * @return IDataSet
+     */
     protected function getDataSet(): IDataSet
     ***REMOVED***
         echo "Regenerating mock database...\t\t";
         $testDatabase = new TestDatabase();
         $startGenerate = microtime(true);
-        $json = file_get_contents(__DIR__ . '/dataset.json');
+        $json = '';
+        if (file_exists(__DIR__ . '/dataset.json')) ***REMOVED***
+            $json = file_get_contents(__DIR__ . '/dataset.json');
+    ***REMOVED***
+
         if (empty($json)) ***REMOVED***
             $data = $testDatabase->all();
+            $this->fillHashes($data);
             $this->getDataHook($data);
             $json = json_encode($data);
             file_put_contents(__DIR__ . '/dataset.json', $json);
     ***REMOVED*** else ***REMOVED***
             $dataJson = json_decode($json, true);
+            $this->fillHashes($dataJson);
             $this->getDataHook($dataJson);
+            $endGenerate = microtime(true);
+            $timeUsedGenerating = $endGenerate - $startGenerate;
+            echo "Done ***REMOVED***$timeUsedGenerating***REMOVED***s\n";
             return new ArrayDataSet($dataJson);
     ***REMOVED***
         $endGenerate = microtime(true);
@@ -230,19 +268,208 @@ abstract class DbTestCase extends ApiTestCase
     ***REMOVED***
 ***REMOVED***
 
-    protected function assertResponseHasKeys(Response $response, array $keys)
+    /**
+     * Assert that response has keys.
+     *
+     * @param Response $response
+     * @param array $keys
+     */
+    protected function assertResponseHasKeys(array $keys, Response $response)
     ***REMOVED***
         $json = $response->getBody()->__toString();
         $this->assertJson($json);
         $data = json_decode($json, true);
         foreach ($keys as $key) ***REMOVED***
-            $subKeys = explode('.', $key);
+            $requiredKeys = $subKeys = explode('.', $key);
+            array_pop($subKeys);
             $array = $data;
+
             foreach ($subKeys as $subKey) ***REMOVED***
-                $this->assertArrayHasKey($subKey, $array);
                 $array = $array[$subKey];
         ***REMOVED***
+            $element = end($requiredKeys);
+            $this->assertArrayHasKey($element, $array, "Assertion for ***REMOVED***$key***REMOVED*** failed");
     ***REMOVED***
+***REMOVED***
+
+    /**
+     * Assert that response has a message
+     *
+     * @param $expected
+     * @param Response $response
+     */
+    protected function assertResponseHasMessage($expected, Response $response)
+    ***REMOVED***
+        $json = $response->getBody()->__toString();
+        $data = json_decode($json, true);
+        $this->assertArrayHasKey('message', $data, 'Response didn\'t have a message key');
+        $this->assertSame($expected, $data['message'], 'Response didn\'t have the correct message');
+***REMOVED***
+
+    /**
+     * Make default assertions for POST/PUT Requests
+     *
+     * @param Response $response
+     * @param int $expectedStatusCode
+     * @param array $expectedResponseData
+     * @param $expectedDatabaseState
+     * @param $notExpectedDatabaseState
+     */
+    protected function assertDefaultValues(Response $response, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
+    ***REMOVED***
+        $this->assertSame($expectedStatusCode, $response->getStatusCode());
+        $this->assertResponseHasMessage($expectedResponseData['message'], $response);
+        $json = $response->getBody()->__toString();
+        $this->assertJson($json);
+        $responseData = json_decode($json, true);
+        $expectedResponseData = $this->arrayReplaceHashes($expectedResponseData);
+
+        if (array_key_exists('info', $expectedResponseData)
+            && is_array($expectedResponseData['info'])
+            && array_key_exists('errors', (array)$expectedResponseData['info'])) ***REMOVED***
+            usort($expectedResponseData['info']['errors'], function ($a, $b) ***REMOVED***
+                return $a['field'] <=> $b['field'];
+        ***REMOVED***);
+            usort($responseData['info']['errors'], function ($a, $b) ***REMOVED***
+                return $a['field'] <=> $b['field'];
+        ***REMOVED***);
+    ***REMOVED***
+
+        $this->assertEquals($expectedResponseData, $responseData);
+
+        if ($expectedDatabaseState) ***REMOVED***
+            $this->assertDataInDatabase($expectedDatabaseState);
+    ***REMOVED***
+
+        if ($notExpectedDatabaseState) ***REMOVED***
+            $this->assertDataNotInDatabase($notExpectedDatabaseState);
+    ***REMOVED***
+***REMOVED***
+
+    /***
+     * Assert that data is in database.
+     *
+     * @param array $data
+     */
+    protected function assertDataInDatabase($data = ['table' => ['attribute' => 'value']])
+    ***REMOVED***
+        $pdo = $this->getPdo();
+        foreach ($data as $table => $values) ***REMOVED***
+            $query = "SELECT 1 FROM ***REMOVED***$table***REMOVED*** WHERE ";
+            foreach ($values as $attribute => $value) ***REMOVED***
+                if (is_null($value) || $value === '') ***REMOVED***
+                    $query .= "***REMOVED***$attribute***REMOVED*** IS NULL \nAND ";
+                    continue;
+            ***REMOVED***
+                $query .= "***REMOVED***$attribute***REMOVED*** = '***REMOVED***$value***REMOVED***' AND ";
+        ***REMOVED***
+            $query = substr($query, 0, -4);
+            $stmt = $pdo->query($query);
+            $row = $stmt->fetch();
+            $this->assertNotEmpty($row, 'Assertion, that values would be in database was wrong');
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Assert that data is not in database.
+     *
+     * @param array $data
+     */
+    protected function assertDataNotInDatabase($data = ['table' => ['attribute' => 'value']])
+    ***REMOVED***
+        $pdo = $this->getPdo();
+        foreach ($data as $table => $values) ***REMOVED***
+            $query = "SELECT 1 FROM ***REMOVED***$table***REMOVED*** WHERE ";
+            foreach ($values as $attribute => $value) ***REMOVED***
+                $query .= "***REMOVED***$attribute***REMOVED*** = '***REMOVED***$value***REMOVED***' && ";
+        ***REMOVED***
+            $query = substr($query, 0, -4);
+            $stmt = $pdo->query($query);
+            $row = $stmt->fetch();
+            $this->assertEmpty($row, 'Assertion, that values would not be in database was wrong');
+    ***REMOVED***
+***REMOVED***
+
+    /**
+     * Replace all required placeholders in array
+     *
+     * @param $array
+     * @return null|string|string[]
+     */
+    protected function arrayReplaceHashes($array)
+    ***REMOVED***
+        $array = preg_replace_array('/***REMOVED***article_hash***REMOVED***/', $this->articleHash, $array);
+        $array = preg_replace_array('/***REMOVED***department_hash***REMOVED***/', $this->departmentHash, $array);
+        $array = preg_replace_array('/***REMOVED***department_group_hash***REMOVED***/', $this->departmentGroupHash, $array);
+        $array = preg_replace_array('/***REMOVED***department_region_hash***REMOVED***/', $this->departmentRegionHash, $array);
+        $array = preg_replace_array('/***REMOVED***department_type_hash***REMOVED***/', $this->departmentTypeHash, $array);
+        $array = preg_replace_array('/***REMOVED***educational_course_hash***REMOVED***/', $this->educationalCourseHash, $array);
+        $array = preg_replace_array('/***REMOVED***educational_course_organiser_hash***REMOVED***/', $this->educationalCourseOrganiserHash, $array);
+        $array = preg_replace_array('/***REMOVED***educational_course_participant_hash***REMOVED***/', $this->educationalCourseParticipantHash, $array);
+        $array = preg_replace_array('/***REMOVED***event_hash***REMOVED***/', $this->eventHash, $array);
+        $array = preg_replace_array('/***REMOVED***event_participant_hash***REMOVED***/', $this->eventParticipantHash, $array);
+        $array = preg_replace_array('/***REMOVED***event_participation_hash***REMOVED***/', $this->eventParticipationStatusHash, $array);
+        $array = preg_replace_array('/***REMOVED***gender_hash***REMOVED***/', $this->genderHash, $array);
+        $array = preg_replace_array('/***REMOVED***image_hash***REMOVED***/', $this->imageHash, $array);
+        $array = preg_replace_array('/***REMOVED***language_hash***REMOVED***/', $this->languageHash, $array);
+        $array = preg_replace_array('/***REMOVED***permission_hash***REMOVED***/', $this->permissionHash, $array);
+        $array = preg_replace_array('/***REMOVED***position_hash***REMOVED***/', $this->positionHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_chest_hash***REMOVED***/', $this->slChestHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_corridor_hash***REMOVED***/', $this->slCorridorHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_location_hash***REMOVED***/', $this->slLocationHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_room_hash***REMOVED***/', $this->slRoomHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_shelf_hash***REMOVED***/', $this->slShelfHash, $array);
+        $array = preg_replace_array('/***REMOVED***sl_tray_hash***REMOVED***/', $this->slTrayHash, $array);
+        $array = preg_replace_array('/***REMOVED***storage_place_hash***REMOVED***/', $this->storagePlaceHash, $array);
+        $array = preg_replace_array('/***REMOVED***user_hash***REMOVED***/', $this->userHash, $array);
+        if (array_key_exists('code', $array)) ***REMOVED***
+            $array['code'] = (int)$array['code'];
+    ***REMOVED***
+        if (array_key_exists('verified', $array)) ***REMOVED***
+            $array['verified'] = (bool)$array['verified'];
+    ***REMOVED***
+        if (array_key_exists('info', $array)) ***REMOVED***
+            if (array_key_exists('verified', $array['info'])) ***REMOVED***
+                $array['info']['verified'] = (bool)$array['info']['verified'];
+        ***REMOVED***
+            if (array_key_exists('signup_completed', $array['info'])) ***REMOVED***
+                $array['info']['signup_completed'] = (bool)$array['info']['signup_completed'];
+        ***REMOVED***
+    ***REMOVED***
+        return $array;
+***REMOVED***
+
+    /**
+     * Fill in all required hashes.
+     *
+     * @param $mockDatabaseArray
+     */
+    private function fillHashes($mockDatabaseArray)
+    ***REMOVED***
+        $this->educationalCourseParticipantHash = $mockDatabaseArray['educational_course_participant'][0]['hash'];
+        $this->articleHash = $mockDatabaseArray['article'][0]['hash'];
+        $this->departmentHash = $mockDatabaseArray['department'][0]['hash'];
+        $this->departmentGroupHash = $mockDatabaseArray['department_group'][0]['hash'];
+        $this->departmentRegionHash = $mockDatabaseArray['department_region'][0]['hash'];
+        $this->departmentTypeHash = $mockDatabaseArray['department_type'][0]['hash'];
+        $this->educationalCourseHash = $mockDatabaseArray['educational_course'][0]['hash'];
+        $this->educationalCourseOrganiserHash = $mockDatabaseArray['educational_course_organiser'][0]['hash'];
+        $this->eventHash = $mockDatabaseArray['event'][0]['hash'];
+        $this->eventParticipantHash = $mockDatabaseArray['event_participant'][0]['hash'];
+        $this->eventParticipationStatusHash = $mockDatabaseArray['event_participation_status'][0]['hash'];
+        $this->genderHash = $mockDatabaseArray['gender'][0]['hash'];
+        $this->imageHash = $mockDatabaseArray['image'][0]['hash'];
+        $this->languageHash = $mockDatabaseArray['language'][0]['hash'];
+        $this->permissionHash = $mockDatabaseArray['permission'][0]['hash'];
+        $this->positionHash = $mockDatabaseArray['position'][0]['hash'];
+        $this->slChestHash = $mockDatabaseArray['sl_chest'][0]['hash'];
+        $this->slCorridorHash = $mockDatabaseArray['sl_corridor'][0]['hash'];
+        $this->slLocationHash = $mockDatabaseArray['sl_location'][0]['hash'];
+        $this->slRoomHash = $mockDatabaseArray['sl_room'][0]['hash'];
+        $this->slShelfHash = $mockDatabaseArray['sl_shelf'][0]['hash'];
+        $this->slTrayHash = $mockDatabaseArray['sl_tray'][0]['hash'];
+        $this->storagePlaceHash = $mockDatabaseArray['storage_place'][0]['hash'];
+        $this->userHash = $mockDatabaseArray['user'][0]['hash'];
 ***REMOVED***
 
     /**

@@ -3,7 +3,7 @@
 
 namespace App\Repository;
 
-use App\Service\Formatter;
+use App\Util\Formatter;
 use App\Table\SlChestTable;
 use App\Table\SlCorridorTable;
 use App\Table\SlLocationTable;
@@ -132,13 +132,13 @@ class StorageRepository extends AppRepository
     public function createStorage(string $departmentId, array $params, string $userId): string
     ***REMOVED***
         $row = [
-            'department_id' => $departmentId,
-            'sl_location_id' => $params['location_id'],
-            'sl_room_id' => $params['room_id'],
-            'sl_corridor_id' => $params['corridor_id'],
-            'sl_shelf_id' => $params['shelf_id'],
-            'sl_tray_id' => $params['tray_id'],
-            'sl_chest_id' => $params['chest_id'],
+            'department_hash' => $departmentId,
+            'sl_location_hash' => $params['location_hash'],
+            'sl_room_hash' => $params['room_hash'],
+            'sl_corridor_hash' => $params['corridor_hash'],
+            'sl_shelf_hash' => $params['shelf_hash'],
+            'sl_tray_hash' => $params['tray_hash'],
+            'sl_chest_hash' => $params['chest_hash'],
             'name' => $params['name']
         ];
         return $this->storagePlaceTable->insert($row, $userId);
@@ -155,28 +155,28 @@ class StorageRepository extends AppRepository
     ***REMOVED***
         $row = [];
 
-        if (array_key_exists('location_id', $params)) ***REMOVED***
-            $row['sl_location_id'] = $params['location_id'];
+        if (array_key_exists('location_hash', $params)) ***REMOVED***
+            $row['sl_location_hash'] = $params['location_hash'];
     ***REMOVED***
 
-        if (array_key_exists('room_id', $params)) ***REMOVED***
-            $row['sl_room_id'] = $params['room_id'];
+        if (array_key_exists('room_hash', $params)) ***REMOVED***
+            $row['sl_room_hash'] = $params['room_hash'];
     ***REMOVED***
 
-        if (array_key_exists('corridor_id', $params)) ***REMOVED***
-            $row['sl_corridor_id'] = $params['corridor_id'];
+        if (array_key_exists('corridor_hash', $params)) ***REMOVED***
+            $row['sl_corridor_hash'] = $params['corridor_hash'];
     ***REMOVED***
 
-        if (array_key_exists('shelf_id', $params)) ***REMOVED***
-            $row['sl_shelf_id'] = $params['shelf_id'];
+        if (array_key_exists('shelf_hash', $params)) ***REMOVED***
+            $row['sl_shelf_hash'] = $params['shelf_hash'];
     ***REMOVED***
 
-        if (array_key_exists('tray_id', $params)) ***REMOVED***
-            $row['sl_tray_id'] = $params['tray_id'];
+        if (array_key_exists('tray_hash', $params)) ***REMOVED***
+            $row['sl_tray_hash'] = $params['tray_hash'];
     ***REMOVED***
 
-        if (array_key_exists('chest_id', $params)) ***REMOVED***
-            $row['sl_chest_id'] = $params['chest_id'];
+        if (array_key_exists('chest_hash', $params)) ***REMOVED***
+            $row['sl_chest_hash'] = $params['chest_hash'];
     ***REMOVED***
 
         if (array_key_exists('name', $params)) ***REMOVED***
@@ -184,7 +184,7 @@ class StorageRepository extends AppRepository
     ***REMOVED***
 
         try ***REMOVED***
-            $this->storagePlaceTable->modify($row, ['department_id' => $departmentId, 'id' => $storageId], $userId);
+            $this->storagePlaceTable->modify($row, ['department_hash' => $departmentId, 'hash' => $storageId], $userId);
     ***REMOVED*** catch (Exception $exception) ***REMOVED***
             return false;
     ***REMOVED***
@@ -202,7 +202,7 @@ class StorageRepository extends AppRepository
      */
     public function deleteStorage(string $departmentId, string $storageId, string $userId): bool
     ***REMOVED***
-        return (bool)$this->storagePlaceTable->archive($userId, ['id' => $storageId, 'department_id' => $departmentId]);
+        return (bool)$this->storagePlaceTable->archive($userId, ['id' => $storageId, 'department_hash' => $departmentId]);
 ***REMOVED***
 
     /**
@@ -220,12 +220,12 @@ class StorageRepository extends AppRepository
     ***REMOVED***
         $query = $this->storagePlaceTable->newSelect();
         $query->select(1)->where([
-            'sl_location_id' => $locationId ?: null,
-            'sl_room_id' => $roomId ?: null,
-            'sl_corridor_id' => $corridorId ?: null,
-            'sl_shelf_id' => $shelfId ?: null,
-            'sl_tray_id' => $trayId ?: null,
-            'sl_chest_id' => $chestId ?: null,
+            'sl_location_hash' => $locationId ?: null,
+            'sl_room_hash' => $roomId ?: null,
+            'sl_corridor_hash' => $corridorId ?: null,
+            'sl_shelf_hash' => $shelfId ?: null,
+            'sl_tray_hash' => $trayId ?: null,
+            'sl_chest_hash' => $chestId ?: null,
         ]);
         $row = $query->execute()->fetch();
         return !empty($row);
@@ -250,7 +250,7 @@ class StorageRepository extends AppRepository
      */
     public function existsLocation(string $locationId): bool
     ***REMOVED***
-        return $this->exists($this->slLocationTable, ['id' => $locationId]);
+        return $this->exists($this->slLocationTable, ['hash' => $locationId]);
 ***REMOVED***
 
     /**
@@ -261,7 +261,7 @@ class StorageRepository extends AppRepository
      */
     public function existsRoom(string $roomId): bool
     ***REMOVED***
-        return $this->exists($this->slRoomTable, ['id' => $roomId]);
+        return $this->exists($this->slRoomTable, ['hash' => $roomId]);
 ***REMOVED***
 
     /**
@@ -272,7 +272,7 @@ class StorageRepository extends AppRepository
      */
     public function existsCorridor(string $corridorId): bool
     ***REMOVED***
-        return $this->exists($this->slCorridorTable, ['id' => $corridorId]);
+        return $this->exists($this->slCorridorTable, ['hash' => $corridorId]);
 ***REMOVED***
 
     /**
@@ -283,7 +283,7 @@ class StorageRepository extends AppRepository
      */
     public function existsShelf(string $shelfId): bool
     ***REMOVED***
-        return $this->exists($this->slShelfTable, ['id' => $shelfId]);
+        return $this->exists($this->slShelfTable, ['hash' => $shelfId]);
 ***REMOVED***
 
     /**
@@ -294,7 +294,7 @@ class StorageRepository extends AppRepository
      */
     public function existsTray(string $trayId): bool
     ***REMOVED***
-        return $this->exists($this->slTrayTable, ['id' => $trayId]);
+        return $this->exists($this->slTrayTable, ['hash' => $trayId]);
 ***REMOVED***
 
     /**
@@ -305,7 +305,7 @@ class StorageRepository extends AppRepository
      */
     public function existsChest(string $chestId): bool
     ***REMOVED***
-        return $this->exists($this->slChestTable, ['id' => $chestId]);
+        return $this->exists($this->slChestTable, ['hash' => $chestId]);
 ***REMOVED***
 
     /**
@@ -345,36 +345,36 @@ class StorageRepository extends AppRepository
                 [
                     'table' => $locationTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_location_id = ' . $locationTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_location_hash = ' . $locationTablename . '.hash',
                 ],
                 [
                     'table' => $roomTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_room_id = ' . $roomTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_room_hash = ' . $roomTablename . '.hash',
                 ],
                 [
                     'table' => $corridorTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_corridor_id = ' . $corridorTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_corridor_hash = ' . $corridorTablename . '.hash',
                 ],
                 [
                     'table' => $shelfTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_shelf_id = ' . $shelfTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_shelf_hash = ' . $shelfTablename . '.hash',
                 ],
                 [
                     'table' => $trayTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_tray_id = ' . $trayTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_tray_id = ' . $trayTablename . '.hash',
                 ],
                 [
                     'table' => $chestTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_chest_id = ' . $chestTablename . '.id',
+                    'conditions' => $storagePlaceTablename . '.sl_chest_hash = ' . $chestTablename . '.hash',
                 ],
             ])
             ->where([
-                $storagePlaceTablename . '.department_id' => $departmentId,
+                $storagePlaceTablename . '.department_hash' => $departmentId,
             ]);
         return $query;
 ***REMOVED***
