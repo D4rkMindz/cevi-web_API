@@ -94,17 +94,17 @@ class UserRepository extends AppRepository
      * @param string $username
      * @return string
      */
-    public function getIdByusername(string $username): string
+    public function getHashByusername(string $username): string
     ***REMOVED***
         $where = ['username' => $username];
         if (is_email($username)) ***REMOVED***
             $where = ['email' => $username];
     ***REMOVED***
         $query = $this->userTable->newSelect();
-        $query->select('id')->where($where);
+        $query->select('hash')->where($where);
         $row = $query->execute()->fetch('assoc');
 
-        return !empty($row) ? $row['id'] : '';
+        return !empty($row) ? $row['hash'] : '';
 ***REMOVED***
 
     /**

@@ -108,14 +108,11 @@ abstract class DbTestCase extends ApiTestCase
         if ($shouldMigrate || !empty(getenv('DBUNIT_REGENERATE_NOW')) || !file_exists($dump)) ***REMOVED***
             putenv('DBUNIT_REGENERATE_NOW');
 
-            echo "Inserting data into test datbase...\t";
             $startInsert = microtime(true);
             Factory::INSERT()->execute($this->getConnection(), $dataSet);
             $endInsert = microtime(true);
             $timeUsedInserting = $endInsert - $startInsert;
-            echo "Done ***REMOVED***$timeUsedInserting***REMOVED***s\n";
 
-            echo "Dumping data into dumpfile...\t\t";
             $startDump = microtime(true);
             $mysqldumpExecutable = $config['mysqldump_executable'];
             if (empty($mysqldumpExecutable)) ***REMOVED***
@@ -131,13 +128,11 @@ abstract class DbTestCase extends ApiTestCase
             exec($command);
             $endDump = microtime(true);
             $timeUsedDumping = $endDump - $startDump;
-            echo "Done ***REMOVED***$timeUsedDumping***REMOVED***s\n";
     ***REMOVED***
         $mysqlExecutable = $config['mysql_executable'];
         if (empty($mysqlExecutable)) ***REMOVED***
             throw new Exception('Mysql Executable must be defined in the db_test.mysql_executable in the configuration (env.php)');
     ***REMOVED***
-        echo "Importing mysql dump...\t\t\t";
         $startImport = microtime(true);
         $migrateCommand = "***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$dump***REMOVED***";
         if (empty($password)) ***REMOVED***
@@ -146,7 +141,6 @@ abstract class DbTestCase extends ApiTestCase
         exec($migrateCommand);
         $endImport = microtime(true);
         $timeUsedImporting = $endImport - $startImport;
-        echo "Done ***REMOVED***$timeUsedImporting***REMOVED***s\n";
 ***REMOVED***
 
     /**
@@ -200,7 +194,6 @@ abstract class DbTestCase extends ApiTestCase
      */
     protected function getDataSet(): IDataSet
     ***REMOVED***
-        echo "Regenerating mock database...\t\t";
         $testDatabase = new TestDatabase();
         $startGenerate = microtime(true);
         $json = '';
@@ -220,12 +213,10 @@ abstract class DbTestCase extends ApiTestCase
             $this->getDataHook($dataJson);
             $endGenerate = microtime(true);
             $timeUsedGenerating = $endGenerate - $startGenerate;
-            echo "Done ***REMOVED***$timeUsedGenerating***REMOVED***s\n";
             return new ArrayDataSet($dataJson);
     ***REMOVED***
         $endGenerate = microtime(true);
         $timeUsedGenerating = $endGenerate - $startGenerate;
-        echo "Done ***REMOVED***$timeUsedGenerating***REMOVED***s\n";
         return new ArrayDataSet($data);
 ***REMOVED***
 

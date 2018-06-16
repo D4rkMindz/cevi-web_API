@@ -66,13 +66,13 @@ class AuthenticationController extends AppController
         $password = (string)$data['password'];
         $lang = (string)$request->getParam('lang');
         if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
-            $userId = $this->userRepository->getIdByusername($username);
-            $expireOffset = 60 * 15;
-            $token = JWTFactory::generate($username, $userId, $lang, $this->secret, $expireOffset);
+            $userHash = $this->userRepository->getHashByusername($username);
+            $expireOffset = 60 * 15; // 15 Minutes
+            $token = JWTFactory::generate($username, $userHash, $lang, $this->secret, $expireOffset);
             $expiresAt = (time() + $expireOffset) * 1000;
-            $this->logger->info(sprintf('%s (ID: %s)issued a token. Expires at: %s', $username, $userId, $expiresAt));
-            return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt, 'user_id' => $userId]);
+            $this->logger->info(sprintf('%s (ID: %s)issued a token. Expires at: %s', $username, $userHash, $expiresAt));
+            return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt, 'user_hash' => $userHash]);
     ***REMOVED***
-        return $this->error($response, 'Unprocessable entity', 422, ['message' => __('invalid user data')]);
+        return $this->error($response, 'Unprocessable entity', 422, ['message' => __('Invalid user data')]);
 ***REMOVED***
 ***REMOVED***
