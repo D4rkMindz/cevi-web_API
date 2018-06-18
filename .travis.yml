@@ -20,7 +20,9 @@ before_script:
   - travis_retry composer self-update
   - travis_retry composer update $***REMOVED***COMPOSER_FLAGS***REMOVED*** --no-interaction --prefer-dist
   - cp config/env.example.php config/env.php
-  - mysql -e 'create database cevi_web_test;'
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('test_passwd') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade
+  - sudo service mysql restart
   - cd $TRAVIS_BUILD_DIR
 
 
@@ -33,3 +35,6 @@ after_success:
 
 notifications:
   email: true
+
+addons:
+  mariadb: '10.0'
