@@ -32,13 +32,13 @@ class BasicInformationTest extends DbTestCase
         $this->assertResponseHasMessage('Success', $response);
 
         $expectedKeys = [
-            'departmentgroups',
-            'departmentgroups.0',
-            'departmentgroups.0.hash',
-            'departmentgroups.0.name_de',
-            'departmentgroups.0.name_en',
-            'departmentgroups.0.name_fr',
-            'departmentgroups.0.name_it',
+            'department_groups',
+            'department_groups.0',
+            'department_groups.0.hash',
+            'department_groups.0.name_de',
+            'department_groups.0.name_en',
+            'department_groups.0.name_fr',
+            'department_groups.0.name_it',
         ];
         $this->assertResponseHasKeys($expectedKeys, $response);
 
