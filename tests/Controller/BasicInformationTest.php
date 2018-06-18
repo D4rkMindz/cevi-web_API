@@ -19,6 +19,8 @@ use App\Test\DbTestCase;
 class BasicInformationTest extends DbTestCase
 ***REMOVED***
     /**
+     * Test get all department groups.
+     *
      * @throws \Slim\Exception\MethodNotAllowedException
      * @throws \Slim\Exception\NotFoundException
      *
@@ -44,6 +46,74 @@ class BasicInformationTest extends DbTestCase
 
         $data = json_decode($response->getBody()->__toString(), true);
         $this->assertArrayNotHasKey('2', $data['department_groups']);
+***REMOVED***
+
+    /**
+     * Test get all cities.
+     *
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
+     *
+     * @covers ::cityAction
+     */
+    public function testCity()
+    ***REMOVED***
+        $request = $this->createRequest('GET', '/v2/cities', false);
+        $response = $this->request($request);
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertResponseHasMessage('Success', $response);
+
+        $expectedKeys = [
+            'cities',
+            'cities.0',
+            // Swiss Post City Table => No Hashes Available !
+            'cities.0.id',
+            'cities.0.postcode',
+            'cities.0.name_de',
+            'cities.0.name_en',
+            'cities.0.name_fr',
+            'cities.0.name_it',
+        ];
+        $this->assertResponseHasKeys($expectedKeys, $response);
+
+        $data = json_decode($response->getBody()->__toString(), true);
+        // if the value in TestDatabase::city is increased, increase this value below!
+        $this->assertArrayNotHasKey('3', $data['cities']);
+***REMOVED***
+
+    /**
+     * Test get all cities as reduced array.
+     *
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
+     *
+     * @covers ::cityAction
+     */
+    public function testCityReduced()
+    ***REMOVED***
+        $request = $this->createRequest('GET', '/v2/cities?reduced=true&lang=en');
+        $response = $this->request($request);
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertResponseHasMessage('Success', $response);
+
+
+        $expectedKeys = [
+            'cities',
+            'cities.0',
+            // Swiss Post City Table => No Hashes Available !
+            'cities.0.id',
+            'cities.0.postcode',
+            'cities.0.name',
+        ];
+        $this->assertResponseHasKeys($expectedKeys, $response);
+
+        $data = json_decode($response->getBody()->__toString(), true);
+        // if the value in TestDatabase::city is increased, increase this value below!
+        $this->assertArrayNotHasKey('3', $data['cities']);
+        $this->assertArrayNotHasKey('name_de', $data['cities'][0]);
+        $this->assertArrayNotHasKey('name_en', $data['cities'][0]);
+        $this->assertArrayNotHasKey('name_fr', $data['cities'][0]);
+        $this->assertArrayNotHasKey('name_it', $data['cities'][0]);
 ***REMOVED***
 
     /**
