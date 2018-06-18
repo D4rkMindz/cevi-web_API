@@ -13,6 +13,7 @@ use Monolog\Logger;
 use Odan\Twig\TwigTranslationExtension;
 use Slim\Container;
 use Slim\Exception\ContainerException;
+use Slim\Exception\ContainerValueNotFoundException;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -119,12 +120,11 @@ $container[Twig_Environment::class] = function (Container $container): Twig_Envi
  *
  * @param Container $container
  * @return Translator
- * @throws \Psr\Container\ContainerExceptionInterface
- * @throws \Psr\Container\NotFoundExceptionInterface
  */
 $container[Translator::class] = function (Container $container): Translator ***REMOVED***
-    $locale = $container->get('jwt')['lang'];
-    if (empty($locale)) ***REMOVED***
+    try ***REMOVED***
+        $locale = $container->get('jwt')['lang'];
+***REMOVED*** catch (ContainerValueNotFoundException $exception) ***REMOVED***
         $locale = 'de_CH';
 ***REMOVED***
 
