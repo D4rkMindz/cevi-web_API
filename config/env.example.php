@@ -1,5 +1,6 @@
 <?php
 $env['displayErrorDetails'] = true;
+$env['isProduction'] = false;
 
 $env['jwt'] = [
     'active' => false,
