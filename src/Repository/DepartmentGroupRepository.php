@@ -34,7 +34,7 @@ class DepartmentGroupRepository extends AppRepository
     public function getAll(int $limit=10000, int $page = 0): array
     ***REMOVED***
         $query = $this->departmentGroupTable->newSelect();
-        $query->select(['id', 'name_de', 'name_en', 'name_fr', 'name_it'])
+        $query->select(['hash', 'name_de', 'name_en', 'name_fr', 'name_it'])
             ->limit($limit)
             ->page($page);
         $rows = $query->execute()->fetchAll('assoc');
