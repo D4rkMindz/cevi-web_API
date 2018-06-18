@@ -213,6 +213,12 @@ $container['notFoundHandler'] = function (Container $container) ***REMOVED***
 ***REMOVED***;
 ***REMOVED***;
 
+/**
+ * Error handler.
+ *
+ * @param Container $container
+ * @return Closure
+ */
 $container['errorHandler'] = function (Container $container) ***REMOVED***
     return function (Request $request, Response $response, Exception $exception) use ($container) ***REMOVED***
         /**
