@@ -115,6 +115,7 @@ $container[Twig_Environment::class] = function (Container $container): Twig_Envi
 
     return $twig;
 ***REMOVED***;
+
 /**
  * Translator container.
  *
