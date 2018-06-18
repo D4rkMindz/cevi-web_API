@@ -91,7 +91,7 @@ class BasicInformationTest extends DbTestCase
      */
     public function testCityReduced()
     ***REMOVED***
-        $request = $this->createRequest('GET', '/v2/cities?reduced=true&lang=en');
+        $request = $this->createRequest('GET', '/v2/cities?reduced=true&lang=en', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
         $this->assertResponseHasMessage('Success', $response);
