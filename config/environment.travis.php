@@ -1,4 +1,7 @@
 <?php
+$config = [];
+$config['jwt']['active'] = true;
+
 $env['displayErrorDetails'] = true;
 $env['isProduction'] = false;
 
@@ -8,11 +11,11 @@ $env['jwt'] = [
 ];
 
 $env['db'] = [
-    'database' => '',
-    'host' => '',
-    'port' => '',
-    'username' => '',
-    'password' => '',
+    'database' => 'cevi_web_test',
+    'host' => 'localhost',
+    'port' => 3306,
+    'username' => 'root',
+    'password' => 'travis_passwd',
 ];
 
 $env['mailgun'] = [
@@ -20,5 +23,4 @@ $env['mailgun'] = [
     'apikey' => '',
     'domain' => '',
 ];
-
-return $env;
+return $config;

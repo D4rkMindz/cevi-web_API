@@ -47,17 +47,6 @@ $config['db'] = [
     'charset' => 'utf8',
     'encoding' => 'utf8',
     'collation' => 'utf8_unicode_ci',
-    'mysqldump_executable' => 'mysqldump',
-    'mysql_executable' => 'mysql',
-];
-
-$config['db_test'] = [
-    'database' => 'cevi_web_test',
-    'charset' => 'utf8',
-    'encoding' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'mysqldump_executable' => 'mysqldump',
-    'mysql_executable' => 'mysql',
 ];
 
 $config['language_whitelist'] = [
