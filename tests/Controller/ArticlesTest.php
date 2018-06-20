@@ -363,7 +363,7 @@ class ArticlesTest extends DbTestCase
                         'errors' => [
                             ['field' => 'title', 'message' => 'Required',],
                             ['field' => 'description', 'message' => 'Required',],
-                            ['field' => 'purchase_time', 'message' => 'Required',],
+                            ['field' => 'purchase_date', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Impossible quantity',],
                             ['field' => 'quality_hash', 'message' => 'Required',],
@@ -489,7 +489,7 @@ class ArticlesTest extends DbTestCase
                         'errors' => [
                             ['field' => 'title', 'message' => 'Required',],
                             ['field' => 'description', 'message' => 'Required',],
-                            ['field' => 'purchase_time', 'message' => 'Required',],
+                            ['field' => 'purchase_date', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Impossible quantity',],
                             ['field' => 'quality_hash', 'message' => 'Required',],

@@ -162,7 +162,7 @@ class BasicInformationTest extends DbTestCase
                         'archived_at' => NULL,
                         'archived_by' => NULL,
                         'images' => [
-                            ['hash' => 'hash_test_1', 'url' => 'C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg'],
+                            ['hash' => 'hash_test_1', 'url' => baseurl('img/events/image-url-1.jpg')],
                         ],
                         'description' => [
                             'name_de' => ['plain' => 'Beschreibung des Events', 'parsed' => '<p>Beschreibung des Events</p>'],
