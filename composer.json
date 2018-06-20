@@ -10,7 +10,8 @@
     "d4rkmindz/slim-jwt-auth": "^2.3.4",
     "twig/twig": "^2.4",
     "odan/twig-translation": "^1.1",
-    "php-http/curl-client": "^1.7"
+    "php-http/curl-client": "^1.7",
+    "zircote/swagger-php": "^2.0"
   },
   "require-dev": {
     "odan/phinx-migrations-generator": "^2.3",

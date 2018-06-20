@@ -30,6 +30,7 @@ $config['jwt'] = [
         '/v2/departmentgroups' => ['GET'],
         '/v2/departments' => ['GET'],
         '/v2/departments/{department_hash:[0-9]+}' => ['GET'],
+        '/v2/swagger' => ['GET'],
     ]
 ];
 

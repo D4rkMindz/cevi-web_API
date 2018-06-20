@@ -1,8 +1,102 @@
 <?php
 
-$app->get('/', route(['App\Controller\AppController', 'redirectToCeviWeb']))->setName('root');
+if (!defined('SWAGGER_API_VERSION')) {
+    define('SWAGGER_API_VERSION', 'v2');
+}
+if (!defined('SWAGGER_HOST')) {
+    define('SWAGGER_HOST', 'https://api.cevi-web.com');
+}
+/**
+ * @SWG\Swagger(
+ *     schemes={"http"},
+ *     host=SWAGGER_HOST,
+ *     basePath="/",
+ *     @SWG\Info(
+ *          title="The API for CEVI Web",
+ *          version="0.0.1"
+ *     )
+ * )
+ * @SWG\Parameter(
+ *     parameter="article_hash",
+ *     name="article_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="chest_hash",
+ *     name="chest_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="corridor_hash",
+ *     name="corridor_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="department_hash",
+ *     name="department_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="event_hash",
+ *     name="event_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="location_hash",
+ *     name="location_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="room_hash",
+ *     name="room_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="shelf_hash",
+ *     name="shelf_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="storage_hash",
+ *     name="storage_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="tray_hash",
+ *     name="tray_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="user_hash",
+ *     name="user_hash",
+ *     type="string",
+ *     in="path"
+ * )
+ * @SWG\Parameter(
+ *     parameter="auth",
+ *     name="X-Token",
+ *     type="string",
+ *     in="header",
+ *     required="true"
+ * )
+ */
 
-$app->get('/v2/auth', route(['App\Controller\AppController', 'redirectToCeviWeb']))->setName('get.authenticate');
+$app->get('/', route(['App\Controller\AppController', 'redirectToCeviWeb']))->setName('root');
+$app->get('/docs/swagger.json', route(['App\Controller\BasicInformationController', 'swagger']))->setName('get.swagger');
+
+/**
+ *
+ */
 $app->post('/v2/auth', route(['App\Controller\AuthenticationController', 'authenticateAction']))->setName('post.authenticate');
 
 /***********************************************************************************************************************
@@ -11,6 +105,13 @@ $app->post('/v2/auth', route(['App\Controller\AuthenticationController', 'authen
 $app->get('/v2/users', route(['App\Controller\UserController', 'getAllUsersAction']))->setName('get.getAllUsers');
 $app->post('/v2/users/signup', route(['App\Controller\UserController', 'signupAction']))->setName('post.signup');
 $app->post('/v2/users/verify', route(['App\Controller\UserController', 'verifyEmailAction']))->setName('post.verify');
+/**
+ * @SWG\Get(
+ *     path="/v2/users/{user_hash}",
+ *     @SWG\Parameter(reg="#/parameters/user_hash"),
+ *     @SWG\Response(response="200",)
+ * )
+ */
 $app->get('/v2/users/{user_hash}', route(['App\Controller\UserController', 'getUserAction']))->setName('get.getUser');
 $app->put('/v2/users/{user_hash}', route(['App\Controller\UserController', 'updateUserAction']))->setName('put.updateUser');
 $app->delete('/v2/users/{user_hash}', route(['App\Controller\UserController', 'deleteUserAction']))->setName('archive.deleteUser');
