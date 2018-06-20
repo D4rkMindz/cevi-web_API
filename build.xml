@@ -214,4 +214,17 @@
         </exec>
     </target>
 
+    <target name="phpunit-coverage-travis" description="Run unit tests with PHPUnit with coverage in TravisCI">
+        <delete dir="${basedir}/build/coverage" />
+        <mkdir dir="${basedir}/build/coverage" />
+        <exec executable="${basedir}/vendor/bin/phpunit${ext}" searchpath="true" resolveexecutable="true" failonerror="true" taskname="phpunit-coverage">
+            <arg value="--configuration" />
+            <arg path="${basedir}/phpunit-travis.xml" />
+            <arg value="--coverage-clover" />
+            <arg path="${basedir}/build/logs/clover.xml" />
+            <arg value="--coverage-html" />
+            <arg path="${basedir}/build/coverage" />
+        </exec>
+    </target>
+
 </project>
