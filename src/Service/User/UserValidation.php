@@ -18,7 +18,7 @@ use Slim\Container;
  * Class UserValidation
  */
 class UserValidation extends AppValidation
-***REMOVED***
+{
     /**
      * @var UserRepository
      */
@@ -46,13 +46,13 @@ class UserValidation extends AppValidation
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
         $this->languageRepository = $container->get(LanguageRepository::class);
         $this->positionRepository = $container->get(PositionRepository::class);
         $this->genderRepository = $container->get(GenderRepository::class);
-***REMOVED***
+    }
 
     /**
      * Validate modify data.
@@ -62,79 +62,79 @@ class UserValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateUpdate(array $data, string $modifier): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext(__('Please check your data'));
 
         $this->validateModifier($modifier, $validationContext);
 
-        if (array_key_exists('postcode', $data)) ***REMOVED***
+        if (array_key_exists('postcode', $data)) {
             $this->validatePostcode((string)$data['postcode'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('language_hash', $data)) ***REMOVED***
+        if (array_key_exists('language_hash', $data)) {
             $this-> validateLanguage((string)$data['language_hash'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('department_hash', $data)) ***REMOVED***
+        if (array_key_exists('department_hash', $data)) {
             $this->validateDepartment($data['department_hash'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('posititon_hash', $data)) ***REMOVED***
+        if (array_key_exists('posititon_hash', $data)) {
             $this->validatePosition($data['posititon_hash'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('gender_hash', $data)) ***REMOVED***
+        if (array_key_exists('gender_hash', $data)) {
             $this->validateGender($data['gender_hash'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('first_name', $data)) ***REMOVED***
+        if (array_key_exists('first_name', $data)) {
             $this->validateName($data['first_name'], $validationContext, 'first_name');
-    ***REMOVED***
+        }
 
-        if (array_key_exists('email', $data)) ***REMOVED***
+        if (array_key_exists('email', $data)) {
             $this->validateEmail($data['email'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('username', $data)) ***REMOVED***
+        if (array_key_exists('username', $data)) {
             $this->validateUsername($data['username'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('password', $data)) ***REMOVED***
+        if (array_key_exists('password', $data)) {
             $this->validatePassword($data['password'], $validationContext);
-    ***REMOVED***
+        }
 
         // signup_completed must be generated, can not be set by the user.
 
-        if (array_key_exists('js_certificate', $data)) ***REMOVED***
+        if (array_key_exists('js_certificate', $data)) {
             $this->validateJsCertificate($data, $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('last_name', $data)) ***REMOVED***
+        if (array_key_exists('last_name', $data)) {
             $this->validateName($data['last_name'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('address', $data)) ***REMOVED***
+        if (array_key_exists('address', $data)) {
             $this->validateAddress($data['address'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('cevi_name', $data)) ***REMOVED***
+        if (array_key_exists('cevi_name', $data)) {
             $this->validateName($data['cevi_name'], $validationContext, 'cevi_name');
-    ***REMOVED***
+        }
 
-        if (array_key_exists('birthdate', $data)) ***REMOVED***
+        if (array_key_exists('birthdate', $data)) {
             $this->validateBirthdate($data['birthdate'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('phone', $data)) ***REMOVED***
+        if (array_key_exists('phone', $data)) {
             $this->validatePhonenumber($data['phone'], $validationContext);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('mobile', $data)) ***REMOVED***
+        if (array_key_exists('mobile', $data)) {
             $this->validatePhonenumber($data['mobile'], $validationContext, 'mobile');
-    ***REMOVED***
+        }
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate modifier.
@@ -143,11 +143,11 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateModifier(string $modifier, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->userRepository->existsUserById($modifier)) ***REMOVED***
+    {
+        if (!$this->userRepository->existsUserById($modifier)) {
             $validationContext->setError('modifier', __('Modifier does not exist'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate city ID.
@@ -156,11 +156,11 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateCity(string $postcode, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
+    {
+        if (!$this->cityRepository->existsPostcode($postcode)) {
             $validationContext->setError('postcode', __('Not found'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate language ID.
@@ -169,11 +169,11 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateLanguage(string $languageHash, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->languageRepository->existsLanguage($languageHash)) ***REMOVED***
+    {
+        if (!$this->languageRepository->existsLanguage($languageHash)) {
             $validationContext->setError('language', __('Not found'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate department ID.
@@ -182,11 +182,11 @@ class UserValidation extends AppValidation
      * @param $validationContext
      */
     private function validateDepartment(string $departmentHash, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($departmentHash)) ***REMOVED***
+    {
+        if (!$this->departmentRepository->existsDepartment($departmentHash)) {
             $validationContext->setError('department_hash', __('Not found'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate position ID.
@@ -195,11 +195,11 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validatePosition(string $positionHash, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->positionRepository->existsPosition($positionHash)) ***REMOVED***
+    {
+        if (!$this->positionRepository->existsPosition($positionHash)) {
             $validationContext->setError('position', __('Not found'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate gender ID.
@@ -208,11 +208,11 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateGender(string $genderHash, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->genderRepository->existsGender($genderHash)) ***REMOVED***
+    {
+        if (!$this->genderRepository->existsGender($genderHash)) {
             $validationContext->setError('gender_hash', __('Not found'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * @param string $name
@@ -220,9 +220,9 @@ class UserValidation extends AppValidation
      * @param string $elementName
      */
     private function validateName(string $name, ValidationContext $validationContext, string $elementName = 'last_name')
-    ***REMOVED***
+    {
         $this->validateLength($name, $elementName, $validationContext, 2);
-***REMOVED***
+    }
 
     /**
      * Validate username
@@ -231,13 +231,13 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateUsername(string $username, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateLength($username, 'username', $validationContext, 4, 40);
 
-        if (!$this->userRepository->existsUsername($username)) ***REMOVED***
+        if (!$this->userRepository->existsUsername($username)) {
             $validationContext->setError('username', __('Already in use'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate password.
@@ -246,21 +246,21 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validatePassword(string $password, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateLength($password, 'password', $validationContext, 6);
 
-        if (!preg_match('/(?=.*\d)/', $password)) ***REMOVED***
+        if (!preg_match('/(?=.*\d)/', $password)) {
             $validationContext->setError('password', __('Password must contain a number'));
-    ***REMOVED***
+        }
 
-        if (!preg_match('/(?=.*[a-z])/', $password)) ***REMOVED***
+        if (!preg_match('/(?=.*[a-z])/', $password)) {
             $validationContext->setError('password', __('Password must contain a lowercase character'));
-    ***REMOVED***
+        }
 
-        if (!preg_match('/(?=.*[A-Z])/', $password)) ***REMOVED***
+        if (!preg_match('/(?=.*[A-Z])/', $password)) {
             $validationContext->setError('password', __('Password must contain a uppercase character'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate J + S certificate requirements
@@ -269,18 +269,18 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateJsCertificate(array $data, ValidationContext $validationContext)
-    ***REMOVED***
-        if ((bool)$data['js_certificate']) ***REMOVED***
-            if (!array_key_exists('js_certificate_until', $data)) ***REMOVED***
+    {
+        if ((bool)$data['js_certificate']) {
+            if (!array_key_exists('js_certificate_until', $data)) {
                 $validationContext->setError('js_certificate', __('Date required'));
-        ***REMOVED*** else ***REMOVED***
+            } else {
                 // allow dates
-                if ((int)$data['js_certificate_until'] <= (time() - (60 * 60 * 24 * 365 * 2))) ***REMOVED***
+                if ((int)$data['js_certificate_until'] <= (time() - (60 * 60 * 24 * 365 * 2))) {
                     $validationContext->setError('js_certificate_until', __('JS Certificate is outdated'));
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+                }
+            }
+        }
+    }
 
     /**
      * Validate address.
@@ -289,9 +289,9 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateAddress(string $address, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateLength($address, 'address', $validationContext);
-***REMOVED***
+    }
 
     /**
      * Validate birthdate.
@@ -300,14 +300,14 @@ class UserValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateBirthdate(string $birthdate, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateDate((int)$birthdate, 'birthday', $validationContext, true);
 
         // minimum age of 4 years
-        if ($birthdate >= (time() - (60 * 60 * 24 * 365 * 4))) ***REMOVED***
+        if ($birthdate >= (time() - (60 * 60 * 24 * 365 * 4))) {
             $validationContext->setError('birthday', sprintf(__('Birthday not valid (minimum age: %s years'), 4));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate phonenumber.
@@ -317,9 +317,9 @@ class UserValidation extends AppValidation
      * @param string $elementName
      */
     private function validatePhonenumber(string $phonenumber, ValidationContext $validationContext, string $elementName = 'phone')
-    ***REMOVED***
+    {
         $this->validateLength($phonenumber, $elementName, $validationContext, 4, 18);
-***REMOVED***
+    }
 
     /**
      * Validate signup data.
@@ -336,23 +336,23 @@ class UserValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateSignup(string $email, string $firstName, $lastName, string $postcode, string $username, string $password, $ceviName, string $languageHash, string $departmentHash): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext(__('Please check your data'));
 
         $this->validateEmail($email, $validationContext);
         $this->validateName($firstName, $validationContext, 'first_name');
-        if (!empty($lastName)) ***REMOVED***
+        if (!empty($lastName)) {
             $this->validateName($lastName, $validationContext, 'last_name');
-    ***REMOVED***
+        }
         $this->validateUsername($username, $validationContext);
         $this->validatePostcode($postcode, $validationContext);
         $this->validatePassword($password, $validationContext);
-        if (!empty($ceviName)) ***REMOVED***
+        if (!empty($ceviName)) {
             $this->validateName($ceviName, $validationContext, 'cevi_name');
-    ***REMOVED***
+        }
         $this->validateLanguage($languageHash, $validationContext);
         $this->validateDepartment($departmentHash, $validationContext);
 
         return $validationContext;
-***REMOVED***
-***REMOVED***
+    }
+}

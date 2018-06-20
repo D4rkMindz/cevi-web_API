@@ -18,7 +18,7 @@ use Slim\Container;
  * Class StorageRepository
  */
 class StorageRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var Formatter
      */
@@ -65,7 +65,7 @@ class StorageRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->formatter = new Formatter();
         $this->storagePlaceTable = $container->get(StoragePlaceTable::class);
         $this->slLocationTable = $container->get(SlLocationTable::class);
@@ -74,7 +74,7 @@ class StorageRepository extends AppRepository
         $this->slShelfTable = $container->get(SlShelfTable::class);
         $this->slTrayTable = $container->get(SlTrayTable::class);
         $this->slChestTable = $container->get(SlChestTable::class);
-***REMOVED***
+    }
 
     /**
      * Get all storages.
@@ -85,22 +85,22 @@ class StorageRepository extends AppRepository
      * @return array
      */
     public function getAllStorages(string $departmentId, int $limit, int $page): array
-    ***REMOVED***
+    {
         $query = $this->getStoragePlaceQuery($departmentId);
         $query->limit($limit)
             ->page($page);
         $rows = $query->execute()->fetchAll('assoc');
-        foreach ($rows as $key => $row) ***REMOVED***
+        foreach ($rows as $key => $row) {
             $rows[$key] = $this->formatter->formatStoragePlace($row, $departmentId);
-    ***REMOVED***
-        if (empty($rows)) ***REMOVED***
+        }
+        if (empty($rows)) {
             return [];
-    ***REMOVED***
+        }
         $rows['limit'] = $limit;
         $rows['page'] = $page;
 
         return $rows;
-***REMOVED***
+    }
 
     /**
      * Get single storage.
@@ -110,16 +110,16 @@ class StorageRepository extends AppRepository
      * @return array
      */
     public function getStorage(string $departmentId, string $storageId): array
-    ***REMOVED***
+    {
         $query = $this->getStoragePlaceQuery($departmentId);
         $query->where([$this->storagePlaceTable->getTablename() . '.id' => $storageId]);
         $storage = $query->execute()->fetch('assoc');
-        if (empty($storage)) ***REMOVED***
+        if (empty($storage)) {
             return [];
-    ***REMOVED***
+        }
 
         return $this->formatter->formatStoragePlace($storage, $departmentId);
-***REMOVED***
+    }
 
     /**
      * Create storage.
@@ -130,7 +130,7 @@ class StorageRepository extends AppRepository
      * @return string Last inserted ID
      */
     public function createStorage(string $departmentId, array $params, string $userId): string
-    ***REMOVED***
+    {
         $row = [
             'department_hash' => $departmentId,
             'sl_location_hash' => $params['location_hash'],
@@ -142,7 +142,7 @@ class StorageRepository extends AppRepository
             'name' => $params['name']
         ];
         return $this->storagePlaceTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * @param string $departmentId
@@ -152,45 +152,45 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function updateStorage(string $departmentId, string $storageId, array $params, string $userId): bool
-    ***REMOVED***
+    {
         $row = [];
 
-        if (array_key_exists('location_hash', $params)) ***REMOVED***
+        if (array_key_exists('location_hash', $params)) {
             $row['sl_location_hash'] = $params['location_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('room_hash', $params)) ***REMOVED***
+        if (array_key_exists('room_hash', $params)) {
             $row['sl_room_hash'] = $params['room_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('corridor_hash', $params)) ***REMOVED***
+        if (array_key_exists('corridor_hash', $params)) {
             $row['sl_corridor_hash'] = $params['corridor_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('shelf_hash', $params)) ***REMOVED***
+        if (array_key_exists('shelf_hash', $params)) {
             $row['sl_shelf_hash'] = $params['shelf_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('tray_hash', $params)) ***REMOVED***
+        if (array_key_exists('tray_hash', $params)) {
             $row['sl_tray_hash'] = $params['tray_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('chest_hash', $params)) ***REMOVED***
+        if (array_key_exists('chest_hash', $params)) {
             $row['sl_chest_hash'] = $params['chest_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('name', $params)) ***REMOVED***
+        if (array_key_exists('name', $params)) {
             $row['name'] = $params['name'];
-    ***REMOVED***
+        }
 
-        try ***REMOVED***
+        try {
             $this->storagePlaceTable->modify($row, ['department_hash' => $departmentId, 'hash' => $storageId], $userId);
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
 
         return true;
-***REMOVED***
+    }
 
     /**
      * Delete storage.
@@ -201,9 +201,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function deleteStorage(string $departmentId, string $storageId, string $userId): bool
-    ***REMOVED***
+    {
         return (bool)$this->storagePlaceTable->archive($userId, ['id' => $storageId, 'department_hash' => $departmentId]);
-***REMOVED***
+    }
 
     /**
      * Check if storage exists.
@@ -217,7 +217,7 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsStorage(string $locationId, string $roomId, string $corridorId, string $shelfId, string $trayId, string $chestId)
-    ***REMOVED***
+    {
         $query = $this->storagePlaceTable->newSelect();
         $query->select(1)->where([
             'sl_location_hash' => $locationId ?: null,
@@ -229,7 +229,7 @@ class StorageRepository extends AppRepository
         ]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Check if storage exists.
@@ -238,9 +238,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsStorageById(string $storageId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->storagePlaceTable, ['id' => $storageId]);
-***REMOVED***
+    }
 
     /**
      * Check if location exists.
@@ -249,9 +249,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsLocation(string $locationId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slLocationTable, ['hash' => $locationId]);
-***REMOVED***
+    }
 
     /**
      * Check if room exists
@@ -260,9 +260,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsRoom(string $roomId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slRoomTable, ['hash' => $roomId]);
-***REMOVED***
+    }
 
     /**
      * Check if corridor exists
@@ -271,9 +271,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsCorridor(string $corridorId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slCorridorTable, ['hash' => $corridorId]);
-***REMOVED***
+    }
 
     /**
      * Check if shelf exists
@@ -282,9 +282,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsShelf(string $shelfId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slShelfTable, ['hash' => $shelfId]);
-***REMOVED***
+    }
 
     /**
      * Check if tray exists
@@ -293,9 +293,9 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsTray(string $trayId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slTrayTable, ['hash' => $trayId]);
-***REMOVED***
+    }
 
     /**
      * Check if chest exists.
@@ -304,16 +304,16 @@ class StorageRepository extends AppRepository
      * @return bool
      */
     public function existsChest(string $chestId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->slChestTable, ['hash' => $chestId]);
-***REMOVED***
+    }
 
     /**
      * @param string $departmentId
      * @return \Cake\Database\Query
      */
     private function getStoragePlaceQuery(string $departmentId): \Cake\Database\Query
-    ***REMOVED***
+    {
         $storagePlaceTablename = $this->storagePlaceTable->getTablename();
         $locationTablename = $this->slLocationTable->getTablename();
         $roomTablename = $this->slRoomTable->getTablename();
@@ -377,5 +377,5 @@ class StorageRepository extends AppRepository
                 $storagePlaceTablename . '.department_hash' => $departmentId,
             ]);
         return $query;
-***REMOVED***
-***REMOVED***
+    }
+}

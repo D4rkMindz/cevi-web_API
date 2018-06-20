@@ -17,7 +17,7 @@ use App\Test\DbTestCase;
  * @coversDefaultClass \App\Controller\BasicInformationController
  */
 class BasicInformationTest extends DbTestCase
-***REMOVED***
+{
     /**
      * Test get all department groups.
      *
@@ -27,7 +27,7 @@ class BasicInformationTest extends DbTestCase
      * @covers ::departmentGroupAction
      */
     public function testDepartmentGroup()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/departmentgroups', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -46,7 +46,7 @@ class BasicInformationTest extends DbTestCase
 
         $data = json_decode($response->getBody()->__toString(), true);
         $this->assertArrayNotHasKey('2', $data['department_groups']);
-***REMOVED***
+    }
 
     /**
      * Test get all cities.
@@ -57,7 +57,7 @@ class BasicInformationTest extends DbTestCase
      * @covers ::cityAction
      */
     public function testCity()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/cities', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -79,7 +79,7 @@ class BasicInformationTest extends DbTestCase
         $data = json_decode($response->getBody()->__toString(), true);
         // if the value in TestDatabase::city is increased, increase this value below!
         $this->assertArrayNotHasKey('3', $data['cities']);
-***REMOVED***
+    }
 
     /**
      * Test get all cities as reduced array.
@@ -90,7 +90,7 @@ class BasicInformationTest extends DbTestCase
      * @covers ::cityAction
      */
     public function testCityReduced()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/cities?reduced=true&lang=en', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -114,7 +114,7 @@ class BasicInformationTest extends DbTestCase
         $this->assertArrayNotHasKey('name_en', $data['cities'][0]);
         $this->assertArrayNotHasKey('name_fr', $data['cities'][0]);
         $this->assertArrayNotHasKey('name_it', $data['cities'][0]);
-***REMOVED***
+    }
 
     /**
      * Test events.
@@ -125,7 +125,7 @@ class BasicInformationTest extends DbTestCase
      * @covers ::eventAction
      */
     public function testEvents()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/events', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -201,7 +201,7 @@ class BasicInformationTest extends DbTestCase
                 ],
         ];
         $this->assertSame($expectedResponse, $data);
-***REMOVED***
+    }
 
     /**
      * Hook to get all data
@@ -209,6 +209,6 @@ class BasicInformationTest extends DbTestCase
      * @param array $data
      */
     protected function getDataHook(array $data): void
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+    }
+}

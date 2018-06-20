@@ -23,7 +23,7 @@ use Slim\Container;
  * Class ParticipationRepository
  */
 class ParticipationRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var EventParticipantTable
      */
@@ -85,7 +85,7 @@ class ParticipationRepository extends AppRepository
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->eventParticipantTable = $container->get(EventParticipantTable::class);
         $this->eventTable = $container->get(EventTable::class);
         $this->eventDescritpionTable = $container->get(EventDescriptionTable::class);
@@ -97,7 +97,7 @@ class ParticipationRepository extends AppRepository
         $this->cityTable = $container->get(CityTable::class);
         $this->formatter = $container->get(Formatter::class);
         $this->eventParticipationStatusTable = $container->get(EventParticipationStatusTable::class);
-***REMOVED***
+    }
 
     /**
      * Get all participations
@@ -110,7 +110,7 @@ class ParticipationRepository extends AppRepository
      * @return array
      */
     public function getParticipations(string $eventId, int $limit, int $page, string $departmentId, string $eventDescriptionFormat): array
-    ***REMOVED***
+    {
         $query = $this->getParticipationQuery($eventId);
         $query
             ->limit($limit)
@@ -118,16 +118,16 @@ class ParticipationRepository extends AppRepository
         $participations = $query->execute()
             ->fetchAll('assoc');
 
-        if (empty($participations)) ***REMOVED***
+        if (empty($participations)) {
             return $participations;
-    ***REMOVED***
+        }
 
-        foreach ($participations as $key => $participation) ***REMOVED***
+        foreach ($participations as $key => $participation) {
             $participations[$key] = $this->formatter->formatParticipation($participation, $departmentId, $eventDescriptionFormat);
-    ***REMOVED***
+        }
 
         return $participations;
-***REMOVED***
+    }
 
     /**
      * Get single participation.
@@ -139,18 +139,18 @@ class ParticipationRepository extends AppRepository
      * @return array
      */
     public function getParticipation(string $eventId, string $userId, string $departmentId, string $eventDescriptionFormat): array
-    ***REMOVED***
+    {
         $query = $this->getParticipationQuery($eventId);
         $query->where([$this->eventParticipantTable->getTablename() . '.user_id' => $userId]);
         $participation = $query->execute()
             ->fetch('assoc');
 
-        if (empty($participation)) ***REMOVED***
+        if (empty($participation)) {
             return [];
-    ***REMOVED***
+        }
 
         return $this->formatter->formatParticipation($participation, $departmentId, $eventDescriptionFormat);
-***REMOVED***
+    }
 
     /**
      * Create participation and get participation id.
@@ -162,14 +162,14 @@ class ParticipationRepository extends AppRepository
      * @return string
      */
     public function createParticipation(string $eventId, string $userId, string $statusId, string $executorId): string
-    ***REMOVED***
+    {
         $row = [
             'event_id' => $eventId,
             'user_id' => $userId,
             'status_id' => $statusId,
         ];
         return $this->eventParticipantTable->insert($row, $executorId);
-***REMOVED***
+    }
 
     /**
      * Update participation status.
@@ -181,9 +181,9 @@ class ParticipationRepository extends AppRepository
      * @return bool
      */
     public function updateParticipation(string $eventId, string $userId, string $statusId, string $executorId): bool
-    ***REMOVED***
+    {
         return $this->eventParticipantTable->modify(['status_id' => $statusId], ['event_id' => $eventId, 'user_id' => $userId], $executorId);
-***REMOVED***
+    }
 
     /**
      * Delete participation for user
@@ -194,9 +194,9 @@ class ParticipationRepository extends AppRepository
      * @return bool
      */
     public function deleteParticipation(string $eventId, string $userId, string $executorId): bool
-    ***REMOVED***
+    {
         return $this->eventParticipantTable->archive($executorId, ['event_id' => $eventId, 'user_id' => $userId]);
-***REMOVED***
+    }
 
     /**
      * Get all participating users of an event.
@@ -205,7 +205,7 @@ class ParticipationRepository extends AppRepository
      * @return array
      */
     public function getAllParticipatingUsers(string $eventId, int $limit, int $page): array
-    ***REMOVED***
+    {
         $eventParticipationTablename = $this->eventParticipantTable->getTablename();
         $userTablename = $this->userTable->getTablename();
         $departmentTableName = $this->departmentTable->getTablename();
@@ -265,15 +265,15 @@ class ParticipationRepository extends AppRepository
             ->page($page);
         $users = $query->execute()->fetchAll('assoc');
 
-        if (empty($users)) ***REMOVED***
+        if (empty($users)) {
             return [];
-    ***REMOVED***
+        }
 
-        foreach ($users as $key => $user) ***REMOVED***
+        foreach ($users as $key => $user) {
             $users[$key] = $this->formatter->formatParticipatingUser($user);
-    ***REMOVED***
+        }
         return $users;
-***REMOVED***
+    }
 
     /**
      * Cancel an event with a message (the reason why it is cancelled).
@@ -284,14 +284,14 @@ class ParticipationRepository extends AppRepository
      * @return bool
      */
     public function cancelEvent(string $eventId, string $message, string $executorId): bool
-    ***REMOVED***
+    {
         $updated = $this->eventParticipantTable->modify(['message' => $message], ['event_id' => $eventId], $executorId);
-        if (!$updated) ***REMOVED***
+        if (!$updated) {
             return false;
-    ***REMOVED***
+        }
 
         return $this->eventParticipantTable->archive($executorId, ['event_id' => $eventId]);
-***REMOVED***
+    }
 
     /**
      * Get event participation statuses
@@ -299,12 +299,12 @@ class ParticipationRepository extends AppRepository
      * @return array
      */
     public function getStatuses(): array
-    ***REMOVED***
+    {
         $query = $this->eventParticipationStatusTable->newSelect();
         $query->select('*');
         $rows = $query->execute()->fetchAll('assoc');
         return !empty($rows)? $rows: [];
-***REMOVED***
+    }
 
     /**
      * Check if status exists.
@@ -313,9 +313,9 @@ class ParticipationRepository extends AppRepository
      * @return bool
      */
     public function existsStatus(string $statusId)
-    ***REMOVED***
+    {
         return $this->exists($this->eventParticipationStatusTable, ['id'=> $statusId]);
-***REMOVED***
+    }
 
     /**
      * Get participations query.
@@ -324,7 +324,7 @@ class ParticipationRepository extends AppRepository
      * @return Query
      */
     private function getParticipationQuery(string $eventId): Query
-    ***REMOVED***
+    {
         $eventParticipationTablename = $this->eventParticipantTable->getTablename();
         $userTablename = $this->userTable->getTablename();
         $departmentTableName = $this->departmentTable->getTablename();
@@ -409,5 +409,5 @@ class ParticipationRepository extends AppRepository
                 $eventParticipationTablename . '.event_id' => $eventId,
             ]);
         return $query;
-***REMOVED***
-***REMOVED***
+    }
+}

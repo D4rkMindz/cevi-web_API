@@ -11,7 +11,7 @@ use Slim\Container;
  * Class GenderRepository
  */
 class GenderRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var GenderTable
      */
@@ -23,9 +23,9 @@ class GenderRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->genderTable = $container->get(GenderTable::class);
-***REMOVED***
+    }
 
     /**
      * Exists gender.
@@ -34,12 +34,12 @@ class GenderRepository extends AppRepository
      * @return bool true if found
      */
     public function existsGender(string $genderId): bool
-    ***REMOVED***
+    {
         $query = $this->genderTable->newSelect();
         $query->select(1)->where(['hash' => $genderId]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Get all available genders
@@ -49,7 +49,7 @@ class GenderRepository extends AppRepository
      * @return array
      */
     public function getAllGenders(int $limit, int $page): array
-    ***REMOVED***
+    {
         $fields = ['id', 'name_de', 'name_en', 'name_fr', 'name_it'];
 
         $query = $this->genderTable->newSelect();
@@ -59,5 +59,5 @@ class GenderRepository extends AppRepository
             ->page($page);
         $rows = $query->execute()->fetchAll('assoc');
         return !empty($rows) ? $rows : [];
-***REMOVED***
-***REMOVED***
+    }
+}

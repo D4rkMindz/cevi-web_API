@@ -8,7 +8,7 @@ use App\Table\DepartmentGroupTable;
 use Slim\Container;
 
 class DepartmentGroupRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var DepartmentGroupTable
      */
@@ -20,9 +20,9 @@ class DepartmentGroupRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->departmentGroupTable = $container->get(DepartmentGroupTable::class);
-***REMOVED***
+    }
 
     /**
      * Get all department groups
@@ -32,14 +32,14 @@ class DepartmentGroupRepository extends AppRepository
      * @return array
      */
     public function getAll(int $limit=10000, int $page = 0): array
-    ***REMOVED***
+    {
         $query = $this->departmentGroupTable->newSelect();
         $query->select(['hash', 'name_de', 'name_en', 'name_fr', 'name_it'])
             ->limit($limit)
             ->page($page);
         $rows = $query->execute()->fetchAll('assoc');
         return !empty($rows) ? $rows : [];
-***REMOVED***
+    }
 
     /**
      * Check if department exists.
@@ -48,10 +48,10 @@ class DepartmentGroupRepository extends AppRepository
      * @return bool
      */
     public function existsDepartment(string $departmentGroupId): bool
-    ***REMOVED***
+    {
         $query = $this->departmentGroupTable->newSelect();
         $query->select(1)->where(['id'=>$departmentGroupId]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
-***REMOVED***
+    }
+}

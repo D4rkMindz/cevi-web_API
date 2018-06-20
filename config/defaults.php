@@ -29,13 +29,13 @@ $config['jwt'] = [
         '/v2/cities' => ['GET'],
         '/v2/departmentgroups' => ['GET'],
         '/v2/departments' => ['GET'],
-        '/v2/departments/***REMOVED***department_hash:[0-9]+***REMOVED***' => ['GET'],
+        '/v2/departments/{department_hash:[0-9]+}' => ['GET'],
     ]
 ];
 
 // used in Role::checkAllowedRoutes
 $config['allowedPaths'] = [
-    ['path' => '/v2/users/***REMOVED***user_id***REMOVED***', 'methods' => ['GET', 'POST', 'PUT', 'DELETE'],],
+    ['path' => '/v2/users/{user_id}', 'methods' => ['GET', 'POST', 'PUT', 'DELETE'],],
     ['path' => '/v2/departmentgroups', 'methods' => ['GET'],],
     ['path' => '/v2/cities', 'methods' => ['GET'],],
     ['path' => '/v2/events', 'methods' => ['GET'],],

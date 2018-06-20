@@ -15,7 +15,7 @@ use Slim\Http\Response;
  * Class BasicInformationController
  */
 class BasicInformationController extends AppController
-***REMOVED***
+{
     /**
      * @var DepartmentGroupRepository
      */
@@ -42,13 +42,13 @@ class BasicInformationController extends AppController
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->departmentGroupRepository = $container->get(DepartmentGroupRepository::class);
         $this->cityRepository = $container->get(CityRepository::class);
         $this->eventRepository = $container->get(EventRepository::class);
         $this->genderRepository = $container->get(GenderRepository::class);
-***REMOVED***
+    }
 
     /**
      * Get all department groups.
@@ -63,12 +63,12 @@ class BasicInformationController extends AppController
      * @return Response
      */
     public function departmentGroupAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
 
         $data = ['department_groups' => $this->departmentGroupRepository->getAll($params['limit'], $params['page'])];
         return $this->json($response, $data);
-***REMOVED***
+    }
 
     /**
      * Get all cities.
@@ -83,7 +83,7 @@ class BasicInformationController extends AppController
      * @return Response
      */
     public function cityAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
         $reduced = $request->getParam('reduced');
         $lang = $request->getParam('lang');
@@ -94,15 +94,15 @@ class BasicInformationController extends AppController
             'it' => 1,
         ];
 
-        if (!empty($reduced) && (bool)$reduced && array_key_exists($lang, $allowedLangs)) ***REMOVED***
+        if (!empty($reduced) && (bool)$reduced && array_key_exists($lang, $allowedLangs)) {
             $cities = $this->cityRepository->getReduced($lang, $params['limit'], $params['page']);
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $cities = $this->cityRepository->getAll($params['limit'], $params['page']);
-    ***REMOVED***
+        }
 
         $responseData = ['cities' => $cities];
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Get all events.
@@ -124,7 +124,7 @@ class BasicInformationController extends AppController
      * @todo implement language selection for events. (@get lang)
      */
     public function eventAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
@@ -136,19 +136,19 @@ class BasicInformationController extends AppController
         $since = !empty($since) ? $since : time();
 
         $departmentGroup = (string)$data['department_group_id'];
-        if (empty($departmentGroup)) ***REMOVED***
+        if (empty($departmentGroup)) {
             $department = (string)$data['department_hash'];
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $department = '';
-    ***REMOVED***
+        }
         $descriptionFormat = (string)$data['description_format'];
 //        $lang = (string)$data['lang']; // TODO implement language selection for events.
 
         $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, $departmentGroup, $department, $since, $descriptionFormat);
 
-        if (empty($events)) ***REMOVED***
+        if (empty($events)) {
             return $this->error($response, 'Not found', 404, ['message' => __('No events found')]);
-    ***REMOVED***
+        }
 
         $department = $department ?: 'all';
         $departmentGroup = $departmentGroup ?: 'all';
@@ -166,7 +166,7 @@ class BasicInformationController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Get all genders
@@ -181,9 +181,9 @@ class BasicInformationController extends AppController
      * @return Response
      */
     public function genderAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
         $genders = $this->genderRepository->getAllGenders($params['limit'], $params['page']);
         return $this->json($response, ['genders' => $genders]);
-***REMOVED***
-***REMOVED***
+    }
+}

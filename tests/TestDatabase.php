@@ -12,9 +12,9 @@ namespace App\Test;
 use App\Service\Mail\MailToken;
 
 class TestDatabase
-***REMOVED***
+{
     public function all()
-    ***REMOVED***
+    {
         return [
             'article' => $this->article(),
             'article_description' => $this->article_description(),
@@ -53,10 +53,10 @@ class TestDatabase
             'storage_place' => $this->storage_place(),
             'user' => $this->user(),
         ];
-***REMOVED***
+    }
 
     public function educational_course_image()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -77,14 +77,14 @@ class TestDatabase
                 'image_hash' => $this->image()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     /**
      * Get language table data.
      * @return array
      */
     private function language()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -111,10 +111,10 @@ class TestDatabase
                 'abbreviation' => 'it',
             ],
         ];
-***REMOVED***
+    }
 
     private function position()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -165,10 +165,10 @@ class TestDatabase
                 'name_it' => 'Ragazzo',
             ],
         ];
-***REMOVED***
+    }
 
     private function user()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -246,10 +246,10 @@ class TestDatabase
                 'created_by' => '0',
             ],
         ];
-***REMOVED***
+    }
 
     private function article()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -300,10 +300,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function article_title()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -333,10 +333,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function article_description()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -366,10 +366,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function article_quality()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -426,10 +426,10 @@ class TestDatabase
                 'name_it' => 'Kaputt',
             ],
         ];
-***REMOVED***
+    }
 
     private function event_participation_status()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -456,10 +456,10 @@ class TestDatabase
                 'name_it' => 'Peutetros',
             ],
         ];
-***REMOVED***
+    }
 
     private function department_event()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -480,10 +480,10 @@ class TestDatabase
                 'department_group_hash' => $this->department_group()[1]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function educational_course()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -546,10 +546,10 @@ class TestDatabase
                 'archived_by' => '1',
             ],
         ];
-***REMOVED***
+    }
 
     private function educational_course_organiser()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -579,10 +579,10 @@ class TestDatabase
                 'mobile' => '079 456 12 99',
             ],
         ];
-***REMOVED***
+    }
 
     private function educational_course_participant()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -603,10 +603,10 @@ class TestDatabase
                 'user_hash' => $this->user()[2]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function educational_course_description()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -648,10 +648,10 @@ class TestDatabase
                 'archived_by' => null,
             ],
         ];
-***REMOVED***
+    }
 
     private function educational_course_title()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -693,10 +693,10 @@ class TestDatabase
                 'archived_by' => null,
             ],
         ];
-***REMOVED***
+    }
 
     private function email_token()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -717,10 +717,10 @@ class TestDatabase
                 'issued_at' => date('Y-m-d H:i:s', (time() - (60 * 16))), // invalid token, older than 15 minutes
             ],
         ];
-***REMOVED***
+    }
 
     private function event()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -780,10 +780,10 @@ class TestDatabase
                 'archived_by' => null,
             ],
         ];
-***REMOVED***
+    }
 
     private function event_description()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -807,10 +807,10 @@ class TestDatabase
                 'name_it' => 'Descriptione della evente 3',
             ],
         ];
-***REMOVED***
+    }
 
     private function event_participant()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -852,10 +852,10 @@ class TestDatabase
                 'archived_by' => '2',
             ],
         ];
-***REMOVED***
+    }
 
     private function event_title()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -910,10 +910,10 @@ class TestDatabase
                 'archived_by' => '1',
             ],
         ];
-***REMOVED***
+    }
 
     private function event_image()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -931,10 +931,10 @@ class TestDatabase
                 'event_hash' => $this->event()[2]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function city(int $count = 1)
-    ***REMOVED***
+    {
         $result = [];
         $cities = [
             ['name' => 'Möhlin', 'number' => '4313', 'state' => 'AG'],
@@ -950,7 +950,7 @@ class TestDatabase
             ['name' => 'Baden', 'number' => '5400', 'state' => 'AG'],
             ['name' => 'Kaiserstuhl', 'number' => '5466', 'state' => 'AG'],
         ];
-        for ($i = 0; $i < $count; $i++) ***REMOVED***
+        for ($i = 0; $i < $count; $i++) {
             $city = $cities[$i % 11];
             $result[] = [
                 'id' => $i + 1,
@@ -963,12 +963,12 @@ class TestDatabase
                 'title_fr' => $city['name'],
                 'title_it' => $city['name'],
             ];
-    ***REMOVED***
+        }
         return $result;
-***REMOVED***
+    }
 
     private function department()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1011,10 +1011,10 @@ class TestDatabase
                 'created_by' => '0',
             ],
         ];
-***REMOVED***
+    }
 
     private function department_group()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1033,10 +1033,10 @@ class TestDatabase
                 'name_it' => 'Basel',
             ],
         ];
-***REMOVED***
+    }
 
     private function department_region()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1071,10 +1071,10 @@ class TestDatabase
                 'name_it' => 'West',
             ],
         ];
-***REMOVED***
+    }
 
     private function department_type()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1093,10 +1093,10 @@ class TestDatabase
                 'name_it' => 'Tensing',
             ],
         ];
-***REMOVED***
+    }
 
     private function gender()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1115,10 +1115,10 @@ class TestDatabase
                 'name_it' => 'Signora',
             ],
         ];
-***REMOVED***
+    }
 
     private function image()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1157,10 +1157,10 @@ class TestDatabase
                 'archived_by' => '1',
             ],
         ];
-***REMOVED***
+    }
 
     private function permission()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1199,10 +1199,10 @@ class TestDatabase
                 'name' => 'Anonymous',
             ],
         ];
-***REMOVED***
+    }
 
     private function sl_chest()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1226,10 +1226,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ]
         ];
-***REMOVED***
+    }
 
     private function sl_corridor()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1253,10 +1253,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ]
         ];
-***REMOVED***
+    }
 
     private function sl_location()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1280,10 +1280,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function sl_room()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1307,10 +1307,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function sl_shelf()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1334,10 +1334,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function sl_tray()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1361,10 +1361,10 @@ class TestDatabase
                 'created_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
+    }
 
     private function storage_place()
-    ***REMOVED***
+    {
         return [
             [
                 'id' => '1',
@@ -1431,5 +1431,5 @@ class TestDatabase
                 'archived_by' => $this->user()[0]['hash'],
             ],
         ];
-***REMOVED***
-***REMOVED***
+    }
+}

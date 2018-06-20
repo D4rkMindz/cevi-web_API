@@ -15,7 +15,7 @@ use Slim\Container;
  * Class DepartmentValidation
  */
 class DepartmentValidation extends AppValidation
-***REMOVED***
+{
     /**
      * @var DepartmentGroupRepository
      */
@@ -32,12 +32,12 @@ class DepartmentValidation extends AppValidation
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->departmentGroupRepository = $container->get(DepartmentGroupRepository::class);
         $this->departmentTypeRepository = $container->get(DepartmentTypeRepository::class);
-***REMOVED***
+    }
 
     /**
      * Validate insert department.
@@ -49,7 +49,7 @@ class DepartmentValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateCreate(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
         $this->validateName($name, $validationContext);
         $this->validatePostcode($postcode, $validationContext);
@@ -57,7 +57,7 @@ class DepartmentValidation extends AppValidation
         $this->validateDepartmentType($departmentTypeId, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate modify data.
@@ -69,26 +69,26 @@ class DepartmentValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateUpdate(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
-        if (!empty($name)) ***REMOVED***
+        if (!empty($name)) {
             $this->validateName($name, $validationContext);
-    ***REMOVED***
+        }
 
-        if (!empty($postcode)) ***REMOVED***
+        if (!empty($postcode)) {
             $this->validatePostcode($postcode, $validationContext);
-    ***REMOVED***
+        }
 
-        if (!empty($departmentGroupId)) ***REMOVED***
+        if (!empty($departmentGroupId)) {
             $this->validateDepartmentGroup($departmentGroupId, $validationContext);
-    ***REMOVED***
+        }
 
-        if (!empty($departmentTypeId)) ***REMOVED***
+        if (!empty($departmentTypeId)) {
             $this->validateDepartmentType($departmentTypeId, $validationContext);
-    ***REMOVED***
+        }
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate department name.
@@ -97,13 +97,13 @@ class DepartmentValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateName(string $name, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateLength($name, 'name', $validationContext);
 
-        if ($this->departmentRepository->existsDepartmentByName($name)) ***REMOVED***
+        if ($this->departmentRepository->existsDepartmentByName($name)) {
             $validationContext->setError('name', __('Department name already exists'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate department group.
@@ -112,11 +112,11 @@ class DepartmentValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateDepartmentGroup(string $departmentGroupId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (empty($departmentGroupId) || !$this->departmentGroupRepository->existsDepartment($departmentGroupId)) ***REMOVED***
+    {
+        if (empty($departmentGroupId) || !$this->departmentGroupRepository->existsDepartment($departmentGroupId)) {
             $validationContext->setError('department_group_id', __('Department group does not exist'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate department type.
@@ -125,9 +125,9 @@ class DepartmentValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateDepartmentType(string $departmentTypeId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (empty($departmentTypeId) || !$this->departmentTypeRepository->existsDepartmentType($departmentTypeId)) ***REMOVED***
+    {
+        if (empty($departmentTypeId) || !$this->departmentTypeRepository->existsDepartmentType($departmentTypeId)) {
             $validationContext->setError('department_type_id', __('Department type does not exist'));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

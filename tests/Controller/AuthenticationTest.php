@@ -17,7 +17,7 @@ use App\Test\DbTestCase;
  * @coversDefaultClass \App\Controller\AuthenticationController
  */
 class AuthenticationTest extends DbTestCase
-***REMOVED***
+{
     /**
      * @param array $data
      * @param int $expectedStatusCode
@@ -31,36 +31,36 @@ class AuthenticationTest extends DbTestCase
      * @dataProvider authenticateDataprovider
      */
     public function testAuthenticate(array $data, int $expectedStatusCode, $expectedResponseData, $expectedResponseKeys, $expiresAtWithinRange)
-    ***REMOVED***
+    {
         $request = $this->createRequest('POST', '/v2/auth', false);
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
 
-        if ($expectedResponseKeys) ***REMOVED***
+        if ($expectedResponseKeys) {
             $this->assertResponseHasKeys($expectedResponseKeys, $response);
-    ***REMOVED***
+        }
 
         $json = $response->getBody()->__toString();
         $this->assertJson($json);
         $responseData = json_decode($json, true);
 
-        if (array_key_exists('token', $expectedResponseData)) ***REMOVED***
+        if (array_key_exists('token', $expectedResponseData)) {
             $expectedResponseData['token'] = $responseData['token'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('expires_at', $expectedResponseData)) ***REMOVED***
+        if (array_key_exists('expires_at', $expectedResponseData)) {
             $expectedResponseData['expires_at'] = $responseData['expires_at'];
-    ***REMOVED***
+        }
 
         $this->assertSame($expectedResponseData, $responseData);
 
         $expiresAt = array_value('expires_at', $responseData);
-        if (!empty($expiresAt)) ***REMOVED***
+        if (!empty($expiresAt)) {
             $this->assertGreaterThan($expiresAtWithinRange['start'], $expiresAt);
             $this->assertLessThan($expiresAtWithinRange['end'], $expiresAt);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Test authenticate data provider.
@@ -68,7 +68,7 @@ class AuthenticationTest extends DbTestCase
      * @return array
      */
     public function authenticateDataprovider()
-    ***REMOVED***
+    {
         return [
             'Test regular' => [
                 'data' => [
@@ -79,8 +79,8 @@ class AuthenticationTest extends DbTestCase
                 'expectedResponseData' => [
                     'code' => 200,
                     'message' => 'Success',
-                    'token' => '***REMOVED***token***REMOVED***',
-                    'expires_at' => '***REMOVED***expires_at***REMOVED***',
+                    'token' => '{token}',
+                    'expires_at' => '{expires_at}',
                     'user_hash' => 'hash_test_1',
                 ],
                 'expectedResponseKeys' => [
@@ -113,7 +113,7 @@ class AuthenticationTest extends DbTestCase
                 'expiresAtWithinRange' => false,
             ]
         ];
-***REMOVED***
+    }
 
     /**
      * Hook to get all data
@@ -121,6 +121,6 @@ class AuthenticationTest extends DbTestCase
      * @param array $data
      */
     protected function getDataHook(array $data): void
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+    }
+}

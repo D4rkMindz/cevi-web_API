@@ -11,30 +11,30 @@ use Slim\Container;
 
 $container = $app->getContainer();
 
-$container[ArticleValidation::class] = function (Container $container) ***REMOVED***
+$container[ArticleValidation::class] = function (Container $container) {
     return  new ArticleValidation($container);
-***REMOVED***;
+};
 
-$container[UserValidation::class] = function (Container $container) ***REMOVED***
+$container[UserValidation::class] = function (Container $container) {
     return new UserValidation($container);
-***REMOVED***;
+};
 
-$container[LoginValidation::class] = function (Container $container) ***REMOVED***
+$container[LoginValidation::class] = function (Container $container) {
     return new LoginValidation($container);
-***REMOVED***;
+};
 
-$container[DepartmentValidation::class] = function (Container $container) ***REMOVED***
+$container[DepartmentValidation::class] = function (Container $container) {
     return new DepartmentValidation($container);
-***REMOVED***;
+};
 
-$container[StorageValidation::class] = function (Container $container) ***REMOVED***
+$container[StorageValidation::class] = function (Container $container) {
     return new StorageValidation($container);
-***REMOVED***;
+};
 
-$container[ParticipationValidation::class] = function (Container $container) ***REMOVED***
+$container[ParticipationValidation::class] = function (Container $container) {
     return new ParticipationValidation($container);
-***REMOVED***;
+};
 
-$container[EventArticleValidation::class] = function (Container $container) ***REMOVED***
+$container[EventArticleValidation::class] = function (Container $container) {
     return new EventArticleValidation($container);
-***REMOVED***;
+};

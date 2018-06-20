@@ -15,7 +15,7 @@ use Slim\Http\Response;
  * Class AppController
  */
 class AppController
-***REMOVED***
+{
     protected $jwt;
 
     protected $secret;
@@ -32,19 +32,19 @@ class AppController
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
-        try ***REMOVED***
+    {
+        try {
             $this->jwt = (array)$container->get('jwt_decoded')['data'];
-    ***REMOVED*** catch (Exception $e) ***REMOVED***
+        } catch (Exception $e) {
             //do nothing about that
-    ***REMOVED***
-        try ***REMOVED***
+        }
+        try {
             $this->logger = $container->get(Logger::class);
             $this->secret = $container->get('settings')->get('jwt')['secret'];
-    ***REMOVED*** catch (ContainerException $exception) ***REMOVED***
+        } catch (ContainerException $exception) {
             throw new ServerErrorException('SERVER ERROR', $container->get('request'), $container->get('response'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Redirect to main page.
@@ -54,9 +54,9 @@ class AppController
      * @return Response
      */
     public function redirectToCeviWeb(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         return $response->withRedirect('https://cevi-web.com/');
-***REMOVED***
+    }
 
     /**
      * Return JSON Response.
@@ -68,20 +68,20 @@ class AppController
      * @return Response
      */
     public function json(Response $response, array $data, int $status = 200, string $message = 'Success'): Response
-    ***REMOVED***
-        if (empty($data)) ***REMOVED***
+    {
+        if (empty($data)) {
             return $this->error($response, __('No data available'), 404);
-    ***REMOVED***
+        }
 
-        if ($status === 200) ***REMOVED***
+        if ($status === 200) {
             $message = array_key_exists('message', $data) ? $data['message'] : $message;
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $message = array_key_exists('message', $data) ? $data['message'] : 'Error ' . $status;
-    ***REMOVED***
+        }
 
         $responseData = JsonResponseFactory::success($data, $status, $message);
         return $response->withJson($responseData, $status);
-***REMOVED***
+    }
 
     /**
      * Return Error JSON Response
@@ -93,11 +93,11 @@ class AppController
      * @return Response
      */
     public function error(Response $response, string $message = null, int $status = 404, array $info = ['message' => 'Not Found']): Response
-    ***REMOVED***
+    {
         $message = empty($message) ? __('Not found') : $message;
         $responseData = JsonResponseFactory::error($info, $status, $message);
         return $response->withJson($responseData, $status);
-***REMOVED***
+    }
 
     /**
      * Return redirect.
@@ -108,9 +108,9 @@ class AppController
      * @return Response
      */
     public function redirect(Response $response, string $url, int $status = 301): Response
-    ***REMOVED***
+    {
         return $response->withRedirect($url, $status);
-***REMOVED***
+    }
 
 
     /**
@@ -120,7 +120,7 @@ class AppController
      * @return array
      */
     protected function getLimitationParams(Request $request): array
-    ***REMOVED***
+    {
         $data = $request->getParams();
         $params = [];
         $params['limit'] = (int)array_key_exists('limit', $data) ? $data['limit'] : 1000;
@@ -132,5 +132,5 @@ class AppController
 
         unset($params['offset']);
         return $params;
-***REMOVED***
-***REMOVED***
+    }
+}

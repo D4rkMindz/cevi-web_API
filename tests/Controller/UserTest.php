@@ -19,7 +19,7 @@ use App\Util\PhonenumberConverter;
  * @coversDefaultClass \App\Controller\UserController
  */
 class UserTest extends DbTestCase
-***REMOVED***
+{
     private $emailToken;
 
     /**
@@ -30,7 +30,7 @@ class UserTest extends DbTestCase
      * @covers ::getUserAction
      */
     public function testGetUser()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/users/' . $this->userHash);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -128,7 +128,7 @@ class UserTest extends DbTestCase
         ];
         $data = json_decode($response->getBody()->__toString(), true);
         $this->assertSame($expected, $data['user']);
-***REMOVED***
+    }
 
     /**
      * Get all users
@@ -139,7 +139,7 @@ class UserTest extends DbTestCase
      * @covers ::getAllUsersAction
      */
     public function testGetAllUsers()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/users');
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -241,7 +241,7 @@ class UserTest extends DbTestCase
         $data = json_decode($json, true);
         $this->assertSame($expected, $data['users'][0]);
         $this->assertArrayNotHasKey(3, $data['users']);
-***REMOVED***
+    }
 
     /**
      * Test sign up action
@@ -258,18 +258,18 @@ class UserTest extends DbTestCase
      * @dataProvider signupDataprovider
      */
     public function testSignup(array $data, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
-    ***REMOVED***
+    {
         $request = $this->createRequest('POST', '/v2/users/signup');
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
 
         $data = json_decode($response->getBody()->__toString(), true);
-        if (!empty(array_value('user_hash', $data))) ***REMOVED***
-            $expectedResponseData = preg_replace_array('/***REMOVED***new_user_hash***REMOVED***/', $data['user_hash'], $expectedResponseData);
-    ***REMOVED***
+        if (!empty(array_value('user_hash', $data))) {
+            $expectedResponseData = preg_replace_array('/{new_user_hash}/', $data['user_hash'], $expectedResponseData);
+        }
 
         $this->assertDefaultValues($response, $expectedStatusCode, $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState);
-***REMOVED***
+    }
 
     /**
      * @param array $data
@@ -284,16 +284,16 @@ class UserTest extends DbTestCase
      * @dataProvider verifyEmailDataprovider
      */
     public function testVerifyEmail(array $data, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
-    ***REMOVED***
+    {
         $request = $this->createRequest('POST', '/v2/users/verify');
 
-        $data = preg_replace_array('/***REMOVED***email_token***REMOVED***/', $this->emailToken, $data);
+        $data = preg_replace_array('/{email_token}/', $this->emailToken, $data);
 
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
 
         $this->assertDefaultValues($response, $expectedStatusCode, $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState);
-***REMOVED***
+    }
 
     /**
      * @param array $data
@@ -308,16 +308,16 @@ class UserTest extends DbTestCase
      * @dataProvider updateUserDataProvider
      */
     public function testUpdateUser(array $data, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
-    ***REMOVED***
+    {
         $request = $this->createRequest('PUT', '/v2/users/' . $this->userHash);
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
 
         $this->assertDefaultValues($response, $expectedStatusCode, $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState);
-***REMOVED***
+    }
 
     public function testDeleteUser()
-    ***REMOVED***
+    {
         $request = $this->createRequest('DELETE', '/v2/users/'. $this->userHash);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -329,7 +329,7 @@ class UserTest extends DbTestCase
             ],
         ];
         $this->assertDataInDatabase($db);
-***REMOVED***
+    }
 
     /**
      * Sign up data provider.
@@ -337,7 +337,7 @@ class UserTest extends DbTestCase
      * @return array
      */
     public function signupDataprovider()
-    ***REMOVED***
+    {
         return [
             'Test regular' => [
                 'data' => [
@@ -353,7 +353,7 @@ class UserTest extends DbTestCase
                 'expectedResponseData' => [
                     'code' => 200,
                     'message' => 'Signed up user successfully',
-                    'user_hash' => '***REMOVED***new_user_hash***REMOVED***',
+                    'user_hash' => '{new_user_hash}',
                 ],
                 'expectedDatabaseState' => [
                     'user' => [
@@ -423,7 +423,7 @@ class UserTest extends DbTestCase
                 'notExpectedDatabaseState' => false,
             ],
         ];
-***REMOVED***
+    }
 
     /**
      * Verify email data provider.
@@ -431,11 +431,11 @@ class UserTest extends DbTestCase
      * @return array
      */
     public function verifyEmailDataprovider()
-    ***REMOVED***
+    {
         return [
             'Test regular' => [
                 'data' => [
-                    'token' => '***REMOVED***email_token***REMOVED***',
+                    'token' => '{email_token}',
                 ],
                 'expectedStatusCode' => 200,
                 'expectedResponseData' => [
@@ -473,7 +473,7 @@ class UserTest extends DbTestCase
                 'notExpectedDatabaseState' => false,
             ],
         ];
-***REMOVED***
+    }
 
     /**
      * Update user data provider.
@@ -481,7 +481,7 @@ class UserTest extends DbTestCase
      * @return array
      */
     public function updateUserDataProvider()
-    ***REMOVED***
+    {
         $jsCertificateUntil = time() + (60 * 60 * 24 * 365);
         $birthdate = time() - (60 * 60 * 24 * 365 * 4) - 1;
         $phonenumberConverter = new PhonenumberConverter();
@@ -587,7 +587,7 @@ class UserTest extends DbTestCase
                 ],
             ],
         ];
-***REMOVED***
+    }
 
     /**
      * Hook to get all data
@@ -595,7 +595,7 @@ class UserTest extends DbTestCase
      * @param array $data
      */
     protected function getDataHook(array $data): void
-    ***REMOVED***
+    {
         $this->emailToken = $data['email_token'][0]['token'];
-***REMOVED***
-***REMOVED***
+    }
+}

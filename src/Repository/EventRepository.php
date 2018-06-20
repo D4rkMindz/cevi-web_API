@@ -22,7 +22,7 @@ use Slim\Container;
  * Class EventRepository
  */
 class EventRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var DepartmentEventTable
      */
@@ -69,7 +69,7 @@ class EventRepository extends AppRepository
     private $formatter;
 
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->eventTable = $container->get(EventTable::class);
         $this->eventTitleTable = $container->get(EventTitleTable::class);
         $this->departmentTable = $container->get(DepartmentTable::class);
@@ -80,7 +80,7 @@ class EventRepository extends AppRepository
         $this->imageTable = $container->get(ImageTable::class);
 
         $this->formatter = new Formatter();
-***REMOVED***
+    }
 
     /**
      * @param int $limit Limit of records
@@ -94,17 +94,17 @@ class EventRepository extends AppRepository
      * @return array
      */
     public function getEvents(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null, bool $isPublic = true): array
-    ***REMOVED***
+    {
         $query = $this->getEventQuery($limit, $page, $until, $departmentGroupId, $departmentId, $since, $isPublic);
         $events = $query->execute()->fetchAll('assoc');
-        if (empty($events)) ***REMOVED***
+        if (empty($events)) {
             return [];
-    ***REMOVED***
+        }
 
         $events = $this->addEventImages($descriptionFormat, $events);
 
         return $events;
-***REMOVED***
+    }
 
     /**
      * Get single event.
@@ -121,18 +121,18 @@ class EventRepository extends AppRepository
      * @return array
      */
     public function getEvent(string $eventId, int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, string $descriptionFormat = null, bool $isPublic = true): array
-    ***REMOVED***
+    {
         $query = $this->getEventQuery($limit, $page, $until, $departmentGroupId, $departmentId, $since, $isPublic);
         $query->andWhere([$this->eventTable->getTablename() . '.id' => $eventId]);
         $event = $query->execute()->fetch('assoc');
-        if (empty($event)) ***REMOVED***
+        if (empty($event)) {
             return [];
-    ***REMOVED***
+        }
 
         $event = $this->addEventImages($descriptionFormat, $event);
 
         return $event;
-***REMOVED***
+    }
 
     /**
      * Create event.
@@ -143,7 +143,7 @@ class EventRepository extends AppRepository
      * @return array
      */
     public function createEvent(array $data, string $lang, string $userId): array
-    ***REMOVED***
+    {
         $eventTitleId = $this->insertEventTitle((string)$data['title'], $lang, $userId);
         $eventDescriptionId = $this->insertEventDescription((string)$data['description'], $lang, $userId);
 
@@ -160,7 +160,7 @@ class EventRepository extends AppRepository
         ];
 
         return $this->eventTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Update event.
@@ -172,38 +172,38 @@ class EventRepository extends AppRepository
      * @return bool
      */
     public function updateEvent(array $data, int $eventId, string $lang, string $userId): bool
-    ***REMOVED***
+    {
         $row = [];
 
-        if (array_key_exists('title', $data)) ***REMOVED***
+        if (array_key_exists('title', $data)) {
             $row['title_id'] = $this->insertEventTitle((string)$data['title'], $lang, $userId);
-    ***REMOVED***
-        if (array_key_exists('description', $data)) ***REMOVED***
+        }
+        if (array_key_exists('description', $data)) {
             $row['description_id'] = $this->insertEventDescription((string)$data['description'], $lang, $userId);
-    ***REMOVED***
-        if (array_key_exists('start', $data)) ***REMOVED***
+        }
+        if (array_key_exists('start', $data)) {
             $row['start'] = date('Y-m-d H:i:s', (int)$data['start']);
-    ***REMOVED***
-        if (array_key_exists('end', $data)) ***REMOVED***
+        }
+        if (array_key_exists('end', $data)) {
             $row['start'] = date('Y-m-d H:i:s', (int)$data['end']);
-    ***REMOVED***
-        if (array_key_exists('start_leaders', $data)) ***REMOVED***
+        }
+        if (array_key_exists('start_leaders', $data)) {
             $row['start'] = date('Y-m-d H:i:s', (int)$data['start_leaders']);
-    ***REMOVED***
-        if (array_key_exists('end_leaders', $data)) ***REMOVED***
+        }
+        if (array_key_exists('end_leaders', $data)) {
             $row['start'] = date('Y-m-d H:i:s', (int)$data['end_leaders']);
-    ***REMOVED***
-        if (array_key_exists('price', $data)) ***REMOVED***
+        }
+        if (array_key_exists('price', $data)) {
             $row['price'] = (float)$data['price'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('public', $data)) ***REMOVED***
+        if (array_key_exists('public', $data)) {
             $row['public'] = (bool)$data['public'];
             $row['publicize_at'] = !empty($data['publicize_at']) ? date('Y-m-d H:i:s', (int)$data['publicize_at']) : null;
-    ***REMOVED***
+        }
 
         return $this->eventTable->modify($row, [$this->eventTable->getTablename() . '.id' => $eventId], $userId);
-***REMOVED***
+    }
 
     /**
      * Check if event exists.
@@ -213,9 +213,9 @@ class EventRepository extends AppRepository
      * @return bool
      */
     public function existsEvent(string $eventId, string $departmentId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->departmentEventTable, ['event_id' => $eventId, 'department_hash'=> $departmentId]);
-***REMOVED***
+    }
 
     /**
      * Insert event title.
@@ -226,7 +226,7 @@ class EventRepository extends AppRepository
      * @return string
      */
     private function insertEventTitle(string $eventTitle, string $lang, string $userId)
-    ***REMOVED***
+    {
         $translated = TranslateService::trans($eventTitle, $lang);
         $row = [
             'name_de' => $translated['de'],
@@ -236,7 +236,7 @@ class EventRepository extends AppRepository
         ];
 
         return $this->eventTitleTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Insert event description.
@@ -247,7 +247,7 @@ class EventRepository extends AppRepository
      * @return int
      */
     private function insertEventDescription(string $eventDescription, string $lang, string $userId): int
-    ***REMOVED***
+    {
         $translated = TranslateService::trans($eventDescription, $lang);
         $row = [
             'name_de' => $translated['de'],
@@ -257,7 +257,7 @@ class EventRepository extends AppRepository
         ];
 
         return $this->eventDescriptionTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Delete event.
@@ -267,14 +267,14 @@ class EventRepository extends AppRepository
      * @return bool
      */
     public function deleteEvent(string $eventId, string $executorId)
-    ***REMOVED***
-        try ***REMOVED***
+    {
+        try {
             $this->eventTable->archive($executorId, ['id' => $eventId]);
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
         return true;
-***REMOVED***
+    }
 
     /**
      * Get event selection query.
@@ -289,7 +289,7 @@ class EventRepository extends AppRepository
      * @return Query
      */
     private function getEventQuery(int $limit, int $page, int $until, string $departmentGroupId, string $departmentId, int $since, bool $isPublic): Query
-    ***REMOVED***
+    {
         $eventTableName = $this->eventTable->getTablename();
         $eventTitleTableName = $this->eventTitleTable->getTablename();
         $departmentEventTableName = $this->departmentEventTable->getTablename();
@@ -319,19 +319,19 @@ class EventRepository extends AppRepository
         ];
 
         $where = [];
-        if ($isPublic) ***REMOVED***
+        if ($isPublic) {
             $where[$eventTableName . '.public'] = true;
-    ***REMOVED***
+        }
         $where[$eventTableName . '.start <= '] = date('Y-m-d H:i:s', $until);
         $where[$eventTableName . '.start >= '] = date('Y-m-d H:i:s', $since);
 
-        if (!empty($departmentId)) ***REMOVED***
+        if (!empty($departmentId)) {
             $where[$departmentEventTableName . '.department_hash'] = $departmentId;
-    ***REMOVED***
+        }
 
-        if (!empty($departmentGroupId)) ***REMOVED***
+        if (!empty($departmentGroupId)) {
             $where[$departmentEventTableName . '.department_group_hash'] = $departmentGroupId;
-    ***REMOVED***
+        }
 
         $query = $this->eventTable->newSelect();
         $query->select($fields)
@@ -356,7 +356,7 @@ class EventRepository extends AppRepository
             ->limit($limit)
             ->page($page);
         return $query;
-***REMOVED***
+    }
 
     /**
      * Add all event images to the event array
@@ -366,7 +366,7 @@ class EventRepository extends AppRepository
      * @return mixed
      */
     private function addEventImages(string $descriptionFormat, $events)
-    ***REMOVED***
+    {
         $imageTablename = $this->imageTable->getTablename();
         $eventImageTablename = $this->eventImageTable->getTablename();
 
@@ -385,13 +385,13 @@ class EventRepository extends AppRepository
                 ],
             ]);
 
-        foreach ($events as $key => $event) ***REMOVED***
+        foreach ($events as $key => $event) {
             $q = $query;
             $q->where([$eventImageTablename . '.event_hash' => $event['hash']]);
 
             $event['images'] = $q->execute()->fetchAll('assoc') ?: ['message' => __('No images available')];
             $events[$key] = $this->formatter->formatEvent($event, $descriptionFormat);
-    ***REMOVED***
+        }
         return $events;
-***REMOVED***
-***REMOVED***
+    }
+}

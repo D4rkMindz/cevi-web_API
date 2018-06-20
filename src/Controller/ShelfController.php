@@ -16,7 +16,7 @@ use Slim\Http\Response;
  * Class ShelfController
  */
 class ShelfController extends AppController
-***REMOVED***
+{
     /**
      * @var DepartmentRepository
      */
@@ -48,14 +48,14 @@ class ShelfController extends AppController
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->locationRepository = $container->get(LocationRepository::class);
         $this->slShelfTable = $container->get(SlShelfTable::class);
         $this->storageRepository = $container->get(StorageRepository::class);
         $this->storageValidation = $container->get(StorageValidation::class);
-***REMOVED***
+    }
 
     /**
      * Get all shelfs.
@@ -71,17 +71,17 @@ class ShelfController extends AppController
      * @return Response
      */
     public function getAllLocationsAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
+    {
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $params = $this->getLimitationParams($request);
         $shelfs = $this->locationRepository->getAllStorages($this->slShelfTable, $args['department_hash'], $params['limit'], $params['page']);
 
-        if (empty($shelfs)) ***REMOVED***
+        if (empty($shelfs)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('No shelfs found')]);
-    ***REMOVED***
+        }
 
         $responseData = [
             'limit' => $params['limit'],
@@ -90,7 +90,7 @@ class ShelfController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Create sl_shelf
@@ -101,26 +101,26 @@ class ShelfController extends AppController
      * @return Response
      */
     public function createLocation(Request $request, Response $response, array $args): Response
-    ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
+    {
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $json = (string)$request->getBody();
         $params = json_decode($json, true);
 
         $validationContext = $this->storageValidation->validateLocation($params, false);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $created = $this->locationRepository->createStorage($this->slShelfTable, $params['name'], $this->jwt['user_id']);
-        if (!$created) ***REMOVED***
+        if (!$created) {
             return $this->error($response, __('Creating shelf failed'), 422, ['message' => __('Creating shelf failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Created shelf successfully')]);
-***REMOVED***
+    }
 
     /**
      * Create sl_shelf
@@ -131,27 +131,27 @@ class ShelfController extends AppController
      * @return Response
      */
     public function updateLocation(Request $request, Response $response, array $args): Response
-    ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
+    {
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $json = (string)$request->getBody();
         $params = json_decode($json, true);
         $params['storage_id'] = $args['storage_id'];
 
         $validationContext = $this->storageValidation->validateLocation($params);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $created = $this->locationRepository->updateStorage($this->slShelfTable, $args['storage_id'], $params['name'], $this->jwt['user_id']);
-        if (!$created) ***REMOVED***
+        if (!$created) {
             return $this->error($response, __('Updating shelf failed'), 422, ['message' => __('Updating shelf failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Updated shelf successfully')]);
-***REMOVED***
+    }
 
     /**
      * Update sl_shelf.
@@ -162,25 +162,25 @@ class ShelfController extends AppController
      * @return Response
      */
     public function deleteLocation(Request $request, Response $response, array $args): Response
-    ***REMOVED***
-        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) ***REMOVED***
+    {
+        if (!$this->departmentRepository->existsDepartment($args['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $json = (string)$request->getBody();
         $params = json_decode($json, true);
         $params['storage_id'] = $args['storage_id'];
 
         $validationContext = $this->storageValidation->validateDelete($params);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $updated = $this->locationRepository->deleteStorage($this->slShelfTable, $args['storage_id'], $this->jwt['user_id']);
-        if (!$updated) ***REMOVED***
+        if (!$updated) {
             return $this->error($response, __('Deleting shelf failed'), 422, ['message' => __('Deleting shelf failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Deleted shelf successfully')]);
-***REMOVED***
-***REMOVED***
+    }
+}

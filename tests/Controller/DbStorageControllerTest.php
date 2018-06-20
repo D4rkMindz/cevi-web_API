@@ -18,7 +18,7 @@
 // * Class DbStorageControllerTest
 // */
 //class DbStorageControllerTest extends DbTestCase
-//***REMOVED***
+//{
 //    private $data;
 //
 //    /**
@@ -27,11 +27,11 @@
 //     * @return ArrayDataSet|IDataSet
 //     */
 //    public function getDataSet()
-//    ***REMOVED***
+//    {
 //        $testDatabase = new TestDatabase();
 //        $this->data = $testDatabase->storage();
 //        return new ArrayDataSet($this->data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * @param $requestData
@@ -44,7 +44,7 @@
 //     * @dataProvider createStorageDataProvider
 //     */
 //    public function testCreateStorage($requestData, $expected, $statuscode)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('POST', '/v2/departments/1/storages', true);
 //        $request = $this->withJson($request, $requestData);
 //        $response = $this->request($request);
@@ -54,7 +54,7 @@
 //        $data = json_decode($body, true);
 //        $this->assertSame($expected, $data['info']);
 //        $this->assertSame($statuscode, $data['code']);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * @param $requestData
@@ -67,7 +67,7 @@
 //     * @dataProvider updateStorageDataProvider
 //     */
 //    public function testUpdateStorage($requestData, $expected, $statuscode)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('PUT', '/v2/departments/1/storages/2', true);
 //        $request = $this->withJson($request, $requestData);
 //        $response = $this->request($request);
@@ -77,13 +77,13 @@
 //        $data = json_decode($body, true);
 //        $this->assertSame($expected, $data['info']);
 //        $this->assertSame($statuscode, $data['code']);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * @return array
 //     */
 //    public function createStorageDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'Test with valid request data' => [
 //                'requestData' => [
@@ -185,13 +185,13 @@
 //                422,
 //            ],
 //        ];
-//***REMOVED***
+//    }
 //
 //    /**
 //     * @return array
 //     */
 //    public function updateStorageDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'Test with valid request data' => [
 //                'requestData' => [
@@ -209,5 +209,5 @@
 //                200,
 //            ],
 //        ];
-//***REMOVED***
-//***REMOVED***
+//    }
+//}

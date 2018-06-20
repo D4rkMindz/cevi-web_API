@@ -16,7 +16,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class DepartmentController extends AppController
-***REMOVED***
+{
     /**
      * @var DepartmentRepository
      */
@@ -33,12 +33,12 @@ class DepartmentController extends AppController
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->departmentValidation = $container->get(DepartmentValidation::class);
 
-***REMOVED***
+    }
 
     /**
      * Get all departments.
@@ -53,7 +53,7 @@ class DepartmentController extends AppController
      * @return Response
      */
     public function getAllAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
 
         $departments = $this->departmentRepository->getAll($params['limit'], $params['page']);
@@ -65,7 +65,7 @@ class DepartmentController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Get single department.
@@ -79,17 +79,17 @@ class DepartmentController extends AppController
      * @return Response
      */
     public function getDepartmentAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $department = $this->departmentRepository->getDepartment($args['department_hash']);
-        if (empty($department)) ***REMOVED***
+        if (empty($department)) {
             return $this->error($response, 'Not found', 404, ['message' => __('Department does not exist')]);
-    ***REMOVED***
+        }
         $responseData = [
             'department' => $department,
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Update department
@@ -106,7 +106,7 @@ class DepartmentController extends AppController
      * @return Response
      */
     public function updateDepartmentAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
         $name = (string)$data['name'];
@@ -114,17 +114,17 @@ class DepartmentController extends AppController
         $departmentGroupId = (string)$data['department_group_id'];
         $departmentTypeId = (string)$data['department_type_id'];
         $validationContext = $this->departmentValidation->validateUpdate($name, $postcode, $departmentGroupId, $departmentTypeId);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $success = $this->departmentRepository->updateDepartment($args['department_hash'], $name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['user_id']);
-        if (!$success) ***REMOVED***
+        if (!$success) {
             return $this->error($response, 'Unprocessable Entity', 404, ['message' => __('Update failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Updated department successfully')]);
-***REMOVED***
+    }
 
     /**
      * Delete user.
@@ -139,14 +139,14 @@ class DepartmentController extends AppController
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function deleteDepartmentAction(Request $request, Response $response, array $args)
-    ***REMOVED***
+    {
         $deleted = $this->departmentRepository->deleteDepartment($args['department_hash'], $this->jwt['user_id']);
-        if (!$deleted) ***REMOVED***
+        if (!$deleted) {
             return $this->error($response, 'Internal Server Error', 500, ['message' => __('Deleting user failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Deleted user successfully')]);
-***REMOVED***
+    }
 
     /**
      * Create department.
@@ -162,7 +162,7 @@ class DepartmentController extends AppController
      * @return Response
      */
     public function createDepartmentAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
         $name = (string)$data['name'];
@@ -172,9 +172,9 @@ class DepartmentController extends AppController
 
         $validationContext = $this->departmentValidation->validateCreate($name, $postcode, $departmentGroupId, $departmentTypeId);
 
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $lastInsertedId = $this->departmentRepository->insertDepartment($name, $postcode, $departmentGroupId, $departmentTypeId, $this->jwt['userid']);
         $url = baseurl('/v2/departments/' . $lastInsertedId);
@@ -184,5 +184,5 @@ class DepartmentController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
-***REMOVED***
+    }
+}

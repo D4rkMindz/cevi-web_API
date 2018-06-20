@@ -17,7 +17,7 @@ use App\Test\DbTestCase;
  * @coversDefaultClass \App\Controller\ArticleController
  */
 class ArticlesTest extends DbTestCase
-***REMOVED***
+{
     private $qualities;
     private $locations;
 
@@ -30,7 +30,7 @@ class ArticlesTest extends DbTestCase
      * @covers ::getArticleAction
      */
     public function testGetArticleActionSuccess()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/departments/' . $this->departmentHash . '/articles/' . $this->articleHash);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -111,7 +111,7 @@ class ArticlesTest extends DbTestCase
         $this->assertArrayHasKey('article', $data);
         $article = $data['article'];
         $this->assertArrayNotHasKey('id', $article);
-***REMOVED***
+    }
 
     /**
      * Get all articles
@@ -122,7 +122,7 @@ class ArticlesTest extends DbTestCase
      * @covers ::getAllArticlesAction
      */
     public function testGetAllArticlesActionSuccess()
-    ***REMOVED***
+    {
         $request = $this->createRequest('GET', '/v2/departments/' . $this->departmentHash . '/articles');
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
@@ -207,7 +207,7 @@ class ArticlesTest extends DbTestCase
         $articles = $data['articles'];
         $this->assertArrayNotHasKey('id', $articles['0']);
         $this->assertArrayNotHasKey('2', $articles); // maximum result set of the department
-***REMOVED***
+    }
 
     /**
      * Test create article
@@ -221,25 +221,25 @@ class ArticlesTest extends DbTestCase
      * @covers ::createArticleAction
      */
     public function testCreateArticle(array $data, int $expectedStatusCode, array $expectedResponseData)
-    ***REMOVED***
+    {
         $request = $this->createRequest('POST', '/v2/departments/' . $this->departmentHash . '/articles');
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
 
-        if (array_key_exists('hash', $expectedResponseData)) ***REMOVED***
+        if (array_key_exists('hash', $expectedResponseData)) {
             $json = $response->getBody()->__toString();
             $data = json_decode($json, true);
             $expectedResponseData['hash'] = $data['hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('url', $expectedResponseData)) ***REMOVED***
+        if (array_key_exists('url', $expectedResponseData)) {
             $json = $response->getBody()->__toString();
             $data = json_decode($json, true);
-            $expectedResponseData['url'] = preg_replace('/***REMOVED***new_article_hash***REMOVED***/', $data['hash'], $expectedResponseData['url']);
-    ***REMOVED***
+            $expectedResponseData['url'] = preg_replace('/{new_article_hash}/', $data['hash'], $expectedResponseData['url']);
+        }
 
         $this->assertDefaultValues($response, $expectedStatusCode, $expectedResponseData, false, false);
-***REMOVED***
+    }
 
     /**
      * @param array $data
@@ -252,13 +252,13 @@ class ArticlesTest extends DbTestCase
      * @dataProvider updateArticleDataprovider
      */
     public function testUpdateArticle(array $data, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
-    ***REMOVED***
+    {
         $request = $this->createRequest('PUT', '/v2/departments/' . $this->departmentHash . '/articles/' . $this->articleHash);
         $request = $this->withJson($request, $data);
         $response = $this->request($request);
 
         $this->assertDefaultValues($response, $expectedStatusCode, $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState);
-***REMOVED***
+    }
 
     /**
      * Test delete article
@@ -267,7 +267,7 @@ class ArticlesTest extends DbTestCase
      * @throws \Slim\Exception\NotFoundException
      */
     public function testDeleteArticle()
-    ***REMOVED***
+    {
         $request = $this->createRequest('DELETE', '/v2/departments/' . $this->departmentHash . '/articles/' . $this->articleHash);
         $response = $this->request($request);
 
@@ -291,7 +291,7 @@ class ArticlesTest extends DbTestCase
 
         ];
         $this->assertDataInDatabase($tableData);
-***REMOVED***
+    }
 
     /**
      * Dataprovider for testCreateArticle
@@ -299,7 +299,7 @@ class ArticlesTest extends DbTestCase
      * @return array
      */
     public function createArticleDataprovider()
-    ***REMOVED***
+    {
         return [
             'Test regular' => [
                 'data' => [
@@ -318,7 +318,7 @@ class ArticlesTest extends DbTestCase
                     'code' => 200,
                     'message' => 'Inserted article successfully',
                     'hash' => 'hashToBeReplacedManually',
-                    'url' => baseurl('/v2/departments/***REMOVED***department_hash***REMOVED***/articles/***REMOVED***new_article_hash***REMOVED***'),
+                    'url' => baseurl('/v2/departments/{department_hash}/articles/{new_article_hash}'),
                 ],
                 'expectedDatabaseState' => [
                     'article' => [
@@ -425,7 +425,7 @@ class ArticlesTest extends DbTestCase
                 ],
             ],
         ];
-***REMOVED***
+    }
 
     /**
      * Dataprovider for testUpdateArticle
@@ -433,7 +433,7 @@ class ArticlesTest extends DbTestCase
      * @return array
      */
     public function updateArticleDataprovider(): array
-    ***REMOVED***
+    {
         return [
             'Test regular' => [
                 'data' => [
@@ -521,7 +521,7 @@ class ArticlesTest extends DbTestCase
                 'notExpectedDatabaseState' => false,
             ]
         ];
-***REMOVED***
+    }
 
     /**
      * Hook to get all data
@@ -529,8 +529,8 @@ class ArticlesTest extends DbTestCase
      * @param array $data
      */
     protected function getDataHook(array $data): void
-    ***REMOVED***
+    {
         $this->qualities = $data['article_quality'];
         $this->locations = $data['storage_place'];
-***REMOVED***
-***REMOVED***
+    }
+}

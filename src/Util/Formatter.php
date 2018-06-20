@@ -5,7 +5,7 @@ namespace App\Util;
 
 
 class Formatter
-***REMOVED***
+{
     /**
      * Format user.
      *
@@ -13,7 +13,7 @@ class Formatter
      * @return array
      */
     public function formatUser(array $user): array
-    ***REMOVED***
+    {
         $tmp['hash'] = $user['hash'];
         $tmp['department'] = [
             'hash' => $user['department_hash'],
@@ -66,7 +66,7 @@ class Formatter
         $tmp['archived_at'] = $user['archived_at'];
 
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format event.
@@ -77,7 +77,7 @@ class Formatter
      * @return array
      */
     public function formatEvent(array $event, string $descriptionFormat = null): array
-    ***REMOVED***
+    {
         $tmp = [];
         $tmp['hash'] = $event['hash'];
         $tmp['name'] = [
@@ -100,7 +100,7 @@ class Formatter
         $tmp['archived_by'] = $event['archived_by'];
         $tmp['images'] = $event['images'];
 
-        if ($descriptionFormat === 'plain') ***REMOVED***
+        if ($descriptionFormat === 'plain') {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $event['description_name_de'],
@@ -115,7 +115,7 @@ class Formatter
                     'plain' => $event['description_name_it'],
                 ],
             ];
-    ***REMOVED*** else if ($descriptionFormat === 'parsed') ***REMOVED***
+        } else if ($descriptionFormat === 'parsed') {
             $tmp['description'] = [
                 'name_de' => [
                     'parsed' => MDParser::parse($event['description_name_de']),
@@ -130,7 +130,7 @@ class Formatter
                     'parsed' => MDParser::parse($event['description_name_it']),
                 ],
             ];
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $event['description_name_de'],
@@ -149,9 +149,9 @@ class Formatter
                     'parsed' => MDParser::parse($event['description_name_it']),
                 ],
             ];
-    ***REMOVED***
+        }
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format simple event array.
@@ -161,7 +161,7 @@ class Formatter
      * @return array
      */
     public function formatEventSimple(array $event, string $descriptionFormat = null): array
-    ***REMOVED***
+    {
         $tmp = [];
         $tmp['hash'] = $event['hash'];
         $tmp['name'] = [
@@ -178,7 +178,7 @@ class Formatter
         $tmp['archived_at'] = $event['archived_at'];
         $tmp['archived_by'] = $event['archived_by'];
 
-        if ($descriptionFormat === 'plain') ***REMOVED***
+        if ($descriptionFormat === 'plain') {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $event['description_name_de'],
@@ -193,7 +193,7 @@ class Formatter
                     'plain' => $event['description_name_it'],
                 ],
             ];
-    ***REMOVED*** else if ($descriptionFormat === 'parsed') ***REMOVED***
+        } else if ($descriptionFormat === 'parsed') {
             $tmp['description'] = [
                 'name_de' => [
                     'parsed' => MDParser::parse($event['description_name_de']),
@@ -208,7 +208,7 @@ class Formatter
                     'parsed' => MDParser::parse($event['description_name_it']),
                 ],
             ];
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $event['description_name_de'],
@@ -227,9 +227,9 @@ class Formatter
                     'parsed' => MDParser::parse($event['description_name_it']),
                 ],
             ];
-    ***REMOVED***
+        }
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format department.
@@ -238,7 +238,7 @@ class Formatter
      * @return array
      */
     public function formatDepartment(array $department)
-    ***REMOVED***
+    {
         $tmp = [];
         $tmp['id'] = $department['id'];
         $tmp['name'] = $department['name'];
@@ -272,7 +272,7 @@ class Formatter
         $tmp['archived_by'] = $department['archived_by'];
 
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format article
@@ -284,7 +284,7 @@ class Formatter
      * @return array
      */
     public function formatArticle(array $article, string $departemntId, string $descriptionFormat = null, bool $withStorageplaces = true): array
-    ***REMOVED***
+    {
         $tmp = [];
         $tmp['hash'] = $article['hash'];
         $tmp['title'] = [
@@ -294,7 +294,7 @@ class Formatter
             'name_it' => $article['title_name_it'],
         ];
 
-        if ($descriptionFormat === 'parsed') ***REMOVED***
+        if ($descriptionFormat === 'parsed') {
             $tmp['description'] = [
                 'name_de' => [
                     'parsed' => MDParser::parse($article['description_name_de']),
@@ -309,7 +309,7 @@ class Formatter
                     'parsed' => MDParser::parse($article['description_name_it']),
                 ],
             ];
-    ***REMOVED*** else if ($descriptionFormat === 'plain') ***REMOVED***
+        } else if ($descriptionFormat === 'plain') {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $article['description_name_de']
@@ -324,7 +324,7 @@ class Formatter
                     'plain' => $article['description_name_it']
                 ],
             ];
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $tmp['description'] = [
                 'name_de' => [
                     'plain' => $article['description_name_de'],
@@ -343,7 +343,7 @@ class Formatter
                     'parsed' => MDParser::parse($article['description_name_it']),
                 ],
             ];
-    ***REMOVED***
+        }
         $tmp['purchase_date'] = $article['purchase_date'];
         $tmp['quantity'] = (int)$article['quantity'];
         $tmp['quality'] = [
@@ -356,48 +356,48 @@ class Formatter
                 'name_it' => $article['quality_name_it'],
             ],
         ];
-        if ($withStorageplaces) ***REMOVED***
+        if ($withStorageplaces) {
             $tmp['storage'] = [
                 'hash' => $article['location_hash'],
                 'name' => $article['location_name'],
                 'url' => baseurl('/v2/departments/' . $departemntId . '/storages/' . $article['location_hash']),
             ];
-            if (!empty($article['room_name'])) ***REMOVED***
+            if (!empty($article['room_name'])) {
                 $tmp['room'] = [
                     'hash' => $article['room_hash'],
                     'name' => $article['room_name'],
                     'url' => baseurl('/v2/departments/' . $departemntId . '/rooms/' . $article['room_hash']),
                 ];
-        ***REMOVED***
-            if (!empty($article['corridor_name'])) ***REMOVED***
+            }
+            if (!empty($article['corridor_name'])) {
                 $tmp['corridor'] = [
                     'hash' => $article['corridor_hash'],
                     'name' => $article['corridor_name'],
                     'url' => baseurl('/v2/departments/' . $departemntId . '/corridors/' . $article['corridor_hash']),
                 ];
-        ***REMOVED***
-            if (!empty($article['shelf_name'])) ***REMOVED***
+            }
+            if (!empty($article['shelf_name'])) {
                 $tmp['shelf'] = [
                     'hash' => $article['shelf_hash'],
                     'name' => $article['shelf_name'],
                     'url' => baseurl('/v2/departments/' . $departemntId . '/shelfs/' . $article['shelf_hash']),
                 ];
-        ***REMOVED***
-            if (!empty($article['tray_name'])) ***REMOVED***
+            }
+            if (!empty($article['tray_name'])) {
                 $tmp['tray'] = [
                     'hash' => $article['tray_hash'],
                     'name' => $article['tray_name'],
                     'url' => baseurl('/v2/departments/' . $departemntId . '/trays/' . $article['tray_hash']),
                 ];
-        ***REMOVED***
-            if (!empty($article['chest_name'])) ***REMOVED***
+            }
+            if (!empty($article['chest_name'])) {
                 $tmp['chest'] = [
                     'hash' => $article['chest_hash'],
                     'name' => $article['chest_name'],
                     'url' => baseurl('/v2/departments/' . $departemntId . '/chest/' . $article['chest_hash']),
                 ];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         $tmp['replacement'] = [
             'needed' => !empty($article['replacement']),
             'urgent' => strtotime($article['replacement']) <= time() + 60 * 60 * 24 * 30 * 3, // three months
@@ -415,7 +415,7 @@ class Formatter
         $tmp['archived_by'] = empty($article['archived_by']) ? $article['archived_by'] : null;
 
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format storage place.
@@ -425,7 +425,7 @@ class Formatter
      * @return array
      */
     public function formatStoragePlace(array $storagePlace, string $departmentId): array
-    ***REMOVED***
+    {
         $tmp = [];
         $tmp['location'] = [
             'id' => $storagePlace['location_id'],
@@ -460,7 +460,7 @@ class Formatter
         $tmp['name'] = $storagePlace['name'];
         $tmp['id'] = $storagePlace['id'];
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format participation.
@@ -471,12 +471,12 @@ class Formatter
      * @return array
      */
     public function formatParticipation(array $participation, string $departmentId, string $format): array
-    ***REMOVED***
+    {
         // works, because in the Participation Repository
         // are the same array keys used for getting all
         // and getting only users
         $tmp = $this->formatParticipatingUser($participation);
-        if ($format === 'plain') ***REMOVED***
+        if ($format === 'plain') {
             $tmp['event'] = [
                 'id' => $participation['event_id'],
                 'title' => [
@@ -500,7 +500,7 @@ class Formatter
                     ],
                 ]
             ];
-    ***REMOVED*** elseif ($format === 'parsed') ***REMOVED***
+        } elseif ($format === 'parsed') {
             $tmp['event'] = [
                 'id' => $participation['event_id'],
                 'title' => [
@@ -524,7 +524,7 @@ class Formatter
                     ],
                 ]
             ];
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $tmp['event'] = [
                 'id' => $participation['event_id'],
                 'title' => [
@@ -552,12 +552,12 @@ class Formatter
                     ],
                 ]
             ];
-    ***REMOVED***
+        }
 
         $tmp['event']['url'] = baseurl('/v2/departments/' . $departmentId . '/events/' . $participation['event_id']);
 
         return $tmp;
-***REMOVED***
+    }
 
     /**
      * Format user who's participating at an event.
@@ -565,7 +565,7 @@ class Formatter
      * @param array $user
      */
     public function formatParticipatingUser(array $user)
-    ***REMOVED***
+    {
         $tmp['user_id'] = $user['user_id'];
         $tmp['department'] = [
             'id' => $user['department_hash'],
@@ -590,5 +590,5 @@ class Formatter
         $tmp['user_url'] = baseurl('/v2/users/' . $user['user_id']);
 
         return $tmp;
-***REMOVED***
-***REMOVED***
+    }
+}

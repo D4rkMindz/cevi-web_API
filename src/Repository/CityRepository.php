@@ -11,7 +11,7 @@ use Slim\Container;
  * Class CityRepository
  */
 class CityRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var CityTable
      */
@@ -23,9 +23,9 @@ class CityRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->cityTable = $container->get(CityTable::class);
-***REMOVED***
+    }
 
     /**
      * @param int $limit
@@ -33,7 +33,7 @@ class CityRepository extends AppRepository
      * @return array
      */
     public function getAll(int $limit = 10000, int $page = 0): array
-    ***REMOVED***
+    {
         $query = $this->cityTable->newSelect();
         $fields = [
             'id',
@@ -48,7 +48,7 @@ class CityRepository extends AppRepository
             ->page($page);
         $row = $query->execute()->fetchAll('assoc');
         return !empty($row) ? $row : [];
-***REMOVED***
+    }
 
     /**
      * Get reduced city data for registration autocomplete
@@ -59,7 +59,7 @@ class CityRepository extends AppRepository
      * @return array
      */
     public function getReduced(string $lang = 'de', $limit, $page): array
-    ***REMOVED***
+    {
         $query = $this->cityTable->newSelect();
         $name = 'title_' . $lang;
         $fields = [
@@ -72,7 +72,7 @@ class CityRepository extends AppRepository
             ->page($page);
         $rows = $query->execute()->fetchAll('assoc');
         return !empty($rows) ? $rows : [];
-***REMOVED***
+    }
 
     /**
      * Check if postcode exists in repository.
@@ -81,12 +81,12 @@ class CityRepository extends AppRepository
      * @return bool true if found.
      */
     public function existsPostcode(string $postcode): bool
-    ***REMOVED***
+    {
         $query = $this->cityTable->newSelect();
         $query->select('number')->where(['number' => $postcode]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Check if city exists.
@@ -95,10 +95,10 @@ class CityRepository extends AppRepository
      * @return bool true if exists
      */
     public function existsCity(string $cityId)
-    ***REMOVED***
+    {
         $query = $this->cityTable->newSelect();
         $query->select('id')->where(['id' => $cityId]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
-***REMOVED***
+    }
+}

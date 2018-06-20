@@ -7,7 +7,7 @@ namespace App\Test\Mock;
 use App\Service\Mail\MailerInterface;
 
 class MockMailer implements MailerInterface
-***REMOVED***
+{
 
     /**
      * Get domain as string.
@@ -15,9 +15,9 @@ class MockMailer implements MailerInterface
      * @return string domain
      */
     public function getDomain(): string
-    ***REMOVED***
+    {
         return 'test.cevi-web.com'; // Never required
-***REMOVED***
+    }
 
     /**
      * Send HTML email.
@@ -29,8 +29,8 @@ class MockMailer implements MailerInterface
      * @return void
      */
     public function sendHtml(string $to, string $subject, string $html, string $from = null)
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Send Text email.
@@ -42,6 +42,6 @@ class MockMailer implements MailerInterface
      * @return void
      */
     public function sendText(string $to, string $subject, string $text, string $from = null)
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+    }
+}

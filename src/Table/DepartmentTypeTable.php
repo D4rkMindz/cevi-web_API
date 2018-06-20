@@ -10,6 +10,6 @@ namespace App\Table;
 
 
 class DepartmentTypeTable extends AppTable
-***REMOVED***
+{
     protected $table = 'department_type';
-***REMOVED***
+}

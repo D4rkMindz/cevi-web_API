@@ -5,7 +5,7 @@ namespace App\Util;
 
 
 class ValidationContext
-***REMOVED***
+{
     protected $message;
     protected $errors = [];
 
@@ -15,9 +15,9 @@ class ValidationContext
      * @param string|null $message
      */
     public function __construct(string $message = 'Please check your data')
-    ***REMOVED***
+    {
         $this->message = $message === 'Please check your data' ? __('Please check your data') : $message;
-***REMOVED***
+    }
 
     /**
      * Get message.
@@ -25,9 +25,9 @@ class ValidationContext
      * @return null|string
      */
     public function getMessage()
-    ***REMOVED***
+    {
         return $this->message;
-***REMOVED***
+    }
 
     /**
      * Set message.
@@ -35,9 +35,9 @@ class ValidationContext
      * @param string $message
      */
     public function setMessage(string $message)
-    ***REMOVED***
+    {
         $this->message = $message;
-***REMOVED***
+    }
 
     /**
      * Set error
@@ -47,12 +47,12 @@ class ValidationContext
      * @param int $status
      */
     public function setError(string $field, string $message)
-    ***REMOVED***
+    {
         $this->errors[] = [
             "field" => $field,
             "message" => $message,
         ];
-***REMOVED***
+    }
 
     /**
      * Get errors.
@@ -60,9 +60,9 @@ class ValidationContext
      * @return array $errors
      */
     public function getErrors()
-    ***REMOVED***
+    {
         return $this->errors;
-***REMOVED***
+    }
 
     /**
      * Fail.
@@ -72,9 +72,9 @@ class ValidationContext
      * @return bool
      */
     public function fails()
-    ***REMOVED***
+    {
         return !empty($this->errors);
-***REMOVED***
+    }
 
     /**
      * Success
@@ -84,9 +84,9 @@ class ValidationContext
      * @return bool
      */
     public function success()
-    ***REMOVED***
+    {
         return empty($this->errors);
-***REMOVED***
+    }
 
     /**
      * Clear.
@@ -94,10 +94,10 @@ class ValidationContext
      * Clear message and errors
      */
     public function clear()
-    ***REMOVED***
+    {
         $this->message = null;
         $this->errors = [];
-***REMOVED***
+    }
 
     /**
      * Validation To Array.
@@ -107,11 +107,11 @@ class ValidationContext
      * @return array $result
      */
     public function toArray()
-    ***REMOVED***
+    {
         $result = [
             "message" => $this->message,
             "errors" => $this->errors,
         ];
         return $result;
-***REMOVED***
-***REMOVED***
+    }
+}

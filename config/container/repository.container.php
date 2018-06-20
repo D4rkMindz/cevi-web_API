@@ -18,58 +18,58 @@ use Slim\Container;
 
 $container = $app->getContainer();
 
-$container[ArticleRepository::class] = function (Container $container) ***REMOVED***
+$container[ArticleRepository::class] = function (Container $container) {
     return new ArticleRepository($container);
-***REMOVED***;
+};
 
-$container[CityRepository::class] = function (Container $container) ***REMOVED***
+$container[CityRepository::class] = function (Container $container) {
     return new CityRepository($container);
-***REMOVED***;
+};
 
-$container[DepartmentGroupRepository::class] = function (Container $container) ***REMOVED***
+$container[DepartmentGroupRepository::class] = function (Container $container) {
     return new DepartmentGroupRepository($container);
-***REMOVED***;
+};
 
-$container[DepartmentRepository::class] = function (Container $container) ***REMOVED***
+$container[DepartmentRepository::class] = function (Container $container) {
     return new DepartmentRepository($container);
-***REMOVED***;
+};
 
-$container[DepartmentTypeRepository::class] = function (Container $container) ***REMOVED***
+$container[DepartmentTypeRepository::class] = function (Container $container) {
     return new DepartmentTypeRepository($container);
-***REMOVED***;
+};
 
-$container[EventRepository::class] = function (Container $container) ***REMOVED***
+$container[EventRepository::class] = function (Container $container) {
     return new EventRepository($container);
-***REMOVED***;
+};
 
-$container[GenderRepository::class] = function (Container $container) ***REMOVED***
+$container[GenderRepository::class] = function (Container $container) {
     return new GenderRepository($container);
-***REMOVED***;
+};
 
-$container[LanguageRepository::class] = function (Container $container) ***REMOVED***
+$container[LanguageRepository::class] = function (Container $container) {
     return new LanguageRepository($container);
-***REMOVED***;
+};
 
-$container[LocationRepository::class] = function (Container $container) ***REMOVED***
+$container[LocationRepository::class] = function (Container $container) {
     return new LocationRepository($container);
-***REMOVED***;
+};
 
-$container[PositionRepository::class] = function (Container $container) ***REMOVED***
+$container[PositionRepository::class] = function (Container $container) {
     return new PositionRepository($container);
-***REMOVED***;
+};
 
-$container[StorageRepository::class] = function (Container $container) ***REMOVED***
+$container[StorageRepository::class] = function (Container $container) {
     return new StorageRepository($container);
-***REMOVED***;
+};
 
-$container[UserRepository::class] = function (Container $container)***REMOVED***
+$container[UserRepository::class] = function (Container $container){
     return new UserRepository($container);
-***REMOVED***;
+};
 
-$container[ParticipationRepository::class] = function (Container $container) ***REMOVED***
+$container[ParticipationRepository::class] = function (Container $container) {
     return new ParticipationRepository($container);
-***REMOVED***;
+};
 
-$container[EventArticleRepository::class] = function (Container $container) ***REMOVED***
+$container[EventArticleRepository::class] = function (Container $container) {
     return new EventArticleRepository($container);
-***REMOVED***;
+};

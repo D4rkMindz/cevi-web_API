@@ -12,15 +12,15 @@
 //use Slim\Exception\NotFoundException;
 //
 //class EventControllerTest extends DbTestCase
-//***REMOVED***
+//{
 //    private $data;
 //
 //    public function getDataSet()
-//    ***REMOVED***
+//    {
 //        $testDatabase = new TestDatabase();
 //        $this->data = $testDatabase->events();
 //        return new ArrayDataSet($this->data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     *
@@ -33,7 +33,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testGetAll(string $departmentId, int $statuscode, array $expectedResponse)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('GET', '/v2/departments/ ' . $departmentId . '/events');
 //        $response = $this->request($request);
 //        $body = (string)$response->getBody();
@@ -41,10 +41,10 @@
 //        $this->assertJson($body);
 //        $data = json_decode($body, true);
 //        $this->assertSame($expectedResponse, $data);
-//***REMOVED***
+//    }
 //
 //    public function getAllDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'test Get all success' => [
 //                '1',
@@ -52,5 +52,5 @@
 //                []
 //            ],
 //        ];
-//***REMOVED***
-//***REMOVED***
+//    }
+//}

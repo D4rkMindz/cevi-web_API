@@ -8,7 +8,7 @@ use Mailgun\Mailgun;
  * Class MailgunAdapter
  */
 class MailgunAdapter implements MailerInterface
-***REMOVED***
+{
     /**
      * @var Mailgun $mail
      */
@@ -32,11 +32,11 @@ class MailgunAdapter implements MailerInterface
      * @param string $sender email
      */
     public function __construct(string $apiKey, string $domain, string $sender)
-    ***REMOVED***
+    {
         $this->mail = Mailgun::create($apiKey);
         $this->domain = $domain;
         $this->from = $sender;
-***REMOVED***
+    }
 
     /**
      * Get domain name.
@@ -44,9 +44,9 @@ class MailgunAdapter implements MailerInterface
      * @return string
      */
     public function getDomain(): string
-    ***REMOVED***
+    {
         return $this->domain;
-***REMOVED***
+    }
 
     /**
      * Send Text email.
@@ -58,10 +58,10 @@ class MailgunAdapter implements MailerInterface
      * @return void
      */
     public function sendText(string $to, string $subject, string $text, string $from = null)
-    ***REMOVED***
-        if (empty($from)) ***REMOVED***
+    {
+        if (empty($from)) {
             $from = $this->from;
-    ***REMOVED***
+        }
         $mailConfig = [
             'from' => $from,
             'to' => $to,
@@ -69,7 +69,7 @@ class MailgunAdapter implements MailerInterface
             'text' => $text,
         ];
         $this->mail->messages()->send($this->getDomain(), $mailConfig);
-***REMOVED***
+    }
 
     /**
      * Send HTML email.
@@ -81,10 +81,10 @@ class MailgunAdapter implements MailerInterface
      * @return void
      */
     public function sendHtml(string $to,  string $subject, string $html, string $from = null)
-    ***REMOVED***
-        if (empty($from)) ***REMOVED***
+    {
+        if (empty($from)) {
             $from = $this->from;
-    ***REMOVED***
+        }
         $mailConfig = [
             'from' => $from,
             'to' => $to,
@@ -92,5 +92,5 @@ class MailgunAdapter implements MailerInterface
             'html' => $html,
         ];
         $this->mail->messages()->send($this->getDomain(), $mailConfig);
-***REMOVED***
-***REMOVED***
+    }
+}

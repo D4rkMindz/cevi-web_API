@@ -16,7 +16,7 @@ use Slim\Http\Response;
 use Slim\Middleware\JwtAuthentication\RuleInterface;
 
 class PassthroughRule implements RuleInterface
-***REMOVED***
+{
     private $passthrough;
 
     /**
@@ -25,9 +25,9 @@ class PassthroughRule implements RuleInterface
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->passthrough = $container->get('settings')->get('jwt')['passthrough'];
-***REMOVED***
+    }
 
     /**
      * Invoke method.
@@ -37,17 +37,17 @@ class PassthroughRule implements RuleInterface
      * @throws NotFoundException
      */
     public function __invoke(RequestInterface $request)
-    ***REMOVED***
+    {
         $route = $request->getAttribute('route');
-        if (empty($route)) ***REMOVED***
+        if (empty($route)) {
             throw new NotFoundException($request, new Response());
-    ***REMOVED***
+        }
         $requestedRoute = $route->getPattern();
         $method = $request->getMethod();
-        if (!isset($this->passthrough[$requestedRoute])) ***REMOVED***
+        if (!isset($this->passthrough[$requestedRoute])) {
             return true;
-    ***REMOVED***
+        }
         $pass = in_array($method, (array)$this->passthrough[$requestedRoute]);
         return !$pass;
-***REMOVED***
-***REMOVED***
+    }
+}

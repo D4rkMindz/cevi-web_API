@@ -17,7 +17,7 @@ use Slim\Container;
  * Class DepartmentRepository
  */
 class DepartmentRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var DepartmentTable
      */
@@ -49,14 +49,14 @@ class DepartmentRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->departmentTable = $container->get(DepartmentTable::class);
         $this->cityTable = $container->get(CityTable::class);
         $this->departmentGroupTable = $container->get(DepartmentGroupTable::class);
         $this->departmentTypeTable = $container->get(DepartmentTypeTable::class);
 
         $this->formatter = new Formatter();
-***REMOVED***
+    }
 
     /**
      * Check if department exists.
@@ -65,9 +65,9 @@ class DepartmentRepository extends AppRepository
      * @return bool true if found.
      */
     public function existsDepartment(string $departmentHash): bool
-    ***REMOVED***
+    {
         return $this->exists($this->departmentTable, ['hash' => $departmentHash]);
-***REMOVED***
+    }
 
     /**
      * Check if department exists by name.
@@ -76,12 +76,12 @@ class DepartmentRepository extends AppRepository
      * @return bool
      */
     public function existsDepartmentByName(string $name)
-    ***REMOVED***
+    {
         $query = $this->departmentTable->newSelect();
         $query->select(1)->where(['name LIKE' => $name]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Get all departments
@@ -91,22 +91,22 @@ class DepartmentRepository extends AppRepository
      * @return array
      */
     public function getAll(int $limit, int $page)
-    ***REMOVED***
+    {
         $query = $this->getDepartmentQuery();
         $query->limit($limit)
             ->page($page);
         $departments = $query->execute()->fetchAll('assoc');
 
-        if (empty($departments)) ***REMOVED***
+        if (empty($departments)) {
             return [];
-    ***REMOVED***
+        }
 
-        foreach ($departments as $key => $department) ***REMOVED***
+        foreach ($departments as $key => $department) {
             $departments[$key] = $this->formatter->formatDepartment($department);
-    ***REMOVED***
+        }
 
         return $departments;
-***REMOVED***
+    }
 
     /**
      * Get join query.
@@ -114,7 +114,7 @@ class DepartmentRepository extends AppRepository
      * @return Query
      */
     private function getDepartmentQuery(): Query
-    ***REMOVED***
+    {
         $departmentTableName = $this->departmentTable->getTablename();
         $cityTableName = $this->cityTable->getTablename();
         $departmentGroupTableName = $this->departmentGroupTable->getTablename();
@@ -167,7 +167,7 @@ class DepartmentRepository extends AppRepository
                 ],
             ]);
         return $query;
-***REMOVED***
+    }
 
     /**
      * Get single department by ID.
@@ -176,16 +176,16 @@ class DepartmentRepository extends AppRepository
      * @return array|false
      */
     public function getDepartment(string $departmentId)
-    ***REMOVED***
+    {
         $query = $this->getDepartmentQuery();
         $query->where([$this->departmentTable->getTablename() . '.id' => $departmentId]);
         $row = $query->execute()->fetch('assoc');
-        if (empty($row)) ***REMOVED***
+        if (empty($row)) {
             return [];
-    ***REMOVED***
+        }
         $department = $this->formatter->formatDepartment($row);
         return $department;
-***REMOVED***
+    }
 
     /**
      * Insert new department.
@@ -198,7 +198,7 @@ class DepartmentRepository extends AppRepository
      * @return int
      */
     public function insertDepartment(string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): int
-    ***REMOVED***
+    {
         $query = $this->cityTable->newSelect();
         $query->select(['id'])->where(['number' => $postcode]);
         $row = $query->execute()->fetch('assoc');
@@ -212,7 +212,7 @@ class DepartmentRepository extends AppRepository
         $lastInsertedId = $this->departmentTable->insert($data, $userId);
 
         return $lastInsertedId;
-***REMOVED***
+    }
 
     /**
      * Update department.
@@ -226,39 +226,39 @@ class DepartmentRepository extends AppRepository
      * @return bool
      */
     public function updateDepartment(string $departmentId, string $name, string $postcode, string $departmentGroupId, string $departmentTypeId, string $userId): bool
-    ***REMOVED***
+    {
         $row = [
             'modified_at' => date('Y-m-d H:i:s'),
             'modified_by' => $userId,
         ];
 
-        if (!empty($name)) ***REMOVED***
+        if (!empty($name)) {
             $row['name'] = $name;
-    ***REMOVED***
+        }
 
-        if (!empty($postcode)) ***REMOVED***
+        if (!empty($postcode)) {
             $cityId = $this->cityTable->newSelect()->select(['id'])->where(['number' => $postcode]);
             $row['city_id'] = $cityId;
-    ***REMOVED***
+        }
 
-        if (!empty($departmentGroupId)) ***REMOVED***
+        if (!empty($departmentGroupId)) {
             $row['department_group_id'] = $departmentGroupId;
-    ***REMOVED***
+        }
 
-        if (!empty($departmentTypeId)) ***REMOVED***
+        if (!empty($departmentTypeId)) {
             $row['department_type_id'] = $departmentTypeId;
-    ***REMOVED***
+        }
 
         $error = false;
 
-        try ***REMOVED***
+        try {
             $this->departmentTable->modify($row, [ 'id' =>  $departmentId], $userId);
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             $error = true;
-    ***REMOVED***
+        }
 
         return !$error;
-***REMOVED***
+    }
 
     /**
      * Soft archive department.
@@ -268,13 +268,13 @@ class DepartmentRepository extends AppRepository
      * @return bool
      */
     public function deleteDepartment(string $departmentId, string $userId)
-    ***REMOVED***
-        try ***REMOVED***
+    {
+        try {
             $this->departmentTable->archive($userId, ['id'=>$departmentId]);
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             $error = true;
-    ***REMOVED***
+        }
 
         return !$error;
-***REMOVED***
-***REMOVED***
+    }
+}

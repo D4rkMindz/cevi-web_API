@@ -28,12 +28,12 @@ $container = $app->getContainer();
  *
  * @return Environment
  */
-$container['environment'] = function (): Environment ***REMOVED***
+$container['environment'] = function (): Environment {
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
 
     return new Slim\Http\Environment($_SERVER);
-***REMOVED***;
+};
 
 /**
  * Database connection container.
@@ -42,7 +42,7 @@ $container['environment'] = function (): Environment ***REMOVED***
  * @return Connection
  * @throws \Interop\Container\Exception\ContainerException
  */
-$container[Connection::class] = function (Container $container): Connection ***REMOVED***
+$container[Connection::class] = function (Container $container): Connection {
     $config = $container->get('settings')->get('db');
     $driver = new Mysql([
         'host' => $config['host'],
@@ -69,7 +69,7 @@ $container[Connection::class] = function (Container $container): Connection ***R
     $db->connect();
 
     return $db;
-***REMOVED***;
+};
 
 /**
  * Mailer container.
@@ -79,11 +79,11 @@ $container[Connection::class] = function (Container $container): Connection ***R
  * @throws \Interop\Container\Exception\ContainerException
  * @throws Exception
  */
-$container[MailerInterface::class] = function (Container $container) ***REMOVED***
-    try ***REMOVED***
+$container[MailerInterface::class] = function (Container $container) {
+    try {
         $mailSettings = $container->get('settings')->get('mailgun');
         $mail = new MailgunAdapter($mailSettings['apikey'], $mailSettings['domain'], $mailSettings['from']);
-***REMOVED*** catch (Exception $exception) ***REMOVED***
+    } catch (Exception $exception) {
         /**
          * @var Logger $logger
          */
@@ -93,10 +93,10 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
         $context = $container->get('settings')->get('logger')['context'][MailerInterface::class];
         $logger->addDebug($message, [$context]);
         throw new Exception('Mailer instantiation failed');
-***REMOVED***
+    }
 
     return $mail;
-***REMOVED***;
+};
 
 /**
  * Twig container.
@@ -107,14 +107,14 @@ $container[MailerInterface::class] = function (Container $container) ***REMOVED*
  * @return Twig_Environment
  * @throws ContainerException
  */
-$container[Twig_Environment::class] = function (Container $container): Twig_Environment ***REMOVED***
+$container[Twig_Environment::class] = function (Container $container): Twig_Environment {
     $twigSettings = $container->get('settings')->get('twig');
     $loader = new Twig_Loader_Filesystem($twigSettings['viewPath']);
     $twig = new Twig_Environment($loader, ['cache' => $twigSettings['cachePath']]);
     $twig->addExtension(new TwigTranslationExtension());
 
     return $twig;
-***REMOVED***;
+};
 
 /**
  * Translator container.
@@ -122,12 +122,12 @@ $container[Twig_Environment::class] = function (Container $container): Twig_Envi
  * @param Container $container
  * @return Translator
  */
-$container[Translator::class] = function (Container $container): Translator ***REMOVED***
-    try ***REMOVED***
+$container[Translator::class] = function (Container $container): Translator {
+    try {
         $locale = $container->get('jwt')['lang'];
-***REMOVED*** catch (ContainerValueNotFoundException $exception) ***REMOVED***
+    } catch (ContainerValueNotFoundException $exception) {
         $locale = 'de_CH';
-***REMOVED***
+    }
 
     $resourceDe = __DIR__ . "/../../resources/locale/de_CH_messages.mo";
     $resourceEn = __DIR__ . "/../../resources/locale/en_GB_messages.mo";
@@ -140,7 +140,7 @@ $container[Translator::class] = function (Container $container): Translator ***R
     $translator->addResource('mo', $resourceDe, 'de_CH');
     $translator->addResource('mo', $resourceEn, 'en_GB');
     return $translator;
-***REMOVED***;
+};
 
 /**
  * Role Container.
@@ -148,9 +148,9 @@ $container[Translator::class] = function (Container $container): Translator ***R
  * @param Container $container
  * @return Role
  */
-$container[Role::class] = function (Container $container) ***REMOVED***
+$container[Role::class] = function (Container $container) {
     return new Role($container);
-***REMOVED***;
+};
 
 /**
  * Default App logger
@@ -158,11 +158,11 @@ $container[Role::class] = function (Container $container) ***REMOVED***
  * @param Container $container
  * @return Logger
  */
-$container[Monolog\Logger::class] = function (Container $container) ***REMOVED***
+$container[Monolog\Logger::class] = function (Container $container) {
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_app.log', date('y-m-d')));
     $logger = new Logger('app', [$rotatingFileHandler]);
     return $logger;
-***REMOVED***;
+};
 
 /**
  * Access logger
@@ -170,11 +170,11 @@ $container[Monolog\Logger::class] = function (Container $container) ***REMOVED**
  * @param Container $container
  * @return Logger
  */
-$container[Monolog\Logger::class . '_request'] = function (Container $container) ***REMOVED***
+$container[Monolog\Logger::class . '_request'] = function (Container $container) {
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_access.log', date('y-m-d')));
     $logger = new Logger('request', [$rotatingFileHandler]);
     return $logger;
-***REMOVED***;
+};
 
 /**
  * Error Logger.
@@ -182,10 +182,10 @@ $container[Monolog\Logger::class . '_request'] = function (Container $container)
  * @param Container $container
  * @return Logger
  */
-$container[Monolog\Logger::class . '_error'] = function (Container $container) ***REMOVED***
+$container[Monolog\Logger::class . '_error'] = function (Container $container) {
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_error.log', date('y-m-d')));
     return new Logger('error', [$rotatingFileHandler]);
-***REMOVED***;
+};
 
 /**
  * Debug logger
@@ -193,10 +193,10 @@ $container[Monolog\Logger::class . '_error'] = function (Container $container) *
  * @param Container $container
  * @return Logger
  */
-$container[Monolog\Logger::class . '_debug'] = function (Container $container) ***REMOVED***
+$container[Monolog\Logger::class . '_debug'] = function (Container $container) {
     $rotatingFileHandler = new \Monolog\Handler\RotatingFileHandler(sprintf(__DIR__ . '/../../tmp/logs/%s_debug.log', date('y-m-d')));
     return new Logger('debug', [$rotatingFileHandler]);
-***REMOVED***;
+};
 
 /**
  * Not found handler
@@ -204,14 +204,14 @@ $container[Monolog\Logger::class . '_debug'] = function (Container $container) *
  * @param Container $container
  * @return Closure
  */
-$container['notFoundHandler'] = function (Container $container) ***REMOVED***
-    return function (Request $request, Response $response) use ($container) ***REMOVED***
+$container['notFoundHandler'] = function (Container $container) {
+    return function (Request $request, Response $response) use ($container) {
         $errorController = new ErrorController($container);
         $response = $errorController->notFoundAction($request, $response);
         $container->get(Logger::class)->info(sprintf('ROUTE NOT FOUND: %s', $request->getRequestTarget()));
         return $response;
-***REMOVED***;
-***REMOVED***;
+    };
+};
 
 /**
  * Error handler.
@@ -219,31 +219,31 @@ $container['notFoundHandler'] = function (Container $container) ***REMOVED***
  * @param Container $container
  * @return Closure
  */
-$container['errorHandler'] = function (Container $container) ***REMOVED***
-    return function (Request $request, Response $response, Exception $exception) use ($container) ***REMOVED***
+$container['errorHandler'] = function (Container $container) {
+    return function (Request $request, Response $response, Exception $exception) use ($container) {
         /**
          * @var $logger Logger
          */
         $logger = $container->get(Logger::class . '_error');
         $message = sprintf("EXCEPTION: %s\n", $exception->getMessage());
-        foreach ($exception->getTrace() as $row) ***REMOVED***
+        foreach ($exception->getTrace() as $row) {
             $message .= sprintf("\e[Method %s in %s:%s",
                 array_key_exists('function', $row) ? $row['function'] : '',
                 array_key_exists('file', $row) ? $row['file'] : '',
                 array_key_exists('line', $row) ? $row['line'] : '');
-    ***REMOVED***
+        }
         $logger->addError($message);
         $errorController = new ErrorController($container);
         return $errorController->serverErrorAction($request, $response);
-***REMOVED***;
-***REMOVED***;
+    };
+};
 
 // TODO disable this in prod
-if (!$container->get('settings')->get('isProduction')) ***REMOVED***
-    $container['jwt'] = function () ***REMOVED***
+if (!$container->get('settings')->get('isProduction')) {
+    $container['jwt'] = function () {
         return [
             'lang' => 'de_CH',
             'position_id' => 1,
         ];
-***REMOVED***;
-***REMOVED***
+    };
+}

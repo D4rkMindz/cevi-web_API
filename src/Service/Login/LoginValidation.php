@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 use Slim\Container;
 
 class LoginValidation
-***REMOVED***
+{
     /**
      * @var UserRepository
      */
@@ -19,9 +19,9 @@ class LoginValidation
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->userRepository = $container->get(UserRepository::class);
-***REMOVED***
+    }
 
     /**
      * Check if user can login.
@@ -31,13 +31,13 @@ class LoginValidation
      * @return bool
      */
     public function canLogin(string $username, string $password): bool
-    ***REMOVED***
-        if (is_email($username)) ***REMOVED***
+    {
+        if (is_email($username)) {
             $canLogin = $this->userRepository->checkLoginByEmail($username, $password);
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $canLogin = $this->userRepository->checkLoginByUsername($username, $password);
-    ***REMOVED***
+        }
 
         return $canLogin;
-***REMOVED***
-***REMOVED***
+    }
+}

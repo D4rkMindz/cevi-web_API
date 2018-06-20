@@ -1,5 +1,5 @@
-***REMOVED***
-  "require": ***REMOVED***
+{
+  "require": {
     "slim/slim": "^3.9",
     "cakephp/database": "^3.5",
     "mailgun/mailgun-php": "^2.3",
@@ -11,34 +11,34 @@
     "twig/twig": "^2.4",
     "odan/twig-translation": "^1.1",
     "php-http/curl-client": "^1.7"
-  ***REMOVED***,
-  "require-dev": ***REMOVED***
+  },
+  "require-dev": {
     "odan/phinx-migrations-generator": "^2.3",
     "phpunit/phpunit": "^6.4",
     "fzaninotto/faker": "^1.7",
     "phpunit/dbunit": "^3.0"
-  ***REMOVED***,
+  },
   "repositories": [
-    ***REMOVED***
+    {
       "type": "vcs",
       "url": "git@github.com:D4rkMindz/slim-jwt-auth.git"
-***REMOVED***
+    }
   ],
-  "config": ***REMOVED***
+  "config": {
     "preferred-install": "dist"
-  ***REMOVED***,
-  "autoload": ***REMOVED***
-    "psr-4": ***REMOVED***
+  },
+  "autoload": {
+    "psr-4": {
       "App\\": "src"
-***REMOVED***,
+    },
     "files": [
       "lib/util.php",
       "lib/services.php"
     ]
-  ***REMOVED***,
-  "autoload-dev": ***REMOVED***
-    "psr-4": ***REMOVED***
+  },
+  "autoload-dev": {
+    "psr-4": {
       "App\\Test\\": "tests"
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

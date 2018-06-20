@@ -7,7 +7,7 @@ namespace App\Util;
  * Class TranslateService
  */
 class TranslateService
-***REMOVED***
+{
     /**
      * Translate string into german, english, french and italian.
      * @param string $string
@@ -15,10 +15,10 @@ class TranslateService
      * @return array
      */
     public static function trans(string $string, string $lang): array
-    ***REMOVED***
+    {
         $lang = strtolower(substr($lang, 0,2));
         $translated = [];
-        switch ($lang) ***REMOVED***
+        switch ($lang) {
             case 'de':
                 $translated['de'] = $string;
                 $translated['en'] = self::toEnglish($string);
@@ -51,9 +51,9 @@ class TranslateService
                     'it'=> $string,
                 ];
                 break;
-    ***REMOVED***
+        }
         return $translated;
-***REMOVED***
+    }
 
     /**
      * Translate string to german
@@ -61,9 +61,9 @@ class TranslateService
      * @return string
      */
     private static function toGerman(string $string): string
-    ***REMOVED***
+    {
         return $string;
-***REMOVED***
+    }
 
     /**
      * Translate string to english
@@ -71,9 +71,9 @@ class TranslateService
      * @return string
      */
     private static function toEnglish(string $string): string
-    ***REMOVED***
+    {
         return $string;
-***REMOVED***
+    }
 
     /**
      * Translate string to french
@@ -81,9 +81,9 @@ class TranslateService
      * @return string
      */
     private static function toFrench(string $string): string
-    ***REMOVED***
+    {
         return $string;
-***REMOVED***
+    }
 
     /**
      * Translate string to italian
@@ -91,7 +91,7 @@ class TranslateService
      * @return string
      */
     private static function toItalian(string $string): string
-    ***REMOVED***
+    {
         return $string;
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -5,7 +5,7 @@ namespace App\Test;
 use PHPUnit\Framework\TestCase;
 
 abstract class BaseTestCase extends TestCase
-***REMOVED***
+{
     /**
      * Call protected/private method of a class.
      *
@@ -16,11 +16,11 @@ abstract class BaseTestCase extends TestCase
      * @return mixed Method return.
      */
     protected function invokeMethod(&$object, $methodName, array $parameters = array())
-    ***REMOVED***
+    {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -23,7 +23,7 @@ use Exception;
 use Slim\Container;
 
 class ArticleRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var ArticleTitleTable
      */
@@ -90,7 +90,7 @@ class ArticleRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->articleTable = $container->get(ArticleTable::class);
         $this->articleTitleTable = $container->get(ArticleTitleTable::class);
         $this->articleDescrtiptionTable = $container->get(ArticleDescriptionTable::class);
@@ -104,7 +104,7 @@ class ArticleRepository extends AppRepository
         $this->slChestTable = $container->get(SlChestTable::class);
 
         $this->formatter = new Formatter();
-***REMOVED***
+    }
 
     /**
      * Get single article
@@ -114,18 +114,18 @@ class ArticleRepository extends AppRepository
      * @return array
      */
     public function getArticle(string $departmentHash, string $articleHash): array
-    ***REMOVED***
+    {
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery();
         $query->where([$articleTableName . '.department_hash' => $departmentHash, $articleTableName . '.hash' => $articleHash]);
         $row = $query->execute()->fetch('assoc');
-        if (empty($row)) ***REMOVED***
+        if (empty($row)) {
             return [];
-    ***REMOVED***
+        }
 
         $article = $this->formatter->formatArticle($row, $departmentHash);
         return $article;
-***REMOVED***
+    }
 
     /**
      * Get all articles for storage place
@@ -136,7 +136,7 @@ class ArticleRepository extends AppRepository
      * @return array
      */
     public function getArticleForStorageplace(string $storagePlaceHash, string $departmentHash, string $descriptionFormat = 'both'): array
-    ***REMOVED***
+    {
         $articleTableName = $this->articleTable->getTablename();
         $articleTitleTableName = $this->articleTitleTable->getTablename();
         $articleDescriptionTableName = $this->articleDescrtiptionTable->getTablename();
@@ -190,16 +190,16 @@ class ArticleRepository extends AppRepository
         $query = $this->articleTable->newSelect();
         $query->select($fields)->join($join)->where([$this->articleTable->getTablename() . '.storage_place_hash' => $storagePlaceHash]);
         $articles = $query->execute()->fetchAll('assoc');
-        if (empty($articles)) ***REMOVED***
+        if (empty($articles)) {
             return [];
-    ***REMOVED***
+        }
 
-        foreach ($articles as $key => $article) ***REMOVED***
+        foreach ($articles as $key => $article) {
             $articles[$key] = $this->formatter->formatArticle($article, $departmentHash, $descriptionFormat, false);
-    ***REMOVED***
+        }
 
         return $articles;
-***REMOVED***
+    }
 
     /**
      * Get all articles.
@@ -211,7 +211,7 @@ class ArticleRepository extends AppRepository
      * @return array
      */
     public function getAllArticles(string $departmentHash, int $limit, int $page, string $descriptionFormat): array
-    ***REMOVED***
+    {
         $articleTableName = $this->articleTable->getTablename();
         $query = $this->getArticleQuery()
             ->limit($limit)
@@ -222,16 +222,16 @@ class ArticleRepository extends AppRepository
 
         $articles = $query->execute()->fetchAll('assoc');
 
-        if (empty($articles)) ***REMOVED***
+        if (empty($articles)) {
             return [];
-    ***REMOVED***
+        }
 
-        foreach ($articles as $key => $article) ***REMOVED***
+        foreach ($articles as $key => $article) {
             $articles[$key] = $this->formatter->formatArticle($article, $departmentHash, $descriptionFormat);
-    ***REMOVED***
+        }
 
         return $articles;
-***REMOVED***
+    }
 
     /**
      * Check if quantity is possible to use for article. Measured with the full, possible quantity.
@@ -241,13 +241,13 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function hasQuantity(string $articleId, int $quantity): bool
-    ***REMOVED***
+    {
         $query = $this->articleTable->newSelect();
         $query->select('quantity')->where(['id' => $articleId]);
         $quantityAvailable = $query->execute()->fetch('assoc')[0];
         return $quantity <= $quantityAvailable;
 
-***REMOVED***
+    }
 
     /**
      * Inser new article.
@@ -258,7 +258,7 @@ class ArticleRepository extends AppRepository
      * @return string last inserted id (article id)
      */
     public function insertArticle(array $article, string $lang, string $userId): string
-    ***REMOVED***
+    {
         $articleTitleId = $this->insertArticleTitle($article['title'], $lang, $userId);
         $articleDescriptionId = $this->insertArticleDescription($article['description'], $lang, $userId);
         $availableForRent = array_key_exists('available_for_rent', $article) ? $article['available_for_rent'] : false;
@@ -279,7 +279,7 @@ class ArticleRepository extends AppRepository
         $barcode = Barcode::generate($articleHash, $article['storage_place_hash'], $article['department_hash']);
         $this->articleTable->modify(['barcode' => $barcode], ['id' => $articleHash], $userId);
         return $articleHash;
-***REMOVED***
+    }
 
     /**
      * Update article
@@ -290,49 +290,49 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function updateArticle(array $article, string $lang, string $userId): bool
-    ***REMOVED***
+    {
         $row = [
             'modified_at' => date('Y-m-d H:i:s'),
             'modified_by' => $userId,
         ];
-        if (array_key_exists('title', $article)) ***REMOVED***
+        if (array_key_exists('title', $article)) {
             $row['article_title_id'] = $this->insertArticleTitle($article['title'], $lang, $userId);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('description', $article)) ***REMOVED***
+        if (array_key_exists('description', $article)) {
             $row['article_description_id'] = $this->insertArticleDescription($article['description'], $lang, $userId);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('quality_hash', $article)) ***REMOVED***
+        if (array_key_exists('quality_hash', $article)) {
             $row['article_quality_hash'] = $article['quality_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('storage_place_hash', $article)) ***REMOVED***
+        if (array_key_exists('storage_place_hash', $article)) {
             $row['storage_place_hash'] = $article['storage_place_hash'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('purchase_date', $article)) ***REMOVED***
+        if (array_key_exists('purchase_date', $article)) {
             $row['date'] = date('Y-m-d H:i:s', $article['purchase_date']);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('quantity', $article)) ***REMOVED***
+        if (array_key_exists('quantity', $article)) {
             $row['quantity'] = $article['quantity'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('replacement', $article)) ***REMOVED***
+        if (array_key_exists('replacement', $article)) {
             $row['replacement'] = date('Y-m-d H:i:s', $article['replacement']);
-    ***REMOVED***
+        }
 
-        if (array_key_exists('available_for_rent', $article)) ***REMOVED***
+        if (array_key_exists('available_for_rent', $article)) {
             $row['available_for_rent'] = $article['available_for_rent'];
-    ***REMOVED***
+        }
 
-        if (array_key_exists('rent_price', $article)) ***REMOVED***
+        if (array_key_exists('rent_price', $article)) {
             $row['rent_price'] = $article['rent_price'];
-    ***REMOVED***
+        }
 
         return $this->articleTable->modify($row, ['hash' => $article['hash']], $userId);
-***REMOVED***
+    }
 
     /**
      * Delete article
@@ -342,14 +342,14 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function deleteArticle(string $articleHash, string $executorId)
-    ***REMOVED***
-        try ***REMOVED***
+    {
+        try {
             $this->articleTable->archive($executorId, ['hash' => $articleHash]);
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
         return true;
-***REMOVED***
+    }
 
     /**
      * Check if article exists
@@ -359,9 +359,9 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function existsArticle(string $articleId, string $departmentId)
-    ***REMOVED***
+    {
         return $this->exists($this->articleTable, ['hash' => $articleId, 'department_hash' => $departmentId]);
-***REMOVED***
+    }
 
     /**
      * Check if storage place exists
@@ -370,12 +370,12 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function existsStoragePlace(string $storagePlaceHash): bool
-    ***REMOVED***
+    {
         $query = $this->storagePlaceTable->newSelect();
         $query->select(1)->where(['hash' => $storagePlaceHash]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Check if quality exists.
@@ -384,12 +384,12 @@ class ArticleRepository extends AppRepository
      * @return bool
      */
     public function existsQuality(string $qualityHash): bool
-    ***REMOVED***
+    {
         $query = $this->articleQualtityTable->newSelect();
         $query->select(1)->where(['hash' => $qualityHash]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
+    }
 
     /**
      * Get all article qualities.
@@ -397,12 +397,12 @@ class ArticleRepository extends AppRepository
      * @return array
      */
     public function getQualities()
-    ***REMOVED***
+    {
         $query = $this->articleQualtityTable->newSelect();
         $query->select('*');
         $rows = $query->execute()->fetchAll('assoc');
         return $rows ?: [];
-***REMOVED***
+    }
 
     /**
      * Get article Query.
@@ -410,7 +410,7 @@ class ArticleRepository extends AppRepository
      * @return Query
      */
     private function getArticleQuery(): Query
-    ***REMOVED***
+    {
         $articleTableName = $this->articleTable->getTablename();
         $articleTitleTableName = $this->articleTitleTable->getTablename();
         $articleDescriptionTableName = $this->articleDescrtiptionTable->getTablename();
@@ -521,7 +521,7 @@ class ArticleRepository extends AppRepository
         $query = $this->articleTable->newSelect();
         $query->select($fields)->join($join);
         return $query;
-***REMOVED***
+    }
 
     /**
      * Insert article title.
@@ -532,7 +532,7 @@ class ArticleRepository extends AppRepository
      * @return string
      */
     private function insertArticleTitle(string $articleTitle, string $lang, string $userId): int
-    ***REMOVED***
+    {
         $translated = TranslateService::trans($articleTitle, $lang);
         $row = [
             'name_de' => $translated['de'],
@@ -541,7 +541,7 @@ class ArticleRepository extends AppRepository
             'name_it' => $translated['it'],
         ];
         return $this->articleTitleTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Insert article title.
@@ -552,7 +552,7 @@ class ArticleRepository extends AppRepository
      * @return string
      */
     private function insertArticleDescription(string $articleDescription, string $lang, string $userId): int
-    ***REMOVED***
+    {
         $translated = TranslateService::trans($articleDescription, $lang);
         $row = [
             'name_de' => $translated['de'],
@@ -562,7 +562,7 @@ class ArticleRepository extends AppRepository
         ];
 
         return $this->articleDescrtiptionTable->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Get storage place id.
@@ -578,7 +578,7 @@ class ArticleRepository extends AppRepository
      * @return string
      */
     private function getStoragePlaceHash(string $locationId, string $roomHash, string $corridorHash, string $shelfHash, string $trayHash, string $chestHash, string $name, string $userHash)
-    ***REMOVED***
+    {
         $row = [
             'sl_location_hash' => $locationId,
             'sl_room_hash' => $roomHash,
@@ -591,9 +591,9 @@ class ArticleRepository extends AppRepository
         $query->select('hash')->where($row);
         $row = $query->execute()->fetch();
 
-        if (!empty($row)) ***REMOVED***
+        if (!empty($row)) {
             return $row['hash'];
-    ***REMOVED***
+        }
 
         $row['hash'] = uniqid();
         $row['name'] = $name;
@@ -602,5 +602,5 @@ class ArticleRepository extends AppRepository
 
         $this->storagePlaceTable->insert($row, $userHash);
         return $row['hash'];
-***REMOVED***
-***REMOVED***
+    }
+}

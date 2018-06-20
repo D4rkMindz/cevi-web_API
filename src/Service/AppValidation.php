@@ -13,7 +13,7 @@ use Slim\Container;
  * Class AppValidation
  */
 class AppValidation
-***REMOVED***
+{
     /**
      * @var DepartmentRepository
      */
@@ -30,10 +30,10 @@ class AppValidation
      * @throws \Interop\Container\Exception\ContainerException
      */
     protected function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->cityRepository = $container->get(CityRepository::class);
-***REMOVED***
+    }
 
     /**
      * Validate value not empty.
@@ -43,13 +43,13 @@ class AppValidation
      * @param ValidationContext $validationContext
      */
     protected function validateNotEmpty($value, string $elementName, ValidationContext $validationContext)
-    ***REMOVED***
-        if (empty($value)) ***REMOVED***
+    {
+        if (empty($value)) {
             $validationContext->setError($elementName, __('Required'));
             return true;
-    ***REMOVED***
+        }
         return false;
-***REMOVED***
+    }
 
     /**
      * Validate length of text.
@@ -61,20 +61,20 @@ class AppValidation
      * @param int $max
      */
     protected function validateLength(string $text, string $elementName, ValidationContext $validationContext, int $min = 3, int $max = 255)
-    ***REMOVED***
+    {
         $fails = $this->validateNotEmpty($text, $elementName, $validationContext);
-        if ($fails) ***REMOVED***
+        if ($fails) {
             return;
-    ***REMOVED***
+        }
         $length = strlen(trim($text));
-        if ($length < $min) ***REMOVED***
+        if ($length < $min) {
             $validationContext->setError($elementName, __('too short'));
-    ***REMOVED***
+        }
 
-        if ($length > $max) ***REMOVED***
+        if ($length > $max) {
             $validationContext->setError($elementName, __('too long'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate email.
@@ -83,12 +83,12 @@ class AppValidation
      * @param ValidationContext $validationContext
      */
     protected function validateEmail(string $email, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         $this->validateLength($email, 'email', $validationContext);
-        if (!is_email($email)) ***REMOVED***
+        if (!is_email($email)) {
             $validationContext->setError('email', _('Not a valid email address'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate postcode.
@@ -97,16 +97,16 @@ class AppValidation
      * @param ValidationContext $validationContext
      */
     protected function validatePostcode(string $postcode, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->cityRepository->existsPostcode($postcode)) ***REMOVED***
+    {
+        if (!$this->cityRepository->existsPostcode($postcode)) {
             $validationContext->setError('postcode', _('Does not exist'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     protected function validateDate($time, string $elementName, ValidationContext $validationContext, bool $acceptPassed = false)
-    ***REMOVED***
-        if (!$acceptPassed && $time < time()) ***REMOVED***
+    {
+        if (!$acceptPassed && $time < time()) {
             $validationContext->setError($elementName, __('Date already passed'));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

@@ -6,7 +6,7 @@ namespace App\Factory;
  * Class JsonResponseFactory
  */
 class JsonResponseFactory
-***REMOVED***
+{
     /**
      * Create default JSON response body.
      *
@@ -18,13 +18,13 @@ class JsonResponseFactory
      * @return array
      */
     public static function success(array $body, int $status = 200, string $message = 'success'): array
-    ***REMOVED***
+    {
         $responseData = [
             'code' => $status,
             'message' => $message,
         ];
         return array_replace_recursive($responseData, $body);
-***REMOVED***
+    }
 
     /**
      * Create default error resonse
@@ -35,15 +35,15 @@ class JsonResponseFactory
      * @return array
      */
     public static function  error(array $body = null, int $status = 403, string $message = 'Forbidden')
-    ***REMOVED***
+    {
         $responseData = [
             'code' => $status,
             'message' => $message,
         ];
-        if ($body !== null) ***REMOVED***
+        if ($body !== null) {
             $responseData['info'] = $body;
-    ***REMOVED***
+        }
 
         return $responseData;
-***REMOVED***
-***REMOVED***
+    }
+}

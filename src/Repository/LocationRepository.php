@@ -10,7 +10,7 @@ use App\Table\TableInterface;
 use Slim\Container;
 
 class LocationRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var Formatter
      */
@@ -27,10 +27,10 @@ class LocationRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->formatter = new Formatter();
         $this->storagePlaceTable = $container->get(StoragePlaceTable::class);
-***REMOVED***
+    }
 
     /**
      * Get all storages.
@@ -42,7 +42,7 @@ class LocationRepository extends AppRepository
      * @return array
      */
     public function getAllStorages(TableInterface $table, string $departmentId, int $limit, int $page): array
-    ***REMOVED***
+    {
         $slLocationTablename = $table->getTablename();
         $storagePlaceTablename = $this->storagePlaceTable->getTablename();
         $fields = [
@@ -68,12 +68,12 @@ class LocationRepository extends AppRepository
             ->page($page)
             ->where([$storagePlaceTablename . '.department_hash' => $departmentId]);
         $locations = $query->execute()->fetchAll('assoc');
-        if (empty($locations)) ***REMOVED***
+        if (empty($locations)) {
             return [];
-    ***REMOVED***
+        }
 
         return $locations;
-***REMOVED***
+    }
 
     /**
      * CreateStorage
@@ -84,12 +84,12 @@ class LocationRepository extends AppRepository
      * @return string
      */
     public function createStorage(TableInterface $table, string $name, string $userId): string
-    ***REMOVED***
+    {
         $row = [
             'name' => $name,
         ];
         return $table->insert($row, $userId);
-***REMOVED***
+    }
 
     /**
      * Update storage
@@ -101,9 +101,9 @@ class LocationRepository extends AppRepository
      * @return bool|\Cake\Database\StatementInterface
      */
     public function updateStorage(TableInterface $table, string $id, string $name, string $userId)
-    ***REMOVED***
+    {
         return $table->modify(['name' => (string)$name], ['id' => $id], $userId);
-***REMOVED***
+    }
 
     /**
      * Delete storage.
@@ -114,7 +114,7 @@ class LocationRepository extends AppRepository
      * @return bool
      */
     public function deleteStorage(TableInterface $table, string $id, string $userId)
-    ***REMOVED***
+    {
         return $table->archive($userId, ['id'=>$id]);
-***REMOVED***
-***REMOVED***
+    }
+}

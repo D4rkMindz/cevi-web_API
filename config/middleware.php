@@ -13,29 +13,29 @@ use Symfony\Component\Translation\Translator;
 $container = $app->getContainer();
 
 //
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+$app->add(function (Request $request, Response $response, $next) use ($container) {
     $locale = $request->getAttribute('lang');
 
     $translator = $container->get(Translator::class);
     $translator->setLocale($locale);
     return $next($request, $response);
-***REMOVED***);
+});
 
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+$app->add(function (Request $request, Response $response, $next) use ($container) {
     $whitelist = $container->get('settings')->get('language_whitelist');
 
     $language = $request->getParam('lang');
     $language = !empty($language) ? $language : $request->getHeader('X-App-Language');
-    if (!empty($language) && is_array($language)) ***REMOVED***
+    if (!empty($language) && is_array($language)) {
         $language = $language[0];
-***REMOVED***
+    }
 
-    if (empty($language)) ***REMOVED***
+    if (empty($language)) {
         // Browser language
         $language = array_key_exists(0, $request->getHeader('accept-language')) ? $request->getHeader('accept-language')[0] : 'de-CH,';
         $language = explode(',', $language)[0];
         $language = explode('-', $language)[0];
-***REMOVED***
+    }
 
     $language = !empty($language) ? $language : 'de';
 
@@ -48,24 +48,24 @@ $app->add(function (Request $request, Response $response, $next) use ($container
 
     $language = $whitelist[$language];
 
-    if (empty($language)) ***REMOVED***
+    if (empty($language)) {
         $language = 'de';
         //throw new \Slim\Exception\NotFoundException($request, $response);
-***REMOVED***
+    }
 
     $request = $request->withAttribute('lang', $language);
 
     return $next($request, $response);
-***REMOVED***);
+});
 
 $jwt = $container->get('settings')->get('jwt');
-if ($jwt['active']) ***REMOVED***
+if ($jwt['active']) {
     $secret = $container->get('settings')->get('jwt')['secret'];
     $app->add(new JwtAuthentication([
         'secret' => $secret,
         'header' => 'X-Token',
         'message' => __('Authentication failed'),
-        'callback' => function (Request $request, Response $response, array $arguments) use ($container) ***REMOVED***
+        'callback' => function (Request $request, Response $response, array $arguments) use ($container) {
             $container['jwt_decoded'] = $decoded = (array)$arguments['decoded'];
             $method = $request->getMethod();
             $path = $request->getRequestTarget();
@@ -73,16 +73,16 @@ if ($jwt['active']) ***REMOVED***
             $container->get(\Monolog\Logger::class)->info(sprintf('[%s] %s checking permission ...', $method, $path));
             $permission = new Permissions();
             $userId = $decoded['data']->user_id;
-            $level = $permission->***REMOVED***strtolower($method)***REMOVED***;
+            $level = $permission->{strtolower($method)};
             // return true if the user has the correct permission
             return $container->get(Role::class)->hasPermission($level, $userId, $path, $method);
-    ***REMOVED***,
-        'error' => function (Request $request, Response $response, $message) use ($container) ***REMOVED***
+        },
+        'error' => function (Request $request, Response $response, $message) use ($container) {
             $userId = '[User ID not known]';
-            if ($container->has('jwt_decoded')) ***REMOVED***
+            if ($container->has('jwt_decoded')) {
                 $decoded = $container['jwt_decoded'];
                 $userId = $decoded['data']->user_id;
-        ***REMOVED***
+            }
             /** @var \Monolog\Logger $logger */
             $logger = $container->get(\Monolog\Logger::class);
 
@@ -96,15 +96,15 @@ if ($jwt['active']) ***REMOVED***
             $logger->error($error);
             $errorMessage = JsonResponseFactory::error(['message' => $message['message']]);
             return $response->withStatus(403)->withJson($errorMessage);
-    ***REMOVED***,
+        },
         'rules' => [new PassthroughRule($container)],
     ]));
-***REMOVED***
+}
 
 /**
  * Logging middleware
  */
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+$app->add(function (Request $request, Response $response, $next) use ($container) {
     /**
      * @var \Monolog\Logger $logger
      */
@@ -136,31 +136,31 @@ $app->add(function (Request $request, Response $response, $next) use ($container
         $xToken
     ));
     return $response;
-***REMOVED***);
+});
 
 /**
  * Options middleware
  */
-$app->add(function (Request $request, Response $response, $next) ***REMOVED***
+$app->add(function (Request $request, Response $response, $next) {
     $method = $request->getMethod();
-    if (strtoupper($method) == 'OPTIONS') ***REMOVED***
+    if (strtoupper($method) == 'OPTIONS') {
         return $response->withStatus(200);
-***REMOVED***
+    }
 
     return $next($request, $response);
-***REMOVED***);
+});
 
 /**
  * For CORS
  */
-$app->add(function (Request $request, Response $response, $next) use ($container) ***REMOVED***
+$app->add(function (Request $request, Response $response, $next) use ($container) {
     /** @var Response $response */
     $response = $next($request, $response);
     $corsEnabled = $container->get('settings')->get('enableCORS');
-    if ($corsEnabled) ***REMOVED***
+    if ($corsEnabled) {
         $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:4200')
             ->withHeader('Access-Control-Allow-Headers', 'X-App-Language, X-Token, Content-Type')
             ->withHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-***REMOVED***
+    }
     return $response;
-***REMOVED***);
+});

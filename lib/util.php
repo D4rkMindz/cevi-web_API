@@ -10,20 +10,20 @@ use Symfony\Component\Translation\Translator;
  * @return App
  */
 function app(App $inst = null): App
-***REMOVED***
+{
     static $app = null;
 
-    if ($inst instanceof App) ***REMOVED***
+    if ($inst instanceof App) {
         $app = $inst;
-***REMOVED***
+    }
 
-    if ($app === null) ***REMOVED***
+    if ($app === null) {
         $config = ['settings' => require __DIR__ . '/../config/config.php'];
         $app = new App($config);
-***REMOVED***
+    }
 
     return $app;
-***REMOVED***
+}
 
 /**
  * Route function.
@@ -32,9 +32,9 @@ function app(App $inst = null): App
  * @return string
  */
 function route($callback): string
-***REMOVED***
+{
     return implode(':', (array)$callback);
-***REMOVED***
+}
 
 /**
  * Translation function (i18n).
@@ -42,20 +42,20 @@ function route($callback): string
  * @param mixed $message
  * @return string
  */
-function __($message): string ***REMOVED***
+function __($message): string {
     static $translator = null;
     /* @var $translator Translator */
-    if ($message instanceof Translator) ***REMOVED***
+    if ($message instanceof Translator) {
         $translator = $message;
         return '';
-***REMOVED***
+    }
     $translated = $translator->trans($message);
     $context = array_slice(func_get_args(), 1);
-    if (!empty($context)) ***REMOVED***
+    if (!empty($context)) {
         $translated = vsprintf($translated, $context);
-***REMOVED***
+    }
     return $translated;
-***REMOVED***;
+};
 
 /**
  * Get Container.
@@ -63,6 +63,6 @@ function __($message): string ***REMOVED***
  * @return \Psr\Container\ContainerInterface
  */
 function container()
-***REMOVED***
+{
     return app()->getContainer();
-***REMOVED***
+}

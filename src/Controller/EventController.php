@@ -13,7 +13,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class EventController extends AppController
-***REMOVED***
+{
     /**
      * @var DepartmentRepository
      */
@@ -35,12 +35,12 @@ class EventController extends AppController
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->eventRepository = $container->get(EventRepository::class);
         $this->departmentRepository = $container->get(DepartmentRepository::class);
         $this->eventValidation = $container->get(EventValidation::class);
-***REMOVED***
+    }
 
     /**
      * Get all events of a department including private and passed events.
@@ -59,7 +59,7 @@ class EventController extends AppController
      * @return Response
      */
     public function getAllEventsAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
 
         $json = (string)$request->getBody();
@@ -70,17 +70,17 @@ class EventController extends AppController
         $descriptionFormat = isset($data['description_format']) ? $data['description_format'] : 'both';
 
         $department = $args['department_hash'];
-        if (!$this->departmentRepository->existsDepartment($department)) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($department)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         // Set description format to plain or parsed if it is exactly like this. If not set it to both
         $params['description_format'] = $descriptionFormat === 'plain' || $descriptionFormat === 'parsed' ? $descriptionFormat : 'both';
 
         $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, '', $department, $since, $params['description_format'], false);
-        if (empty($events)) ***REMOVED***
+        if (empty($events)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('No events found')]);
-    ***REMOVED***
+        }
 
         $responseData = [
             'limit' => $params['limit'],
@@ -91,7 +91,7 @@ class EventController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Create event action.
@@ -113,19 +113,19 @@ class EventController extends AppController
      * @return Response
      */
     public function createEventAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
         $departmentId = $args['department_hash'];
-        if (!$this->departmentRepository->existsDepartment($departmentId))***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($departmentId)){
             return $this->error($response, __('Not found'), ['message'=> __('Department not found')]);
-    ***REMOVED***
+        }
 
         $validationContext = $this->eventValidation->validateCreate($data);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $eventId = $this->eventRepository->createEvent($data, $this->jwt['lang'], $this->jwt['user_id']);
 
@@ -136,7 +136,7 @@ class EventController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Get single event
@@ -155,7 +155,7 @@ class EventController extends AppController
      * @return Response
      */
     public function getEventAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $params = $this->getLimitationParams($request);
 
         $json = (string)$request->getBody();
@@ -166,29 +166,29 @@ class EventController extends AppController
         $descriptionFormat = isset($data['description_format']) ? $data['description_format'] : 'both';
 
         $department = (string)$args['department_hash'];
-        if (!$this->departmentRepository->existsDepartment($department)) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($department)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $event = (string)$args['event_id'];
-        if (!$this->eventRepository->existsEvent($event, $department)) ***REMOVED***
+        if (!$this->eventRepository->existsEvent($event, $department)) {
             return $this->error($response, __('Not Found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         // Set description format to plain or parsed if it is exactly like this. If not set it to both
         $params['description_format'] = $descriptionFormat === 'plain' || $descriptionFormat === 'parsed' ? $descriptionFormat : 'both';
 
         $event = $this->eventRepository->getEvent($params['event_id'],$params['limit'], $params['page'], $until, '', $department, $since, $params['description_format'], false);
-        if (empty($event)) ***REMOVED***
+        if (empty($event)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('No events found')]);
-    ***REMOVED***
+        }
 
         $responseData = [
             'event' => $event,
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Update event.
@@ -210,34 +210,34 @@ class EventController extends AppController
      * @return Response
      */
     public function updateEventAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
         $data['event_id'] = (string)$args['event_id'];
         $data['department_hash'] = (string)$args['department_hash'];
 
-        if (!$this->eventRepository->existsEvent($data['eventId'], $data['department_hash'])) ***REMOVED***
+        if (!$this->eventRepository->existsEvent($data['eventId'], $data['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Event not found')]);
-    ***REMOVED***
+        }
 
-        if (!$this->departmentRepository->existsDepartment($data['department_hash'])) ***REMOVED***
+        if (!$this->departmentRepository->existsDepartment($data['department_hash'])) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Department not found')]);
-    ***REMOVED***
+        }
 
         $validationContext = $this->eventValidation->validateUpdate($data);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $updated = $this->eventRepository->updateEvent($data, $data['event_id'], $this->jwt['lang'], $this->jwt['user_id']);
 
-        if (!$updated) ***REMOVED***
+        if (!$updated) {
             return $this->error($response, __('Server Error'), 500, ['message'=>__('Updating event failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message'=> __('Updated event successfully')]);
-***REMOVED***
+    }
 
     /**
      * Delete event.
@@ -250,13 +250,13 @@ class EventController extends AppController
      * @return Response
      */
     public function deleteEventAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $eventId = (string)$args['event_id'];
         $departmentId =(string)$args['department_hash'];
         $eventExists = $this->eventRepository->existsEvent($eventId, $departmentId);
-        if (!$eventExists || !$this->eventRepository->deleteEvent($eventId, $this->jwt['user_id'])) ***REMOVED***
+        if (!$eventExists || !$this->eventRepository->deleteEvent($eventId, $this->jwt['user_id'])) {
             $this->error($response, 'Not Found', 404, ['message' => __('Deleting event failed')]);
-    ***REMOVED***
+        }
         return $this->json($response, ['message' => __('Deleted event successfully')]);
-***REMOVED***
-***REMOVED***
+    }
+}

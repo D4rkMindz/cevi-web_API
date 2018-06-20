@@ -16,7 +16,7 @@ use Slim\Container;
  * Class ParticipationValidation
  */
 class ParticipationValidation extends AppValidation
-***REMOVED***
+{
     /**
      * @var EventRepository
      */
@@ -38,12 +38,12 @@ class ParticipationValidation extends AppValidation
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->eventRepository = $container->get(EventRepository::class);
         $this->userRepository = $container->get(UserRepository::class);
         $this->participationRepository = $container->get(ParticipationRepository::class);
-***REMOVED***
+    }
 
     /**
      * Validate creation of a participation.
@@ -55,7 +55,7 @@ class ParticipationValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateAll(string $eventId, string $departmentId, string $userId, string $statusId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
 
         $this->validateEvent($eventId, $departmentId, $validationContext);
@@ -63,7 +63,7 @@ class ParticipationValidation extends AppValidation
         $this->validateStatus($statusId, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate get all.
@@ -73,13 +73,13 @@ class ParticipationValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateGetAll(string $eventId, string $departmentId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
 
         $this->validateEvent($eventId, $departmentId, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * @param string $eventId
@@ -88,14 +88,14 @@ class ParticipationValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateEventAndUser(string $eventId, string $departmentId, string $userId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
 
         $this->validateEvent($eventId, $departmentId, $validationContext);
         $this->validateUser($userId, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate event.
@@ -105,11 +105,11 @@ class ParticipationValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateEvent(string $eventId, string $departmentId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->eventRepository->existsEvent($eventId, $departmentId)) ***REMOVED***
+    {
+        if (!$this->eventRepository->existsEvent($eventId, $departmentId)) {
             $validationContext->setError('event_id', __('Event does not exist'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate user.
@@ -118,11 +118,11 @@ class ParticipationValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateUser(string $userId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->userRepository->existsUser($userId)) ***REMOVED***
+    {
+        if (!$this->userRepository->existsUser($userId)) {
             $validationContext->setError('user_id', __('User does not exist'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Validate status
@@ -131,9 +131,9 @@ class ParticipationValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function validateStatus(string $statusId, ValidationContext $validationContext)
-    ***REMOVED***
-        if (!$this->participationRepository->existsStatus($statusId)) ***REMOVED***
+    {
+        if (!$this->participationRepository->existsStatus($statusId)) {
             $validationContext->setError('status_id', __('Status does not exist'));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

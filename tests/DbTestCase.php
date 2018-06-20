@@ -18,7 +18,7 @@ use Slim\Http\Response;
  * Class DbTestCase
  */
 abstract class DbTestCase extends ApiTestCase
-***REMOVED***
+{
     protected $articleHash;
     protected $departmentHash;
     protected $departmentGroupHash;
@@ -67,7 +67,7 @@ abstract class DbTestCase extends ApiTestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function setUp()
-    ***REMOVED***
+    {
         parent::setUp();
         $this->container = $this->app->getContainer();
         $config = $this->container->get('settings')->get('db');
@@ -80,21 +80,21 @@ abstract class DbTestCase extends ApiTestCase
 
         $shouldMigrate = true;
 
-        if ($stmt->fetch()) ***REMOVED***
+        if ($stmt->fetch()) {
             $shouldMigrate = $this->hasPendingMigrations($pdo);
-    ***REMOVED***
+        }
 
-        if ($shouldMigrate) ***REMOVED***
+        if ($shouldMigrate) {
             chdir(__DIR__ . '/../config');
             $wrap = new TextWrapper(new PhinxApplication());
             // Execute the command and determine if it was successful.
             $target = null;
             call_user_func([$wrap, 'getMigrate'], 'local', $target);
             $error = $wrap->getExitCode() > 0;
-            if ($error) ***REMOVED***
+            if ($error) {
                 throw new Exception('Error: Setup database failed with exit code: %s', $wrap->getExitCode());
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         $this->truncateTables();
         $dumpPath = __DIR__ . '/../resources/dumps/';
@@ -105,7 +105,7 @@ abstract class DbTestCase extends ApiTestCase
 
         $dataSet = $this->getDataSet();
         // Regenerate schema by setting DBUNIT_REGENERATE_NOW
-        if ($shouldMigrate || !empty(getenv('DBUNIT_REGENERATE_NOW')) || !file_exists($dump)) ***REMOVED***
+        if ($shouldMigrate || !empty(getenv('DBUNIT_REGENERATE_NOW')) || !file_exists($dump)) {
             putenv('DBUNIT_REGENERATE_NOW');
 
             $startInsert = microtime(true);
@@ -115,33 +115,33 @@ abstract class DbTestCase extends ApiTestCase
 
             $startDump = microtime(true);
             $mysqldumpExecutable = $config['mysqldump_executable'];
-            if (empty($mysqldumpExecutable)) ***REMOVED***
+            if (empty($mysqldumpExecutable)) {
                 throw new Exception('Mysqldump Executable must be defined in the db_test.mysqldump_executable in the configuration (env.php)');
-        ***REMOVED***
-            if (file_exists($dump)) ***REMOVED***
+            }
+            if (file_exists($dump)) {
                 rename($dump, $dumpPath . date('Y-m-d_h-i-s') . '_backup.sql');
-        ***REMOVED***
-            $command = "***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***";
-            if (empty($password)) ***REMOVED***
-                $command = "***REMOVED***$mysqldumpExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** ***REMOVED***$tableSchema***REMOVED*** > ***REMOVED***$dump***REMOVED***";
-        ***REMOVED***
+            }
+            $command = "{$mysqldumpExecutable} -u {$user} -p{$password} {$tableSchema} > {$dump}";
+            if (empty($password)) {
+                $command = "{$mysqldumpExecutable} -u {$user} {$tableSchema} > {$dump}";
+            }
             exec($command);
             $endDump = microtime(true);
             $timeUsedDumping = $endDump - $startDump;
-    ***REMOVED***
+        }
         $mysqlExecutable = $config['mysql_executable'];
-        if (empty($mysqlExecutable)) ***REMOVED***
+        if (empty($mysqlExecutable)) {
             throw new Exception('Mysql Executable must be defined in the db_test.mysql_executable in the configuration (env.php)');
-    ***REMOVED***
+        }
         $startImport = microtime(true);
-        $migrateCommand = "***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** -p***REMOVED***$password***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$dump***REMOVED***";
-        if (empty($password)) ***REMOVED***
-            $migrateCommand = "***REMOVED***$mysqlExecutable***REMOVED*** -u ***REMOVED***$user***REMOVED*** ***REMOVED***$tableSchema***REMOVED***< ***REMOVED***$dump***REMOVED***";
-    ***REMOVED***
+        $migrateCommand = "{$mysqlExecutable} -u {$user} -p{$password} {$tableSchema}< {$dump}";
+        if (empty($password)) {
+            $migrateCommand = "{$mysqlExecutable} -u {$user} {$tableSchema}< {$dump}";
+        }
         exec($migrateCommand);
         $endImport = microtime(true);
         $timeUsedImporting = $endImport - $startImport;
-***REMOVED***
+    }
 
     /**
      * Get Connection.
@@ -151,13 +151,13 @@ abstract class DbTestCase extends ApiTestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function getConnection(): DefaultConnection
-    ***REMOVED***
-        if ($this->conn === null) ***REMOVED***
+    {
+        if ($this->conn === null) {
             $this->conn = new DefaultConnection($this->getPdo());
-    ***REMOVED***
+        }
 
         return $this->conn;
-***REMOVED***
+    }
 
     /**
      * Generate Update row.
@@ -166,19 +166,19 @@ abstract class DbTestCase extends ApiTestCase
      * @return array
      */
     public function generateUpdateRow(array $row): array
-    ***REMOVED***
-        foreach ($row as $key => $value) ***REMOVED***
-            if (preg_match('/\w*(id)\w*/', $key)) ***REMOVED***
+    {
+        foreach ($row as $key => $value) {
+            if (preg_match('/\w*(id)\w*/', $key)) {
                 continue;
-        ***REMOVED***
+            }
             $converted = preg_replace('/[ÄÖÜäöüÉÈÀéèà]/', "", $row[$key]);
             $parts = str_split(html_entity_decode($converted));
             sort($parts);
             $row[$key] = implode($parts);
-    ***REMOVED***
+        }
 
         return $row;
-***REMOVED***
+    }
 
     /**
      * Hook to get all data
@@ -193,32 +193,32 @@ abstract class DbTestCase extends ApiTestCase
      * @return IDataSet
      */
     protected function getDataSet(): IDataSet
-    ***REMOVED***
+    {
         $testDatabase = new TestDatabase();
         $startGenerate = microtime(true);
         $json = '';
-        if (file_exists(__DIR__ . '/dataset.json')) ***REMOVED***
+        if (file_exists(__DIR__ . '/dataset.json')) {
             $json = file_get_contents(__DIR__ . '/dataset.json');
-    ***REMOVED***
+        }
 
-        if (empty($json)) ***REMOVED***
+        if (empty($json)) {
             $data = $testDatabase->all();
             $this->fillHashes($data);
             $this->getDataHook($data);
             $json = json_encode($data);
             file_put_contents(__DIR__ . '/dataset.json', $json);
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $dataJson = json_decode($json, true);
             $this->fillHashes($dataJson);
             $this->getDataHook($dataJson);
             $endGenerate = microtime(true);
             $timeUsedGenerating = $endGenerate - $startGenerate;
             return new ArrayDataSet($dataJson);
-    ***REMOVED***
+        }
         $endGenerate = microtime(true);
         $timeUsedGenerating = $endGenerate - $startGenerate;
         return new ArrayDataSet($data);
-***REMOVED***
+    }
 
     /**
      * Get PDO object.
@@ -228,18 +228,18 @@ abstract class DbTestCase extends ApiTestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function getPdo(): PDO
-    ***REMOVED***
-        if (!self::$pdo) ***REMOVED***
+    {
+        if (!self::$pdo) {
             /**
              * @var $connection Connection
              */
             $connection = $this->app->getContainer()->get(Connection::class);
             $pdo = $connection->getDriver()->getConnection();
             self::$pdo = $pdo;
-    ***REMOVED***
+        }
 
         return self::$pdo;
-***REMOVED***
+    }
 
     /**
      * Truncate all Tables.
@@ -248,16 +248,16 @@ abstract class DbTestCase extends ApiTestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function truncateTables()
-    ***REMOVED***
+    {
         $pdo = $this->getPdo();
         $stmt = $pdo->query('SHOW TABLES');
-        while ($row = $stmt->fetch()) ***REMOVED***
+        while ($row = $stmt->fetch()) {
             $table = array_values($row)[0];
-            if ($table !== 'phinxlog') ***REMOVED***
+            if ($table !== 'phinxlog') {
                 $pdo->prepare(sprintf('TRUNCATE TABLE `%s`', $table))->execute();
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+            }
+        }
+    }
 
     /**
      * Assert that response has keys.
@@ -266,22 +266,22 @@ abstract class DbTestCase extends ApiTestCase
      * @param array $keys
      */
     protected function assertResponseHasKeys(array $keys, Response $response)
-    ***REMOVED***
+    {
         $json = $response->getBody()->__toString();
         $this->assertJson($json);
         $data = json_decode($json, true);
-        foreach ($keys as $key) ***REMOVED***
+        foreach ($keys as $key) {
             $requiredKeys = $subKeys = explode('.', $key);
             array_pop($subKeys);
             $array = $data;
 
-            foreach ($subKeys as $subKey) ***REMOVED***
+            foreach ($subKeys as $subKey) {
                 $array = $array[$subKey];
-        ***REMOVED***
+            }
             $element = end($requiredKeys);
-            $this->assertArrayHasKey($element, $array, "Assertion for ***REMOVED***$key***REMOVED*** failed");
-    ***REMOVED***
-***REMOVED***
+            $this->assertArrayHasKey($element, $array, "Assertion for {$key} failed");
+        }
+    }
 
     /**
      * Assert that response has a message
@@ -290,12 +290,12 @@ abstract class DbTestCase extends ApiTestCase
      * @param Response $response
      */
     protected function assertResponseHasMessage($expected, Response $response)
-    ***REMOVED***
+    {
         $json = $response->getBody()->__toString();
         $data = json_decode($json, true);
         $this->assertArrayHasKey('message', $data, 'Response didn\'t have a message key');
         $this->assertSame($expected, $data['message'], 'Response didn\'t have the correct message');
-***REMOVED***
+    }
 
     /**
      * Make default assertions for POST/PUT Requests
@@ -307,7 +307,7 @@ abstract class DbTestCase extends ApiTestCase
      * @param $notExpectedDatabaseState
      */
     protected function assertDefaultValues(Response $response, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
-    ***REMOVED***
+    {
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
         $this->assertResponseHasMessage($expectedResponseData['message'], $response);
         $json = $response->getBody()->__toString();
@@ -317,25 +317,25 @@ abstract class DbTestCase extends ApiTestCase
 
         if (array_key_exists('info', $expectedResponseData)
             && is_array($expectedResponseData['info'])
-            && array_key_exists('errors', (array)$expectedResponseData['info'])) ***REMOVED***
-            usort($expectedResponseData['info']['errors'], function ($a, $b) ***REMOVED***
+            && array_key_exists('errors', (array)$expectedResponseData['info'])) {
+            usort($expectedResponseData['info']['errors'], function ($a, $b) {
                 return $a['field'] <=> $b['field'];
-        ***REMOVED***);
-            usort($responseData['info']['errors'], function ($a, $b) ***REMOVED***
+            });
+            usort($responseData['info']['errors'], function ($a, $b) {
                 return $a['field'] <=> $b['field'];
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
 
         $this->assertEquals($expectedResponseData, $responseData);
 
-        if ($expectedDatabaseState) ***REMOVED***
+        if ($expectedDatabaseState) {
             $this->assertDataInDatabase($expectedDatabaseState);
-    ***REMOVED***
+        }
 
-        if ($notExpectedDatabaseState) ***REMOVED***
+        if ($notExpectedDatabaseState) {
             $this->assertDataNotInDatabase($notExpectedDatabaseState);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /***
      * Assert that data is in database.
@@ -343,23 +343,23 @@ abstract class DbTestCase extends ApiTestCase
      * @param array $data
      */
     protected function assertDataInDatabase($data = ['table' => ['attribute' => 'value']])
-    ***REMOVED***
+    {
         $pdo = $this->getPdo();
-        foreach ($data as $table => $values) ***REMOVED***
-            $query = "SELECT 1 FROM ***REMOVED***$table***REMOVED*** WHERE ";
-            foreach ($values as $attribute => $value) ***REMOVED***
-                if (is_null($value) || $value === '') ***REMOVED***
-                    $query .= "***REMOVED***$attribute***REMOVED*** IS NULL \nAND ";
+        foreach ($data as $table => $values) {
+            $query = "SELECT 1 FROM {$table} WHERE ";
+            foreach ($values as $attribute => $value) {
+                if (is_null($value) || $value === '') {
+                    $query .= "{$attribute} IS NULL \nAND ";
                     continue;
-            ***REMOVED***
-                $query .= "***REMOVED***$attribute***REMOVED*** = '***REMOVED***$value***REMOVED***' AND ";
-        ***REMOVED***
+                }
+                $query .= "{$attribute} = '{$value}' AND ";
+            }
             $query = substr($query, 0, -4);
             $stmt = $pdo->query($query);
             $row = $stmt->fetch();
             $this->assertNotEmpty($row, 'Assertion, that values would be in database was wrong');
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Assert that data is not in database.
@@ -367,19 +367,19 @@ abstract class DbTestCase extends ApiTestCase
      * @param array $data
      */
     protected function assertDataNotInDatabase($data = ['table' => ['attribute' => 'value']])
-    ***REMOVED***
+    {
         $pdo = $this->getPdo();
-        foreach ($data as $table => $values) ***REMOVED***
-            $query = "SELECT 1 FROM ***REMOVED***$table***REMOVED*** WHERE ";
-            foreach ($values as $attribute => $value) ***REMOVED***
-                $query .= "***REMOVED***$attribute***REMOVED*** = '***REMOVED***$value***REMOVED***' && ";
-        ***REMOVED***
+        foreach ($data as $table => $values) {
+            $query = "SELECT 1 FROM {$table} WHERE ";
+            foreach ($values as $attribute => $value) {
+                $query .= "{$attribute} = '{$value}' && ";
+            }
             $query = substr($query, 0, -4);
             $stmt = $pdo->query($query);
             $row = $stmt->fetch();
             $this->assertEmpty($row, 'Assertion, that values would not be in database was wrong');
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Replace all required placeholders in array
@@ -388,47 +388,47 @@ abstract class DbTestCase extends ApiTestCase
      * @return null|string|string[]
      */
     protected function arrayReplaceHashes($array)
-    ***REMOVED***
-        $array = preg_replace_array('/***REMOVED***article_hash***REMOVED***/', $this->articleHash, $array);
-        $array = preg_replace_array('/***REMOVED***department_hash***REMOVED***/', $this->departmentHash, $array);
-        $array = preg_replace_array('/***REMOVED***department_group_hash***REMOVED***/', $this->departmentGroupHash, $array);
-        $array = preg_replace_array('/***REMOVED***department_region_hash***REMOVED***/', $this->departmentRegionHash, $array);
-        $array = preg_replace_array('/***REMOVED***department_type_hash***REMOVED***/', $this->departmentTypeHash, $array);
-        $array = preg_replace_array('/***REMOVED***educational_course_hash***REMOVED***/', $this->educationalCourseHash, $array);
-        $array = preg_replace_array('/***REMOVED***educational_course_organiser_hash***REMOVED***/', $this->educationalCourseOrganiserHash, $array);
-        $array = preg_replace_array('/***REMOVED***educational_course_participant_hash***REMOVED***/', $this->educationalCourseParticipantHash, $array);
-        $array = preg_replace_array('/***REMOVED***event_hash***REMOVED***/', $this->eventHash, $array);
-        $array = preg_replace_array('/***REMOVED***event_participant_hash***REMOVED***/', $this->eventParticipantHash, $array);
-        $array = preg_replace_array('/***REMOVED***event_participation_hash***REMOVED***/', $this->eventParticipationStatusHash, $array);
-        $array = preg_replace_array('/***REMOVED***gender_hash***REMOVED***/', $this->genderHash, $array);
-        $array = preg_replace_array('/***REMOVED***image_hash***REMOVED***/', $this->imageHash, $array);
-        $array = preg_replace_array('/***REMOVED***language_hash***REMOVED***/', $this->languageHash, $array);
-        $array = preg_replace_array('/***REMOVED***permission_hash***REMOVED***/', $this->permissionHash, $array);
-        $array = preg_replace_array('/***REMOVED***position_hash***REMOVED***/', $this->positionHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_chest_hash***REMOVED***/', $this->slChestHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_corridor_hash***REMOVED***/', $this->slCorridorHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_location_hash***REMOVED***/', $this->slLocationHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_room_hash***REMOVED***/', $this->slRoomHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_shelf_hash***REMOVED***/', $this->slShelfHash, $array);
-        $array = preg_replace_array('/***REMOVED***sl_tray_hash***REMOVED***/', $this->slTrayHash, $array);
-        $array = preg_replace_array('/***REMOVED***storage_place_hash***REMOVED***/', $this->storagePlaceHash, $array);
-        $array = preg_replace_array('/***REMOVED***user_hash***REMOVED***/', $this->userHash, $array);
-        if (array_key_exists('code', $array)) ***REMOVED***
+    {
+        $array = preg_replace_array('/{article_hash}/', $this->articleHash, $array);
+        $array = preg_replace_array('/{department_hash}/', $this->departmentHash, $array);
+        $array = preg_replace_array('/{department_group_hash}/', $this->departmentGroupHash, $array);
+        $array = preg_replace_array('/{department_region_hash}/', $this->departmentRegionHash, $array);
+        $array = preg_replace_array('/{department_type_hash}/', $this->departmentTypeHash, $array);
+        $array = preg_replace_array('/{educational_course_hash}/', $this->educationalCourseHash, $array);
+        $array = preg_replace_array('/{educational_course_organiser_hash}/', $this->educationalCourseOrganiserHash, $array);
+        $array = preg_replace_array('/{educational_course_participant_hash}/', $this->educationalCourseParticipantHash, $array);
+        $array = preg_replace_array('/{event_hash}/', $this->eventHash, $array);
+        $array = preg_replace_array('/{event_participant_hash}/', $this->eventParticipantHash, $array);
+        $array = preg_replace_array('/{event_participation_hash}/', $this->eventParticipationStatusHash, $array);
+        $array = preg_replace_array('/{gender_hash}/', $this->genderHash, $array);
+        $array = preg_replace_array('/{image_hash}/', $this->imageHash, $array);
+        $array = preg_replace_array('/{language_hash}/', $this->languageHash, $array);
+        $array = preg_replace_array('/{permission_hash}/', $this->permissionHash, $array);
+        $array = preg_replace_array('/{position_hash}/', $this->positionHash, $array);
+        $array = preg_replace_array('/{sl_chest_hash}/', $this->slChestHash, $array);
+        $array = preg_replace_array('/{sl_corridor_hash}/', $this->slCorridorHash, $array);
+        $array = preg_replace_array('/{sl_location_hash}/', $this->slLocationHash, $array);
+        $array = preg_replace_array('/{sl_room_hash}/', $this->slRoomHash, $array);
+        $array = preg_replace_array('/{sl_shelf_hash}/', $this->slShelfHash, $array);
+        $array = preg_replace_array('/{sl_tray_hash}/', $this->slTrayHash, $array);
+        $array = preg_replace_array('/{storage_place_hash}/', $this->storagePlaceHash, $array);
+        $array = preg_replace_array('/{user_hash}/', $this->userHash, $array);
+        if (array_key_exists('code', $array)) {
             $array['code'] = (int)$array['code'];
-    ***REMOVED***
-        if (array_key_exists('verified', $array)) ***REMOVED***
+        }
+        if (array_key_exists('verified', $array)) {
             $array['verified'] = (bool)$array['verified'];
-    ***REMOVED***
-        if (array_key_exists('info', $array)) ***REMOVED***
-            if (array_key_exists('verified', $array['info'])) ***REMOVED***
+        }
+        if (array_key_exists('info', $array)) {
+            if (array_key_exists('verified', $array['info'])) {
                 $array['info']['verified'] = (bool)$array['info']['verified'];
-        ***REMOVED***
-            if (array_key_exists('signup_completed', $array['info'])) ***REMOVED***
+            }
+            if (array_key_exists('signup_completed', $array['info'])) {
                 $array['info']['signup_completed'] = (bool)$array['info']['signup_completed'];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         return $array;
-***REMOVED***
+    }
 
     /**
      * Fill in all required hashes.
@@ -436,7 +436,7 @@ abstract class DbTestCase extends ApiTestCase
      * @param $mockDatabaseArray
      */
     private function fillHashes($mockDatabaseArray)
-    ***REMOVED***
+    {
         $this->educationalCourseParticipantHash = $mockDatabaseArray['educational_course_participant'][0]['hash'];
         $this->articleHash = $mockDatabaseArray['article'][0]['hash'];
         $this->departmentHash = $mockDatabaseArray['department'][0]['hash'];
@@ -461,7 +461,7 @@ abstract class DbTestCase extends ApiTestCase
         $this->slTrayHash = $mockDatabaseArray['sl_tray'][0]['hash'];
         $this->storagePlaceHash = $mockDatabaseArray['storage_place'][0]['hash'];
         $this->userHash = $mockDatabaseArray['user'][0]['hash'];
-***REMOVED***
+    }
 
     /**
      * Check if there is any pending migration.
@@ -471,32 +471,32 @@ abstract class DbTestCase extends ApiTestCase
      * @throws \Interop\Container\Exception\ContainerException
      */
     private function hasPendingMigrations(PDO $pdo): bool
-    ***REMOVED***
+    {
         $shouldMigrate = true;
         // Check if there is any pending migration
         $stmt = $pdo->prepare("SELECT version FROM phinxlog ORDER BY version ASC");
         $stmt->execute();
         $executedMigrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($executedMigrations !== false) ***REMOVED***
-            foreach ($executedMigrations as $key => $record) ***REMOVED***
+        if ($executedMigrations !== false) {
+            foreach ($executedMigrations as $key => $record) {
                 $executedMigrations[$key] = $record['version'];
-        ***REMOVED***
+            }
 
             $migrationsPath = $this->container->get('settings')->get('migrations');
             $migrationFiles = glob($migrationsPath . '/*.php');
-            foreach ($migrationFiles as $key => $file) ***REMOVED***
+            foreach ($migrationFiles as $key => $file) {
                 $filename = basename($file, '.php');
-                if ($filename === 'schema') ***REMOVED***
+                if ($filename === 'schema') {
                     unset($migrationFiles[$key]);
                     continue;
-            ***REMOVED***
+                }
                 $migrationFiles[$key] = preg_replace('/[^\d\W]+/', '', $filename);;
-        ***REMOVED***
+            }
             $missingMigrations = array_diff($migrationFiles, $executedMigrations);
             $shouldMigrate = !empty($missingMigrations);
-    ***REMOVED***
+        }
 
         return $shouldMigrate;
-***REMOVED***
-***REMOVED***
+    }
+}
 

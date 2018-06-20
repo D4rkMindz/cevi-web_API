@@ -7,7 +7,7 @@ namespace App\Test\Mock;
 use Psr\Log\LoggerInterface;
 
 class MockLogger implements LoggerInterface
-***REMOVED***
+{
 
     /**
      * System is unusable.
@@ -18,8 +18,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function emergency($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Action must be taken immediately.
@@ -33,8 +33,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function alert($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Critical conditions.
@@ -47,8 +47,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function critical($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Runtime errors that do not require immediate action but should typically
@@ -60,8 +60,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function error($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Exceptional occurrences that are not errors.
@@ -75,8 +75,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function warning($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Normal but significant events.
@@ -87,8 +87,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function notice($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Interesting events.
@@ -101,8 +101,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function info($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Detailed debug information.
@@ -113,8 +113,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function debug($message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Logs with an arbitrary level.
@@ -126,8 +126,8 @@ class MockLogger implements LoggerInterface
      * @return void
      */
     public function log($level, $message, array $context = array())
-    ***REMOVED***
-***REMOVED***
+    {
+    }
 
     /**
      * Add debug
@@ -135,6 +135,6 @@ class MockLogger implements LoggerInterface
      * @param $message
      */
     public function addDebug($message)
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+    }
+}

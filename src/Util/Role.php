@@ -8,7 +8,7 @@ use Monolog\Logger;
 use Slim\Container;
 
 class Role
-***REMOVED***
+{
     const SUPER_ADMIN = 64;
     const ADMIN = 32;
     const SUPER_USER = 16;
@@ -34,11 +34,11 @@ class Role
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->userRepository = $container->get(UserRepository::class);
         $this->logger = $container->get(Logger::class);
         $this->allowedPaths = $container->get('settings')->get('allowedPaths');
-***REMOVED***
+    }
 
     /**
      * Check if user has permission.
@@ -50,21 +50,21 @@ class Role
      * @return bool
      */
     public function hasPermission(int $requiredLevel, string $userId, string $requestedPath, string $method): bool
-    ***REMOVED***
+    {
         $usersPermission = $this->userRepository->getPermission($userId);
 
         // allow user to get it's user data
-        if ($this->checkAllowedRoutes($userId, $requestedPath, $method)) ***REMOVED***
+        if ($this->checkAllowedRoutes($userId, $requestedPath, $method)) {
             return true;
-    ***REMOVED***
-        if ($requiredLevel <= (int)$usersPermission['level']) ***REMOVED***
+        }
+        if ($requiredLevel <= (int)$usersPermission['level']) {
             $this->logger->info(sprintf('Permission granted for %s [req: %s]', $usersPermission['level'], $requiredLevel));
             return true;
-    ***REMOVED***
+        }
 
         $this->logger->info(sprintf('Permission not granted for %s [req: %s]', $usersPermission['level'], $requiredLevel));
         return false;
-***REMOVED***
+    }
 
     /**
      * Check if route is available for the user without the usual permissions
@@ -75,17 +75,17 @@ class Role
      * @return bool
      */
     private function checkAllowedRoutes(string $userId, string $requestedPath, string $method): bool
-    ***REMOVED***
+    {
         $requestedPath = baseurl($requestedPath);
-        foreach ($this->allowedPaths as $route) ***REMOVED***
+        foreach ($this->allowedPaths as $route) {
             $path = $route['path'];
-            $path = preg_replace('/***REMOVED***user_id***REMOVED***/', $userId, $path);
+            $path = preg_replace('/{user_id}/', $userId, $path);
             $path = preg_replace('/\//', '\/', $path);
             $regex = sprintf('/%s/', $path);
-            if (preg_match($regex, $requestedPath)) ***REMOVED***
+            if (preg_match($regex, $requestedPath)) {
                 return in_array($method, $route['methods']);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -14,7 +14,7 @@ use Interop\Container\Exception\ContainerException;
 use Slim\Container;
 
 class EventArticleValidation extends AppValidation
-***REMOVED***
+{
     /**
      * @var EventRepository
      */
@@ -41,13 +41,13 @@ class EventArticleValidation extends AppValidation
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->eventRepository = $container->get(EventRepository::class);
         $this->articleRepsitory = $container->get(ArticleRepository::class);
         $this->userRepository = $container->get(UserRepository::class);
         $this->eventArticleRepository = $container->get(EventArticleRepository::class);
-***REMOVED***
+    }
 
     /**
      * Check if event exists.
@@ -57,9 +57,9 @@ class EventArticleValidation extends AppValidation
      * @return bool
      */
     public function isPossibleForEvent(string $departmentId, string $eventId): bool
-    ***REMOVED***
+    {
         return $this->eventRepository->existsEvent($eventId, $departmentId);
-***REMOVED***
+    }
 
     /**
      * Check if event and article exists.
@@ -71,27 +71,27 @@ class EventArticleValidation extends AppValidation
      * @return ValidationContext
      */
     public function isPossible(string $departmentId, string $eventId, string $articleId, int $quantity, string $accountableUserId): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
 
-        if (!$this->eventRepository->existsEvent($eventId, $departmentId))***REMOVED***
+        if (!$this->eventRepository->existsEvent($eventId, $departmentId)){
             $validationContext->setError('event_id', __('Event does not exist'));
-    ***REMOVED***
+        }
 
-        if (!$this->articleRepsitory->existsArticle($articleId, $departmentId)) ***REMOVED***
+        if (!$this->articleRepsitory->existsArticle($articleId, $departmentId)) {
             $validationContext->setError('field', __('Article does not exist'));
-    ***REMOVED***
+        }
 
-        if ($this->articleRepsitory->hasQuantity($articleId, $quantity)) ***REMOVED***
+        if ($this->articleRepsitory->hasQuantity($articleId, $quantity)) {
             $validationContext->setError('quantity', __('Not enough available'));
-    ***REMOVED***
+        }
 
-        if (!$this->userRepository->existsUser($accountableUserId)) ***REMOVED***
+        if (!$this->userRepository->existsUser($accountableUserId)) {
             $validationContext->setError('accountable_user_id', __('User does not exist'));
-    ***REMOVED***
+        }
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Check if link exists.
@@ -101,7 +101,7 @@ class EventArticleValidation extends AppValidation
      * @return bool
      */
     public function existsLink(string $eventId, string $articleId): bool
-    ***REMOVED***
+    {
         return $this->eventArticleRepository->existsLink($eventId, $articleId);
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -5,7 +5,7 @@ namespace App\Util;
 
 
 class PhonenumberConverter
-***REMOVED***
+{
     /**
      * @var string $phonenumber phonenumber to convert
      */
@@ -19,7 +19,7 @@ class PhonenumberConverter
      * @return string $phonenumber
      */
     public function convert(string $phonenumber): string
-    ***REMOVED***
+    {
         $this->phonenumber = $phonenumber;
         $this->trim()
             ->replaceFirstZeros()
@@ -27,7 +27,7 @@ class PhonenumberConverter
             ->addCountryCode()
             ->addPlus();
         return $this->phonenumber;
-***REMOVED***
+    }
     /**
      * Trim phonenumber.
      *
@@ -36,49 +36,49 @@ class PhonenumberConverter
      * @return $this
      */
     protected function trim(): PhonenumberConverter
-    ***REMOVED***
+    {
         $this->phonenumber = str_replace(' ', '', $this->phonenumber);
         return $this;
-***REMOVED***
+    }
     /**
      * Replace heading zeros.
      *
      * @return $this
      */
     protected function replaceFirstZeros(): PhonenumberConverter
-    ***REMOVED***
-        if (substr($this->phonenumber, 0, 2) == '00') ***REMOVED***
+    {
+        if (substr($this->phonenumber, 0, 2) == '00') {
             $number = ltrim($this->phonenumber, 0);
             $this->phonenumber = '+' . $number;
-    ***REMOVED***
+        }
         return $this;
-***REMOVED***
+    }
     /**
      * Remove duplicated plus.
      *
      * @return $this
      */
     protected function removeDuplicatedPlus(): PhonenumberConverter
-    ***REMOVED***
-        if (substr($this->phonenumber, 0, 2) == '++') ***REMOVED***
+    {
+        if (substr($this->phonenumber, 0, 2) == '++') {
             $number = ltrim($this->phonenumber, '+');
             $this->phonenumber = '+' . $number;
-    ***REMOVED***
+        }
         return $this;
-***REMOVED***
+    }
     /**
      * Add country code.
      *
      * @return $this
      */
     protected function addCountryCode(): PhonenumberConverter
-    ***REMOVED***
-        if (substr($this->phonenumber, 0, 1) == '0') ***REMOVED***
+    {
+        if (substr($this->phonenumber, 0, 1) == '0') {
             $number = ltrim($this->phonenumber, '0');
             $this->phonenumber = '+41' . $number;
-    ***REMOVED***
+        }
         return $this;
-***REMOVED***
+    }
     /**
      * Add plus.
      *
@@ -87,10 +87,10 @@ class PhonenumberConverter
      * @return $this
      */
     protected function addPlus(): PhonenumberConverter
-    ***REMOVED***
-        if (substr($this->phonenumber, 0, 1) != '+') ***REMOVED***
+    {
+        if (substr($this->phonenumber, 0, 1) != '+') {
             $this->phonenumber = '+' . $this->phonenumber;
-    ***REMOVED***
+        }
         return $this;
-***REMOVED***
-***REMOVED***
+    }
+}

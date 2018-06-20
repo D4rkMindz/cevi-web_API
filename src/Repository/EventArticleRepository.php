@@ -20,7 +20,7 @@ use Slim\Container;
  * Class EventArticleRepository
  */
 class EventArticleRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var ArticleTable
      */
@@ -77,7 +77,7 @@ class EventArticleRepository extends AppRepository
      * @throws ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->articleTable = $container->get(ArticleTable::class);
         $this->articleDescriptionTable = $container->get(ArticleDescriptionTable::class);
         $this->articleTitleTable = $container->get(ArticleTitleTable::class);
@@ -88,7 +88,7 @@ class EventArticleRepository extends AppRepository
         $this->eventTitleTable = $container->get(EventTitleTable::class);
         $this->formatter = $container->get(Formatter::class);
         $this->userTable = $container->get(UserTable::class);
-***REMOVED***
+    }
 
     /**
      * Get all articles.
@@ -100,7 +100,7 @@ class EventArticleRepository extends AppRepository
      * @return array
      */
     public function getAllArticles(string $eventId, string $departmentId, string $descriptionFormat, string $articleDescriptionFormat): array
-    ***REMOVED***
+    {
         $eventTablename = $this->eventTable->getTablename();
         $eventDescriptionTablename = $this->eventDescriptionTable->getTablename();
         $eventTitleTablename = $this->eventTitleTable->getTablename();
@@ -140,15 +140,15 @@ class EventArticleRepository extends AppRepository
             ->where([$eventTablename . '.id' => $eventId]);
         $event = $query->execute()->fetch('assoc');
 
-        if (empty($event)) ***REMOVED***
+        if (empty($event)) {
             return [];
-    ***REMOVED***
+        }
 
         $event = $this->formatter->formatEventSimple($event, $descriptionFormat);
         $event['articles'] = $this->getArticles($event['id'], $departmentId,  $articleDescriptionFormat);
 
         return $event;
-***REMOVED***
+    }
 
     /**
      * Link article to event
@@ -161,7 +161,7 @@ class EventArticleRepository extends AppRepository
      * @return array
      */
     public function linkArticle(string $eventId, string $articleId, string $accountableUserId, int $quantity, string $executorId): array
-    ***REMOVED***
+    {
         $row = [
             'event_id' => $eventId,
             'article_id' => $articleId,
@@ -169,7 +169,7 @@ class EventArticleRepository extends AppRepository
             'quantity' => $quantity,
         ];
         return $this->eventArticleTable->insert($row, $executorId);
-***REMOVED***
+    }
 
     /**
      * Remove linked article
@@ -180,9 +180,9 @@ class EventArticleRepository extends AppRepository
      * @return bool
      */
     public function removeLinkedArticle(string $eventId, string $articleId, string $executorId)
-    ***REMOVED***
+    {
         return $this->eventArticleTable->archive($executorId, ['event_id' => $eventId, 'article_id' => $articleId]);
-***REMOVED***
+    }
 
     /**
      * Check if link exists
@@ -192,9 +192,9 @@ class EventArticleRepository extends AppRepository
      * @return bool
      */
     public function existsLink(string $eventId, string $articleId): bool
-    ***REMOVED***
+    {
         return $this->exists($this->eventArticleTable, ['event_id'=> $eventId, 'article_id'=> $articleId]);
-***REMOVED***
+    }
 
     /**
      * Get articles for event
@@ -205,7 +205,7 @@ class EventArticleRepository extends AppRepository
      * @return array
      */
     private function getArticles(string $eventId, string $departmentId, string $articleDescriptionFormat): array
-    ***REMOVED***
+    {
         $eventArticleTablename = $this->eventArticleTable->getTablename();
         $articleTablename = $this->articleTable->getTablename();
         $articleDescriptionTablename = $this->articleDescriptionTable->getTablename();
@@ -267,18 +267,18 @@ class EventArticleRepository extends AppRepository
             ->where([$eventArticleTablename . '.event_id' => $eventId]);
         $articles = $query->execute()->fetchAll('assoc');
 
-        if (empty($articles)) ***REMOVED***
+        if (empty($articles)) {
             return [];
-    ***REMOVED***
+        }
 
-        foreach ($articles as $key => $article) ***REMOVED***
+        foreach ($articles as $key => $article) {
             $articles[$key] = $this->formatter->formatArticle($article, $departmentId,$articleDescriptionFormat, false);
             $articles[$key]['accountable_user'] = $this->getAccountableUser($article['id']);
             $articles[$key]['required_quantity'] = $article['required_article_quantity'];
-    ***REMOVED***
+        }
 
         return $articles;
-***REMOVED***
+    }
 
     /**
      * Get accountable user for article.
@@ -287,7 +287,7 @@ class EventArticleRepository extends AppRepository
      * @return array
      */
     private function getAccountableUser(string $articleId)
-    ***REMOVED***
+    {
         $userTablename = $this->userTable->getTablename();
         $eventArticleTablename = $this->eventArticleTable->getTablename();
 
@@ -308,11 +308,11 @@ class EventArticleRepository extends AppRepository
             ])
             ->where([$eventArticleTablename . '.article_id' => $articleId]);
         $user = $query->execute()->fetchAll('assoc');
-        if (empty($user)) ***REMOVED***
+        if (empty($user)) {
             return [];
-    ***REMOVED***
+        }
 
         $user['url'] = baseurl('/v2/users/' . $user['id']);
         return $user;
-***REMOVED***
-***REMOVED***
+    }
+}

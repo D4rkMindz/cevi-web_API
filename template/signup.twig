@@ -1,11 +1,11 @@
-***REMOVED***% extends "email_layout.twig" %***REMOVED***
+{% extends "email_layout.twig" %}
 
-***REMOVED***% block content %***REMOVED***
-    <h3>***REMOVED******REMOVED*** __('Hello') ***REMOVED******REMOVED*** ***REMOVED******REMOVED*** firstName ***REMOVED******REMOVED***</h3>
-    <p>***REMOVED******REMOVED*** __('Welcome to CEVI Web. You have recently created a CEVI Web account. We are happy that you are using our Platform.') ***REMOVED******REMOVED***</p>
-    <p>***REMOVED******REMOVED*** __('Please confirm your registration:') ***REMOVED******REMOVED***</p>
-    <a href="***REMOVED******REMOVED*** url ***REMOVED******REMOVED***">***REMOVED******REMOVED*** url ***REMOVED******REMOVED***</a>
-    <p>***REMOVED******REMOVED*** __('The registration is confirmed for following email:') ***REMOVED******REMOVED***</p>
-    ***REMOVED******REMOVED*** email ***REMOVED******REMOVED***
-    <p>***REMOVED******REMOVED*** __('For security reasons, Your position will be confirmed by your department head.') ***REMOVED******REMOVED***</p>
-***REMOVED***% endblock %***REMOVED***
+{% block content %}
+    <h3>{{ __('Hello') }} {{ firstName }}</h3>
+    <p>{{ __('Welcome to CEVI Web. You have recently created a CEVI Web account. We are happy that you are using our Platform.') }}</p>
+    <p>{{ __('Please confirm your registration:') }}</p>
+    <a href="{{ url }}">{{ url }}</a>
+    <p>{{ __('The registration is confirmed for following email:') }}</p>
+    {{ email }}
+    <p>{{ __('For security reasons, Your position will be confirmed by your department head.') }}</p>
+{% endblock %}

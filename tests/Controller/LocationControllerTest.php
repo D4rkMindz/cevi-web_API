@@ -18,18 +18,18 @@
 // * @coversDefaultClass App\Controller\LocationController
 // */
 //class LocationControllerTest extends DbTestCase
-//***REMOVED***
+//{
 //    private $data;
 //
 //    /**
 //     * @return ArrayDataSet|IDataSet
 //     */
 //    public function getDataSet()
-//    ***REMOVED***
+//    {
 //        $testDatabase = new TestDatabase();
 //        $this->data = $testDatabase->location();
 //        return new ArrayDataSet($this->data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Get all locations
@@ -42,7 +42,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testGetAllLocationsAction($statuscode, $expected)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('GET', '/v2/departments/1/locations', true);
 //        $response = $this->request($request);
 //        $body = (string)$response->getBody();
@@ -50,7 +50,7 @@
 //        $this->assertSame($statuscode, $response->getStatusCode());
 //        $data = json_decode($body, true);
 //        $this->assertSame($expected, $data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Get all
@@ -58,7 +58,7 @@
 //     * @return array
 //     */
 //    public function getAllLocationsDataProvicder()
-//    ***REMOVED***
+//    {
 //        return [
 //            'Test success' => [
 //                200,
@@ -92,5 +92,5 @@
 //                ],
 //            ]
 //        ];
-//***REMOVED***
-//***REMOVED***
+//    }
+//}

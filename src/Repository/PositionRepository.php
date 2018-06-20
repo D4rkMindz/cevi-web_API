@@ -11,7 +11,7 @@ use Slim\Container;
  * Class PositionRepository
  */
 class PositionRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var PositionTable
      */
@@ -23,9 +23,9 @@ class PositionRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->positionTable = $container->get(PositionTable::class);
-***REMOVED***
+    }
 
     /**
      * Exists position.
@@ -34,10 +34,10 @@ class PositionRepository extends AppRepository
      * @return bool
      */
     public function existsPosition(string $positionId): bool
-    ***REMOVED***
+    {
         $query = $this->positionTable->newSelect();
         $query->select('hash')->where(['hash'=> $positionId]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
-***REMOVED***
+    }
+}

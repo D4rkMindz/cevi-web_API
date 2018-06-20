@@ -11,7 +11,7 @@ use Exception;
  * Class AppTable
  */
 class AppTable implements TableInterface
-***REMOVED***
+{
     protected $table = null;
 
     private $connection = null;
@@ -22,9 +22,9 @@ class AppTable implements TableInterface
      * @param Connection $connection
      */
     public function __construct(Connection $connection = null)
-    ***REMOVED***
+    {
         $this->connection = $connection;
-***REMOVED***
+    }
 
     /**
      * Get table name.
@@ -32,9 +32,9 @@ class AppTable implements TableInterface
      * @return string table name
      */
     public function getTablename()
-    ***REMOVED***
+    {
         return $this->table;
-***REMOVED***
+    }
 
     /**
      * Get all entries from database.
@@ -42,16 +42,16 @@ class AppTable implements TableInterface
      * @return array $rows
      */
     public function getAll(): array
-    ***REMOVED***
+    {
         $query = $this->newSelect();
         $query->select('*');
-        if ($this->hasMetadata()) ***REMOVED***
+        if ($this->hasMetadata()) {
             $query->where(['archived_at' => date('Y-m-d H:i:s')]);
-    ***REMOVED***
+        }
         $rows = $query->execute()->fetchAll('assoc');
 
         return $rows;
-***REMOVED***
+    }
 
     /**
      * Get Query.
@@ -60,13 +60,13 @@ class AppTable implements TableInterface
      * @return Query
      */
     public function newSelect(bool $includeArchived = false): Query
-    ***REMOVED***
-        if (!$this->hasMetadata() || $includeArchived) ***REMOVED***
+    {
+        if (!$this->hasMetadata() || $includeArchived) {
             return $this->connection->newQuery()->from($this->table);
-    ***REMOVED***;
+        };
 
         return $this->connection->newQuery()->from($this->table)->where(['OR' => [[$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')], [$this->table . '.archived_at IS NULL']]]);
-***REMOVED***
+    }
 
     /**
      * Get entity by id.
@@ -75,19 +75,19 @@ class AppTable implements TableInterface
      * @return array
      */
     public function getById($id): array
-    ***REMOVED***
+    {
         $query = $this->newSelect();
         $where = ['id' => $id];
-        if ($this->hasMetadata()) ***REMOVED***
+        if ($this->hasMetadata()) {
             $where['OR'] = [
                 [$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')],
                 [$this->table . '.archived_at IS NULL']
             ];
-    ***REMOVED***
+        }
         $query->select('*')->where($where);
         $row = $query->execute()->fetch('assoc');
         return !empty($row) ? $row : [];
-***REMOVED***
+    }
 
     /**
      * Insert into database.
@@ -97,15 +97,15 @@ class AppTable implements TableInterface
      * @return string last inserted ID
      */
     public function insert(array $row, string $id): string
-    ***REMOVED***
-        if ($this->hasMetadata()) ***REMOVED***
+    {
+        if ($this->hasMetadata()) {
             $row['created_at'] = date('Y-m-d H:i:s');
             $row['created_by'] = $id;
-    ***REMOVED***
+        }
         $id = $this->connection->insert($this->table, $row)->lastInsertId($this->table);
-        if (!$this->hasHash()) ***REMOVED***
+        if (!$this->hasHash()) {
             return $id;
-    ***REMOVED***
+        }
 
         $row = $this->connection->newQuery()
             ->select(['hash'])
@@ -114,7 +114,7 @@ class AppTable implements TableInterface
             ->execute()
             ->fetch('assoc');
         return !empty($row)?$row['hash']:'';
-***REMOVED***
+    }
 
     /**
      * Update database
@@ -125,23 +125,23 @@ class AppTable implements TableInterface
      * @return bool
      */
     public function modify(array $row, array $where, string $userId): bool
-    ***REMOVED***
-        if (!$this->hasMetadata()) ***REMOVED***
+    {
+        if (!$this->hasMetadata()) {
             return false;
-    ***REMOVED***
+        }
         $row['modified_at'] = (string)date('Y-m-d H:i:s');
         $row['modified_by'] = (string)$userId;
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
             ->where($where);
-        try ***REMOVED***
+        try {
             $query->execute();
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
         return true;
-***REMOVED***
+    }
 
     /**
      * Delete from database.
@@ -151,29 +151,29 @@ class AppTable implements TableInterface
      * @return StatementInterface
      */
     public function archive(string $executorId, array $where): bool
-    ***REMOVED***
+    {
         $row = [
             'archived_by' => $executorId,
             'archived_at' => date('Y-m-d H:i:s'),
         ];
-        if ($this->hasMetadata()) ***REMOVED***
+        if ($this->hasMetadata()) {
             $where['OR'] = [
                 [$this->table . '.archived_at >= ' => date('Y-m-d H:i:s')],
                 [$this->table . '.archived_at IS NULL']
             ];
-    ***REMOVED***
+        }
         $query = $this->connection->newQuery();
         $query->update($this->table)
             ->set($row)
             ->where($where);
-        try ***REMOVED***
+        try {
             $query->execute();
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
 
         return true;
-***REMOVED***
+    }
 
     /**
      * Unarchive element.
@@ -183,10 +183,10 @@ class AppTable implements TableInterface
      * @return bool true if unarchived successfully
      */
     public function unarchive(string $executorId, array $where): bool
-    ***REMOVED***
-        if (!$this->hasMetadata()) ***REMOVED***
+    {
+        if (!$this->hasMetadata()) {
             return false;
-    ***REMOVED***
+        }
         $row = [
             'modified_by' => $executorId,
             'modified_at' => date('Y-m-d H:i:s')
@@ -195,14 +195,14 @@ class AppTable implements TableInterface
         $query->update($this->table)
             ->set($row)
             ->where($where);
-        try ***REMOVED***
+        try {
             $query->execute();
-    ***REMOVED*** catch (Exception $exception) ***REMOVED***
+        } catch (Exception $exception) {
             return false;
-    ***REMOVED***
+        }
 
         return true;
-***REMOVED***
+    }
 
     /**
      * Check if table has not metadata like created, modified and archived information.
@@ -210,7 +210,7 @@ class AppTable implements TableInterface
      * @return bool
      */
     public function hasMetadata(): bool
-    ***REMOVED***
+    {
         $blacklist = [
             'article_image' => 1,
             'article_quality' => 1,
@@ -231,12 +231,12 @@ class AppTable implements TableInterface
             'position' => 1,
         ];
 
-        if (isset($blacklist[$this->table])) ***REMOVED***
+        if (isset($blacklist[$this->table])) {
             return false;
-    ***REMOVED***
+        }
 
         return true;
-***REMOVED***
+    }
 
     /**
      * Check if table has hashes
@@ -244,7 +244,7 @@ class AppTable implements TableInterface
      * @return bool
      */
     public function hasHash(): bool
-    ***REMOVED***
+    {
         $whitelist = [
             'article' => 1,
             'article_quality' => 1,
@@ -274,5 +274,5 @@ class AppTable implements TableInterface
             'user' => 1,
         ];
         return isset($whitelist[$this->table]);
-***REMOVED***
-***REMOVED***
+    }
+}

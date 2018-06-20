@@ -26,7 +26,7 @@ use Slim\Http\Uri;
  * Class ApiTestCase
  */
 abstract class ApiTestCase extends TestCase
-***REMOVED***
+{
     /**
      * @var App|null
      */
@@ -40,9 +40,9 @@ abstract class ApiTestCase extends TestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function setUp()
-    ***REMOVED***
+    {
         $this->app = require __DIR__ . '/../config/bootstrap.php';
-***REMOVED***
+    }
 
     /**
      * Tear down method
@@ -52,9 +52,9 @@ abstract class ApiTestCase extends TestCase
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     protected function tearDown()
-    ***REMOVED***
+    {
         $this->app = null;
-***REMOVED***
+    }
 
     /**
      * Create mock request.
@@ -66,7 +66,7 @@ abstract class ApiTestCase extends TestCase
      * @return Request
      */
     protected function createRequest(string $method, string $url, bool $withJwt = true, $jwtAuthUser = ['users' => 'test_user', 'id' => 1, 'lang' => 'en', 'scope' => '/']): Request
-    ***REMOVED***
+    {
         $env = Environment::mock();
         $uri = Uri::createFromString('http://localhost' . $url);
         $headers = Headers::createFromEnvironment($env);
@@ -77,14 +77,14 @@ abstract class ApiTestCase extends TestCase
 
         $request = new Request($method, $uri, $headers, $cookies, $serverParams, $body, $uploadedFiles);
 
-        if ($withJwt) ***REMOVED***
+        if ($withJwt) {
             $secret = $this->getContainer()->get('settings')->get('jwt')['secret'];
             $token = JWTFactory::generate($jwtAuthUser['users'], $jwtAuthUser['id'], $jwtAuthUser['lang'], $secret, 60 * 60 * 8, $jwtAuthUser['scope']);
             $request = $request->withHeader('X-Token', $token);
-    ***REMOVED***
+        }
 
         return $request;
-***REMOVED***
+    }
 
     /**
      * Make silent request.
@@ -96,30 +96,30 @@ abstract class ApiTestCase extends TestCase
      * @throws NotFoundException
      */
     protected function request(Request $request): Response
-    ***REMOVED***
+    {
         $container = $this->getContainer();
         $this->setFrozenValueInContainer($container, 'request', $request);
         $this->setFrozenValueInContainer($container, 'response', new Response());
-        $container[MailerInterface::class] = function () ***REMOVED***
+        $container[MailerInterface::class] = function () {
             return new MockMailer();
-    ***REMOVED***;
-        $container[Logger::class] = function () ***REMOVED***
+        };
+        $container[Logger::class] = function () {
             return new MockLogger();
-    ***REMOVED***;
-        $container[Logger::class . '_request'] = function() ***REMOVED***
+        };
+        $container[Logger::class . '_request'] = function() {
             return new MockLogger();
-    ***REMOVED***;
-        $container[Logger::class . '_error'] = function () ***REMOVED***
+        };
+        $container[Logger::class . '_error'] = function () {
             return new MockLogger();
-    ***REMOVED***;
-        $container[Logger::class . '_debug'] = function () ***REMOVED***
+        };
+        $container[Logger::class . '_debug'] = function () {
             return new MockLogger();
-    ***REMOVED***;
+        };
 
         $response = $this->app->run(true);
 
         return $response;
-***REMOVED***
+    }
 
     /**
      * Set container.
@@ -130,7 +130,7 @@ abstract class ApiTestCase extends TestCase
      * @return void
      */
     protected function setFrozenValueInContainer(Container $container, string $key, $value)
-    ***REMOVED***
+    {
         $class = new ReflectionClass(\Pimple\Container::class);
         $property = $class->getProperty('frozen');
         $property->setAccessible(true);
@@ -138,7 +138,7 @@ abstract class ApiTestCase extends TestCase
         unset($values[$key]);
         $property->setValue($container, $values);
         $container[$key] = $value;
-***REMOVED***
+    }
 
     /**
      * Get container object for tests.
@@ -146,11 +146,11 @@ abstract class ApiTestCase extends TestCase
      * @return Container
      */
     protected function getContainer(): Container
-    ***REMOVED***
+    {
         $container = $this->app->getContainer();
 
         return $container;
-***REMOVED***
+    }
 
     /**
      * Add post data to request.
@@ -160,18 +160,18 @@ abstract class ApiTestCase extends TestCase
      * @return Request
      */
     protected function withFormData(Request $request, array $data): Request
-    ***REMOVED***
-        if ($request->getMethod() == 'GET') ***REMOVED***
+    {
+        if ($request->getMethod() == 'GET') {
             $request = $request->withMethod('POST');
-    ***REMOVED***
+        }
 
-        if (!empty($data)) ***REMOVED***
+        if (!empty($data)) {
             $request = $request->withParsedBody($data);
-    ***REMOVED***
+        }
         $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         return $request;
-***REMOVED***
+    }
 
     /**
      * Add JSON body to request
@@ -181,11 +181,11 @@ abstract class ApiTestCase extends TestCase
      * @return Request
      */
     protected function withJson(Request $request, array $data): Request
-    ***REMOVED***
+    {
         $body = $request->getBody();
         $body->write(json_encode($data));
         $request = $request->withHeader('Content-Type', 'application/json');
 
         return $request->withBody($body);
-***REMOVED***
-***REMOVED***
+    }
+}

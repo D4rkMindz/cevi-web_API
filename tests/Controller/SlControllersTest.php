@@ -12,15 +12,15 @@
 //use Slim\Exception\NotFoundException;
 //
 //class SlControllersTest extends DbTestCase
-//***REMOVED***
+//{
 //    private $data;
 //
 //    public function getDataSet()
-//    ***REMOVED***
+//    {
 //        $testDatabase = new TestDatabase();
 //        $this->data = $testDatabase->sl_locations();
 //        return new ArrayDataSet($this->data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Test get all.
@@ -34,7 +34,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testGetAll(string $type, string $departmentId, int $statuscode, array $expectedResponse)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('GET', '/v2/departments/' . $departmentId . '/' . $type, true);
 //        $response = $this->request($request);
 //        $body = (string)$response->getBody();
@@ -42,7 +42,7 @@
 //        $this->assertSame($statuscode, $response->getStatusCode());
 //        $data = json_decode($body, true);
 //        $this->assertSame($expectedResponse, $data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Test insert all.
@@ -57,7 +57,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testCreateAll(string $type, array $requestData, int $statuscode, array $expectedResponse)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('POST', '/v2/departments/1/' . $type, true);
 //        $request = $this->withJson($request, $requestData);
 //        $response = $this->request($request);
@@ -66,7 +66,7 @@
 //        $this->assertSame($statuscode, $response->getStatusCode());
 //        $data = json_decode($body, true);
 //        $this->assertSame($expectedResponse, $data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Test modify all
@@ -83,7 +83,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testUpdateAll(string $departmentId, string $type, string $elementId, array $requestData, int $statuscode, array $expectedResponse)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('PUT', '/v2/departments/' . $departmentId . '/' . $type . '/' . $elementId, true);
 //        $request = $this->withJson($request, $requestData);
 //        $response = $this->request($request);
@@ -92,7 +92,7 @@
 //        $this->assertSame($statuscode, $response->getStatusCode());
 //        $data = json_decode($body, true);
 //        $this->assertSame($expectedResponse, $data);
-//***REMOVED***
+//    }
 //
 //    /**
 //     * Test delete.
@@ -108,7 +108,7 @@
 //     * @throws NotFoundException
 //     */
 //    public function testDelete(string $departmentId, string $type, string $elementId, int $statuscode, array $expectedResponse)
-//    ***REMOVED***
+//    {
 //        $request = $this->createRequest('DELETE', '/v2/departments/' . $departmentId . '/' . $type . '/' . $elementId, true);
 //        $response = $this->request($request);
 //        $body = (string)$response->getBody();
@@ -116,10 +116,10 @@
 //        $this->assertSame($statuscode, $response->getStatusCode());
 //        $data = json_decode($body, true);
 //        $this->assertSame($expectedResponse, $data);
-//***REMOVED***
+//    }
 //
 //    public function getAllDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'sl_location Test success' => [
 //                'locations',
@@ -463,10 +463,10 @@
 //                ]
 //            ],
 //        ];
-//***REMOVED***
+//    }
 //
 //    public function createAllDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'sl_location Test insert success' => [
 //                'locations',
@@ -895,10 +895,10 @@
 //                ]
 //            ],
 //        ];
-//***REMOVED***
+//    }
 //
 //    public function updateAllDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'sl_location Test modify success' => [
 //                '1',
@@ -1006,10 +1006,10 @@
 //                ],
 //            ],
 //        ];
-//***REMOVED***
+//    }
 //
 //    public function deleteDataProvider()
-//    ***REMOVED***
+//    {
 //        return [
 //            'sl_location Test delete success' => [
 //                '1',
@@ -1264,5 +1264,5 @@
 //                ],
 //            ],
 //        ];
-//***REMOVED***
-//***REMOVED***
+//    }
+//}

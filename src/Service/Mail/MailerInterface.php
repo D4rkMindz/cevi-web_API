@@ -9,7 +9,7 @@
 namespace App\Service\Mail;
 
 interface MailerInterface
-***REMOVED***
+{
     /**
      * Get domain as string.
      *
@@ -38,4 +38,4 @@ interface MailerInterface
      * @return void
      */
     public function sendText(string $to, string $subject, string $text, string $from = null);
-***REMOVED***
+}

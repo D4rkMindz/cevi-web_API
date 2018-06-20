@@ -13,7 +13,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 class AuthenticationController extends AppController
-***REMOVED***
+{
     /**
      * @var LoginValidation
      */
@@ -35,13 +35,13 @@ class AuthenticationController extends AppController
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->loginValidation = $container->get(LoginValidation::class);
         $this->secret = $container->get('settings')->get('jwt')['secret'];
         $this->userRepository = $container->get(UserRepository::class);
         $this->logger = $container->get(Logger::class);
-***REMOVED***
+    }
 
     /**
      * Get JWT token.
@@ -59,20 +59,20 @@ class AuthenticationController extends AppController
      * @return Response
      */
     public function authenticateAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
         $username = (string)$data['username'];
         $password = (string)$data['password'];
         $lang = (string)$request->getParam('lang');
-        if ($this->loginValidation->canLogin($username, $password)) ***REMOVED***
+        if ($this->loginValidation->canLogin($username, $password)) {
             $userHash = $this->userRepository->getHashByusername($username);
             $expireOffset = 60 * 15; // 15 Minutes
             $token = JWTFactory::generate($username, $userHash, $lang, $this->secret, $expireOffset);
             $expiresAt = (time() + $expireOffset) * 1000;
             $this->logger->info(sprintf('%s (ID: %s)issued a token. Expires at: %s', $username, $userHash, $expiresAt));
             return $this->json($response, ['token' => $token, 'expires_at' => $expiresAt, 'user_hash' => $userHash]);
-    ***REMOVED***
+        }
         return $this->error($response, 'Unprocessable entity', 422, ['message' => __('Invalid user data')]);
-***REMOVED***
-***REMOVED***
+    }
+}

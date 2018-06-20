@@ -15,7 +15,7 @@ use Twig_Environment;
  * UserController
  */
 class UserController extends AppController
-***REMOVED***
+{
     /**
      * @var UserRepository;
      */
@@ -53,7 +53,7 @@ class UserController extends AppController
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->userRepository = $container->get(UserRepository::class);
         $this->languageRepository = $container->get(LanguageRepository::class);
@@ -61,7 +61,7 @@ class UserController extends AppController
         $this->mailer = $container->get(MailerInterface::class);
         $this->twig = $container->get(Twig_Environment::class);
         $this->isProduction = $container->get('settings')->get('isProduction');
-***REMOVED***
+    }
 
     /**
      * Get all users.
@@ -76,16 +76,16 @@ class UserController extends AppController
      * @return Response
      */
     public function getAllUsersAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $data = $this->getLimitationParams($request);
         $users = $this->userRepository->getUsers($data['limit'], $data['page']);
 
-        if (empty($users)) ***REMOVED***
+        if (empty($users)) {
             return $this->error($response, __('No users found'), 404);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['users' => $users]);
-***REMOVED***
+    }
 
     /**
      * Get single user.
@@ -97,15 +97,15 @@ class UserController extends AppController
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function getUserAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $userHash = (string)$request->getAttribute('route')->getArgument('user_hash');
         $user = $this->userRepository->getUser($userHash);
-        if (empty($user)) ***REMOVED***
+        if (empty($user)) {
             return $this->error($response, __('No user found'), 404);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['user' => $user]);
-***REMOVED***
+    }
 
     /**
      * Signup user
@@ -128,7 +128,7 @@ class UserController extends AppController
      * @throws \Twig_Error_Syntax
      */
     public function signupAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
@@ -155,9 +155,9 @@ class UserController extends AppController
             (string)$languageHash,
             (string)$departmentHash
         );
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $signupData = $this->userRepository->signupUser(
             (string)$email,
@@ -172,9 +172,9 @@ class UserController extends AppController
         );
 
         $url = 'https://cevi-web.com/registration/verify/' . $signupData['token'];
-        if (!$this->isProduction) ***REMOVED***
+        if (!$this->isProduction) {
             $url = 'http://localhost:4200/registration/verify/' . $signupData['token'];
-    ***REMOVED***
+        }
 
         $templateData = [
             'url' => $url,
@@ -193,7 +193,7 @@ class UserController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Verify email action
@@ -206,17 +206,17 @@ class UserController extends AppController
      * @return Response
      */
     public function verifyEmailAction(Request $request, Response $response): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
         $token = (string)array_value('token', $data);
         $userHash = $this->userRepository->getUserIdByEmailToken($token);
-        if (!$this->userRepository->existsUser($userHash)) ***REMOVED***
+        if (!$this->userRepository->existsUser($userHash)) {
             return $this->error($response, __('Please check your data'), 422, ['message' => __('User does not exist'), 'verified' => false]);
-    ***REMOVED***
+        }
         $this->userRepository->confirmEmail($userHash);
         return $this->json($response, ['verified' => true]);
-***REMOVED***
+    }
 
     /**
      * Update user action.
@@ -245,18 +245,18 @@ class UserController extends AppController
      * @return Response
      */
     public function updateUserAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
+    {
         $json = (string)$request->getBody();
         $data = json_decode($json, true);
 
-        if (array_key_exists('language', $data)) ***REMOVED***
+        if (array_key_exists('language', $data)) {
             $data['language_hash'] = $this->languageRepository->getLanguageByAbbreviation($data['language']);
-    ***REMOVED***
+        }
 
         $validationContext = $this->userValidation->validateUpdate($data, $this->jwt['user_id']);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $this->error($response, $validationContext->getMessage(), 422, $validationContext->toArray());
-    ***REMOVED***
+        }
 
         $singupCompleted = $this->userRepository->updateUser($data, $args['user_hash'], $this->jwt['user_id']);
 
@@ -268,7 +268,7 @@ class UserController extends AppController
         ];
 
         return $this->json($response, $responseData);
-***REMOVED***
+    }
 
     /**
      * Delete user action.
@@ -279,11 +279,11 @@ class UserController extends AppController
      * @return Response
      */
     public function deleteUserAction(Request $request, Response $response, array $args): Response
-    ***REMOVED***
-        if (!$this->userRepository->deleteUser($args['user_hash'], $this->jwt['user_id'])) ***REMOVED***
+    {
+        if (!$this->userRepository->deleteUser($args['user_hash'], $this->jwt['user_id'])) {
             $this->error($response, 'Forbidden', 403, ['message' => __('Deleting user failed')]);
-    ***REMOVED***
+        }
 
         return $this->json($response, ['message' => __('Deleted user successfully')]);
-***REMOVED***
-***REMOVED***
+    }
+}

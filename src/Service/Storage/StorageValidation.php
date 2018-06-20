@@ -10,17 +10,17 @@ use App\Util\ValidationContext;
 use Slim\Container;
 
 class StorageValidation extends AppValidation
-***REMOVED***
+{
     /**
      * @var StorageRepository
      */
     private $storageRepository;
 
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         parent::__construct($container);
         $this->storageRepository = $container->get(StorageRepository::class);
-***REMOVED***
+    }
 
     /**
      * Validate storage
@@ -38,17 +38,17 @@ class StorageValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateStorage(array $storage)
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
         $this->existsStorage($storage, $validationContext);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $validationContext;
-    ***REMOVED***
+        }
 
         $this->validateStorageFields($storage, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate modify storage
@@ -57,17 +57,17 @@ class StorageValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateUpdateStorage(array $storage)
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
         $this->existsStorageNot($storage, $validationContext);
-        if ($validationContext->fails()) ***REMOVED***
+        if ($validationContext->fails()) {
             return $validationContext;
-    ***REMOVED***
+        }
 
         $this->validateStorageFields($storage, $validationContext);
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate location
@@ -77,19 +77,19 @@ class StorageValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateLocation(array $location, bool $isUpdate = true): ValidationContext
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
-        if ($isUpdate && !$this->storageRepository->existsLocation($location['storage_id'])) ***REMOVED***
+        if ($isUpdate && !$this->storageRepository->existsLocation($location['storage_id'])) {
             $validationContext->setError('storage_id', __('Storage place not found'));
-    ***REMOVED***
+        }
 
-        if (array_key_exists('name', $location)) ***REMOVED***
+        if (array_key_exists('name', $location)) {
             $this->validateLength($location['name'], 'name', $validationContext);
-    ***REMOVED*** else ***REMOVED***
+        } else {
             $validationContext->setError('name', __('Name must be defined'));
-    ***REMOVED***
+        }
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * Validate delete.
@@ -98,21 +98,21 @@ class StorageValidation extends AppValidation
      * @return ValidationContext
      */
     public function validateDelete(array $location)
-    ***REMOVED***
+    {
         $validationContext = new ValidationContext();
-        if (!$this->storageRepository->existsLocation($location['storage_id'])) ***REMOVED***
+        if (!$this->storageRepository->existsLocation($location['storage_id'])) {
             $validationContext->setError('storage_id', __('Storage place not found'));
-    ***REMOVED***
+        }
 
         return $validationContext;
-***REMOVED***
+    }
 
     /**
      * @param array $storage
      * @param $validationContext
      */
     private function existsStorage(array $storage, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         if ($this->storageRepository->existsStorage(
             (string)$storage['location_id'],
             (string)$storage['room_id'],
@@ -120,10 +120,10 @@ class StorageValidation extends AppValidation
             (string)$storage['shelf_id'],
             (string)$storage['tray_id'],
             (string)$storage['chest_id']
-        )) ***REMOVED***
+        )) {
             $validationContext->setError('storage_place', __('Storage place already exists'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Fail if storage does not exist.
@@ -132,7 +132,7 @@ class StorageValidation extends AppValidation
      * @param ValidationContext $validationContext
      */
     private function existsStorageNot(array $storage, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         if (!$this->storageRepository->existsStorage(
             (string)$storage['location_id'],
             (string)$storage['room_id'],
@@ -140,17 +140,17 @@ class StorageValidation extends AppValidation
             (string)$storage['shelf_id'],
             (string)$storage['tray_id'],
             (string)$storage['chest_id']
-        )) ***REMOVED***
+        )) {
             $validationContext->setError('storage_place', __('Storage place already exists'));
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * @param array $storage
      * @param $validationContext
      */
     private function validateStorageFields(array $storage, ValidationContext $validationContext)
-    ***REMOVED***
+    {
         if ((
                 empty($storage['location_id'])
                 && empty($storage['room_id'])
@@ -159,33 +159,33 @@ class StorageValidation extends AppValidation
                 && empty($storage['tray_id'])
                 && empty($storage['chest_id']))
             || empty($storage['name'])
-        ) ***REMOVED***
+        ) {
             $validationContext->setError('storage_place', __('Nothing defined'));
             return;
-    ***REMOVED***
+        }
 
-        if (!empty($storage['location_id']) && !$this->storageRepository->existsLocation($storage['location_id'])) ***REMOVED***
+        if (!empty($storage['location_id']) && !$this->storageRepository->existsLocation($storage['location_id'])) {
             $validationContext->setError('location_id', __('Location does not exist'));
-    ***REMOVED***
+        }
 
-        if (!empty($storage['room_id']) && !$this->storageRepository->existsRoom($storage['room_id'])) ***REMOVED***
+        if (!empty($storage['room_id']) && !$this->storageRepository->existsRoom($storage['room_id'])) {
             $validationContext->setError('room_id', __('Room does not exist'));
-    ***REMOVED***
+        }
 
-        if (!empty($storage['corridor_id']) && !$this->storageRepository->existsCorridor($storage['corridor_id'])) ***REMOVED***
+        if (!empty($storage['corridor_id']) && !$this->storageRepository->existsCorridor($storage['corridor_id'])) {
             $validationContext->setError('corridor_id', __('Corridor does not exist'));
-    ***REMOVED***
+        }
 
-        if (!empty($storage['shelf_id']) && !$this->storageRepository->existsShelf($storage['shelf_id'])) ***REMOVED***
+        if (!empty($storage['shelf_id']) && !$this->storageRepository->existsShelf($storage['shelf_id'])) {
             $validationContext->setError('shelf_id', __('Shelf does not exist'));
-    ***REMOVED***
+        }
 
-        if (!empty($storage['tray_id']) && !$this->storageRepository->existsTray($storage['tray_id'])) ***REMOVED***
+        if (!empty($storage['tray_id']) && !$this->storageRepository->existsTray($storage['tray_id'])) {
             $validationContext->setError('tray_id', __('Tray does not exist'));
-    ***REMOVED***
+        }
 
-        if (!empty($storage['chest_id']) && !$this->storageRepository->existsChest($storage['chest_id'])) ***REMOVED***
+        if (!empty($storage['chest_id']) && !$this->storageRepository->existsChest($storage['chest_id'])) {
             $validationContext->setError('chest_id', __('Chest does not exist'));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

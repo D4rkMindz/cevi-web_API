@@ -16,7 +16,7 @@ use Slim\Container;
  * Class DepartmentTypeRepository
  */
 class DepartmentTypeRepository extends AppRepository
-***REMOVED***
+{
     /**
      * @var DepartmentTypeTable
      */
@@ -28,9 +28,9 @@ class DepartmentTypeRepository extends AppRepository
      * @throws \Interop\Container\Exception\ContainerException
      */
     public function __construct(Container $container)
-    ***REMOVED***
+    {
         $this->departmentTypeTable = $container->get(DepartmentTypeTable::class);
-***REMOVED***
+    }
 
     /**
      * Chexk if department type exists.
@@ -39,10 +39,10 @@ class DepartmentTypeRepository extends AppRepository
      * @return bool
      */
     public function existsDepartmentType(string $departmentTypeId): bool
-    ***REMOVED***
+    {
         $query = $this->departmentTypeTable->newSelect();
         $query->select(1)->where(['id'=> $departmentTypeId, '' => false]);
         $row = $query->execute()->fetch();
         return !empty($row);
-***REMOVED***
-***REMOVED***
+    }
+}

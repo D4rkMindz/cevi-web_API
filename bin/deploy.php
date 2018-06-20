@@ -1,10 +1,10 @@
 <?php
 date_default_timezone_set("Europe/Berlin");
 $time = date("Y-m-d_H-i-s");
-if (is_dir("/release/")) ***REMOVED***
+if (is_dir("/release/")) {
     echo "Removing directory ./release/";
     system("rmdir ./release/");
-***REMOVED***
+}
 
 echo "Creating directory ./release/\n";
 system("mkdir ./release/");
@@ -12,10 +12,10 @@ system("mkdir ./release/");
 echo "Unzipping $argv[1]\n";
 system("unzip $argv[1] -d ./release/");
 
-if (is_dir("./htdocs/"))***REMOVED***
+if (is_dir("./htdocs/")){
     echo "Renaming ./htdocs/ to ./htdocs_$time\n";
     system("mv ./htdocs/ ./htdocs_$time");
-***REMOVED***
+}
 
 echo "Renaming ./release/ to ./htdocs/\n";
 system("mv ./release/ ./htdocs/");
@@ -23,20 +23,20 @@ system("mv ./release/ ./htdocs/");
 echo "Removing zipfile $argv[1]\n";
 system("rm $argv[1] -rf");
 
-if (!is_dir("./htdocs/tmp")) ***REMOVED***
+if (!is_dir("./htdocs/tmp")) {
     echo "Creating /tmp directory";
     system("mkdir ./htdocs/tmp");
-***REMOVED***
+}
 
-if (!is_dir("./htdocs/tmp/logs")) ***REMOVED***
+if (!is_dir("./htdocs/tmp/logs")) {
     echo "Creating /logs directory";
     system("mkdir ./htdocs/tmp/logs");
-***REMOVED***
+}
 
-if (!is_dir("./htdocs/tmp/cache")) ***REMOVED***
+if (!is_dir("./htdocs/tmp/cache")) {
     echo "Creating /cache directory";
     system("mkdir ./htdocs/tmp/cache");
-***REMOVED***
+}
 
 echo "Updating directory permissions to 775\n";
 system("chmod -R 775 ./htdocs/tmp/");

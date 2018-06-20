@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
  * Class JWTFactory
  */
 class JWTFactory
-***REMOVED***
+{
     /**
      * Generate JWT data.
      *
@@ -20,7 +20,7 @@ class JWTFactory
      * @return string
      */
     public static function generate(string $username, string $userId, string $lang, string $secret, int $expireOffset = 60 * 60 * 8, string $scope = '')
-    ***REMOVED***
+    {
         $tokenData = [
             'iss' => 'cevi-web',
             'aud' => 'cevi-web',
@@ -36,5 +36,5 @@ class JWTFactory
         ];
         return $token = JWT::encode($tokenData, $secret);
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -18,7 +18,7 @@ cache:
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update $***REMOVED***COMPOSER_FLAGS***REMOVED*** --no-interaction --prefer-dist
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
   - cp config/env.example.php config/env.php
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('test_passwd') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade

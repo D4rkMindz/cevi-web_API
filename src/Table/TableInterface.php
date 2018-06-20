@@ -14,7 +14,7 @@ use Cake\Database\Query;
 use Cake\Database\StatementInterface;
 
 interface TableInterface
-***REMOVED***
+{
     /**
      * AppTable constructor.
      *
@@ -94,4 +94,4 @@ interface TableInterface
      * @return bool
      */
     public function hasMetadata(): bool;
-***REMOVED***
+}
