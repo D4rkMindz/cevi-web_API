@@ -204,6 +204,43 @@ class BasicInformationTest extends DbTestCase
     }
 
     /**
+     * Test genders.
+     *
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
+     *
+     * @covers ::genderAction
+     */
+    public function testGenders()
+    {
+        $request = $this->createRequest('GET', '/v2/genders', false);
+        $response = $this->request($request);
+        $this->assertSame(200, $response->getStatusCode());
+        $data = json_decode($response->getBody()->__toString(), true);
+        $expectedResponse = [
+            'code' => 200,
+            'message' => 'Success',
+            'genders' => [
+                [
+                    'id' => '1',
+                    'name_de' => 'Mann',
+                    'name_en' => 'Men',
+                    'name_fr' => 'Homme',
+                    'name_it' => 'Uomo',
+                ],
+                [
+                    'id' => '2',
+                    'name_de' => 'Frau',
+                    'name_en' => 'Miss',
+                    'name_fr' => 'Madame',
+                    'name_it' => 'Signora',
+                ],
+            ],
+        ];
+        $this->assertSame($expectedResponse, $data);
+    }
+
+    /**
      * Hook to get all data
      *
      * @param array $data
