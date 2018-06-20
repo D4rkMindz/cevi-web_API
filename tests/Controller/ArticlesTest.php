@@ -318,7 +318,7 @@ class ArticlesTest extends DbTestCase
                     'code' => 200,
                     'message' => 'Inserted article successfully',
                     'hash' => 'hashToBeReplacedManually',
-                    'url' => baseurl('/v2/departments/{department_hash}/articles/{new_article_hash}'),
+                    'url' => $this->baseurl('/v2/departments/{department_hash}/articles/{new_article_hash}'),
                 ],
                 'expectedDatabaseState' => [
                     'article' => [
@@ -367,7 +367,6 @@ class ArticlesTest extends DbTestCase
                             ['field' => 'quantity', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Impossible quantity',],
                             ['field' => 'quality_hash', 'message' => 'Required',],
-                            ['field' => 'quality_hash', 'message' => 'Quality does not exist',],
                             ['field' => 'storage_place_hash', 'message' => 'Storage place does not exist',],
                             ['field' => 'rent_price', 'message' => 'The article must be available to rent to define a rent price.',],
                         ],
@@ -384,7 +383,7 @@ class ArticlesTest extends DbTestCase
                 'data' => [
                     'title' => str_pad('asdf', 61, '_-'),
                     'description' => str_pad('asdf', 10001, '_-'),
-                    'purchase_date' => (time() + (60 * 60 * 24 * 365) + 200), // add 20 because of the testing boot time
+                    'purchase_date' => (time() + (60 * 60 * 24 * 365) + 1000), // add 20 because of the testing boot time
                     'quantity' => 10001,
                     'quality_hash' => null,
                     'replacement' => time(), // every date is valid

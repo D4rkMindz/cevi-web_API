@@ -116,7 +116,7 @@ abstract class DbTestCase extends ApiTestCase
             $startDump = microtime(true);
             $mysqldumpExecutable = $config['mysqldump_executable'];
             if (empty($mysqldumpExecutable)) {
-                throw new Exception('Mysqldump Executable must be defined in the db_test.mysqldump_executable in the configuration (env.php)');
+                throw new Exception('Mysqldump Executable must be defined in the db.mysqldump_executable in the configuration (env.php)');
             }
             if (file_exists($dump)) {
                 rename($dump, $dumpPath . date('Y-m-d_h-i-s') . '_backup.sql');
@@ -131,7 +131,7 @@ abstract class DbTestCase extends ApiTestCase
         }
         $mysqlExecutable = $config['mysql_executable'];
         if (empty($mysqlExecutable)) {
-            throw new Exception('Mysql Executable must be defined in the db_test.mysql_executable in the configuration (env.php)');
+            throw new Exception('Mysql Executable must be defined in the db.mysql_executable in the configuration (env.php)');
         }
         $startImport = microtime(true);
         $migrateCommand = "{$mysqlExecutable} -u {$user} -p{$password} {$tableSchema}< {$dump}";
@@ -186,6 +186,20 @@ abstract class DbTestCase extends ApiTestCase
      * @param array $data
      */
     abstract protected function getDataHook(array $data): void;
+
+    /**
+     * Base url method to use for test data.
+     *
+     * @param string $path
+     * @return mixed|string
+     */
+    public function baseurl(string $path = '')
+    {
+        $baseUri = dirname(dirname($_SERVER['SCRIPT_NAME']));
+        $result = str_replace('\\', '/', $baseUri) . $path;
+        $result = str_replace('//', '/', $result);
+        return $result;
+    }
 
     /**
      * Get array data set and create test data base object.

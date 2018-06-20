@@ -96,7 +96,7 @@
 //                    'chest_id' => 1,
 //                ],
 //                'expectedResponseInfo' => [
-//                    'url' => baseurl('/v2/departments/1/storages/4'),
+//                    'url' => $this->baseurl('/v2/departments/1/storages/4'),
 //                    'message' => 'Created storage place successfully',
 //                ],
 //                200,

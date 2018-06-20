@@ -186,4 +186,16 @@ class BasicInformationController extends AppController
         $genders = $this->genderRepository->getAllGenders($params['limit'], $params['page']);
         return $this->json($response, ['genders' => $genders]);
     }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
+    public function swagger(Request $request, Response $response): Response
+    {
+        $swagger = \Swagger\scan(__DIR__ . '/../../docs/swagger/');
+        $data = json_decode($swagger, true);
+        return $this->json($response, $data);
+    }
 }
