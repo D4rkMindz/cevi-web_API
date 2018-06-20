@@ -1,6 +1,8 @@
 # CEVI Web API
 
 [![Build Status](https://travis-ci.org/D4rkMindz/cevi-web_API.svg?branch=master)](https://travis-ci.org/D4rkMindz/cevi-web_API)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/D4rkMindz/cevi-web_API/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/D4rkMindz/cevi-web_API/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/D4rkMindz/cevi-web_API/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/D4rkMindz/cevi-web_API/?branch=master)
 
 ## Description
 
