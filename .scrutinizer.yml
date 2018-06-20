@@ -1,3 +1,10 @@
+build:
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+
 filter:
   excluded_paths:
     - "tests/"
@@ -26,3 +33,8 @@ checks:
     fix_line_ending: true
     fix_identation_4spaces: true
     fix_doc_comments: true
+
+tools:
+  external_code_coverage:
+    timeout: 1500
+    runs: 1
