@@ -4,6 +4,7 @@ cache.properties
 .idea/
 *.bak
 *~
+auth.json
 
 composer.phar
 
