@@ -79,7 +79,7 @@ class Formatter
     public function formatEvent(array $event, string $descriptionFormat = null): array
     ***REMOVED***
         $tmp = [];
-        $tmp['id'] = $event['id'];
+        $tmp['hash'] = $event['hash'];
         $tmp['name'] = [
             'name_de' => $event['event_name_de'],
             'name_en' => $event['event_name_en'],
@@ -163,7 +163,7 @@ class Formatter
     public function formatEventSimple(array $event, string $descriptionFormat = null): array
     ***REMOVED***
         $tmp = [];
-        $tmp['id'] = $event['id'];
+        $tmp['hash'] = $event['hash'];
         $tmp['name'] = [
             'name_de' => $event['event_name_de'],
             'name_en' => $event['event_name_en'],

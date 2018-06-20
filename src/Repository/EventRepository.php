@@ -296,7 +296,7 @@ class EventRepository extends AppRepository
         $eventDescriptionTableName = $this->eventDescriptionTable->getTablename();
 
         $fields = [
-            'id' => $eventTableName . '.id',
+            'hash' => $eventTableName . '.hash',
             'event_name_de' => $eventTitleTableName . '.name_de',
             'event_name_en' => $eventTitleTableName . '.name_en',
             'event_name_fr' => $eventTitleTableName . '.name_fr',
@@ -322,15 +322,15 @@ class EventRepository extends AppRepository
         if ($isPublic) ***REMOVED***
             $where[$eventTableName . '.public'] = true;
     ***REMOVED***
-        $where[$eventTableName . '.start <='] = date('Y-m-d H:i:s', $until);
-        $where[$eventTableName . '.start >='] = date('Y-m-d H:i:s', $since);
+        $where[$eventTableName . '.start <= '] = date('Y-m-d H:i:s', $until);
+        $where[$eventTableName . '.start >= '] = date('Y-m-d H:i:s', $since);
 
         if (!empty($departmentId)) ***REMOVED***
             $where[$departmentEventTableName . '.department_hash'] = $departmentId;
     ***REMOVED***
 
         if (!empty($departmentGroupId)) ***REMOVED***
-            $where[$departmentEventTableName . '.department_group_id'] = $departmentGroupId;
+            $where[$departmentEventTableName . '.department_group_hash'] = $departmentGroupId;
     ***REMOVED***
 
         $query = $this->eventTable->newSelect();
@@ -344,7 +344,7 @@ class EventRepository extends AppRepository
                 [
                     'table' => $departmentEventTableName,
                     'type' => 'LEFT',
-                    'conditions' => $departmentEventTableName . '.event_id=' . $eventTableName . '.id',
+                    'conditions' => $departmentEventTableName . '.event_hash=' . $eventTableName . '.hash',
                 ],
                 [
                     'table' => $eventDescriptionTableName,
@@ -371,12 +371,8 @@ class EventRepository extends AppRepository
         $eventImageTablename = $this->eventImageTable->getTablename();
 
         $fields = [
-            'id' => $imageTablename . '.id',
+            'hash' => $imageTablename . '.hash',
             'url' => $imageTablename . '.url',
-            'name_de' => $imageTablename . '.name_de',
-            'name_en' => $imageTablename . '.name_en',
-            'name_it' => $imageTablename . '.name_fr',
-            'name_fr' => $imageTablename . '.name_it',
         ];
 
         $query = $this->eventImageTable->newSelect();
@@ -385,13 +381,13 @@ class EventRepository extends AppRepository
                 [
                     'table' => $imageTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $eventImageTablename . '.image_id = ' . $imageTablename . '.id',
+                    'conditions' => $eventImageTablename . '.image_hash = ' . $imageTablename . '.hash',
                 ],
             ]);
 
         foreach ($events as $key => $event) ***REMOVED***
             $q = $query;
-            $q->where([$eventImageTablename . '.event_id' => $event['id']]);
+            $q->where([$eventImageTablename . '.event_hash' => $event['hash']]);
 
             $event['images'] = $q->execute()->fetchAll('assoc') ?: ['message' => __('No images available')];
             $events[$key] = $this->formatter->formatEvent($event, $descriptionFormat);
