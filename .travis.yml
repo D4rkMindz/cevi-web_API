@@ -25,6 +25,8 @@ before_script:
   - sudo service mysql restart
   - cd $TRAVIS_BUILD_DIR
 
+addons:
+  mariadb: '10.0'
 
 script:
   - ant phpunit-coverage
