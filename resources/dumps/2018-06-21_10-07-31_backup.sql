@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.22-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.21-MariaDB, for Win32 (AMD64)
 --
--- Host: localhost    Database: cevi_web
+-- Host: localhost    Database: localhost
 -- ------------------------------------------------------
--- Server version	10.1.22-MariaDB
+-- Server version	10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -763,7 +763,7 @@ CREATE TABLE `event_participant` (
   KEY `fk_user_has_event_event1_idx` (`event_hash`),
   KEY `fk_user_has_event_user1_idx` (`user_hash`),
   KEY `fk_event_participant_event_participation_status1_idx` (`event_participation_status_hash`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -772,6 +772,7 @@ CREATE TABLE `event_participant` (
 
 LOCK TABLES `event_participant` WRITE;
 /*!40000 ALTER TABLE `event_participant` DISABLE KEYS */;
+INSERT INTO `event_participant` VALUES (1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_2','hash_test_2','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_3','hash_test_3','hash_test_1',NULL,'2017-05-10 16:32:15',0,NULL,NULL,'2018-02-01 10:00:00',2);
 /*!40000 ALTER TABLE `event_participant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -790,7 +791,7 @@ CREATE TABLE `event_participation_status` (
   `name_fr` varchar(45) NOT NULL,
   `name_it` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -799,6 +800,7 @@ CREATE TABLE `event_participation_status` (
 
 LOCK TABLES `event_participation_status` WRITE;
 /*!40000 ALTER TABLE `event_participation_status` DISABLE KEYS */;
+INSERT INTO `event_participation_status` VALUES (1,'hash_test_1','Zugesagt','Participated','Participaté','Participatés'),(2,'hash_test_2','Abgesagt','Departicipated','Departicipaté','Departicipatés'),(3,'hash_test_3','Vielleicht','Probably','Peutetre','Peutetros');
 /*!40000 ALTER TABLE `event_participation_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -822,7 +824,7 @@ CREATE TABLE `event_title` (
   `archived_at` datetime DEFAULT NULL,
   `archived_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -831,6 +833,7 @@ CREATE TABLE `event_title` (
 
 LOCK TABLES `event_title` WRITE;
 /*!40000 ALTER TABLE `event_title` DISABLE KEYS */;
+INSERT INTO `event_title` VALUES (1,'GLK','GLK','GLK','GLK','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(2,'LLM','LLM','LLM','LLM','2017-01-01 00:00:10',0,NULL,NULL,NULL,NULL),(3,'HEKU','HEKU','HEKU','HEKU','2017-01-01 00:00:10',0,'2017-12-01 00:00:00',2,NULL,NULL),(4,'ZM1','ZM1','ZM1','ZM1','2017-01-01 00:00:10',0,NULL,NULL,'2018-01-01 00:00:12',1);
 /*!40000 ALTER TABLE `event_title` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -849,7 +852,7 @@ CREATE TABLE `gender` (
   `name_fr` varchar(45) NOT NULL,
   `name_it` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -858,6 +861,7 @@ CREATE TABLE `gender` (
 
 LOCK TABLES `gender` WRITE;
 /*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` VALUES (1,'hash_test_1','Mann','Men','Homme','Uomo'),(2,'hash_test_2','Frau','Miss','Madame','Signora');
 /*!40000 ALTER TABLE `gender` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -880,7 +884,7 @@ CREATE TABLE `image` (
   `archived_at` datetime DEFAULT NULL,
   `archived_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -889,6 +893,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (1,'hash_test_1','D:/dev/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','D:/dev/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-2.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','D:/dev/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-3.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,'2017-01-01 11:00:00',1);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -905,7 +910,7 @@ CREATE TABLE `language` (
   `name` varchar(5) NOT NULL,
   `abbreviation` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -914,6 +919,7 @@ CREATE TABLE `language` (
 
 LOCK TABLES `language` WRITE;
 /*!40000 ALTER TABLE `language` DISABLE KEYS */;
+INSERT INTO `language` VALUES (1,'hash_test_1','de_CH','de'),(2,'hash_test_2','en_GB','en'),(3,'hash_test_3','fr_CH','fr'),(4,'hash_test_4','it_CH','it');
 /*!40000 ALTER TABLE `language` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -930,7 +936,7 @@ CREATE TABLE `permission` (
   `level` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -939,6 +945,7 @@ CREATE TABLE `permission` (
 
 LOCK TABLES `permission` WRITE;
 /*!40000 ALTER TABLE `permission` DISABLE KEYS */;
+INSERT INTO `permission` VALUES (1,'hash_test_1',64,'Super Admin'),(2,'hash_test_2',32,'Admin'),(3,'hash_test_3',16,'Super User'),(4,'hash_test_4',8,'User'),(5,'hash_test_5',4,'Guest'),(6,'hash_test_6',2,'Anonymous');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,7 +997,7 @@ CREATE TABLE `position` (
   `archived_at` datetime DEFAULT NULL,
   `archived_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -999,6 +1006,7 @@ CREATE TABLE `position` (
 
 LOCK TABLES `position` WRITE;
 /*!40000 ALTER TABLE `position` DISABLE KEYS */;
+INSERT INTO `position` VALUES (1,'hash_test_1','Abteilungsleiter','Head of department','Capo dipartimento','Chef de département',NULL,NULL,NULL,NULL,NULL,NULL),(2,'hash_test_2','Lagerleiter','Camp leader','Chef de camp','Capo  del campeggio',NULL,NULL,NULL,NULL,NULL,NULL),(3,'hash_test_3','Gruppenleiter','Team leader','Chef d\'équipe','Capogruppo',NULL,NULL,NULL,NULL,NULL,NULL),(4,'hash_test_4','Hilfsleiter','Auxiliary conductors','Conducteurs auxiliaires','Conduttori ausiliari',NULL,NULL,NULL,NULL,NULL,NULL),(5,'hash_test_5','Teilnehmer','Participants','Participants','Partecipanti',NULL,NULL,NULL,NULL,NULL,NULL),(6,'hash_test_6','Eltern','Parent','Parent','Ragazzo',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `position` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1297,4 +1305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-21 10:07:51
+-- Dump completed on 2018-06-20 19:15:44
