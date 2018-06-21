@@ -18,6 +18,7 @@ cache:
 
 before_script:
   - travis_retry composer self-update
+  - travis_retry composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
   - cp config/env.example.php config/env.php
   - sudo mysql -e "CREATE DATABASE cevi_web_test;"
