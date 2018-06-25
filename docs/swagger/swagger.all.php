@@ -16,4 +16,10 @@ if (!defined('SWAGGER_HOST')) {
  *          version="0.0.1"
  *     )
  * )
+ *
+ *
+ * @SWG\Response(
+ *     response="403",
+ *     description="You've tried to access a location without authentication. Provide the X-Token!"
+ * )
  */

@@ -23,6 +23,6 @@
     </filter>
     <php>
         <const name="APP_ENV" value="travis"/>
-        <const name="DBUNIT_REGENERATE_NOW" value="true"/>
+        <env name="DBUNIT_REGENERATE_NOW" value="true"/>
     </php>
 </phpunit>

@@ -188,6 +188,9 @@ class BasicInformationController extends AppController
     }
 
     /**
+     * Get swagger
+     * Not Tested!
+     *
      * @param Request $request
      * @param Response $response
      * @return Response

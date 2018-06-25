@@ -83,6 +83,6 @@
  *     description="This header is required to authenticate the user. ",
  *     type="string",
  *     in="header",
- *     required="true"
+ *     required=true
  * )
  */

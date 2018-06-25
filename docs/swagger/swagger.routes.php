@@ -19,7 +19,8 @@ $app->post('/v2/users/verify', route(['App\Controller\UserController', 'verifyEm
  * @SWG\Get(
  *     path="/v2/users/{user_hash}",
  *     @SWG\Parameter(ref="#/parameters/user_hash"),
- *     @SWG\Response(response="200")
+ *     @SWG\Response(response="200", description="An object of the user"),
+ *     @SWG\Response(response="403", ref="#/responses/Unauthorized")
  * )
  */
 $app->get('/v2/users/{user_hash}', route(['App\Controller\UserController', 'getUserAction']))->setName('get.getUser');

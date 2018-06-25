@@ -74,7 +74,6 @@ abstract class DbTestCase extends ApiTestCase
 
         // Check if phinxlog table exists in database.
         $tableSchema = $config['database'];
-        echo "\nhost: {$config['host']}\nUser: {$config['username']}\nPassword: {$config['password']}\nDatabase: {$tableSchema}\n";
         $pdo = $this->getPdo();
         $stmt = $pdo->prepare("SELECT 1 FROM information_schema.TABLES WHERE TABLE_SCHEMA = :tableschema AND TABLE_NAME = :phinxlog");
         $stmt->execute([':tableschema' => $tableSchema, ':phinxlog' => 'phinxlog']);
