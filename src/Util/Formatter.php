@@ -421,44 +421,44 @@ class Formatter
      * Format storage place.
      *
      * @param array $storagePlace
-     * @param string $departmentId
+     * @param string $departmentHash
      * @return array
      */
-    public function formatStoragePlace(array $storagePlace, string $departmentId): array
+    public function formatStoragePlace(array $storagePlace, string $departmentHash): array
     {
         $tmp = [];
         $tmp['location'] = [
-            'id' => $storagePlace['location_id'],
+            'hash' => $storagePlace['location_hash'],
             'name' => $storagePlace['location_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/locations/' . $storagePlace['location_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/locations/' . $storagePlace['location_hash']),
         ];
         $tmp['room'] = [
-            'id' => $storagePlace['room_id'],
+            'hash' => $storagePlace['room_hash'],
             'name' => $storagePlace['room_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/rooms/' . $storagePlace['room_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/rooms/' . $storagePlace['room_hash']),
         ];
-        $tmp['corridor'] = [
-            'id' => $storagePlace['corridor_id'],
+        $tmp['corrhashor'] = [
+            'hash' => $storagePlace['corridor_hash'],
             'name' => $storagePlace['corridor_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/corridors/' . $storagePlace['corridor_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/corridors/' . $storagePlace['corridor_hash']),
         ];
         $tmp['shelf'] = [
-            'id' => $storagePlace['shelf_id'],
+            'hash' => $storagePlace['shelf_hash'],
             'name' => $storagePlace['shelf_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/shelfs/' . $storagePlace['shelf_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/shelfs/' . $storagePlace['shelf_hash']),
         ];
         $tmp['tray'] = [
-            'id' => $storagePlace['tray_id'],
+            'hash' => $storagePlace['tray_hash'],
             'name' => $storagePlace['tray_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/trays/' . $storagePlace['tray_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/trays/' . $storagePlace['tray_hash']),
         ];
         $tmp['chest'] = [
-            'id' => $storagePlace['chest_id'],
+            'hash' => $storagePlace['chest_hash'],
             'name' => $storagePlace['chest_name'],
-            'url' => baseurl('/v2/departments/' . $departmentId . '/chests/' . $storagePlace['chest_id']),
+            'url' => baseurl('/v2/departments/' . $departmentHash . '/chests/' . $storagePlace['chest_hash']),
         ];
         $tmp['name'] = $storagePlace['name'];
-        $tmp['id'] = $storagePlace['id'];
+        $tmp['hash'] = $storagePlace['hash'];
         return $tmp;
     }
 

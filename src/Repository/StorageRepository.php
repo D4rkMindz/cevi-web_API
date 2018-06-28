@@ -324,19 +324,19 @@ class StorageRepository extends AppRepository
 
 
         $fields = [
-            'id' => $storagePlaceTablename . '.id',
+            'hash' => $storagePlaceTablename . '.hash',
             'name' => $storagePlaceTablename . '.name',
-            'location_id' => $locationTablename . '.id',
+            'location_hash' => $locationTablename . '.hash',
             'location_name' => $locationTablename . '.name',
-            'room_id' => $roomTablename . '.id',
+            'room_hash' => $roomTablename . '.hash',
             'room_name' => $roomTablename . '.name',
-            'corridor_id' => $corridorTablename . '.id',
+            'corridor_hash' => $corridorTablename . '.hash',
             'corridor_name' => $corridorTablename . '.name',
-            'shelf_id' => $shelfTablename . '.id',
+            'shelf_hash' => $shelfTablename . '.hash',
             'shelf_name' => $shelfTablename . '.name',
-            'tray_id' => $trayTablename . '.id',
+            'tray_hash' => $trayTablename . '.hash',
             'tray_name' => $trayTablename . '.name',
-            'chest_id' => $chestTablename . '.id',
+            'chest_hash' => $chestTablename . '.hash',
             'chest_name' => $chestTablename . '.name',
         ];
         $query = $this->storagePlaceTable->newSelect();
@@ -365,7 +365,7 @@ class StorageRepository extends AppRepository
                 [
                     'table' => $trayTablename,
                     'type' => 'RIGHT',
-                    'conditions' => $storagePlaceTablename . '.sl_tray_id = ' . $trayTablename . '.hash',
+                    'conditions' => $storagePlaceTablename . '.sl_tray_hash = ' . $trayTablename . '.hash',
                 ],
                 [
                     'table' => $chestTablename,

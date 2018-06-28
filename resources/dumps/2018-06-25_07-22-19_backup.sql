@@ -599,7 +599,7 @@ CREATE TABLE `email_token` (
 
 LOCK TABLES `email_token` WRITE;
 /*!40000 ALTER TABLE `email_token` DISABLE KEYS */;
-INSERT INTO `email_token` VALUES (1,'hash_test_1','fa3e6e9f1d58ca6fba3d2cb94d5ee0be','2018-06-28 07:33:54'),(2,'hash_test_2','e6dc4d60e48c3e617548eb3b2caf0bfc','2018-06-28 07:33:54'),(3,'hash_test_3','4a1185e3b0b057f30a663ede12aaa905','2018-06-28 07:17:54');
+INSERT INTO `email_token` VALUES (1,'hash_test_1','b97abf766c51361b364334124e1cf035','2018-06-21 11:25:59'),(2,'hash_test_2','921c6bacf0dab4fd5252fed6f66f96a6','2018-06-21 11:25:59'),(3,'hash_test_3','0bab58d51e6bb55a8607ff51e0d3d48d','2018-06-21 11:09:59');
 /*!40000 ALTER TABLE `email_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +972,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-28 05:39:12','2018-06-28 05:44:57',0),(20180612173429,'AddedRentForArticles','2018-06-28 05:44:58','2018-06-28 05:44:59',0),(20180615194505,'Fix','2018-06-28 05:44:59','2018-06-28 05:45:06',0);
+INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-20 17:12:38','2018-06-20 17:14:13',0),(20180612173429,'AddedRentForArticles','2018-06-20 17:14:13','2018-06-20 17:14:13',0),(20180615194505,'Fix','2018-06-20 17:14:13','2018-06-20 17:14:15',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1236,7 +1236,7 @@ CREATE TABLE `storage_place` (
 
 LOCK TABLES `storage_place` WRITE;
 /*!40000 ALTER TABLE `storage_place` DISABLE KEYS */;
-INSERT INTO `storage_place` VALUES (1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','Platz 2','2027-02-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_2','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'hash_test_4','hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,'2017-12-30 00:00:00',0);
+INSERT INTO `storage_place` VALUES (1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 1','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','hash_test_2','Platz 2','2027-02-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(4,'hash_test_4','hash_test_2','hash_test_1','hash_test_2','hash_test_2','hash_test_2','hash_test_1','hash_test_1','Platz 3','2017-01-01 00:00:00',0,NULL,NULL,'2017-12-30 00:00:00',0);
 /*!40000 ALTER TABLE `storage_place` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1292,7 +1292,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$zgqZ2xDkT1KTdn3w3jo17OT0300MNxdvJ304J1eKQzNQKayUc60.y',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$SahpmTGqeedHh3hvp2HY4OFds.5ieEdKn.2wpbKd6LqEETbqYkUVe',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$ECE9DfCLzpdk9QZRz4j1.e4OiC2q2gXtCt/8kLv1EYSR5iRHmeGn.',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$.PODW2K.VWVYCX8LH5z3mup0IdbgbwZlsODZViwQhV15YYN0foja2',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$dhjlD610wo3F41f6YiAgFu3RrRY2nJuNIbpdD4Q2Jf0kwAdzr6F6i',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$jTUUs279RASi3AbQKogXYOq2dfeRj/du11mKJnfmNtxeVOflnfRe6',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1305,4 +1305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-28  7:56:40
+-- Dump completed on 2018-06-25  7:19:26

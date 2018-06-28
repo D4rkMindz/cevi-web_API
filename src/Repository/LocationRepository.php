@@ -46,7 +46,7 @@ class LocationRepository extends AppRepository
         $slLocationTablename = $table->getTablename();
         $storagePlaceTablename = $this->storagePlaceTable->getTablename();
         $fields = [
-            'id' => $slLocationTablename . '.id',
+            'hash' => $slLocationTablename . '.hash',
             'name' => $slLocationTablename . '.name',
             'created_at' => $slLocationTablename . '.created_at',
             'created_by' => $slLocationTablename . '.created_by',

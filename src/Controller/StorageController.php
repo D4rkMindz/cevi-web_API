@@ -71,7 +71,15 @@ class StorageController extends AppController
             return $this->error($response, __('No storage places found'), 404, ['message' => __('No storage places found')]);
         }
 
-        return $this->json($response, $storagePlaces);
+        $responseData = [];
+        $responseData['page'] = (int)$storagePlaces['page'];
+        $responseData['limit'] = (int)$storagePlaces['limit'];
+        unset($storagePlaces['limit']);
+        unset($storagePlaces['page']);
+        $responseData['storage_places'] = $storagePlaces;
+
+
+        return $this->json($response, $responseData);
     }
 
     /**
@@ -97,7 +105,7 @@ class StorageController extends AppController
         $descriptionFormat = $request->getParam('description_format') ?: 'both';
 
         $storagePlace = $this->storageRepository->getStorage((string)$args['department_hash'], (string)$args['storage_id']);
-        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $args['department_hash'],  $descriptionFormat);
+        $articles = $this->articleRepository->getArticleForStorageplace($args['storage_id'], $args['department_hash'], $descriptionFormat);
 
         if (empty($storagePlace)) {
             return $this->error($response, __('Not found'), 404, ['message' => __('Storage place does not exist')]);

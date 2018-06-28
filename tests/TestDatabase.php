@@ -1421,7 +1421,7 @@ class TestDatabase
                 'sl_shelf_hash' => $this->sl_shelf()[0]['hash'],
                 'sl_tray_hash' => $this->sl_tray()[0]['hash'],
                 'sl_chest_hash' => $this->sl_chest()[0]['hash'],
-                'department_hash' => $this->department()[0]['hash'],
+                'department_hash' => $this->department()[1]['hash'],
                 'name' => 'Platz 3',
                 'created_at' => '2017-01-01 00:00:00',
                 'created_by' => $this->user()[0]['hash'],

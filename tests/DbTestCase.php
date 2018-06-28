@@ -103,9 +103,10 @@ abstract class DbTestCase extends ApiTestCase
         $user = $config['username'];
         $password = $config['password'];
 
-        $dataSet = $this->getDataSet();
+        $regenerate = !empty(getenv('DBUNIT_REGENERATE_NOW'));
+        $dataSet = $this->getDataSet($regenerate);
         // Regenerate schema by setting DBUNIT_REGENERATE_NOW
-        if ($shouldMigrate || !empty(getenv('DBUNIT_REGENERATE_NOW')) || !file_exists($dump)) {
+        if ($shouldMigrate || $regenerate || !file_exists($dump)) {
             putenv('DBUNIT_REGENERATE_NOW');
 
             $startInsert = microtime(true);
@@ -181,13 +182,6 @@ abstract class DbTestCase extends ApiTestCase
     }
 
     /**
-     * Hook to get all data
-     *
-     * @param array $data
-     */
-    abstract protected function getDataHook(array $data): void;
-
-    /**
      * Base url method to use for test data.
      *
      * @param string $path
@@ -202,16 +196,24 @@ abstract class DbTestCase extends ApiTestCase
     }
 
     /**
+     * Hook to get all data
+     *
+     * @param array $data
+     */
+    abstract protected function getDataHook(array $data): void;
+
+    /**
      * Get array data set and create test data base object.
      *
+     * @param bool $regenerate
      * @return IDataSet
      */
-    protected function getDataSet(): IDataSet
+    protected function getDataSet(bool $regenerate): IDataSet
     {
         $testDatabase = new TestDatabase();
         $startGenerate = microtime(true);
         $json = '';
-        if (file_exists(__DIR__ . '/dataset.json')) {
+        if (file_exists(__DIR__ . '/dataset.json') || $regenerate) {
             $json = file_get_contents(__DIR__ . '/dataset.json');
         }
 
@@ -320,14 +322,16 @@ abstract class DbTestCase extends ApiTestCase
      * @param $expectedDatabaseState
      * @param $notExpectedDatabaseState
      */
-    protected function assertDefaultValues(Response $response, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState)
+    protected function assertDefaultValues(Response $response, int $expectedStatusCode, array $expectedResponseData, $expectedDatabaseState, $notExpectedDatabaseState, $replaceAnyHashes = true)
     {
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
         $this->assertResponseHasMessage($expectedResponseData['message'], $response);
         $json = $response->getBody()->__toString();
         $this->assertJson($json);
         $responseData = json_decode($json, true);
-        $expectedResponseData = $this->arrayReplaceHashes($expectedResponseData);
+        if ($replaceAnyHashes) {
+            $expectedResponseData = $this->arrayReplaceHashes($expectedResponseData);
+        }
 
         if (array_key_exists('info', $expectedResponseData)
             && is_array($expectedResponseData['info'])
@@ -427,11 +431,23 @@ abstract class DbTestCase extends ApiTestCase
         $array = preg_replace_array('/{sl_tray_hash}/', $this->slTrayHash, $array);
         $array = preg_replace_array('/{storage_place_hash}/', $this->storagePlaceHash, $array);
         $array = preg_replace_array('/{user_hash}/', $this->userHash, $array);
+
+        // implemented and required for LocationsTest::testGetAll (initially)
+        if (is_string($array)) {
+            return $array;
+        }
+
         if (array_key_exists('code', $array)) {
             $array['code'] = (int)$array['code'];
         }
         if (array_key_exists('verified', $array)) {
             $array['verified'] = (bool)$array['verified'];
+        }
+        if (array_key_exists('limit', $array)) {
+            $array['limit'] = (int)$array['limit'];
+        }
+        if (array_key_exists('page', $array)) {
+            $array['page'] = (int)$array['page'];
         }
         if (array_key_exists('info', $array)) {
             if (array_key_exists('verified', $array['info'])) {
