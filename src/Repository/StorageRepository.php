@@ -96,8 +96,6 @@ class StorageRepository extends AppRepository
         if (empty($rows)) {
             return [];
         }
-        $rows['limit'] = $limit;
-        $rows['page'] = $page;
 
         return $rows;
     }

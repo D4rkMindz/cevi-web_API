@@ -72,10 +72,8 @@ class StorageController extends AppController
         }
 
         $responseData = [];
-        $responseData['page'] = (int)$storagePlaces['page'];
-        $responseData['limit'] = (int)$storagePlaces['limit'];
-        unset($storagePlaces['limit']);
-        unset($storagePlaces['page']);
+        $responseData['page'] = (int)$reqArgs['page'];
+        $responseData['limit'] = (int)$reqArgs['limit'];
         $responseData['storage_places'] = $storagePlaces;
 
 

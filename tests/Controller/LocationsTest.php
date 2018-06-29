@@ -53,6 +53,76 @@ class LocationsTest extends DbTestCase
                 'message' => 'Success',
                 'limit' => 1000,
                 'page' => 1,
+                'storage_places' => [
+                    [
+                        'location' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Ort 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/locations/hash_test_1'),
+                        ],
+                        'room' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Raum 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/rooms/hash_test_1'),
+                        ],
+                        'corrhashor' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Korridor 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/corridors/hash_test_1'),
+                        ],
+                        'shelf' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Regal 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/shelfs/hash_test_1'),
+                        ],
+                        'tray' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Tablar 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/trays/hash_test_1'),
+                        ],
+                        'chest' => [
+                            'hash' => 'hash_test_1',
+                            'name' => 'Kiste 1',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/chests/hash_test_1'),
+                        ],
+                        'name' => 'Platz 1',
+                        'hash' => 'hash_test_1',
+                    ],
+                    [
+                        'location' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Ort 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/locations/hash_test_2'),
+                        ],
+                        'room' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Raum 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/rooms/hash_test_2'),
+                        ],
+                        'corrhashor' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Korridor 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/corridors/hash_test_2'),
+                        ],
+                        'shelf' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Regal 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/shelfs/hash_test_2'),
+                        ],
+                        'tray' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Tablar 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/trays/hash_test_2'),
+                        ],
+                        'chest' => [
+                            'hash' => 'hash_test_2',
+                            'name' => 'Kiste 2',
+                            'url' => $this->baseurl('/v2/departments/hash_test_1/chests/hash_test_2'),
+                        ],
+                        'name' => 'Platz 2',
+                        'hash' => 'hash_test_2',
+                    ],
+                ]
             ],
         ];
         $locations = [
@@ -93,6 +163,30 @@ class LocationsTest extends DbTestCase
             'expectedResponseData' => [
                 'code' => 200,
                 'message' => 'Success',
+                'limit' => 1000,
+                'page' => 1,
+                'rooms' => [
+                    [
+                        'hash' => 'hash_test_1',
+                        'name' => 'Raum 1',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                    [
+                        'hash' => 'hash_test_2',
+                        'name' => 'Raum 2',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                ]
             ],
         ];
         $corridors = [
@@ -101,6 +195,30 @@ class LocationsTest extends DbTestCase
             'expectedResponseData' => [
                 'code' => 200,
                 'message' => 'Success',
+                'limit' => 1000,
+                'page' => 1,
+                'corridors' => [
+                    [
+                        'hash' => 'hash_test_1',
+                        'name' => 'Korridor 1',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                    [
+                        'hash' => 'hash_test_2',
+                        'name' => 'Korridor 2',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                ]
             ],
         ];
         $shelfs = [
@@ -109,6 +227,30 @@ class LocationsTest extends DbTestCase
             'expectedResponseData' => [
                 'code' => 200,
                 'message' => 'Success',
+                'limit' => 1000,
+                'page' => 1,
+                'shelfs' => [
+                    [
+                        'hash' => 'hash_test_1',
+                        'name' => 'Regal 1',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                    [
+                        'hash' => 'hash_test_2',
+                        'name' => 'Regal 2',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                ],
             ],
         ];
         $trays = [
@@ -117,6 +259,30 @@ class LocationsTest extends DbTestCase
             'expectedResponseData' => [
                 'code' => 200,
                 'message' => 'Success',
+                'limit' => 1000,
+                'page' => 1,
+                'trays' => [
+                    [
+                        'hash' => 'hash_test_1',
+                        'name' => 'Tablar 1',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                    [
+                        'hash' => 'hash_test_2',
+                        'name' => 'Tablar 2',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                ]
             ],
         ];
         $chests = [
@@ -125,16 +291,40 @@ class LocationsTest extends DbTestCase
             'expectedResponseData' => [
                 'code' => 200,
                 'message' => 'Success',
+                'limit' => 1000,
+                'page' => 1,
+                'chests' => [
+                    [
+                        'hash' => 'hash_test_1',
+                        'name' => 'Kiste 1',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                    [
+                        'hash' => 'hash_test_2',
+                        'name' => 'Kiste 2',
+                        'created_at' => '2017-01-01 00:00:00',
+                        'created_by' => '0',
+                        'modified_at' => NULL,
+                        'modified_by' => NULL,
+                        'archived_at' => NULL,
+                        'archived_by' => NULL,
+                    ],
+                ]
             ],
         ];
         return [
             'Test get all storages' => $storages,
-//            'Test get all locations' => $locations,
-//            'Test get all rooms' => $rooms,
-//            'Test get all corridors' => $corridors,
-//            'Test get all shelfs' => $shelfs,
-//            'Test get all trays' => $trays,
-//            'Test get all chests' => $chests,
+            'Test get all locations' => $locations,
+            'Test get all rooms' => $rooms,
+            'Test get all corridors' => $corridors,
+            'Test get all shelfs' => $shelfs,
+            'Test get all trays' => $trays,
+            'Test get all chests' => $chests,
         ];
     }
 
