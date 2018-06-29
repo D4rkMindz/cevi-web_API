@@ -1137,7 +1137,7 @@ class TestDatabase
             [
                 'id' => '1',
                 'hash' => 'hash_test_1',
-                'url' => $this->baseurl('/img/events/image-url-1.jpg'),
+                'url' => '/img/events/image-url-1.jpg',
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
                 'created_by' => $this->user()[0]['hash'],
@@ -1149,7 +1149,7 @@ class TestDatabase
             [
                 'id' => '2',
                 'hash' => 'hash_test_2',
-                'url' => $this->baseurl('/img/events/image-url-2.jpg'),
+                'url' => '/img/events/image-url-2.jpg',
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
                 'created_by' => $this->user()[1]['hash'],
@@ -1161,7 +1161,7 @@ class TestDatabase
             [
                 'id' => '3',
                 'hash' => 'hash_test_3',
-                'url' => $this->baseurl('/img/events/image-url-3.jpg'),
+                'url' => '/img/events/image-url-3.jpg',
                 'type' => 'jpg',
                 'created_at' => '2017-01-01 10:00:00',
                 'created_by' => $this->user()[1]['hash'],
