@@ -37,4 +37,3 @@ checks:
 tools:
   external_code_coverage:
     timeout: 1500
-    runs: 1
