@@ -115,7 +115,7 @@ abstract class DbTestCase extends ApiTestCase
             $timeUsedInserting = $endInsert - $startInsert;
 
             $startDump = microtime(true);
-            $mysqldumpExecutable = $config['mysqldump_executable'];
+            $mysqldumpExecutable =  array_value('mysqldump_executable', $config);;
             if (empty($mysqldumpExecutable)) {
                 throw new Exception('Mysqldump Executable must be defined in the db.mysqldump_executable in the configuration (env.php)');
             }
@@ -130,7 +130,7 @@ abstract class DbTestCase extends ApiTestCase
             $endDump = microtime(true);
             $timeUsedDumping = $endDump - $startDump;
         }
-        $mysqlExecutable = $config['mysql_executable'];
+        $mysqlExecutable = array_value('mysql_executable', $config);
         if (empty($mysqlExecutable)) {
             throw new Exception('Mysql Executable must be defined in the db.mysql_executable in the configuration (env.php)');
         }
@@ -213,7 +213,7 @@ abstract class DbTestCase extends ApiTestCase
         $testDatabase = new TestDatabase();
         $startGenerate = microtime(true);
         $json = '';
-        if (file_exists(__DIR__ . '/dataset.json') || $regenerate) {
+        if (file_exists(__DIR__ . '/dataset.json') && $regenerate === false) {
             $json = file_get_contents(__DIR__ . '/dataset.json');
         }
 

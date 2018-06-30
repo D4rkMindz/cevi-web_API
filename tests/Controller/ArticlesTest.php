@@ -492,7 +492,6 @@ class ArticlesTest extends DbTestCase
                             ['field' => 'quantity', 'message' => 'Required',],
                             ['field' => 'quantity', 'message' => 'Impossible quantity',],
                             ['field' => 'quality_hash', 'message' => 'Required',],
-                            ['field' => 'quality_hash', 'message' => 'Quality does not exist',],
                             ['field' => 'storage_place_hash', 'message' => 'Storage place does not exist',],
                             ['field' => 'rent_price', 'message' => 'The article must be available to rent to define a rent price.',],
                         ],

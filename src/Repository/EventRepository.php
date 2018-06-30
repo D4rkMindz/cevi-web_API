@@ -389,9 +389,13 @@ class EventRepository extends AppRepository
             $q = $query;
             $q->where([$eventImageTablename . '.event_hash' => $event['hash']]);
 
-            $images = $q->execute()->fetchAll('assoc') ?: ['message' => __('No images available')];
-            foreach ($images as $k => $image) {
-                $images[$k]['url'] = baseurl($image['url']);
+            $images = $q->execute()->fetchAll('assoc');
+            if (!empty($images)) {
+                foreach ($images as $k => $image) {
+                    $images[$k]['url'] = baseurl($image['url']);
+                }
+            } else {
+                $images = ['message' => __('No images available')];
             }
             $event['images'] = $images;
             $events[$key] = $this->formatter->formatEvent($event, $descriptionFormat);

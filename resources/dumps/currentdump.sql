@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.22-MariaDB, for Win32 (AMD64)
+-- MySQL dump 10.16  Distrib 10.1.33-MariaDB, for Win32 (AMD64)
 --
 -- Host: localhost    Database: cevi_web_test
 -- ------------------------------------------------------
--- Server version	10.1.22-MariaDB
+-- Server version	10.1.33-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -599,7 +599,7 @@ CREATE TABLE `email_token` (
 
 LOCK TABLES `email_token` WRITE;
 /*!40000 ALTER TABLE `email_token` DISABLE KEYS */;
-INSERT INTO `email_token` VALUES (1,'hash_test_1','fa3e6e9f1d58ca6fba3d2cb94d5ee0be','2018-06-28 07:33:54'),(2,'hash_test_2','e6dc4d60e48c3e617548eb3b2caf0bfc','2018-06-28 07:33:54'),(3,'hash_test_3','4a1185e3b0b057f30a663ede12aaa905','2018-06-28 07:17:54');
+INSERT INTO `email_token` VALUES (1,'hash_test_1','0a7a010d4d98332dfa7a51afd7a3187b','2018-06-30 12:09:24'),(2,'hash_test_2','439f4920eb4300097673384e285faec8','2018-06-30 12:09:24'),(3,'hash_test_3','d2823ea4803f5563af196cbe0b03ff4d','2018-06-30 11:53:24');
 /*!40000 ALTER TABLE `email_token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -893,7 +893,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'hash_test_1','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-2.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','C:/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-3.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,'2017-01-01 11:00:00',1);
+INSERT INTO `image` VALUES (1,'hash_test_1','/img/events/image-url-1.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2','/img/events/image-url-2.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3','/img/events/image-url-3.jpg','jpg','2017-01-01 10:00:00',0,NULL,NULL,'2017-01-01 11:00:00',1);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -972,7 +972,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-28 05:39:12','2018-06-28 05:44:57',0),(20180612173429,'AddedRentForArticles','2018-06-28 05:44:58','2018-06-28 05:44:59',0),(20180615194505,'Fix','2018-06-28 05:44:59','2018-06-28 05:45:06',0);
+INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-30 09:42:44','2018-06-30 09:42:52',0),(20180612173429,'AddedRentForArticles','2018-06-30 09:42:52','2018-06-30 09:42:52',0),(20180615194505,'Fix','2018-06-30 09:42:52','2018-06-30 09:42:53',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1292,7 +1292,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$zgqZ2xDkT1KTdn3w3jo17OT0300MNxdvJ304J1eKQzNQKayUc60.y',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$SahpmTGqeedHh3hvp2HY4OFds.5ieEdKn.2wpbKd6LqEETbqYkUVe',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$ECE9DfCLzpdk9QZRz4j1.e4OiC2q2gXtCt/8kLv1EYSR5iRHmeGn.',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'hash_test_1',1,'hash_test_1','hash_test_1','hash_test_1','hash_test_1','hash_test_1','Max','max.mustermann@example.com','max','$2y$10$jPfv.MPr0Ou4IA2d.Y.hTOnFiDRGpTdGYQQE/oUVPdDGcEDoNev/K',1,0,1,'Mustermann','Examplehausenerstrasse 1','asöfd','1998-06-05','012 345 67 89','076 123 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(2,'hash_test_2',2,'hash_test_2','hash_test_2','hash_test_1','hash_test_1','hash_test_2','Maxine','maxine.mustermann@example.com','maxine','$2y$10$ZlTnyPiR6uBjD8uH.9oMJ.d71yeWTQv.50EDkrIThUZFmuf8h03qW',1,0,1,'Mustermann','Examplehausenerstrasse 2','Maus','1998-06-05','012 355 67 89','076 523 45 67',2019,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL),(3,'hash_test_3',3,'hash_test_1','hash_test_3','hash_test_1','hash_test_3','hash_test_2','Maxinea','maxine.mustermann@example.com','maxinea','$2y$10$O7Bht1.aaFD726FWf9wMsuoUBfoJo87ldGXNqLAKjzPSt3pEBtYD2',1,0,1,'Mustermann','Examplehausenerstrasse 3','Maus','1998-06-05','013 345 67 89','073 133 45 67',2017,'2017-01-01 00:00:00',0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1305,4 +1305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-29  7:50:46
+-- Dump completed on 2018-06-30 12:09:49
