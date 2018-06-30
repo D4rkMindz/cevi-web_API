@@ -31,6 +31,12 @@ build/
 !tmp/
 tmp/*
 !tmp/.htaccess
+
+#dumps/ folder with empty file
+!tmp/cache/
+tmp/cache/*
+!tmp/cache/empty
+
 #cache/ folder with empty file
 !tmp/cache/
 tmp/cache/*
