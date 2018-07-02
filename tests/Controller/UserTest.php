@@ -118,7 +118,7 @@ class UserTest extends DbTestCase
             'js_certificate_until' => '2019',
             'signup_completed' => true,
             'email_verified' => false,
-            'url' => $this->baseurl('v2/users/hash_test_1'),
+            'url' => $this->baseurl('/v2/users/hash_test_1'),
             'created_at' => '2017-01-01 00:00:00',
             'created_by' => '0',
             'modified_at' => null,
@@ -318,7 +318,7 @@ class UserTest extends DbTestCase
 
     public function testDeleteUser()
     {
-        $request = $this->createRequest('DELETE', '/v2/users/'. $this->userHash);
+        $request = $this->createRequest('DELETE', '/v2/users/' . $this->userHash);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
         $this->assertResponseHasMessage('Deleted user successfully', $response);

@@ -13,6 +13,8 @@ $env['db'] = [
     'port' => '',
     'username' => '',
     'password' => '',
+    'mysql_executable' => '',
+    'mysqldump_executable' => '',
 ];
 
 $env['mailgun'] = [
