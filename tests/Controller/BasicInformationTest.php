@@ -163,7 +163,7 @@ class BasicInformationTest extends DbTestCase
                     'images' => [
                         [
                             'hash' => 'hash_test_1',
-                            'url' => 'G:/dev/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg',
+                            'url' => $this->baseurl('/img/events/image-url-1.jpg'),
                         ],
                     ],
                     'description' => [
