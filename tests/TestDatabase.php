@@ -1215,7 +1215,7 @@ class TestDatabase
         ];
     }
 
-    private function sl_chestsl_chest()
+    private function sl_chest()
     {
         return [
             [
