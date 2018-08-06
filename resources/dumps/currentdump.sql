@@ -747,10 +747,10 @@ DROP TABLE IF EXISTS `event_participant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `event_participant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\''s participation is registered, bc the children is registered in a department.',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\\''s participation is registered, bc the children is registered in a department.',
   `hash` varchar(255) NOT NULL,
-  `user_hash` varchar(255) NOT NULL COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\''s participation is registered, bc the children is registered in a department.',
-  `event_hash` varchar(255) NOT NULL COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\''s participation is registered, bc the children is registered in a department.',
+  `user_hash` varchar(255) NOT NULL COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\\''s participation is registered, bc the children is registered in a department.',
+  `event_hash` varchar(255) NOT NULL COMMENT 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\\''s participation is registered, bc the children is registered in a department.',
   `event_participation_status_hash` varchar(255) NOT NULL,
   `message` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -972,7 +972,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20180612093217,'Init','2018-06-30 09:42:44','2018-06-30 09:42:52',0),(20180612173429,'AddedRentForArticles','2018-06-30 09:42:52','2018-06-30 09:42:52',0),(20180615194505,'Fix','2018-06-30 09:42:52','2018-06-30 09:42:53',0);
+INSERT INTO `phinxlog` VALUES (20180806233847,'Init','2018-08-06 23:39:58','2018-08-06 23:39:59',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1305,4 +1305,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-07  0:02:24
+-- Dump completed on 2018-08-07  1:40:01

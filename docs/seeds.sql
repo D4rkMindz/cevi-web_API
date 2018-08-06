@@ -11,40 +11,76 @@ MySQL - 10.1.32-MariaDB : Database - d4rkmindz_cevi-web_api
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-/*Data for the table `app_language` */
 
-insert  into `language`(`id`,`name`,`abbreviation`) values
-(1,'de_CH','de'),
-(2,'en_GB','en'),
-(3,'fr_CH','fr'),
-(4,'it_CH','it');
+/*Data for the table `language` */
 
-/*Data for the table `app_position` */
+insert  into `language`(`id`,`hash`,`name`,`abbreviation`) values
+(1,'de_CH','71b00e7a-b16f-47e2-9da1-ea323103a818','de'),
+(2,'en_GB','b7e0f7ac-76c6-40fe-87fe-d2bcd8d64aee','en'),
+(3,'fr_CH','fd25a250-701d-4249-ba8b-0723338c6821','fr'),
+(4,'it_CH','03b89e4a-642e-47d0-a26c-81baed1e0caf','it');
 
-insert  into `app_position`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'Admin','Admin','Admin','Admin','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(2,'Abteilungsleiter','Head of Department','Chef de Département','Capo Dipartimento','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(3,'Lagerleiter','Camp Leader','Chef de Camp','Capo del Campeggio','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(4,'Gruppenleiter','Group Leader','Chef de Groupe','Capigruppo','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(5,'Hilfsleiter','Auxiliary Leader','Chef Auxiliaire','Capo  ausiliario','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(6,'Eltern','Parent','Parent','Genitore','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
-(7,'Teilnehmer','Participant','Participant','Partecipante','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL);
+/*Data for the table `position` */
 
-/*Data for the table `app_user` */
+insert  into `position`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'Admin','6a8abfc3-a61f-4f21-80d6-bf7369767762','Admin','Admin','Admin','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(2,'Abteilungsleiter','b9b077f8-e203-441c-86e9-b8af9c6b65f3','Head of Department','Chef de Département','Capo Dipartimento','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(3,'Lagerleiter','cc249c91-6f2b-47a9-817b-5a11c1461d68','Camp Leader','Chef de Camp','Capo del Campeggio','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(4,'Gruppenleiter','098fa093-e52a-4977-b161-79c22eb158e0','Group Leader','Chef de Groupe','Capigruppo','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(5,'Hilfsleiter','fa99c334-a0ce-4056-b927-ce1287af315a','Auxiliary Leader','Chef Auxiliaire','Capo  ausiliario','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(6,'Eltern','7abdfa72-cfde-4755-95bd-3e6265e9ccaa','Parent','Parent','Genitore','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL),
+(7,'Teilnehmer','f42813ad-be01-4eda-b02f-9c048c394971','Participant','Participant','Partecipante','2018-04-09 20:41:32',0,NULL,NULL,NULL,NULL);
 
-insert  into `app_user`(`id`,`city_id`,`language_id`,`permission_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,1709,1,1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
-(2,1709,1,4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
+/*Data for the table `user` */
 
-/*Data for the table `article` */
+insert  into `user`(`id`,`hash`,`city_id`,`language_id`,`permission_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'developer',1709,1,1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
+(2,'default',1709,1,4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
 
-/*Data for the table `article_description` */
+/*Data for the table `department` */
 
-/*Data for the table `article_image` */
+insert  into `department`(`id`,`hash`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'moehlin',1,1,1,1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
 
-/*Data for the table `article_quality` */
+/*Data for the table `department_type` */
 
-/*Data for the table `article_title` */
+insert  into `department_type`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'org','Verband','Organization','Organisme','Organismo');
+
+/*Data for the table `department_group` */
+
+insert  into `department_group`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'ag-so-lu-zg','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
+
+/*Data for the table `department_region` */
+
+insert  into `department_region`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG');
+
+/*Data for the table `department_type` */
+
+insert  into `department_type`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'Jungschar','Flock of Young','Troupeau de Jeunes','Branco di Giovani','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL),
+(2,'Ten Sing','Ten Sing','Ten Sing','Ten Sing','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL);
+
+
+/*Data for the table `gender` */
+
+insert  into `gender`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'Männlich','Male','Mâle','Maschio'),
+(2,'Weiblich','Female','Femme','Femmina');
+
+/*Data for the table `image` */
+
+/*Data for the table `permission` */
+
+insert  into `permission`(`id`,`level`,`name`) values
+(1,64,'Super Admin'),
+(2,32,'Admin'),
+(3,16,'Super User'),
+(4,8,'User'),
+(5,4,'Guest'),
+(6,2,'Anonymous');
 
 /*Data for the table `city` */
 
@@ -5342,87 +5378,6 @@ insert  into `city`(`id`,`country`,`state`,`number`,`number2`,`title_de`,`title_
 (5291,'CH','AG','5313','02','Klingnau Wiesenweg','Klingnau Wiesenweg','Klingnau Wiesenweg','Klingnau Wiesenweg','2015-05-30 18:20:50',2,'2015-05-30 18:20:50',NULL,0,NULL,NULL),
 (5292,'CH','ZH','8953','04','Dietikon Silbern','Dietikon Silbern','Dietikon Silbern','Dietikon Silbern','2015-05-30 18:20:50',2,'2015-05-30 18:20:50',NULL,0,NULL,NULL),
 (5293,'CH','TI','6875','03','Campora','Campora','Campora','Campora','2015-05-30 18:20:50',2,'2015-05-30 18:20:50',NULL,0,NULL,NULL);
-
-/*Data for the table `department` */
-
-insert  into `department`(`id`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,1,1,1,1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
-
-/*Data for the table `department_event` */
-
-/*Data for the table `department_group` */
-
-insert  into `department_group`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'Verband','Organization','Organisme','Organismo');
-
-/*Data for the table `department_region` */
-
-insert  into `department_region`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG');
-
-/*Data for the table `department_type` */
-
-insert  into `department_type`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'Jungschar','Flock of Young','Troupeau de Jeunes','Branco di Giovani','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL),
-(2,'Ten Sing','Ten Sing','Ten Sing','Ten Sing','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL);
-
-/*Data for the table `educational_course` */
-
-/*Data for the table `educational_course_description` */
-
-/*Data for the table `educational_course_image` */
-
-/*Data for the table `educational_course_organiser` */
-
-/*Data for the table `educational_course_participant` */
-
-/*Data for the table `educational_course_title` */
-
-/*Data for the table `event` */
-
-/*Data for the table `event_article` */
-
-/*Data for the table `event_description` */
-
-/*Data for the table `event_image` */
-
-/*Data for the table `event_participant` */
-
-/*Data for the table `event_participation_status` */
-
-/*Data for the table `event_title` */
-
-/*Data for the table `gender` */
-
-insert  into `gender`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'Männlich','Male','Mâle','Maschio'),
-(2,'Weiblich','Female','Femme','Femmina');
-
-/*Data for the table `image` */
-
-/*Data for the table `permission` */
-
-insert  into `permission`(`id`,`level`,`name`) values
-(1,64,'Super Admin'),
-(2,32,'Admin'),
-(3,16,'Super User'),
-(4,8,'User'),
-(5,4,'Guest'),
-(6,2,'Anonymous');
-
-/*Data for the table `sl_chest` */
-
-/*Data for the table `sl_corridor` */
-
-/*Data for the table `sl_location` */
-
-/*Data for the table `sl_room` */
-
-/*Data for the table `sl_shelf` */
-
-/*Data for the table `sl_tray` */
-
-/*Data for the table `storage_place` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
