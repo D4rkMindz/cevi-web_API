@@ -36,7 +36,34 @@ To visit your Website you have to open http://localhost/<project_directory>/.
 
 ## Deployment
 
-To deploy the application, you need a 
+To deploy the application, you need a ant.<environment>.properties file in the config folder. The environment is either test, staging or production.
+For each environment, you MUST define (in the ant.<environment>.properties file) 
+ - The host (as IP-address)
+ - The FTP user that has read, write and execute access for the directory
+ - The password for the FTP user
+ - The directory of your webserver where the application should be installed
+
+```
+build.ftp.host=127.0.0.1
+build.ftp.username=root
+build.ftp.password=mysupersecurepasswordthatisshouldnotcommit
+build.ftp.dir=/var/www/the/directory/to/install
+```
+
+After adding the properties correctly, you can now execute the deployment command. It takes the master branch and prepares it in a zip-file for the deployment.
+
+```bash
+d4rkmindz@linux: $ ant deploy
+```
+After executing this command you will see a prompt to enter the environment to deploy to.
+Either enter test, staging or prod. Entering test will use the config/ant.test.properties file for the FTP credentials.
+```
+deploy:
+    [input] Which config should be used? (test, staging, prod)
+    <type here the required environment to deploy to>
+```
+
+After that, the automated deployment is finished.
 
 ## Todos
 - create setup script
