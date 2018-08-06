@@ -17,6 +17,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -562,6 +563,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -851,6 +853,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -992,6 +995,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -1189,6 +1193,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -1478,6 +1483,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -1915,6 +1921,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -2322,6 +2329,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -2504,6 +2512,7 @@ return array (
         'table_comment' => 'epart',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -2678,6 +2687,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -2852,6 +2862,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -3164,6 +3175,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -3722,6 +3734,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4011,6 +4024,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4175,6 +4189,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4413,6 +4428,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4577,6 +4593,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4866,6 +4883,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -4994,6 +5012,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -5457,6 +5476,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -5800,6 +5820,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -6089,6 +6110,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -6230,6 +6252,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -6254,7 +6277,7 @@ return array (
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\'s participation is registered, bc the children is registered in a department.',
         ),
         'hash' => 
         array (
@@ -6300,7 +6323,7 @@ return array (
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\'s participation is registered, bc the children is registered in a department.',
         ),
         'event_hash' => 
         array (
@@ -6323,7 +6346,7 @@ return array (
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\'s participation is registered, bc the children is registered in a department.',
+          'COLUMN_COMMENT' => 'This table is linked to event because a children can participate via any department to an event. it does not matter via which department it\\\\\\\\\'s participation is registered, bc the children is registered in a department.',
         ),
         'event_participation_status_hash' => 
         array (
@@ -6596,6 +6619,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -6770,6 +6794,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7059,6 +7084,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7233,6 +7259,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7499,6 +7526,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7627,6 +7655,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7755,6 +7784,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -7906,6 +7936,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -8218,6 +8249,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -8461,6 +8493,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -8704,6 +8737,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -8947,6 +8981,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -9190,6 +9225,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -9433,6 +9469,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -9676,6 +9713,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -10188,6 +10226,7 @@ return array (
         'table_comment' => '',
         'table_collation' => 'utf8_general_ci',
         'character_set_name' => 'utf8',
+        'row_format' => 'Compact',
       ),
       'columns' => 
       array (
@@ -10254,7 +10293,7 @@ return array (
           'DATETIME_PRECISION' => NULL,
           'CHARACTER_SET_NAME' => NULL,
           'COLLATION_NAME' => NULL,
-          'COLUMN_TYPE' => 'int(255)',
+          'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'MUL',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
