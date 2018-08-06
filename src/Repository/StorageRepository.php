@@ -243,12 +243,12 @@ class StorageRepository extends AppRepository
     /**
      * Check if location exists.
      *
-     * @param string $locationId
+     * @param string $locationHash
      * @return bool
      */
-    public function existsLocation(string $locationId): bool
+    public function existsLocation(string $locationHash): bool
     {
-        return $this->exists($this->slLocationTable, ['hash' => $locationId]);
+        return $this->exists($this->slLocationTable, ['hash' => $locationHash]);
     }
 
     /**

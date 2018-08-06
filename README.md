@@ -41,4 +41,5 @@ To deploy the application, you need a
 ## Todos
 - create setup script
 - replace IDs with Hashes
+- Return hashes after create !IMPORTANT
 - individualize permission handling

@@ -79,8 +79,8 @@ class StorageValidation extends AppValidation
     public function validateLocation(array $location, bool $isUpdate = true): ValidationContext
     {
         $validationContext = new ValidationContext();
-        if ($isUpdate && !$this->storageRepository->existsLocation($location['storage_id'])) {
-            $validationContext->setError('storage_id', __('Storage place not found'));
+        if ($isUpdate && !$this->storageRepository->existsLocation($location['storage_hash'])) {
+            $validationContext->setError('storage_hash', __('Storage place not found'));
         }
 
         if (array_key_exists('name', $location)) {
@@ -114,12 +114,12 @@ class StorageValidation extends AppValidation
     private function existsStorage(array $storage, ValidationContext $validationContext)
     {
         if ($this->storageRepository->existsStorage(
-            (string)$storage['location_id'],
-            (string)$storage['room_id'],
-            (string)$storage['corridor_id'],
-            (string)$storage['shelf_id'],
-            (string)$storage['tray_id'],
-            (string)$storage['chest_id']
+            (string)$storage['location_hash'],
+            (string)$storage['room_hash'],
+            (string)$storage['corridor_hash'],
+            (string)$storage['shelf_hash'],
+            (string)$storage['tray_hash'],
+            (string)$storage['chest_hash']
         )) {
             $validationContext->setError('storage_place', __('Storage place already exists'));
         }
@@ -151,41 +151,48 @@ class StorageValidation extends AppValidation
      */
     private function validateStorageFields(array $storage, ValidationContext $validationContext)
     {
-        if ((
-                empty($storage['location_id'])
-                && empty($storage['room_id'])
-                && empty($storage['corridor_id'])
-                && empty($storage['shelf_id'])
-                && empty($storage['tray_id'])
-                && empty($storage['chest_id']))
+        // TODO validate if storage is accessible for specific department (add database field and adjust exists location)
+        if (
+            (
+                empty($storage['location_hash'])
+                && empty($storage['room_hash'])
+                && empty($storage['corridor_hash'])
+                && empty($storage['shelf_hash'])
+                && empty($storage['tray_hash'])
+                && empty($storage['chest_hash'])
+            )
             || empty($storage['name'])
         ) {
             $validationContext->setError('storage_place', __('Nothing defined'));
             return;
         }
 
-        if (!empty($storage['location_id']) && !$this->storageRepository->existsLocation($storage['location_id'])) {
-            $validationContext->setError('location_id', __('Location does not exist'));
+        if (empty($storage['location_hash'])) {
+            $validationContext->setError('location_hash', __('A location is required for a storage place'));
         }
 
-        if (!empty($storage['room_id']) && !$this->storageRepository->existsRoom($storage['room_id'])) {
-            $validationContext->setError('room_id', __('Room does not exist'));
+        if (!empty($storage['location_hash']) && !$this->storageRepository->existsLocation($storage['location_hash'])) {
+            $validationContext->setError('location_hash', __('Location does not exist'));
         }
 
-        if (!empty($storage['corridor_id']) && !$this->storageRepository->existsCorridor($storage['corridor_id'])) {
-            $validationContext->setError('corridor_id', __('Corridor does not exist'));
+        if (!empty($storage['room_hash']) && !$this->storageRepository->existsRoom($storage['room_hash'])) {
+            $validationContext->setError('room_hash', __('Room does not exist'));
         }
 
-        if (!empty($storage['shelf_id']) && !$this->storageRepository->existsShelf($storage['shelf_id'])) {
-            $validationContext->setError('shelf_id', __('Shelf does not exist'));
+        if (!empty($storage['corridor_hash']) && !$this->storageRepository->existsCorridor($storage['corridor_hash'])) {
+            $validationContext->setError('corridor_hash', __('Corridor does not exist'));
         }
 
-        if (!empty($storage['tray_id']) && !$this->storageRepository->existsTray($storage['tray_id'])) {
-            $validationContext->setError('tray_id', __('Tray does not exist'));
+        if (!empty($storage['shelf_hash']) && !$this->storageRepository->existsShelf($storage['shelf_hash'])) {
+            $validationContext->setError('shelf_hash', __('Shelf does not exist'));
         }
 
-        if (!empty($storage['chest_id']) && !$this->storageRepository->existsChest($storage['chest_id'])) {
-            $validationContext->setError('chest_id', __('Chest does not exist'));
+        if (!empty($storage['tray_hash']) && !$this->storageRepository->existsTray($storage['tray_hash'])) {
+            $validationContext->setError('tray_hash', __('Tray does not exist'));
+        }
+
+        if (!empty($storage['chest_hash']) && !$this->storageRepository->existsChest($storage['chest_hash'])) {
+            $validationContext->setError('chest_hash', __('Chest does not exist'));
         }
     }
 }

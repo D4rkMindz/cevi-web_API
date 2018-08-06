@@ -87,6 +87,7 @@ class LocationRepository extends AppRepository
     {
         $row = [
             'name' => $name,
+            'hash' => uniqid(),
         ];
         return $table->insert($row, $userId);
     }
@@ -95,26 +96,26 @@ class LocationRepository extends AppRepository
      * Update storage
      *
      * @param TableInterface $table
-     * @param string $id
+     * @param string $hash
      * @param string $name
      * @param string $userId
      * @return bool|\Cake\Database\StatementInterface
      */
-    public function updateStorage(TableInterface $table, string $id, string $name, string $userId)
+    public function updateStorage(TableInterface $table, string $hash, string $name, string $userId)
     {
-        return $table->modify(['name' => (string)$name], ['id' => $id], $userId);
+        return $table->modify(['name' => (string)$name], ['hash' => $hash], $userId);
     }
 
     /**
      * Delete storage.
      *
      * @param TableInterface $table
-     * @param string $id
+     * @param string $hash
      * @param string $userId
      * @return bool
      */
-    public function deleteStorage(TableInterface $table, string $id, string $userId)
+    public function deleteStorage(TableInterface $table, string $hash, string $userId)
     {
-        return $table->archive($userId, ['id'=>$id]);
+        return $table->archive($userId, ['hash' => $hash]);
     }
 }

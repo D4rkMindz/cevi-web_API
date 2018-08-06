@@ -142,7 +142,16 @@ class StorageController extends AppController
         }
 
         $json = (string)$request->getBody();
-        $params = json_decode($json, true);
+        $data = json_decode($json, true);
+        $params = [
+            'name' => array_value('name', $data),
+            'location_hash' => array_value('location_hash', $data),
+            'room_hash' => array_value('room_hash', $data),
+            'corridor_hash' => array_value('corridor_hash', $data),
+            'shelf_hash' => array_value('shelf_hash', $data),
+            'tray_hash' => array_value('tray_hash', $data),
+            'chest_hash' => array_value('chest_hash', $data),
+        ];
 
         $validationContext = $this->storageValidation->validateStorage($params);
         if ($validationContext->fails()) {

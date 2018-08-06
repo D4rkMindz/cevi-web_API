@@ -23,6 +23,5 @@
     </filter>
     <php>
         <const name="APP_ENV" value="integration"/>
-        <env name="DBUNIT_REGENERATE_NOW" value="true"/>
     </php>
 </phpunit>

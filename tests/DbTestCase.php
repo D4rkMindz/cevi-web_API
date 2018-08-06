@@ -318,7 +318,7 @@ abstract class DbTestCase extends ApiTestCase
      *
      * @param Response $response
      * @param int $expectedStatusCode
-     * @param array $expectedResponseData
+     * @param array $expectedResponseData The expected Response data
      * @param $expectedDatabaseState
      * @param $notExpectedDatabaseState
      */
