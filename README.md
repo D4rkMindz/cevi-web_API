@@ -34,6 +34,10 @@ To setup the database, there is a script (TODO) in the `bin/` directory.
 Afterwards you can start your local Apache Server with [XAMPP](https://www.apachefriends.org/index.html).
 To visit your Website you have to open http://localhost/<project_directory>/.
 
+## Deployment
+
+To deploy the application, you need a 
+
 ## Todos
 - create setup script
 - replace IDs with Hashes

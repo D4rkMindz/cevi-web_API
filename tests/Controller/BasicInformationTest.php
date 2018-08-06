@@ -126,7 +126,7 @@ class BasicInformationTest extends DbTestCase
      */
     public function testEvents()
     {
-        $request = $this->createRequest('GET', '/v2/events', false);
+        $request = $this->createRequest('GET', '/v2/events?since=1467756000&until=1530828000&department_hash=hash_test_1', false);
         $response = $this->request($request);
         $this->assertSame(200, $response->getStatusCode());
         $data = json_decode($response->getBody()->__toString(), true);
@@ -135,70 +135,57 @@ class BasicInformationTest extends DbTestCase
             'message' => 'Success',
             'limit' => 1000,
             'page' => 1,
-            'until' => $data['until'],
+            'until' => 1530828000,
             'description_format' => 'both',
-            'department_group' => 'all',
-            'department' => 'all',
-            'since' => $data['since'],
-            'events' =>
+            'department_group' => 'none',
+            'department' => 'hash_test_1',
+            'since' => 1467756000,
+            'events' => [
                 [
-                    [
-                        'hash' => 'hash_test_1',
-                        'name' => [
-                            'name_de' => 'GLK',
-                            'name_en' => 'GLK',
-                            'name_fr' => 'GLK',
-                            'name_it' => 'GLK',
-                        ],
-                        'price' => '123',
-                        'start' => '2018-07-05 10:00:00',
-                        'end' => '2018-07-12 16:00:00',
-                        'end_leader' => '2018-07-12 18:00:00',
-                        'start_leader' => '2018-07-05 08:00:00',
-                        'created_at' => '2017-05-10 16:32:15',
-                        'created_by' => '0',
-                        'modified_at' => NULL,
-                        'modified_by' => NULL,
-                        'archived_at' => NULL,
-                        'archived_by' => NULL,
-                        'images' => [
-                            ['hash' => 'hash_test_1', 'url' => $this->baseurl('/img/events/image-url-1.jpg')],
-                        ],
-                        'description' => [
-                            'name_de' => ['plain' => 'Beschreibung des Events', 'parsed' => '<p>Beschreibung des Events</p>'],
-                            'name_en' => ['plain' => 'Description of the event', 'parsed' => '<p>Description of the event</p>'],
-                            'name_fr' => ['plain' => 'Description de l\'event', 'parsed' => '<p>Description de l\'event</p>'],
-                            'name_it' => ['plain' => 'Descriptione della evente', 'parsed' => '<p>Descriptione della evente</p>'],
+                    'hash' => 'hash_test_1',
+                    'name' => [
+                        'name_de' => 'GLK',
+                        'name_en' => 'GLK',
+                        'name_fr' => 'GLK',
+                        'name_it' => 'GLK',
+                    ],
+                    'price' => '123',
+                    'start' => '2018-07-05 10:00:00',
+                    'end' => '2018-07-12 16:00:00',
+                    'end_leader' => '2018-07-12 18:00:00',
+                    'start_leader' => '2018-07-05 08:00:00',
+                    'created_at' => '2017-05-10 16:32:15',
+                    'created_by' => '0',
+                    'modified_at' => NULL,
+                    'modified_by' => NULL,
+                    'archived_at' => NULL,
+                    'archived_by' => NULL,
+                    'images' => [
+                        [
+                            'hash' => 'hash_test_1',
+                            'url' => 'G:/dev/xampp/htdocs/cevi-web_API/vendor/phpunit/img/events/image-url-1.jpg',
                         ],
                     ],
-                    [
-                        'hash' => 'hash_test_2',
-                        'name' => [
-                            'name_de' => 'LLM',
-                            'name_en' => 'LLM',
-                            'name_fr' => 'LLM',
-                            'name_it' => 'LLM',
+                    'description' => [
+                        'name_de' => [
+                            'plain' => 'Beschreibung des Events',
+                            'parsed' => '<p>Beschreibung des Events</p>',
                         ],
-                        'price' => '150',
-                        'start' => '2018-07-05 10:00:00',
-                        'end' => '2018-07-12 16:00:00',
-                        'end_leader' => '2018-07-12 18:00:00',
-                        'start_leader' => '2018-07-05 08:00:00',
-                        'created_at' => '2017-05-10 16:32:15',
-                        'created_by' => '0',
-                        'modified_at' => NULL,
-                        'modified_by' => NULL,
-                        'archived_at' => NULL,
-                        'archived_by' => NULL,
-                        'images' => ['message' => 'No images available'],
-                        'description' => [
-                            'name_de' => ['plain' => 'Beschreibung des Events 2', 'parsed' => '<p>Beschreibung des Events 2</p>'],
-                            'name_en' => ['plain' => 'Description of the event 2', 'parsed' => '<p>Description of the event 2</p>'],
-                            'name_fr' => ['plain' => 'Description de l\'event 2', 'parsed' => '<p>Description de l\'event 2</p>'],
-                            'name_it' => ['plain' => 'Descriptione della evente 2', 'parsed' => '<p>Descriptione della evente 2</p>'],
+                        'name_en' => [
+                            'plain' => 'Description of the event',
+                            'parsed' => '<p>Description of the event</p>',
+                        ],
+                        'name_fr' => [
+                            'plain' => 'Description de l\'event',
+                            'parsed' => '<p>Description de l\'event</p>',
+                        ],
+                        'name_it' => [
+                            'plain' => 'Descriptione della evente',
+                            'parsed' => '<p>Descriptione della evente</p>',
                         ],
                     ],
                 ],
+            ],
         ];
         $this->assertSame($expectedResponse, $data);
     }

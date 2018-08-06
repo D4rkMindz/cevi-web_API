@@ -17,6 +17,8 @@ use App\Util\PhonenumberConverter;
  *
  * @group actual
  * @coversDefaultClass \App\Controller\UserController
+ *
+ * TODO continue testing locations and then departments
  */
 class UserTest extends DbTestCase
 {

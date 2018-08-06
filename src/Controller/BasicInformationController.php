@@ -111,11 +111,11 @@ class BasicInformationController extends AppController
      * @get int|string limit
      * @get int|string page
      * @get int|string offset
-     * @get int|string department_group_id
-     * @get int|string department_hash (is ignored if department_group_id is set.)
+     * @get int|string department_group_hash
+     * @get int|string department_hash Required if department_group_hash is NOT set
      * @get int|string until (as time())
      * @get int|string since (as time())
-     * @get nulll|string description_format (null, 'plain' or 'parsed' Markdown description)
+     * @get null|string description_format (null, 'plain' or 'parsed' Markdown description)
      *
      * @param Request $request
      * @param Response $response
@@ -126,24 +126,23 @@ class BasicInformationController extends AppController
     public function eventAction(Request $request, Response $response): Response
     {
         $params = $this->getLimitationParams($request);
-        $json = (string)$request->getBody();
-        $data = json_decode($json, true);
+        $data = $request->getParams();
 
-        $until = (int)$data['until'];
-        $until = !empty($until) ? $until : time() + (60 * 60 * 24 * 365 * 2);
+        $until = ((int)array_value('until', $data)) ?: time() + (60 * 60 * 24 * 365 * 2);
 
-        $since = (int)$data['since'];
-        $since = !empty($since) ? $since : time();
+        $since = ((int)array_value('since', $data)) ?: time();
 
-        $departmentGroup = (string)$data['department_group_id'];
+        $departmentGroup = (string)array_value('department_group_hash', $data);
         if (empty($departmentGroup)) {
-            $department = (string)$data['department_hash'];
+            $department = (string)array_value('department_hash', $data);
+            if (empty($department)) {
+                return $this->error($response, __('Not found'), 404, ['info' => ['message' => __('Please select a department or a department group')]]);
+            }
         } else {
             $department = '';
         }
-        $descriptionFormat = (string)$data['description_format'];
+        $descriptionFormat = ((string)array_value('description_format', $data)) ?: 'both';
 //        $lang = (string)$data['lang']; // TODO implement language selection for events.
-
         $events = $this->eventRepository->getEvents($params['limit'], $params['page'], $until, $departmentGroup, $department, $since, $descriptionFormat);
 
         if (empty($events)) {
@@ -151,7 +150,9 @@ class BasicInformationController extends AppController
         }
 
         $department = $department ?: 'all';
-        $departmentGroup = $departmentGroup ?: 'all';
+        if (!empty($department) && empty($departmentGroup)) {
+            $departmentGroup = 'none'; // TODO maybe get the departmentgroup hash by department id?
+        }
         $descriptionFormat = $descriptionFormat ?: 'both';
 
         $responseData = [

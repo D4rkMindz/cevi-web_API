@@ -123,10 +123,10 @@ class AppController
     {
         $data = $request->getParams();
         $params = [];
-        $params['limit'] = (int)array_key_exists('limit', $data) ? $data['limit'] : 1000;
-        $params['page'] = (int)array_key_exists('page', $data) ? $data['limit'] : 1;
+        $params['limit'] = ((int)array_value('limit', $data)) ?: 1000;
+        $params['page'] = ((int)array_value('page', $data)) ?: 1;
 
-        $params['offset'] = array_key_exists('offset', $data) ? (int)$data['offset'] : null;
+        $params['offset'] = ((int)array_value('offset', $data)) ?: null;
         $page = round($params['offset'] / $params['limit'], 0) + 1;
         $params['page'] = !empty($params['offset']) ? $page : $params['page'];
 
