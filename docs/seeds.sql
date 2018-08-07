@@ -15,10 +15,10 @@ MySQL - 10.1.32-MariaDB : Database - d4rkmindz_cevi-web_api
 /*Data for the table `language` */
 
 insert  into `language`(`id`,`hash`,`name`,`abbreviation`) values
-(1,'de_CH','71b00e7a-b16f-47e2-9da1-ea323103a818','de'),
-(2,'en_GB','b7e0f7ac-76c6-40fe-87fe-d2bcd8d64aee','en'),
-(3,'fr_CH','fd25a250-701d-4249-ba8b-0723338c6821','fr'),
-(4,'it_CH','03b89e4a-642e-47d0-a26c-81baed1e0caf','it');
+(1,'71b00e7a-b16f-47e2-9da1-ea323103a818','de_CH','de'),
+(2,'b7e0f7ac-76c6-40fe-87fe-d2bcd8d64aee','en_GB','en'),
+(3,'fd25a250-701d-4249-ba8b-0723338c6821','fr_CH','fr'),
+(4,'03b89e4a-642e-47d0-a26c-81baed1e0caf','it_CH','it');
 
 /*Data for the table `position` */
 
@@ -33,54 +33,49 @@ insert  into `position`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`,`cre
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`hash`,`city_id`,`language_id`,`permission_id`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'developer',1709,1,1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
-(2,'default',1709,1,4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
+insert  into `user`(`id`,`hash`,`city_id`,`language_hash`,`permission_hash`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'developer',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818',1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
+(2,'default',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818',4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
 
 /*Data for the table `department` */
 
 insert  into `department`(`id`,`hash`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
 (1,'moehlin',1,1,1,1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
 
-/*Data for the table `department_type` */
-
-insert  into `department_type`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'org','Verband','Organization','Organisme','Organismo');
-
 /*Data for the table `department_group` */
 
-insert  into `department_group`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'ag-so-lu-zg','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
+insert  into `department_group`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'org','Verband','Organization','Organisme','Organismo');
 
 /*Data for the table `department_region` */
 
-insert  into `department_region`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG');
+insert  into `department_region`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'ag-so-lu-zg','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG','AG-SO-LU-ZG');
 
 /*Data for the table `department_type` */
 
-insert  into `department_type`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'Jungschar','Flock of Young','Troupeau de Jeunes','Branco di Giovani','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL),
-(2,'Ten Sing','Ten Sing','Ten Sing','Ten Sing','2018-04-09 20:53:43',0,NULL,NULL,NULL,NULL);
+insert  into `department_type`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'jungschi','Jungschar','Flock of Young','Troupeau de Jeunes','Branco di Giovani'),
+(2,'ten-sing','Ten Sing','Ten Sing','Ten Sing','Ten Sing');
 
 
 /*Data for the table `gender` */
 
-insert  into `gender`(`id`,`name_de`,`name_en`,`name_fr`,`name_it`) values
-(1,'Männlich','Male','Mâle','Maschio'),
-(2,'Weiblich','Female','Femme','Femmina');
+insert  into `gender`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`) values
+(1,'b06b693a-ec04-4d3d-84a5-e7932780c6d7','Männlich','Male','Mâle','Maschio'),
+(2,'618814cf-ebfa-4146-82df-565c56b91348','Weiblich','Female','Femme','Femmina');
 
 /*Data for the table `image` */
 
 /*Data for the table `permission` */
 
-insert  into `permission`(`id`,`level`,`name`) values
-(1,64,'Super Admin'),
-(2,32,'Admin'),
-(3,16,'Super User'),
-(4,8,'User'),
-(5,4,'Guest'),
-(6,2,'Anonymous');
+insert  into `permission`(`id`,`hash`,`level`,`name`) values
+(1,'bb5a80cd-caa0-435b-a4d9-4d0897005725',64,'Super Admin'),
+(2,'16c4a1c0-1b39-4c0f-96fd-59ef38309f67',32,'Admin'),
+(3,'a9b0979d-8f2d-40e1-8ba2-9c6ff3394c27',16,'Super User'),
+(4,'9f81a68c-0463-425b-9b39-3ba93014658d',8,'User'),
+(5,'42cf23c4-0fbf-494d-972e-7b8391fb169a',4,'Guest'),
+(6,'61123304-7d41-4a87-a973-3c672439928a',2,'Anonymous');
 
 /*Data for the table `city` */
 
