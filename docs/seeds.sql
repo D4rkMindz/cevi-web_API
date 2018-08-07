@@ -33,14 +33,14 @@ insert  into `position`(`id`,`hash`,`name_de`,`name_en`,`name_fr`,`name_it`,`cre
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`hash`,`city_id`,`language_hash`,`permission_hash`,`department_id`,`position_id`,`gender_id`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'developer',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818',1,1,1,1,'Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
-(2,'default',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818',4,1,7,1,'Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
+insert  into `user`(`id`,`hash`,`city_id`,`language_hash`,`permission_hash`,`department_hash`,`position_hash`,`gender_hash`,`first_name`,`email`,`username`,`password`,`signup_completed`,`js_certificate`,`last_name`,`address`,`cevi_name`,`birthdate`,`phone`,`mobile`,`js_certificate_until`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'developer',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818','bb5a80cd-caa0-435b-a4d9-4d0897005725','moehlin','6a8abfc3-a61f-4f21-80d6-bf7369767762','b06b693a-ec04-4d3d-84a5-e7932780c6d7','Björn','bjoern.pfoster@gmail.com','bjoern','$2y$10$ta/6DeE83/OuPBlw0maWbuJlSKZ3x/izIoPkHEEqm6jXISdauiJqe',1,1,'Pfoster','Ulmenstrasse 24','Jupiter','1998-06-05','0041764510128','0041618513258',2019,'2018-04-09 21:14:28',0,NULL,NULL,NULL,NULL),
+(2,'default',1709,'71b00e7a-b16f-47e2-9da1-ea323103a818','9f81a68c-0463-425b-9b39-3ba93014658d','moehlin','f42813ad-be01-4eda-b02f-9c048c394971','618814cf-ebfa-4146-82df-565c56b91348','Default','default@example.com','default','$2y$10$wwwSHcjG565oNB4VmvpP3.uq5zAIW1eozPqGY/PWX6nbPrJPjnXBq',1,0,'User','Examplestreet 42','/dev/null','1991-06-05','0123456789','0123456788',2100,'2018-04-20 11:49:20',1,NULL,NULL,NULL,NULL);
 
 /*Data for the table `department` */
 
-insert  into `department`(`id`,`hash`,`department_group_id`,`department_region_id`,`department_type_id`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
-(1,'moehlin',1,1,1,1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
+insert  into `department`(`id`,`hash`,`department_group_hash`,`department_region_hash`,`department_type_hash`,`city_id`,`name`,`created_at`,`created_by`,`modified_at`,`modified_by`,`archived_at`,`archived_by`) values
+(1,'moehlin','org','ag-so-lu-zg','jungschi',1709,'Möhlin','2018-04-09 21:12:35',0,NULL,NULL,NULL,NULL);
 
 /*Data for the table `department_group` */
 
